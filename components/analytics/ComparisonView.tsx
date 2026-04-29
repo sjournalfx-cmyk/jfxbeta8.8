@@ -253,7 +253,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ trades = [], isD
 
     return (
         <div className="space-y-8 pb-20">            {/* Comparison Mode Switcher */}
-            <div className={`p-1.5 rounded-2xl border flex items-center w-fit gap-1 mx-auto ${isDarkMode ? 'bg-[#111] border-zinc-800' : 'bg-zinc-100 border-zinc-200'}`}>
+            <div className={`p-1.5 rounded-2xl border border-[var(--notebook-divider)] flex items-center w-fit gap-1 mx-auto ${isDarkMode ? 'bg-[#111]' : 'bg-zinc-100'}`}>
                 {(['symbol', 'strategy', 'session'] as const).map((mode) => (
                     <button
                         key={mode}
@@ -319,7 +319,8 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ trades = [], isD
                                 winRate: statsA.winRate > statsB.winRate,
                                 profitFactor: statsA.profitFactor > statsB.profitFactor,
                                 total: statsA.total > statsB.total
-                            }
+                            },
+                            border: 'var(--note-blue-border)'
                         },
                         {
                             label: symbolB,
@@ -333,10 +334,11 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ trades = [], isD
                                 winRate: statsB.winRate > statsA.winRate,
                                 profitFactor: statsB.profitFactor > statsA.profitFactor,
                                 total: statsB.total > statsA.total
-                            }
+                            },
+                            border: 'var(--note-orange-border)'
                         }
                     ].map((panel, idx) => (
-                        <Card key={idx} isDarkMode={isDarkMode} padding="lg" className="relative rounded-[32px] !bg-[#000000] !border-indigo-500/20">
+                        <Card key={idx} isDarkMode={isDarkMode} padding="lg" className="relative rounded-[32px] !bg-[var(--note-default-bg)]" style={{ borderColor: panel.border }}>
                             <div className="flex items-center justify-between mb-8">
                                 <div className="flex items-center gap-3">
                                     <div className={`p-2 rounded-xl ${panel.bg} ${panel.color}`}>
@@ -397,12 +399,12 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ trades = [], isD
                 {/* Delta Indicators overlay for MD+ screens */}
                 <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col gap-6 z-10 items-center pointer-events-none">
                     {deltas.netProfit ? (
-                        <div className={`px-3 py-1.5 rounded-full text-[10px] font-black border backdrop-blur-md shadow-xl ${deltas.netProfit.isPositive ? 'bg-emerald-500/20 border-emerald-500/30 text-emerald-500' : 'bg-rose-500/20 border-rose-500/30 text-rose-500'}`}>
+                        <div className={`px-3 py-1.5 rounded-full text-[10px] font-black border backdrop-blur-md shadow-xl ${deltas.netProfit.isPositive ? 'bg-emerald-500/20 border-[var(--note-green-border)] text-emerald-500' : 'bg-rose-500/20 border-[var(--note-red-border)] text-rose-500'}`}>
                             {deltas.netProfit.isPositive ? '+' : ''}{deltas.netProfit.percent}%
                         </div>
                     ) : null}
                     {deltas.winRate ? (
-                         <div className={`px-3 py-1.5 rounded-full text-[10px] font-black border backdrop-blur-md shadow-xl ${deltas.winRate.isPositive ? 'bg-emerald-500/20 border-emerald-500/30 text-emerald-500' : 'bg-rose-500/20 border-rose-500/30 text-rose-500'}`}>
+                         <div className={`px-3 py-1.5 rounded-full text-[10px] font-black border backdrop-blur-md shadow-xl ${deltas.winRate.isPositive ? 'bg-emerald-500/20 border-[var(--note-green-border)] text-emerald-500' : 'bg-rose-500/20 border-[var(--note-red-border)] text-rose-500'}`}>
                             {deltas.winRate.isPositive ? '+' : ''}{deltas.winRate.percent}%
                         </div>
                     ) : null}
@@ -410,15 +412,15 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ trades = [], isD
             </div>
 
 
-            <Card isDarkMode={isDarkMode} padding="lg" className="rounded-[32px] !bg-[#000000] !border-indigo-500/20">
+            <Card isDarkMode={isDarkMode} padding="lg" className="rounded-[32px] !bg-[var(--note-default-bg)] !border-[var(--notebook-divider)]">
                 <div className="flex items-center justify-between mb-8">
                     <h3 className="text-xl font-bold tracking-tight">Comparative Equity Curve</h3>
                     <div className="flex gap-3">
-                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 shadow-sm shadow-indigo-500/5">
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-500/10 border border-[var(--note-blue-border)] shadow-sm shadow-indigo-500/5">
                             <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-indigo-500">{symbolA || '---'}</span>
                         </div>
-                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 shadow-sm shadow-amber-500/5">
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-[var(--note-orange-border)] shadow-sm shadow-amber-500/5">
                             <div className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-amber-500">{symbolB || '---'}</span>
                         </div>

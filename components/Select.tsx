@@ -63,12 +63,12 @@ export const Select: React.FC<SelectProps> = ({
         disabled={disabled}
         aria-labelledby={label ? labelId.current : undefined}
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`w-full text-left ${Icon ? 'pl-11' : 'pl-4'} pr-10 py-3.5 rounded-lg border outline-none font-medium transition-all text-sm flex items-center justify-between relative
+        className={`w-full text-left ${Icon ? 'pl-11' : 'pl-4'} pr-10 py-3.5 rounded-lg border border-[var(--notebook-divider)] outline-none font-medium transition-all text-sm flex items-center justify-between relative
           ${isOpen ? 'ring-2 ring-violet-500/20 border-violet-500' : ''}
           ${error ? 'border-rose-500 ring-rose-500/10' : ''}
           ${isDarkMode 
-            ? 'bg-[#18181b] border-[#27272a] text-zinc-100 hover:bg-[#27272a]' 
-            : 'bg-white border-slate-200 text-slate-900 hover:bg-slate-50 shadow-sm'
+            ? 'bg-[#18181b] text-zinc-100 hover:bg-[#27272a]'
+            : 'bg-white text-slate-900 hover:bg-slate-50 shadow-sm'
           }
           ${disabled ? 'cursor-not-allowed bg-zinc-100 dark:bg-zinc-900/50' : ''}
         `}
@@ -85,8 +85,8 @@ export const Select: React.FC<SelectProps> = ({
       </button>
 
       {isOpen && (
-        <div className={`absolute left-0 right-0 mt-2 rounded-xl border shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-100 origin-top
-          ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-200'}
+        <div className={`absolute left-0 right-0 mt-2 rounded-xl border border-[var(--notebook-divider)] shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-100 origin-top
+          ${isDarkMode ? 'bg-[#18181b]' : 'bg-white'}
         `}>
           <div className="max-h-60 overflow-y-auto custom-scrollbar p-1.5 space-y-0.5">
             {options.length > 0 ? (
