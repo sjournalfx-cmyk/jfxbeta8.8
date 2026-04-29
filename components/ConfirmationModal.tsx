@@ -144,6 +144,13 @@ return (
         className="relative w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-800 bg-[#090909] shadow-2xl shadow-black/50 transform transition-all animate-in zoom-in-95 duration-200"
         role="document"
       >
+        <button
+          onClick={onCancel}
+          className="absolute top-4 right-4 p-1 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
+          aria-label="Close dialog"
+        >
+          <X size={18} />
+        </button>
         <div className="p-6">
           <div className="flex flex-col items-center text-center">
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${getIconBg()}`}>
