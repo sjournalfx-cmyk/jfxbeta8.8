@@ -85,11 +85,6 @@ export const TradeFormStep2: React.FC<TradeFormStep2Props> = ({
                     isDarkMode={isDarkMode}
                 />
             </div>
-            {isDesktopBridgeTrade && (
-                <p className="text-[10px] font-bold uppercase tracking-widest text-amber-500 -mt-2">
-                    Entry price and exit price are locked for desktop bridge trades
-                </p>
-            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
