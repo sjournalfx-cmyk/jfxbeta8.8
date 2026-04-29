@@ -18,18 +18,18 @@ export type AssistantContextSummary = {
 
 export const MODAL_MODELS = {
   deepseek: {
-    id: "openai/gpt-oss-120b",
-    name: "NVIDIA Research",
-    description: "GPT OSS on NVIDIA for research with no account-data access",
+    id: "meta/llama-3.1-70b-instruct",
+    name: "Llama 3.1 70B (Research)",
+    description: "Reliable model for general market research and trading theory.",
     type: "fast" as const,
     assistantMode: "research" as const,
     maxTokens: 420,
     historyLimit: 3,
   },
   kimi: {
-    id: "openai/gpt-oss-120b",
-    name: "NVIDIA Mentor",
-    description: "GPT OSS on NVIDIA for account-aware mentoring and coaching",
+    id: "abacusai/dracarys-llama-3.1-70b-instruct",
+    name: "Dracarys Llama 3.1 (Mentor)",
+    description: "High-reasoning model for deep performance coaching and auditing.",
     type: "thinking" as const,
     assistantMode: "mentor" as const,
     maxTokens: 420,

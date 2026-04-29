@@ -49,6 +49,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       body: JSON.stringify(req.body ?? {}),
     });
 
+    if (upstream.status === 403) {
+      const errorText = await upstream.text();
+      let details;
+      try {
+        details = JSON.parse(errorText);
+      } catch {
+        details = errorText;
+      }
+      res.status(403).json({
+        error: "NVIDIA API Authorization Failed (403): Please check your API key and model permissions in the environment variables.",
+        status: 403,
+        details
+      });
+      return;
+    }
+
     res.status(upstream.status);
     upstream.headers.forEach((value, key) => {
       const lower = key.toLowerCase();
