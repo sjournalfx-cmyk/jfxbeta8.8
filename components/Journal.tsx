@@ -122,9 +122,9 @@ const MiniCalendar = ({ year, month, trades, isDarkMode, onClick }: any) => {
         const pnl = dayTrades.reduce((acc: number, t: Trade) => acc + safePnL(t.pnl), 0);
         
         // Match main calendar logic
-        if (Math.abs(pnl) < 5) return { bg: 'bg-zinc-400/80 shadow-sm shadow-zinc-400/10', text: 'text-white font-bold' };
-        if (pnl > 0) return { bg: 'bg-emerald-700/65 shadow-sm shadow-emerald-900/10', text: 'text-white font-bold' };
-        if (pnl < 0) return { bg: 'bg-rose-700/65 shadow-sm shadow-rose-900/10', text: 'text-white font-bold' };
+        if (Math.abs(pnl) < 0.01) return { bg: 'bg-zinc-400/80 shadow-sm shadow-zinc-400/10', text: 'text-white font-bold' };
+        if (pnl >= 0.01) return { bg: 'bg-emerald-700/65 shadow-sm shadow-emerald-900/10', text: 'text-white font-bold' };
+        if (pnl <= -0.01) return { bg: 'bg-rose-700/65 shadow-sm shadow-rose-900/10', text: 'text-white font-bold' };
         
         return { bg: 'bg-zinc-400', text: 'text-white font-bold' };
     };
@@ -331,10 +331,10 @@ const CalendarView = ({ isDarkMode, trades, userProfile }: { isDarkMode: boolean
                                 const hasTrades = dayTrades.length > 0; 
                                 const dayPnL = dayTrades.reduce((acc, t) => acc + safePnL(t.pnl), 0); 
                                 
-                                // TradeZella style logic: BE/Grey if P&L is very small (e.g. < $5 absolute)
-                                const isBE = hasTrades && Math.abs(dayPnL) < 5;
-                                const isPositive = dayPnL >= 5; 
-                                const isNegative = dayPnL <= -5;
+                                // TradeZella style logic: BE/Grey if P&L is very small (e.g. < $0.01 absolute)
+                                const isBE = hasTrades && Math.abs(dayPnL) < 0.01;
+                                const isPositive = dayPnL >= 0.01;
+                                const isNegative = dayPnL <= -0.01;
                                 
                                 const isCurrentDay = isToday(day); 
                                 
