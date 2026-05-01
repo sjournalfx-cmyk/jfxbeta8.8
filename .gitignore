@@ -29,7 +29,6 @@ build/
 *.pdf
 
 # Large binary files - exclude these
-*.exe
 *.zip
 *.ico
 *.png

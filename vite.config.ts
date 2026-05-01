@@ -242,6 +242,14 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           secure: true,
           rewrite: () => '/v1/chat/completions',
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq) => {
+              const nvidiaKey = readNvidiaKey();
+              if (nvidiaKey) {
+                proxyReq.setHeader('Authorization', `Bearer ${nvidiaKey}`);
+              }
+            });
+          },
         },
       },
     },
