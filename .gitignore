@@ -28,6 +28,13 @@ build/
 .env
 *.pdf
 
+# Large binary files - exclude these
+*.exe
+*.zip
+*.ico
+*.png
+*.jpg
+
 # Local scratch artifacts from tooling and cleanup work
 .push-tmp/
 .playwright-mcp/

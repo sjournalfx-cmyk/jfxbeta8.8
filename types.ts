@@ -58,6 +58,10 @@ export interface UserProfile {
   chartConfig?: ChartConfig;
   keepChartsAlive?: boolean;
   defaultRR?: number;
+  broker_server?: string;
+  broker_login?: string;
+  mt_terminal_status?: string;
+  mt_terminal_connected_at?: string;
 }
 
 export interface ChartConfig {
@@ -426,4 +430,37 @@ export interface DBCashTransaction {
   date: string;
   description?: string;
   created_at: string;
+}
+
+export interface BrokerCredentials {
+  id: string;
+  user_id: string;
+  broker_type: 'mt4' | 'mt5';
+  server: string;
+  login: string;
+  password_encrypted: string;
+  account_name?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MTTrade {
+  id: string;
+  user_id: string;
+  external_ticket: string;
+  symbol: string;
+  type: 'BUY' | 'SELL';
+  volume: number;
+  open_price: number;
+  close_price?: number;
+  profit: number;
+  commission: number;
+  swap: number;
+  magic?: number;
+  comment?: string;
+  open_time: string;
+  close_time?: string;
+  is_open: boolean;
+  synced_at: string;
 }

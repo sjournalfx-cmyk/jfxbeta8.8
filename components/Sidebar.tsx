@@ -149,6 +149,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const filteredMenuItems = menuItems.filter(item => {
     if (item.id === 'log-trade' && !isBasicTier) return false;
+    if (item.id === 'broker') return false; // Disabled - coming in Premium tier
     return true;
   });
 
