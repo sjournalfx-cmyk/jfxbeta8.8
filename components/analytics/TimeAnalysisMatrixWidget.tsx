@@ -1,6 +1,5 @@
 
 import React, { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Trade } from '../../types';
 import { Clock, TrendingUp, TrendingDown, AlertCircle } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -118,7 +117,7 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
   };
 
   return (
-    <div className={`p-6 rounded-3xl border flex flex-col h-full transition-all overflow-visible relative ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+    <div className={`p-6 rounded-3xl border flex flex-col h-full overflow-visible relative ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-500">
@@ -168,7 +167,7 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
                     return (
                       <div
                         key={hour}
-                        className={`flex-1 rounded-sm transition-all duration-200 hover:ring-2 hover:ring-white/30 hover:scale-110 cursor-pointer relative z-10`}
+                        className={`flex-1 rounded-sm hover:ring-2 hover:ring-white/30 cursor-pointer relative z-10`}
                         style={{ 
                           backgroundColor: getBgColor(cell.pnl, cell.count, day, hour),
                           minWidth: '18px'
@@ -196,15 +195,11 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
         </div>
       </div>
 
-      <AnimatePresence>
-        {hoveredCell && matrixData[hoveredCell.day][hoveredCell.hour].count > 0 && (() => {
+      {hoveredCell && matrixData[hoveredCell.day][hoveredCell.hour].count > 0 && (() => {
           const cell = matrixData[hoveredCell.day][hoveredCell.hour];
           const avgPnl = cell.pnl / cell.count;
           return (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+            <div 
               className="fixed pointer-events-none z-[9999] p-4 rounded-2xl border shadow-2xl backdrop-blur-xl"
               style={{ 
                 left: hoveredCell.x + 20, 
@@ -253,10 +248,9 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           );
         })()}
-      </AnimatePresence>
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-4 px-2">
         <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-wider opacity-50">

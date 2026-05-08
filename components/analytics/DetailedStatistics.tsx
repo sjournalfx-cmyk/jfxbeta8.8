@@ -24,7 +24,7 @@ export const DetailedStatistics: React.FC<DetailedStatisticsProps> = ({ stats, u
   };
 
   const StatRow = ({ label, value, isNegative = false }: { label: string, value: any, isNegative?: boolean }) => (
-    <div className={`flex justify-between items-center py-2.5 px-4 ${isDarkMode ? 'hover:bg-zinc-800/50' : 'hover:bg-slate-50'} transition-colors border-b ${isDarkMode ? 'border-zinc-800' : 'border-slate-100'}`}>
+    <div className={`flex justify-between items-center py-2.5 px-4 ${isDarkMode ? 'hover:bg-zinc-800/50' : 'hover:bg-slate-50'} border-b ${isDarkMode ? 'border-zinc-800' : 'border-slate-100'}`}>
       <span className={`text-sm font-medium ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>{label}</span>
       <span className={`text-sm font-bold ${isDarkMode ? 'text-zinc-200' : 'text-slate-900'} ${isNegative ? 'text-rose-500' : ''}`}>
         {value}

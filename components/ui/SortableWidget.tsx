@@ -27,12 +27,12 @@ export const SortableWidget: React.FC<SortableWidgetProps> = ({ id, children, cl
     };
 
     return (
-        <div ref={setNodeRef} style={style} className={`relative group h-full hover:z-[150] ${className}`}>
+        <div ref={setNodeRef} style={style} className={`relative group h-full ${className}`}>
             {/* Drag Handle - Only visible on hover */}
             <div
                 {...attributes}
                 {...listeners}
-                className="absolute top-4 right-4 p-1.5 rounded-lg cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity z-20 bg-black/10 dark:bg-white/10 text-zinc-500 hover:text-white"
+                className="absolute top-4 right-4 p-1.5 rounded-lg cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 z-20 bg-black/10 dark:bg-white/10 text-zinc-500 hover:text-white"
                 role="button"
                 tabIndex={0}
                 aria-label={`Drag to reorder ${id} widget`}

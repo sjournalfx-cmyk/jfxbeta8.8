@@ -22,16 +22,16 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
             <div className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border flex flex-col min-h-[280px] h-full relative ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
                 <div className="flex justify-between items-start mb-6">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-zinc-500/10 animate-pulse" />
+                        <div className="w-10 h-10 rounded-xl bg-zinc-500/10" />
                         <div className="space-y-2">
-                            <div className="w-24 h-4 bg-zinc-500/10 rounded animate-pulse" />
-                            <div className="w-32 h-2 bg-zinc-500/10 rounded animate-pulse" />
+                            <div className="w-24 h-4 bg-zinc-500/10 rounded" />
+                            <div className="w-32 h-2 bg-zinc-500/10 rounded" />
                         </div>
                     </div>
                 </div>
                 <div className="flex-1 flex items-end gap-1 px-4">
                     {[...Array(20)].map((_, i) => (
-                        <div key={i} className="flex-1 bg-zinc-500/5 rounded-t animate-pulse" style={{ height: `${20 + Math.random() * 60}%` }} />
+                        <div key={i} className="flex-1 bg-zinc-500/5 rounded-t" style={{ height: `${20 + Math.random() * 60}%` }} />
                     ))}
                 </div>
             </div>
@@ -102,7 +102,7 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
                                 <HelpCircle 
                                     size={14}
                                     onClick={onInfoClick}
-                                    className="opacity-40 cursor-help hover:opacity-100 transition-opacity" 
+                                    className="opacity-40 cursor-help hover:opacity-100" 
                                 />
                             </Tooltip>
                         </div>
@@ -111,7 +111,7 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
                 </div>
 
                 {hoverIndex !== null && (
-                    <div className="text-right animate-in fade-in zoom-in-95 duration-200">
+                    <div className="text-right">
                         <div className={`text-xl font-black font-mono leading-none ${equityData[hoverIndex] >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                             {equityData[hoverIndex] >= 0 ? '+' : ''}{currencySymbol}{equityData[hoverIndex].toLocaleString()}
                         </div>
@@ -181,7 +181,7 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
                                         fill={dotColor} 
                                         stroke={isDarkMode ? "#18181b" : "white"} 
                                         strokeWidth="1.5"
-                                        className="transition-all duration-200"
+                                        className=""
                                         style={{ 
                                             opacity: hoverIndex === null || hoverIndex === i ? 1 : 0.4,
                                             filter: (hoverIndex === i) ? `drop-shadow(0 0 4px ${dotColor})` : 'none'
@@ -200,7 +200,7 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
 
                         {hoverIndex !== null && (
                             <div 
-                                className={`absolute z-50 pointer-events-none p-3 rounded-2xl border shadow-2xl transition-all duration-200 animate-in fade-in zoom-in-95 ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200'}`}
+                                className={`absolute z-50 pointer-events-none p-3 rounded-2xl border shadow-2xl ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200'}`}
                                 style={{ 
                                     left: `${(hoverIndex / (equityData.length - 1 || 1)) * 100}%`,
                                     top: `${(hoverY / 240) * 100}%`,

@@ -1,7 +1,7 @@
 
 import { supabase } from '../lib/supabase';
 import { Trade, Note, DailyBias, UserProfile, Goal, StrategyDiagram, DBTrade, DBGoal, BacktestSession, CashTransaction, DBCashTransaction } from '../types';
-import { APP_CONSTANTS, PLAN_FEATURES } from '../lib/constants';
+import { APP_CONSTANTS, PLAN_FEATURES, normalizePlan } from '../lib/constants';
 import { normalizeTrade } from '../lib/trade-normalization';
 
 const toFiniteNumber = (value: unknown, fallback = 0): number => {
@@ -976,7 +976,7 @@ export const dataService = {
     if (profile.experienceLevel !== undefined) dbProfile.experience_level = profile.experienceLevel;
     if (profile.tradingStyle !== undefined) dbProfile.trading_style = profile.tradingStyle;
     if (profile.onboarded !== undefined) dbProfile.onboarded = profile.onboarded;
-    if (profile.plan !== undefined) dbProfile.plan = profile.plan;
+    if (profile.plan !== undefined) dbProfile.plan = normalizePlan(profile.plan);
     if (profile.syncKey !== undefined) dbProfile.sync_key = profile.syncKey;
     if (profile.eaConnected !== undefined) dbProfile.ea_connected = profile.eaConnected;
     if (profile.autoJournal !== undefined) dbProfile.auto_journal = profile.autoJournal;

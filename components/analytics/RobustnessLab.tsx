@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
 import { Shield, Target, TrendingUp, Zap, Waves, Brain, Info, Download, Lock } from 'lucide-react';
 import { OptimizationHeatmap } from '../backtest/OptimizationHeatmap';
 import { Trade, UserProfile, OptimizationResult } from '../../types';
@@ -89,7 +88,7 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                 <div className="relative min-h-[600px] flex items-center justify-center rounded-[40px] border-2 border-dashed border-zinc-800 bg-zinc-900/20 overflow-hidden w-full">
                     <div className="absolute inset-0 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 text-center">
                         <div className="p-6 rounded-3xl bg-indigo-500/10 text-indigo-500 mb-6 border border-indigo-500/20">
-                            <Lock size={48} className="animate-pulse" />
+                            <Lock size={48} />
                         </div>
                         <h2 className="text-3xl font-black uppercase tracking-tight mb-3">Strategy Robustness Lab</h2>
                         <p className={cn("max-w-md text-sm font-bold opacity-60 mb-8", isDarkMode ? 'text-zinc-400' : 'text-slate-500')}>
@@ -99,13 +98,13 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                             View Premium Plans
                         </Button>
                     </div>
-                    <div className="opacity-10 grayscale pointer-events-none scale-110">
+                    <div className="opacity-10 grayscale pointer-events-none">
                          <OptimizationHeatmap isDarkMode={true} data={sensitivityData} paramXName="Stop Loss" paramYName="Take Profit" metric="equity" />
                     </div>
                 </div>
             }
         >
-            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-8 pb-20">
+            <div className="space-y-8 pb-20">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                     <div>
                         <h2 className="text-4xl font-black tracking-tight uppercase mb-2">Strategy Intelligence</h2>
@@ -125,7 +124,7 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                                 key={m.id}
                                 onClick={() => setOptMetric(m.id as any)}
                                 className={cn(
-                                    "px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2",
+                                    "px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2",
                                     optMetric === m.id
                                         ? (isDarkMode ? 'bg-zinc-800 text-white shadow-xl border border-white/10' : 'bg-white text-black shadow-md border border-black/5')
                                         : 'text-zinc-500 hover:text-zinc-300'
@@ -167,11 +166,9 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                                     <span className="text-xl font-black text-purple-500 mb-2">%</span>
                                 </div>
                                 <div className="w-full h-3 bg-zinc-800 rounded-full overflow-hidden mb-6">
-                                    <motion.div
+                                    <div
                                         className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 origin-left"
-                                        initial={{ scaleX: 0 }}
-                                        animate={{ scaleX: robustnessScore }}
-                                        transition={{ duration: 1.5, ease: "easeOut" }}
+                                        style={{ transform: `scaleX(${robustnessScore})` }}
                                     />
 
                                 </div>

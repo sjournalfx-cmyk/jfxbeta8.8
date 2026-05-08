@@ -55,7 +55,7 @@ export const SymbolPerformanceWidget: React.FC<SymbolPerformanceWidgetProps> = (
                         <HelpCircle 
                             size={14}
                             onClick={onInfoClick}
-                            className="opacity-40 cursor-help hover:opacity-100 transition-opacity" 
+                            className="opacity-40 cursor-help hover:opacity-100" 
                         />
                     </Tooltip>
                 </div>

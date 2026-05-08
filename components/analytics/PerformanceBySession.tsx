@@ -10,7 +10,7 @@ interface PerformanceBySessionProps {
 
 export const PerformanceBySession: React.FC<PerformanceBySessionProps> = ({ trades, isDarkMode, currencySymbol }) => {
   return (
-    <div className="space-y-8 animate-in">
+    <div className="space-y-8">
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         

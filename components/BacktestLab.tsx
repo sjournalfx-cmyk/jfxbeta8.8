@@ -18,6 +18,7 @@ import { UserProfile, BacktestSession, Trade, BacktestTrade } from '../types';
 import { dataService } from '../services/dataService';
 import CustomChart from './CustomChart';
 import { OptimizationHeatmap } from './backtest/OptimizationHeatmap';
+import { APP_CONSTANTS, normalizePlan } from '../lib/constants';
 import { OptimizationResult } from '../types';
 import { Waves, LayoutDashboard, Target } from 'lucide-react';
 
@@ -329,11 +330,11 @@ useEffect(() => {
         if (allData.length === 0) return;
 
         // Enforce Data Retention Policy
-        const currentPlan = userProfile.plan || 'FREE TIER (JOURNALER)';
+        const currentPlan = normalizePlan(userProfile.plan);
         const limits: Record<string, number> = {
-            'FREE TIER (JOURNALER)': 5,
-            'PRO TIER (ANALYSTS)': 50,
-            'PREMIUM (MASTERS)': Infinity
+            [APP_CONSTANTS.PLANS.FREE]: 5,
+            [APP_CONSTANTS.PLANS.HOBBY]: 50,
+            [APP_CONSTANTS.PLANS.STANDARD]: Infinity
         };
         const maxSessions = limits[currentPlan] || 5;
 

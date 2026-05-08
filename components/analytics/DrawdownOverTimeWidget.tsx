@@ -76,12 +76,12 @@ export const DrawdownOverTimeWidget: React.FC<DrawdownOverTimeWidgetProps> = ({ 
                         <HelpCircle 
                             size={14}
                             onClick={onInfoClick}
-                            className="opacity-40 cursor-help hover:opacity-100 transition-opacity" 
+                            className="opacity-40 cursor-help hover:opacity-100" 
                         />
                     </Tooltip>
                 </div>
 
-                <div className={`text-right transition-opacity duration-200 ${hoverIndex !== null ? 'opacity-100' : 'opacity-0'}`}>
+                <div className={`text-right ${hoverIndex !== null ? 'opacity-100' : 'opacity-0'}`}>
                     <div className="text-xl font-black font-mono text-rose-500 leading-none">
                         {hoverIndex !== null ? `-${drawdownData[hoverIndex].drawdown.toFixed(2)}%` : '-0.00%'}
                     </div>

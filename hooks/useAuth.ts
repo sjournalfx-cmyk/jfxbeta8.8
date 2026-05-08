@@ -5,6 +5,7 @@ import { authService } from '../services/authService';
 import { dataService } from '../services/dataService';
 import { supabase } from '../lib/supabase';
 import { normalizeThemePreference } from '../lib/theme';
+import { normalizePlan } from '../lib/constants';
 
 export const useAuth = () => {
   const [userId, setUserId] = useState<string | null>(null);
@@ -35,7 +36,7 @@ export const useAuth = () => {
           experienceLevel: profile.experience_level || 'Beginner',
           tradingStyle: profile.trading_style || 'Day Trader',
           onboarded: profile.onboarded || false,
-          plan: profile.plan || 'FREE TIER (JOURNALER)',
+          plan: normalizePlan(profile.plan),
           syncKey: profile.sync_key,
           eaConnected: profile.ea_connected || false,
           autoJournal: profile.auto_journal || false,
@@ -87,9 +88,10 @@ export const useAuth = () => {
   };
 
   const handleOnboardingComplete = async (profile: UserProfile) => {
-    setUserProfile(profile);
+    const normalizedProfile = { ...profile, plan: normalizePlan(profile.plan) };
+    setUserProfile(normalizedProfile);
     try {
-      await dataService.updateProfile(profile);
+      await dataService.updateProfile(normalizedProfile);
     } catch (error) {
       console.error("Error saving profile:", error);
       throw error;
@@ -98,8 +100,9 @@ export const useAuth = () => {
   
   const handleUpdateProfile = async (profile: UserProfile) => {
     try {
-      await dataService.updateProfile(profile);
-      setUserProfile(profile);
+      const normalizedProfile = { ...profile, plan: normalizePlan(profile.plan) };
+      await dataService.updateProfile(normalizedProfile);
+      setUserProfile(normalizedProfile);
     } catch (error) {
       console.error("Error updating profile:", error);
       throw error;

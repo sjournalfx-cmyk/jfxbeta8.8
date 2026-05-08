@@ -95,13 +95,13 @@ export const ExecutionPerformanceTable: React.FC<ExecutionPerformanceTableProps>
                             const exitComment = stripHtml(trade.exitComment || "");
 
                             return (
-                                <tr key={trade.id} className={`group transition-colors ${isDarkMode ? 'hover:bg-white/[0.02]' : 'hover:bg-slate-50'}`}>
+                                <tr key={trade.id} className={`group ${isDarkMode ? 'hover:bg-white/[0.02]' : 'hover:bg-slate-50'}`}>
                                     <td className="px-6 py-4">
                                         <div className="flex items-center">
                                             <div className="relative flex items-center h-4 w-20 justify-center">
                                                 <div className={`absolute w-1.5 h-4 rounded-full z-10 ${isDarkMode ? 'bg-zinc-700' : 'bg-slate-300'}`} />
                                                 <div
-                                                    className={`absolute h-1.5 rounded-full transition-all duration-700 ${isWin ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]' : 'bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.4)]'}`}
+                                                    className={`absolute h-1.5 rounded-full ${isWin ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]' : 'bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.4)]'}`}
                                                     style={{
                                                         width: `${barWidth}px`,
                                                         left: isWin ? '50%' : 'auto',
@@ -123,7 +123,7 @@ export const ExecutionPerformanceTable: React.FC<ExecutionPerformanceTableProps>
                                                 <button 
                                                     title="Edit Entry Comment"
                                                     onClick={() => setEditingTrade({ id: trade.id, field: 'notes', value: trade.notes || '' })}
-                                                    className={`opacity-0 group-hover/comment:opacity-100 transition-opacity p-1 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
+                                                    className={`opacity-0 group-hover/comment:opacity-100 p-1 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
                                                     <Pencil size={12} />
                                                 </button>
                                             </div>
@@ -140,7 +140,7 @@ export const ExecutionPerformanceTable: React.FC<ExecutionPerformanceTableProps>
                                                 <button 
                                                     title="Edit Exit Comment"
                                                     onClick={() => setEditingTrade({ id: trade.id, field: 'exitComment', value: trade.exitComment || '' })}
-                                                    className={`opacity-0 group-hover/comment:opacity-100 transition-opacity p-1 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
+                                                    className={`opacity-0 group-hover/comment:opacity-100 p-1 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
                                                     <Pencil size={12} />
                                                 </button>
                                             </div>

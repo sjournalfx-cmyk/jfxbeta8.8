@@ -13,7 +13,7 @@ import BrokerConnect from './components/BrokerConnect';
 import ConfirmationModal from './components/ConfirmationModal';
 import QuickLogModal from './components/QuickLogModal';
 import ErrorBoundary from './components/ErrorBoundary';
-import { APP_CONSTANTS, PLAN_FEATURES } from './lib/constants';
+import { APP_CONSTANTS, PLAN_FEATURES, normalizePlan } from './lib/constants';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { getSASTDateTime } from './lib/timeUtils';
 import { dataService } from './services/dataService';
@@ -155,7 +155,7 @@ const {
         const sastNow = getSASTDateTime();
         const [year, month] = sastNow.date.split('-').map(Number);
         
-        const currentPlan = userProfile?.plan || APP_CONSTANTS.PLANS.FREE;
+        const currentPlan = normalizePlan(userProfile?.plan);
         const features = PLAN_FEATURES[currentPlan] || PLAN_FEATURES[APP_CONSTANTS.PLANS.FREE];
 
         if (userId && features.maxTradesPerMonth !== Infinity) {

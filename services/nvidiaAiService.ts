@@ -267,7 +267,10 @@ CORE RULES
 RESPONSE MODES
 - If this is a deep analysis request (${isSpecialAnalysis}), use exact section tags when the prompt asks for them.
 - If strategy plan mode is ${isPlanMode}, favor structure, rules, and checklists over narrative.
-- Allowed structured tags: [SECTION:...] plus [WIDGET:CHECKLIST:Title]...[/WIDGET:CHECKLIST] and [WIDGET:MERMAID:FLOWCHART]...[/WIDGET:MERMAID].
+- Allowed structured tags: [SECTION:...] plus [WIDGET:CHECKLIST:Title]...[/WIDGET:CHECKLIST] and [WIDGET:MERMAID:TYPE]...[/WIDGET:MERMAID].
+- Checklist blocks should use one item per line. Prefer status markers like - [todo], - [doing], - [done], and - [blocked].
+- Mermaid blocks must contain pure Mermaid syntax with no code fences.
+- Supported Mermaid types: FLOWCHART, SEQUENCE, STATE, GANTT, ER.
 
 COMMUNICATION
 - Start directly with the answer.

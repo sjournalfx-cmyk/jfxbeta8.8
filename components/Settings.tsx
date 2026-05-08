@@ -25,7 +25,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { UserProfile } from '../types';
-import { APP_CONSTANTS } from '../lib/constants';
+import { APP_CONSTANTS, normalizePlan } from '../lib/constants';
 import { Select } from './Select';
 import { normalizeThemePreference } from '../lib/theme';
 
@@ -115,7 +115,7 @@ const Settings: React.FC<SettingsProps> = ({
   initialTab = 'profile',
 }) => {
   const [activeTab, setActiveTab] = useState<SettingsTab>(initialTab);
-  const [formData, setFormData] = useState<UserProfile>({ ...userProfile });
+  const [formData, setFormData] = useState<UserProfile>({ ...userProfile, plan: normalizePlan(userProfile.plan) });
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveStatus] = useState<string | null>(null);
   const [copiedKey, setCopiedKey] = useState(false);
@@ -130,7 +130,7 @@ const Settings: React.FC<SettingsProps> = ({
   }, [initialTab]);
 
   useEffect(() => {
-    setFormData({ ...userProfile });
+    setFormData({ ...userProfile, plan: normalizePlan(userProfile.plan) });
   }, [userProfile]);
 
   useEffect(() => {
@@ -178,6 +178,25 @@ const Settings: React.FC<SettingsProps> = ({
     setFeedbackSubject('');
     setFeedbackMessage('');
     setTimeout(() => setFeedbackSuccess(false), 4000);
+  };
+
+  const handlePlanSwitch = async (planId: string) => {
+    const nextProfile = { ...formData, plan: normalizePlan(planId) };
+    const previousProfile = formData;
+
+    setFormData(nextProfile);
+    setIsSaving(true);
+
+    try {
+      await onUpdateProfile(nextProfile);
+      setSaveStatus('Plan updated');
+      setTimeout(() => setSaveStatus(null), 2500);
+    } catch {
+      setFormData(previousProfile);
+      setSaveStatus('Save failed');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const containerBg = 'bg-[#000000] text-zinc-100';
@@ -822,10 +841,10 @@ const Settings: React.FC<SettingsProps> = ({
                               <p className="text-[10px] font-bold uppercase opacity-40">per month</p>
                             </div>
                             <button
-                              onClick={() => setFormData({ ...formData, plan: plan.id })}
-                              disabled={active}
-                              className={`rounded-2xl px-4 py-3 text-xs font-black uppercase tracking-[0.16em] transition-all ${
-                                active
+                            onClick={() => { void handlePlanSwitch(plan.id); }}
+                            disabled={active}
+                            className={`rounded-2xl px-4 py-3 text-xs font-black uppercase tracking-[0.16em] transition-all ${
+                              active
                                   ? 'cursor-default bg-zinc-700 text-zinc-400'
                                   : 'bg-[#FF4F01] text-white hover:scale-[1.02]'
                               }`}

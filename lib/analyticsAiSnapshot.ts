@@ -1,5 +1,5 @@
 import { DailyBias, EASession, Trade, UserProfile } from '../types';
-import { APP_CONSTANTS } from './constants';
+import { APP_CONSTANTS, normalizePlan } from './constants';
 import { calculateStats } from './statsUtils';
 import { getSafePnL } from './trade-normalization';
 import { getSastHourFromTrade } from './timeUtils';
@@ -31,8 +31,9 @@ const stripHtml = (html?: string) => {
 };
 
 const buildEffectiveInitialBalance = (trades: Trade[], userProfile: UserProfile | null, eaSession?: EASession | null) => {
-  const isHobby = userProfile?.plan === APP_CONSTANTS.PLANS.HOBBY;
-  const isStandard = userProfile?.plan === APP_CONSTANTS.PLANS.STANDARD;
+  const currentPlan = normalizePlan(userProfile?.plan);
+  const isHobby = currentPlan === APP_CONSTANTS.PLANS.HOBBY;
+  const isStandard = currentPlan === APP_CONSTANTS.PLANS.STANDARD;
   if ((isHobby || isStandard) && eaSession?.data?.account?.balance !== undefined) {
     const totalPnL = trades.reduce((sum, trade) => sum + getSafePnL(trade.pnl), 0);
     return eaSession.data.account.balance - totalPnL;

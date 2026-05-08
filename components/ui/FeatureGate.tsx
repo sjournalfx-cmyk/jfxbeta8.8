@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserProfile } from '../../types';
-import { APP_CONSTANTS, PLAN_FEATURES } from "../../lib/constants";
+import { APP_CONSTANTS, PLAN_FEATURES, normalizePlan } from "../../lib/constants";
 
 import { Lock } from 'lucide-react';
 import { Card } from "./Card";
@@ -26,7 +26,7 @@ export const FeatureGate: React.FC<FeatureGateProps> = ({
   title = 'Feature Locked',
   description = 'This feature is available on higher tier plans.',
 }) => {
-  const currentPlan = userProfile?.plan || APP_CONSTANTS.PLANS.FREE;
+  const currentPlan = normalizePlan(userProfile?.plan);
   const hasAccess = PLAN_FEATURES[currentPlan as keyof typeof PLAN_FEATURES]?.[feature] ?? false;
 
   if (hasAccess) {

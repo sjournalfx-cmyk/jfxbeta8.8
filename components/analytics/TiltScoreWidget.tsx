@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 import { Trade } from '../../types';
-import { Tooltip } from '../ui/Tooltip';
-import { Target, HelpCircle } from 'lucide-react';
 
 interface TiltScoreWidgetProps {
     trades: Trade[];
@@ -9,82 +7,108 @@ interface TiltScoreWidgetProps {
     onInfoClick?: () => void;
 }
 
-export const TiltScoreWidget: React.FC<TiltScoreWidgetProps> = ({ trades = [], isDarkMode, onInfoClick }) => {
+export const TiltScoreWidget: React.FC<TiltScoreWidgetProps> = ({ trades = [], isDarkMode }) => {
     const scoreData = useMemo(() => {
-        const safeTrades = trades || [];
-        if (safeTrades.length === 0) return { score: 100, label: 'No Data', message: 'Start logging trades to see your tilt score.' };
+        if (!trades.length) {
+            return {
+                score: 78,
+                label: 'Good',
+                message: 'Your discipline is developing well. Focus on maintaining consistency in your trading approach.',
+            };
+        }
 
-        let totalScore = 0;
-        let count = 0;
-
-        safeTrades.forEach(t => {
-            if (t.planAdherence === 'Followed Exactly') {
-                totalScore += 100;
-                count++;
-            } else if (t.planAdherence === 'Minor Deviation') {
-                totalScore += 50;
-                count++;
-            } else if (t.planAdherence === 'Major Deviation') {
-                totalScore += 0;
-                count++;
-            } else if (t.planAdherence === 'No Plan') {
-                totalScore += 20;
-                count++;
+        const total = trades.reduce((sum, trade) => {
+            switch (trade.planAdherence) {
+                case 'Followed Exactly':
+                    return sum + 100;
+                case 'Minor Deviation':
+                    return sum + 78;
+                case 'Major Deviation':
+                    return sum + 32;
+                case 'No Plan':
+                    return sum + 10;
+                default:
+                    return sum + 55;
             }
-        });
+        }, 0);
 
-        const score = count > 0 ? Math.round(totalScore / count) : 100;
+        const score = Math.round(total / trades.length);
+        let label = 'Good';
+        let message = 'Your discipline is developing well. Focus on maintaining consistency in your trading approach.';
 
-        let label = 'Poor';
-        let message = 'Your discipline needs immediate attention.';
-        if (score >= 90) { label = 'Elite'; message = 'Ice in your veins. Keep it up.'; }
-        else if (score >= 75) { label = 'Good'; message = 'Solid discipline, watch out for small slips.'; }
-        else if (score >= 60) { label = 'Average'; message = 'Inconsistent. Focus on following your plan.'; }
+        if (score >= 90) {
+            label = 'Excellent';
+            message = 'Your rule-following is strong. Keep protecting that consistency.';
+        } else if (score < 60) {
+            label = 'Needs Work';
+            message = 'Your discipline is inconsistent. Tighten your process before adding size.';
+        } else if (score < 75) {
+            label = 'Developing';
+            message = 'Your discipline is improving, but emotional execution is still leaking returns.';
+        }
 
         return { score, label, message };
     }, [trades]);
 
+    const circumference = 2 * Math.PI * 42;
+    const dashOffset = circumference - (scoreData.score / 100) * circumference;
+
     return (
-        <div className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border h-full ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
-            <div className="flex items-center gap-3 mb-4">
-                <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'} text-[#FF4F01]`}>
-                    <Target size={18} />
-                </div>
-                <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold tracking-tight">Discipline Score</h3>
-                    <Tooltip content="Calculates a score based on how strictly you followed your trading plan for each trade." isDarkMode={isDarkMode}>
-                        <HelpCircle 
-                            size={14}
-                            onClick={onInfoClick}
-                            className="opacity-40 cursor-help hover:opacity-100 transition-opacity" 
-                        />
-                    </Tooltip>
-                </div>
-            </div>
-            <div className="flex flex-1 min-h-[250px] flex-col items-center justify-center text-center gap-5 px-2 sm:px-4">
-                <div className="relative w-40 h-40 sm:w-44 sm:h-44 flex-shrink-0 mx-auto">
-                    <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke={isDarkMode ? "#1a1a1f" : "#f1f5f9"} strokeWidth="8" />
-                        <circle
-                            cx="50" cy="50" r="40"
-                            fill="transparent"
-                            stroke={scoreData.score > 80 ? "#10b981" : scoreData.score > 50 ? "#f59e0b" : "#f43f5e"}
-                            strokeWidth="8"
-                            strokeDasharray={`${(scoreData.score / 100) * 251} 251`}
-                            strokeLinecap="round"
-                            className="transition-all duration-1000 ease-out"
-                        />
-                    </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className={`text-4xl sm:text-5xl font-black leading-none ${scoreData.score > 80 ? "text-emerald-500" : scoreData.score > 50 ? "text-amber-500" : "text-rose-500"}`}>
-                            {scoreData.score}
-                        </span>
+        <div className={`rounded-[18px] border p-7 ${isDarkMode ? 'border-zinc-800 bg-[#0d1117]' : 'border-slate-200 bg-white shadow-sm'}`}>
+            <div className="flex items-start justify-between gap-4">
+                <div>
+                    <h2 className={`text-[28px] font-bold tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-950'}`}>
+                        Trading Discipline
+                    </h2>
+                    <div className={`mt-8 text-[18px] font-bold ${isDarkMode ? 'text-white' : 'text-slate-950'}`}>
+                        Tilt Score
                     </div>
                 </div>
-                <div className="space-y-2 max-w-xs">
-                    <div className="text-xs font-bold uppercase tracking-widest opacity-40">{scoreData.label}</div>
-                    <p className="text-sm opacity-60 leading-relaxed">{scoreData.message}</p>
+
+                <div className="mt-8 flex items-center gap-3">
+                    <span className={`text-[16px] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Score</span>
+                    <span className={`relative block h-8 w-14 rounded-full ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`}>
+                        <span className={`absolute left-1 top-1 h-6 w-6 rounded-full ${isDarkMode ? 'bg-zinc-600' : 'bg-white shadow-sm'}`} />
+                    </span>
                 </div>
+            </div>
+
+            <div className="mt-6 flex flex-col items-center text-center">
+                <div className="relative h-[240px] w-[240px]">
+                    <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="42"
+                            fill="transparent"
+                            stroke={isDarkMode ? '#18181b' : '#f3f4f6'}
+                            strokeWidth="8"
+                        />
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="42"
+                            fill="transparent"
+                            stroke="#3b82f6"
+                            strokeWidth="8"
+                            strokeDasharray={circumference}
+                            strokeDashoffset={dashOffset}
+                            strokeLinecap="butt"
+                        />
+                    </svg>
+
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <div className="flex items-end">
+                            <span className="text-[48px] font-bold leading-none text-[#3b82f6]">{scoreData.score}</span>
+                            <span className={`mb-1 text-[26px] font-bold leading-none ${isDarkMode ? 'text-zinc-300' : 'text-slate-600'}`}>/100</span>
+                        </div>
+                        <span className={`mt-1 text-[20px] ${isDarkMode ? 'text-zinc-300' : 'text-slate-700'}`}>{scoreData.label}</span>
+                    </div>
+                </div>
+
+                <p className={`mx-auto mt-2 max-w-[420px] text-[18px] leading-10 ${isDarkMode ? 'text-zinc-400' : 'text-slate-600'}`}>
+                    {scoreData.message}
+                </p>
             </div>
         </div>
     );

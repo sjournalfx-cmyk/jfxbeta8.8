@@ -565,39 +565,45 @@ const Notes: React.FC<NotesProps> = ({
   );
 };
 
-const SortableWrapper = ({ id, children }: { id: string, children: React.ReactElement }) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging
-  } = useSortable({ id });
+const SortableWrapper = React.forwardRef<HTMLDivElement, { id: string, children: React.ReactElement }>(
+  ({ id, children }, ref) => {
+    const {
+      attributes,
+      listeners,
+      setNodeRef,
+      transform,
+      transition,
+      isDragging
+    } = useSortable({ id });
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    zIndex: isDragging ? 50 : undefined,
-    position: 'relative' as const
-  };
+    const style = {
+      transform: CSS.Transform.toString(transform),
+      transition,
+      zIndex: isDragging ? 50 : undefined,
+      position: 'relative' as const
+    };
 
-  return (
-    <motion.div
-      ref={setNodeRef}
-      style={style}
-      layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      {...attributes}
-      {...listeners}
-    >
-      {React.cloneElement(children as React.ReactElement<any>, { isDragging })}
-    </motion.div>
-  );
-};
+    return (
+      <motion.div
+        ref={(el: HTMLDivElement | null) => {
+          setNodeRef(el);
+          if (typeof ref === 'function') ref(el);
+          else if (ref) ref.current = el;
+        }}
+        style={style}
+        layout
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        {...attributes}
+        {...listeners}
+      >
+        {React.cloneElement(children as React.ReactElement<any>, { isDragging })}
+      </motion.div>
+    );
+  }
+);
 
 const HeaderIcon = ({ icon, title, isDarkMode, onClick }: { icon: React.ReactNode, title: string, isDarkMode: boolean, onClick?: () => void }) => (
     <button 

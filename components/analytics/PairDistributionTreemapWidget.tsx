@@ -149,7 +149,7 @@ const getColor = (pnl: number) => {
                                     fill={getColor(box.pnl)}
                                     stroke="#000000"
                                     strokeWidth="2"
-                                    className="transition-opacity hover:opacity-80 cursor-pointer"
+                                    className="hover:opacity-80 cursor-pointer"
                                 />
                                 {box.width > 60 && box.height > 40 && (
                                     <>

@@ -1,16 +1,18 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback, startTransition } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Trade, UserProfile, DailyBias, EASession } from '../types';
 import { modalResearchService, ModalModelType, getAssistantMode, AssistantContextSummary } from '../services/nvidiaAiService';
 import { browserSpeechService } from '../services/voiceInputService';
 import { calculateStats } from '../lib/statsUtils';
 import { buildAnalyticsAiSnapshot } from '../lib/analyticsAiSnapshot';
+import { normalizeAssistantMarkdown } from '../lib/aiChatFormatting';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { cleanThinkingTags } from '../lib/thinkingCleaner';
 import { TrendingUp, TrendingDown, Brain, Clock, Wand2, Send, User, Trash2, Coins, ChevronDown, List as ListIcon, X, History, Plus, ChevronRight, ChevronLeft, Workflow, CheckCircle2, StickyNote, Download, FileText, Activity, Sparkles, Target, Table, Mic, Star, Square, CheckSquare, ArrowUpRight, Save, RotateCcw, LayoutGrid, MessageSquare, Menu, MoreHorizontal, Copy, ThumbsUp, ThumbsDown, Paperclip, Image, Smile, CornerDownLeft, Zap, AlertCircle, Check, Loader2, StopCircle, ArrowLeft, ArrowRight, ListChecks, BarChart3, Clock3, BrainCircuit, DollarSign, Timer, CircleDot, Goal as GoalIcon, Pause, Play, Settings, Telescope } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useToast } from './ui/Toast';
+import { MermaidWidget } from './ai/AIWidgets';
 
 // --- Utilities ---
 const formatDuration = (openTime?: string, closeTime?: string) => {
@@ -52,64 +54,148 @@ const createDailyCreditState = (date = getLocalDateKey()): DailyCreditState => (
   mentorRemaining: DAILY_CREDIT_MAX,
 });
 
-const normalizeAssistantMarkdown = (text: string): string => {
-  if (!text) return '';
+type ChecklistStatus = 'todo' | 'doing' | 'blocked' | 'done';
 
-  let result = text.replace(/\r\n/g, '\n').trim();
+type StructuredWidget =
+  | {
+      kind: 'mermaid';
+      title: string;
+      type: string;
+      raw: string;
+      body: string;
+    };
 
-  const balanceDelimitedToken = (value: string, token: string) => {
-    const parts = value.split(token);
-    if (parts.length % 2 === 0) {
-      return value;
+type StructuredBlock =
+  | { type: 'text'; content: string }
+  | { type: 'widget'; widget: StructuredWidget };
+
+const WIDGET_OPEN_REGEX = /\[WIDGET:MERMAID(?::([^\]]+))?\]/g;
+const WIDGET_CLOSE_REGEX = /\[\/WIDGET:MERMAID\]|\[\/WIDGET\]/g;
+
+const parseChecklistItems = (body: string) => {
+  const normalized = body.replace(/\r\n/g, '\n').trim();
+  if (!normalized) return [];
+
+  const toChecklistStatus = (value: string): ChecklistStatus => {
+    switch (value.toLowerCase()) {
+      case 'x':
+      case 'done':
+        return 'done';
+      case 'doing':
+        return 'doing';
+      case 'blocked':
+        return 'blocked';
+      default:
+        return 'todo';
     }
-
-    return `${value}${token}`;
   };
 
-  // Strip broken leading bold markers like "** is your biggest losing pair..."
-  result = result.replace(/^\*\*\s+(?=(?:is|was|are|were|your|the|this|that)\b)/i, '');
+  const rawLines = normalized.includes('\n')
+    ? normalized.split('\n')
+    : normalized.includes('|')
+      ? normalized.split('|')
+      : [normalized];
 
-  // Remove dangling bold markers before punctuation, which can swallow trailing text in markdown rendering.
-  result = result.replace(/\*\*(?=[)\],.!?:;]|$)/g, '');
+  return rawLines
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const leadingIndent = line.match(/^[\t ]*/)?.[0] || '';
+      const indentLevel = Math.min(3, Math.floor(leadingIndent.replace(/\t/g, '    ').length / 2));
+      const stripped = line.replace(/^[\t ]*[-*•]?\s*/, '');
+      const statusMatch = stripped.match(/^\[(x|X|done|doing|blocked|todo| )\]\s*(.*)$/i);
 
-  // Strip token-only markdown fragments such as "(**`)" or "[***]" that sometimes leak from model output.
-  result = result.replace(/([(\[{])\s*(?:[*_`~#>-]+\s*){1,6}([)\]}])/g, '');
-  result = result.replace(/(^|[\s([{-])(?:\*\*`|`\*\*|\*\*_|_\*\*|``\*\*|\*\*\*`|`\*\*\*)(?=$|[\s)\]}:;,.!?-])/g, '$1');
-  result = result.replace(/([(\[{])\s*([)\]}])/g, '');
+      if (statusMatch) {
+        const text = statusMatch[2].trim();
+        const status = toChecklistStatus(statusMatch[1]);
 
-  // Remove empty markdown wrappers left behind after cleanup.
-  result = result.replace(/\*\*\s*\*\*/g, '');
-  result = result.replace(/`{1,3}\s*`{1,3}/g, '');
-
-  // Repair headings that were emitted without a space after the marker.
-  result = result.replace(/^(#{1,6})([^\s#])/gm, '$1 $2');
-
-  // Ensure dense label lines split cleanly into bullets when the model emits shouty summaries.
-  result = result.replace(
-    /(^|[\n])([A-Z][A-Z\s/&-]{2,}:\s+[^\n]+)/g,
-    (match, prefix, line) => {
-      const trimmed = line.trim();
-      if (trimmed.startsWith('- ') || trimmed.startsWith('* ') || trimmed.startsWith('#')) {
-        return `${prefix}${trimmed}`;
+        return {
+          text,
+          checked: status === 'done',
+          status,
+          indentLevel,
+        };
       }
-      return `${prefix}- **${trimmed.split(':')[0].trim()}:** ${trimmed.split(':').slice(1).join(':').trim()}`;
-    }
-  );
 
-  // Add breathing room before headings and list blocks when the model compresses sections.
-  result = result.replace(/([^\n])\n(#{1,6}\s)/g, '$1\n\n$2');
-  result = result.replace(/([^\n])\n([-*]\s|\d+\.\s)/g, '$1\n\n$2');
-
-  // Balance common markdown delimiters so malformed model output doesn't truncate rendering.
-  result = balanceDelimitedToken(result, '**');
-  result = balanceDelimitedToken(result, '`');
-
-  // Collapse overly large gaps while keeping paragraphs readable.
-  result = result.replace(/\n{3,}/g, '\n\n');
-  result = result.replace(/[ \t]{2,}/g, ' ');
-
-  return result.trim();
+      return {
+        text: stripped,
+        checked: false,
+        status: undefined,
+        indentLevel,
+      };
+    });
 };
+
+const findWidgetCloseIndex = (text: string, kind: string, fromIndex: number) => {
+  WIDGET_CLOSE_REGEX.lastIndex = fromIndex;
+  let match: RegExpExecArray | null;
+
+  while ((match = WIDGET_CLOSE_REGEX.exec(text)) !== null) {
+    const matchedKind = match[1];
+    if (!matchedKind || matchedKind === kind) {
+      return {
+        closeStart: match.index,
+        closeEnd: WIDGET_CLOSE_REGEX.lastIndex,
+      };
+    }
+  }
+
+  return null;
+};
+
+export const parseStructuredBlocks = (text: string): StructuredBlock[] => {
+  const blocks: StructuredBlock[] = [];
+  WIDGET_OPEN_REGEX.lastIndex = 0;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = WIDGET_OPEN_REGEX.exec(text)) !== null) {
+    const before = text.slice(lastIndex, match.index);
+    if (before) {
+      blocks.push({ type: 'text', content: before });
+    }
+
+    const kind = match[1];
+    const meta = (match[2] || '').trim();
+    const bodyStart = WIDGET_OPEN_REGEX.lastIndex;
+    const closeMatch = findWidgetCloseIndex(text, kind, bodyStart);
+    const closeStart = closeMatch?.closeStart ?? text.length;
+    const closeEnd = closeMatch?.closeEnd ?? text.length;
+    const body = text
+      .slice(bodyStart, closeStart)
+      .replace(/\[\/WIDGET(?::(?:CHECKLIST|MERMAID))?\]\s*$/i, '')
+      .trim();
+
+    blocks.push({
+      type: 'widget',
+      widget: {
+        kind: 'mermaid',
+        title: meta || 'Flowchart',
+        type: meta || 'FLOWCHART',
+        body,
+        raw: text.slice(match.index, closeEnd),
+      },
+    });
+
+    lastIndex = closeEnd;
+    WIDGET_OPEN_REGEX.lastIndex = closeEnd;
+  }
+
+  const after = text.slice(lastIndex);
+  if (after) {
+    blocks.push({ type: 'text', content: after });
+  }
+
+  return blocks.length > 0 ? blocks : [{ type: 'text', content: text }];
+};
+
+export const stripStructuredBlocks = (text: string) => parseStructuredBlocks(text)
+  .filter((block): block is Extract<StructuredBlock, { type: 'text' }> => block.type === 'text')
+  .map((block) => block.content)
+  .join('')
+  .replace(/\[SECTION:[A-Z_]+\]/g, '')
+  .replace(/\n{3,}/g, '\n\n')
+  .trim();
 
 const isPairPerformanceQuestion = (input: string) => {
   const normalized = input.toLowerCase();
@@ -490,7 +576,7 @@ const MessageRow = React.memo(({ message, isDarkMode, userProfile, renderMessage
   const isCompactAudioMessage = isUser && Boolean(message.audioAttachment) && (!message.content || message.content === '[Voice recording]');
 
   const handleCopy = () => {
-    const cleanContentText = (message.content || '').replace(/\[SECTION:[^\]]+\]/g, "");
+    const cleanContentText = stripStructuredBlocks(message.content || '').trim();
     navigator.clipboard?.writeText(cleanContentText);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -772,8 +858,6 @@ const MENTOR_QUICK_PROMPTS: QuickPrompt[] = [
   { title: "Mindset Audit", icon: <Brain size={16} />, prompt: "Analyze my trading psychology based on my trade data.", color: 'text-pink-500', category: 'psychology', featureMode: 'psychology' },
   { title: "Focus Flow", icon: <Target size={16} />, prompt: "Design a focus enhancement protocol.", color: 'text-violet-500', category: 'psychology', featureMode: 'psychology' },
   { title: "Compound Strategy", icon: <TrendingUp size={16} />, prompt: "Create a compounding strategy.", color: 'text-emerald-500', category: 'scaling', featureMode: 'scaling' },
-  { title: "Deep Audit", icon: <Activity size={16} />, prompt: "Perform a deep performance audit. Include: 1) Win rate analysis by pair/time/emotion 2) Best and worst setups 3) Execution quality assessment 4) Risk management score 5) Key improvement areas 6) Personalized action plan", color: 'text-indigo-500', category: 'analysis' },
-  { title: "Strategy Tree", icon: <Workflow size={16} />, prompt: "Generate a visual decision tree for my current trading strategy with entry/exit criteria.", color: 'text-cyan-500', category: 'strategy' },
 ];
 
 const RESEARCH_QUICK_PROMPTS: ResearchPrompt[] = [
@@ -786,7 +870,6 @@ const RESEARCH_QUICK_PROMPTS: ResearchPrompt[] = [
 const RESEARCH_STARTERS = RESEARCH_QUICK_PROMPTS.slice(0, 2);
 
 const FORGE_ITEMS = [
-  { title: "Execution Checklist", icon: <CheckCircle2 size={20} />, desc: "High-probability rule set", prompt: "Build me a high-probability execution checklist based on my best performing trades." },
   { title: "Strategy Roadmap", icon: <Workflow size={20} />, desc: "Logic & decision trees", prompt: "Generate a visual decision tree for my current trading strategy." },
   { title: "Psychology Flow", icon: <Brain size={20} />, desc: "Emotional state management", prompt: "Create a psychology protocol for managing state during drawdown." }
 ];
@@ -883,7 +966,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
   
   const [isPlanMode, setIsPlanMode] = useState(false);
   const [input, setInput] = useState('');
-  const [streamingMessage, setStreamingMessage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isRecordingPaused, setIsRecordingPaused] = useState(false);
@@ -926,8 +1008,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
     const intervalId = window.setInterval(syncDailyCredits, 60 * 1000);
     return () => window.clearInterval(intervalId);
   }, [setDailyCredits]);
-  const streamingFlushTimeoutRef = useRef<number | null>(null);
-  const streamingTextRef = useRef('');
 
   const normalizeMessages = useCallback((stored: Message[] = []) => (
     stored.map((m) => ({
@@ -954,39 +1034,8 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
     setMentorMessages(prev => value instanceof Function ? value(prev) : value);
   }, [selectedModel, setMentorMessages, setResearchMessages]);
 
-  const scheduleStreamingMessage = useCallback((nextText: string) => {
-    streamingTextRef.current = nextText;
-    if (streamingFlushTimeoutRef.current !== null) {
-      return;
-    }
-
-    streamingFlushTimeoutRef.current = window.setTimeout(() => {
-      streamingFlushTimeoutRef.current = null;
-      startTransition(() => {
-        setStreamingMessage(streamingTextRef.current);
-      });
-    }, 40);
-  }, []);
-
-  const resetStreamingMessage = useCallback((nextValue: string | null = null) => {
-    if (streamingFlushTimeoutRef.current !== null) {
-      window.clearTimeout(streamingFlushTimeoutRef.current);
-      streamingFlushTimeoutRef.current = null;
-    }
-    streamingTextRef.current = nextValue ?? '';
-    startTransition(() => {
-      setStreamingMessage(nextValue);
-    });
-  }, []);
-
   useEffect(() => {
     window.localStorage.removeItem('jfx_ai_communication_style');
-  }, []);
-
-  useEffect(() => () => {
-    if (streamingFlushTimeoutRef.current !== null) {
-      window.clearTimeout(streamingFlushTimeoutRef.current);
-    }
   }, []);
 
   useEffect(() => {
@@ -1006,7 +1055,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
       abortControllerRef.current.abort();
       abortControllerRef.current = null;
       setIsGenerating(false);
-      resetStreamingMessage(null);
       addToast({ type: 'info', title: 'Generation Stopped', message: 'The AI architect has paused.' });
     }
   };
@@ -1428,16 +1476,15 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
   }, []);
 
   useEffect(() => {
-    const shouldAutoFollow = messages.length > 0 || Boolean(streamingMessage) || isGenerating || isTranscribing;
+    const shouldAutoFollow = messages.length > 0 || isGenerating || isTranscribing;
     if (!shouldAutoFollow) return;
 
-    const behavior = streamingMessage || isGenerating || isTranscribing ? 'auto' : 'smooth';
     const timer = window.setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior });
+      messagesEndRef.current?.scrollIntoView({ behavior: isGenerating || isTranscribing ? 'auto' : 'smooth' });
     }, 50);
 
     return () => window.clearTimeout(timer);
-  }, [messages, streamingMessage, isGenerating, isTranscribing]);
+  }, [messages, isGenerating, isTranscribing]);
 
   const handleSend = async (
     overrideInput?: string,
@@ -1475,7 +1522,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
       URL.revokeObjectURL(options.voiceClip.url);
     }
     setIsGenerating(true);
-    resetStreamingMessage("");
     setShowForgeMenu(false);
 
     abortControllerRef.current = new AbortController();
@@ -1494,7 +1540,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
         { contextSummary }
       );
       setIsGenerating(false);
-      resetStreamingMessage(null);
       abortControllerRef.current = null;
       isProcessingRef.current = false;
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -1505,7 +1550,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
       const localAnswer = buildPairPerformanceAnswer(normalizedInput, trades, userProfile);
       processResponse(localAnswer, (Date.now() + 1).toString(), { contextSummary });
       setIsGenerating(false);
-      resetStreamingMessage(null);
       abortControllerRef.current = null;
       isProcessingRef.current = false;
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -1516,7 +1560,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
       setMessages(prev => prev.slice(0, -1));
       setInput(normalizedInput);
       setIsGenerating(false);
-      resetStreamingMessage(null);
       abortControllerRef.current = null;
       isProcessingRef.current = false;
       addToast({
@@ -1540,14 +1583,13 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
         requestHistory, 
         selectedModel, 
         isPlanMode, 
-        (t) => scheduleStreamingMessage(t),
+        undefined,
         abortControllerRef.current.signal
       );
       processResponse(res, (Date.now() + 1).toString(), { contextSummary });
     } catch (error: any) {
       if (error.message === "Generation aborted") return;
       console.error("AI Error:", error);
-      resetStreamingMessage(null);
       const errorMessage = error?.message?.includes('API_KEY') 
         ? 'AI not configured. Please add the NVIDIA API key to the service.'
         : error?.message?.includes('timeout')
@@ -1560,7 +1602,6 @@ const AIChat: React.FC<AIChatProps> = ({ isDarkMode, trades: rawTrades = [], use
       addToast({ type: 'error', title: 'AI Error', message: errorMessage });
     } finally {
       setIsGenerating(false);
-      resetStreamingMessage(null);
       abortControllerRef.current = null;
       isProcessingRef.current = false;
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -1698,7 +1739,6 @@ const getCurrentCreditLabel = useCallback(() => 'AI credit 10/10', []);
     };
     setMessages(prev => [...prev, userMessage]);
     setIsGenerating(true);
-    resetStreamingMessage("");
     setShowForgeMenu(false);
 
     abortControllerRef.current = new AbortController();
@@ -1717,6 +1757,16 @@ Use exactly these sections:
 [SECTION:TARGETS]
 Base the response on actual emotions, adherence, and recent behavior. Focus on practical emotional control, reset rules, and a repeatable routine.
 
+FORMAT REQUIREMENTS
+- RESET_PROTOCOL must include exactly one Mermaid widget in this exact wrapper format:
+[WIDGET:MERMAID:FLOWCHART]
+graph TD
+A[Trigger] --> B[Pause]
+[/WIDGET:MERMAID]
+- The Mermaid widget body must contain only raw Mermaid syntax. No title line, no explanation, no markdown fence, no prose inside the widget.
+- Any explanation for the reset flow must go outside the widget as normal Markdown.
+- ROUTINE and TARGETS should prefer concise bullet lists or checklist widgets.
+
 User request: ${userRequest}`
       : `Build a capital scaling plan for this trader.
 
@@ -1728,12 +1778,23 @@ Use exactly these sections:
 [SECTION:TARGETS]
 Base the response on actual performance, current balance, risk profile, and pair performance. Focus on practical risk control, scaling gates, and capital preservation.
 
+FORMAT REQUIREMENTS
+- SCALING_ROADMAP must include exactly one Mermaid widget in this exact wrapper format:
+[WIDGET:MERMAID:GANTT]
+gantt
+title Scaling Roadmap
+section Phase 1
+Consistency Gate :a1, 2026-01-01, 30d
+[/WIDGET:MERMAID]
+- The Mermaid widget body must contain only raw Mermaid syntax. No intro sentence, no label like "Scaling Roadmap:", no markdown fence, no prose inside the widget.
+- Any commentary about milestones must go outside the widget as normal Markdown.
+- CAPITAL_RULES and TARGETS should prefer concise bullet lists or checklist widgets.
+
 User request: ${userRequest}`;
 
     if (dailyCredits.mentorRemaining <= 0) {
       setMessages(prev => prev.slice(0, -1));
       setIsGenerating(false);
-      resetStreamingMessage(null);
       abortControllerRef.current = null;
       isProcessingRef.current = false;
       addToast({
@@ -1756,7 +1817,7 @@ User request: ${userRequest}`;
         requestHistory,
         selectedModel,
         false,
-        (t) => scheduleStreamingMessage(t),
+        undefined,
         abortControllerRef.current.signal
       );
       processResponse(res, (Date.now() + 1).toString(), { isDeepAnalysis: true, kind: mode, psychologySnapshot, scalingSnapshot, contextSummary });
@@ -1771,7 +1832,6 @@ User request: ${userRequest}`;
       });
     } finally {
       setIsGenerating(false);
-      resetStreamingMessage(null);
       abortControllerRef.current = null;
       isProcessingRef.current = false;
     }
@@ -1803,10 +1863,8 @@ User request: ${userRequest}`;
 
     setShowWizard(false);
     setIsGenerating(true);
-    resetStreamingMessage("");
     if (dailyCredits.mentorRemaining <= 0) {
       setIsGenerating(false);
-      resetStreamingMessage(null);
       addToast({
         type: 'error',
         title: 'Daily credits used up',
@@ -1884,6 +1942,16 @@ CONTENT RULES
 - ROUTINE: List pre-market prep, in-session focus, and post-market shutdown.
 - REVIEW: Weekly review prompts and performance tracking metrics.
 
+WIDGET RULES
+- EXECUTION_FLOW must include exactly one Mermaid widget in this exact wrapper format:
+[WIDGET:MERMAID:FLOWCHART]
+graph TD
+A[Bias Check] --> B[Setup Confirmed]
+[/WIDGET:MERMAID]
+- The Mermaid widget body must contain only raw Mermaid syntax. No title line, no explanation, no markdown fence, no prose inside the widget.
+- If you need to explain the flow, do it outside the widget as normal Markdown after the diagram.
+- ROUTINE or RISK may use checklist widgets, but EXECUTION_FLOW must use a Mermaid widget.
+
 STYLE
 - Be structural, architectural, and highly specific.
 - No generic motivation.`;
@@ -1918,7 +1986,7 @@ ${strategyProfile.whyITrade}`;
         requestHistory,
         selectedModel,
         true,
-        (t) => scheduleStreamingMessage(t),
+        undefined,
         abortControllerRef.current.signal
       );
       processResponse(res, Date.now().toString(), { isDeepAnalysis: true, kind: 'trading-plan', strategyProfile, contextSummary });
@@ -1934,24 +2002,71 @@ ${strategyProfile.whyITrade}`;
       });
     } finally {
       setIsGenerating(false);
-      resetStreamingMessage(null);
       abortControllerRef.current = null;
       setIsPlanMode(false);
     }
   };
 
+  const renderMarkdownFragment = useCallback((markdown: string, key: string) => (
+    <ReactMarkdown
+      key={key}
+      remarkPlugins={[remarkGfm]}
+      components={{
+        h1: ({ children }) => <h1 className="ai-md-h1">{children}</h1>,
+        h2: ({ children }) => <h2 className="ai-md-h2">{children}</h2>,
+        h3: ({ children }) => <h3 className="ai-md-h3">{children}</h3>,
+        p: ({ children }) => <p className="ai-md-p">{children}</p>,
+        ul: ({ children }) => <ul className="ai-md-ul">{children}</ul>,
+        ol: ({ children }) => <ol className="ai-md-ol">{children}</ol>,
+        li: ({ children }) => <li className="ai-md-li">{children}</li>,
+        strong: ({ children }) => <strong className="ai-md-strong">{children}</strong>,
+        em: ({ children }) => <em className="ai-md-em">{children}</em>,
+        blockquote: ({ children }) => <blockquote className="ai-md-blockquote">{children}</blockquote>,
+        hr: () => <hr className="ai-md-hr" />,
+        a: ({ children, href }) => <a href={href} target="_blank" rel="noreferrer" className="ai-md-link">{children}</a>,
+        code: ({ children, className, ...props }: any) => props.inline
+          ? <code className="ai-md-code-inline">{children}</code>
+          : <code className={className || 'ai-md-code-block'}>{children}</code>,
+        pre: ({ children }) => <pre className="ai-md-pre">{children}</pre>,
+      }}
+    >
+      {markdown}
+    </ReactMarkdown>
+  ), []);
+
+  const renderStructuredContent = useCallback((rawContent: string, keyPrefix: string) => {
+    const blocks = parseStructuredBlocks(rawContent);
+    return blocks.map((block, index) => {
+      if (block.type === 'text') {
+        const markdown = stripStructuredBlocks(block.content);
+        if (!markdown.trim()) return null;
+        return (
+          <div key={`${keyPrefix}-text-${index}`} className="space-y-4">
+            {renderMarkdownFragment(markdown, `${keyPrefix}-markdown-${index}`)}
+          </div>
+        );
+      }
+
+      return (
+        <div key={`${keyPrefix}-mermaid-${index}`} className="my-4">
+          <MermaidWidget
+            code={block.widget.body}
+            type={block.widget.type}
+            isDarkMode={isDarkMode}
+          />
+        </div>
+      );
+    });
+  }, [isDarkMode, renderMarkdownFragment]);
+
   const renderMessageContent = useCallback((message: Message) => {
-    const { content, role, isStreaming, audioAttachment } = message;
+    const { content, role, audioAttachment } = message;
     const isUser = role === 'user';
     const isAudioOnlyUserMessage = isUser && Boolean(audioAttachment) && (!content || content === '[Voice recording]');
 
     let safeContent = cleanThinkingTags(content || '');
     if (!isUser) {
       safeContent = normalizeAssistantMarkdown(safeContent);
-    }
-
-    if (isStreaming) {
-      return <div className="markdown-plain-text whitespace-pre-wrap leading-7">{safeContent.replace(/\[SECTION:[A-Z_]+\]/g, '')}</div>;
     }
 
     const markdownClassName = isUser
@@ -1980,33 +2095,13 @@ ${strategyProfile.whyITrade}`;
           </div>
         )}
         {isAudioOnlyUserMessage ? null : (
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              h1: ({ children }) => <h1 className="ai-md-h1">{children}</h1>,
-              h2: ({ children }) => <h2 className="ai-md-h2">{children}</h2>,
-              h3: ({ children }) => <h3 className="ai-md-h3">{children}</h3>,
-              p: ({ children }) => <p className="ai-md-p">{children}</p>,
-              ul: ({ children }) => <ul className="ai-md-ul">{children}</ul>,
-              ol: ({ children }) => <ol className="ai-md-ol">{children}</ol>,
-              li: ({ children }) => <li className="ai-md-li">{children}</li>,
-              strong: ({ children }) => <strong className="ai-md-strong">{children}</strong>,
-              em: ({ children }) => <em className="ai-md-em">{children}</em>,
-              blockquote: ({ children }) => <blockquote className="ai-md-blockquote">{children}</blockquote>,
-              hr: () => <hr className="ai-md-hr" />,
-              a: ({ children, href }) => <a href={href} target="_blank" rel="noreferrer" className="ai-md-link">{children}</a>,
-              code: ({ children, className, ...props }: any) => props.inline
-                ? <code className="ai-md-code-inline">{children}</code>
-                : <code className={className || 'ai-md-code-block'}>{children}</code>,
-              pre: ({ children }) => <pre className="ai-md-pre">{children}</pre>,
-            }}
-          >
-            {safeContent.replace(/\[SECTION:[A-Z_]+\]/g, '')}
-          </ReactMarkdown>
+          <div className="space-y-4">
+            {renderStructuredContent(safeContent, `message-${message.id}`)}
+          </div>
         )}
       </div>
     );
-  }, [isDarkMode]);
+  }, [isDarkMode, renderMarkdownFragment, renderStructuredContent]);
 
   const renderSectionCards = (sections: Record<string, string>, message: Message) => {
     const isTradingPlan = message.kind === 'trading-plan' || message.kind === 'strategy';
@@ -2014,7 +2109,7 @@ ${strategyProfile.whyITrade}`;
       ? STRATEGY_SECTION_CONFIG
       : message.kind === 'psychology'
         ? PSYCHOLOGY_SECTION_CONFIG
-        : message.kind === 'scaling'
+      : message.kind === 'scaling'
           ? SCALING_SECTION_CONFIG
           : ANALYSIS_SECTION_CONFIG;
 
@@ -2062,30 +2157,6 @@ ${strategyProfile.whyITrade}`;
           </div>
         )}
 
-        {message.kind === 'psychology' && message.psychologySnapshot && (
-          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/70' : 'border-slate-200 bg-slate-50'}`}>
-            <div className="flex items-center gap-2 mb-4">
-              <Brain size={18} className="text-rose-500" />
-              <span className={`text-xs font-semibold uppercase tracking-[0.2em] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Psychology Snapshot</span>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {[
-                ['Top State', message.psychologySnapshot.topEmotion],
-                ['Worst State', message.psychologySnapshot.worstEmotion],
-                ['No Plan Trades', String(message.psychologySnapshot.noPlanTrades)],
-                ['Followed Plan', String(message.psychologySnapshot.followPlanTrades)],
-                ['Recent Losses', String(message.psychologySnapshot.recentLosses)],
-                ['Total Trades', String(message.psychologySnapshot.totalTrades)],
-              ].map(([label, value]) => (
-                <div key={label} className={`rounded-xl p-3 ${isDarkMode ? 'bg-black/20 border border-zinc-800' : 'bg-white border border-slate-200'}`}>
-                  <div className={`text-[10px] uppercase tracking-widest mb-1 ${isDarkMode ? 'text-zinc-500' : 'text-slate-500'}`}>{label}</div>
-                  <div className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {message.kind === 'scaling' && message.scalingSnapshot && (
           <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/70' : 'border-slate-200 bg-slate-50'}`}>
             <div className="flex items-center gap-2 mb-4">
@@ -2102,6 +2173,30 @@ ${strategyProfile.whyITrade}`;
                 ['Avg Loss', message.scalingSnapshot.avgLoss],
                 ['Risk Default', message.scalingSnapshot.riskPerTrade],
                 ['Best Pair', message.scalingSnapshot.bestPair],
+              ].map(([label, value]) => (
+                <div key={label} className={`rounded-xl p-3 ${isDarkMode ? 'bg-black/20 border border-zinc-800' : 'bg-white border border-slate-200'}`}>
+                  <div className={`text-[10px] uppercase tracking-widest mb-1 ${isDarkMode ? 'text-zinc-500' : 'text-slate-500'}`}>{label}</div>
+                  <div className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {message.kind === 'psychology' && message.psychologySnapshot && (
+          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/70' : 'border-slate-200 bg-slate-50'}`}>
+            <div className="flex items-center gap-2 mb-4">
+              <Brain size={18} className="text-rose-500" />
+              <span className={`text-xs font-semibold uppercase tracking-[0.2em] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Psychology Snapshot</span>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {[
+                ['Top State', message.psychologySnapshot.topEmotion],
+                ['Worst State', message.psychologySnapshot.worstEmotion],
+                ['No Plan Trades', String(message.psychologySnapshot.noPlanTrades)],
+                ['Followed Plan', String(message.psychologySnapshot.followPlanTrades)],
+                ['Recent Losses', String(message.psychologySnapshot.recentLosses)],
+                ['Total Trades', String(message.psychologySnapshot.totalTrades)],
               ].map(([label, value]) => (
                 <div key={label} className={`rounded-xl p-3 ${isDarkMode ? 'bg-black/20 border border-zinc-800' : 'bg-white border border-slate-200'}`}>
                   <div className={`text-[10px] uppercase tracking-widest mb-1 ${isDarkMode ? 'text-zinc-500' : 'text-slate-500'}`}>{label}</div>
@@ -2133,7 +2228,9 @@ ${strategyProfile.whyITrade}`;
                 </div>
                 
                 <div className={`text-sm leading-relaxed ${isDarkMode ? 'text-zinc-300' : 'text-slate-700'}`}>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+                  <div className="space-y-4">
+                    {renderStructuredContent(content, `section-${key}`)}
+                  </div>
                 </div>
               </motion.div>
             );
@@ -2712,44 +2809,7 @@ ${strategyProfile.whyITrade}`;
                   ))}
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl w-full">
-                  <button 
-                    onClick={() => handleFeatureRequest('psychology', "Create a psychology protocol for managing tilt and emotional state during drawdown.")}
-                    className={`p-4 rounded-xl border text-left transition-all ${
-                      isDarkMode ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700' : 'bg-white border-slate-200 hover:border-slate-300'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <Brain size={16} className="text-rose-500" />
-                      <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Psychology Protocol</span>
-                    </div>
-                    <p className={`text-xs ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Tilt & mindset management</p>
-                  </button>
-                  <button 
-                    onClick={() => handleSend("Perform a deep performance audit. Include: 1) Win rate analysis by pair/time/emotion 2) Best and worst setups 3) Execution quality assessment 4) Key improvement areas 5) Action plan.")}
-                    className={`p-4 rounded-xl border text-left transition-all ${
-                      isDarkMode ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700' : 'bg-white border-slate-200 hover:border-slate-300'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <Activity size={16} className="text-indigo-500" />
-                      <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Deep Audit</span>
-                    </div>
-                    <p className={`text-xs ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Performance review and insights</p>
-                  </button>
-                  <button 
-                    onClick={() => handleSend("Generate a visual decision tree for my current trading strategy with entry and exit criteria.")}
-                    className={`p-4 rounded-xl border text-left transition-all ${
-                      isDarkMode ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700' : 'bg-white border-slate-200 hover:border-slate-300'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <Workflow size={16} className="text-cyan-500" />
-                      <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Strategy Tree</span>
-                    </div>
-                    <p className={`text-xs ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Entry and exit decision logic</p>
-                  </button>
-                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl w-full" />
               )}
             </motion.div>
           ) : (
@@ -2765,26 +2825,9 @@ ${strategyProfile.whyITrade}`;
                   assistantIcon={AssistantIcon}
                 />
               ))}
-              {(streamingMessage && streamingMessage.length > 0) && (
-                <MessageRow 
-                  key="stream"
-                  message={{
-                    id: 'stream',
-                    role: 'assistant',
-                    content: streamingMessage,
-                    timestamp: new Date(),
-                    isStreaming: true
-                  }}
-                  isDarkMode={isDarkMode}
-                  userProfile={userProfile}
-                  renderMessageContent={renderMessageContent}
-                  renderSectionCards={renderSectionCards}
-                  assistantIcon={AssistantIcon}
-                />
-              )}
             </div>
           )}
-          {(isGenerating || isTranscribing) && (!streamingMessage || streamingMessage === "") && messages.length > 0 && !showWizard && (
+          {(isGenerating || isTranscribing) && messages.length > 0 && !showWizard && (
             <motion.div 
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -2901,18 +2944,6 @@ ${strategyProfile.whyITrade}`;
                       <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Psychology</span>
                     </div>
                     <p className={`text-xs ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Tilt & mindset protocols</p>
-                  </button>
-                  <button 
-                    onClick={() => { handleSend("Perform a deep performance audit. Include: 1) Win rate analysis by pair/time/emotion 2) Best and worst setups 3) Execution quality assessment 4) Key improvement areas 5) Action plan."); setShowFeaturesMenu(false); }}
-                    className={`p-4 rounded-xl border text-left transition-all ${
-                      isDarkMode ? 'bg-zinc-800 border-zinc-700 hover:border-zinc-600' : 'bg-white border-slate-200 hover:border-slate-300'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <Activity size={16} className="text-indigo-500" />
-                      <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Deep Audit</span>
-                    </div>
-                    <p className={`text-xs ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Performance review and insights</p>
                   </button>
                 </div>
               )}

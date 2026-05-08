@@ -35,6 +35,49 @@ export const APP_CONSTANTS = {
   ]
 };
 
+const PLAN_NORMALIZATION_MAP: Record<string, string> = {
+  [APP_CONSTANTS.PLANS.FREE.toLowerCase()]: APP_CONSTANTS.PLANS.FREE,
+  free: APP_CONSTANTS.PLANS.FREE,
+  'free tier': APP_CONSTANTS.PLANS.FREE,
+  journaler: APP_CONSTANTS.PLANS.FREE,
+  'free tier (journaler)': APP_CONSTANTS.PLANS.FREE,
+
+  [APP_CONSTANTS.PLANS.HOBBY.toLowerCase()]: APP_CONSTANTS.PLANS.HOBBY,
+  pro: APP_CONSTANTS.PLANS.HOBBY,
+  'pro tier': APP_CONSTANTS.PLANS.HOBBY,
+  analyst: APP_CONSTANTS.PLANS.HOBBY,
+  analysts: APP_CONSTANTS.PLANS.HOBBY,
+  'pro tier (analysts)': APP_CONSTANTS.PLANS.HOBBY,
+  hobby: APP_CONSTANTS.PLANS.HOBBY,
+
+  [APP_CONSTANTS.PLANS.STANDARD.toLowerCase()]: APP_CONSTANTS.PLANS.STANDARD,
+  premium: APP_CONSTANTS.PLANS.STANDARD,
+  'premium tier': APP_CONSTANTS.PLANS.STANDARD,
+  masters: APP_CONSTANTS.PLANS.STANDARD,
+  elite: APP_CONSTANTS.PLANS.STANDARD,
+  'elite masters (premium)': APP_CONSTANTS.PLANS.STANDARD,
+  'premium (masters)': APP_CONSTANTS.PLANS.STANDARD,
+  standard: APP_CONSTANTS.PLANS.STANDARD,
+};
+
+export const normalizePlan = (plan?: string | null) => {
+  const normalized = plan?.trim().toLowerCase();
+  if (!normalized) return APP_CONSTANTS.PLANS.FREE;
+
+  const directMatch = PLAN_NORMALIZATION_MAP[normalized];
+  if (directMatch) return directMatch;
+
+  if (normalized.includes('free')) return APP_CONSTANTS.PLANS.FREE;
+  if (normalized.includes('pro') || normalized.includes('hobby') || normalized.includes('analyst')) {
+    return APP_CONSTANTS.PLANS.HOBBY;
+  }
+  if (normalized.includes('premium') || normalized.includes('elite') || normalized.includes('standard')) {
+    return APP_CONSTANTS.PLANS.STANDARD;
+  }
+
+  return APP_CONSTANTS.PLANS.FREE;
+};
+
 export const PLAN_FEATURES = {
   [APP_CONSTANTS.PLANS.FREE]: {
     maxTradesPerMonth: 50,

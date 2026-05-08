@@ -28,7 +28,7 @@ import {
 } from '@tabler/icons-react';
 import { UserProfile, Trade, EASession } from '../types';
 import { useToast } from './ui/Toast';
-import { APP_CONSTANTS, PLAN_FEATURES } from '../lib/constants';
+import { APP_CONSTANTS, PLAN_FEATURES, normalizePlan } from '../lib/constants';
 import { FloatingDock } from './ui/floating-dock';
 import { AnimatePresence, motion } from 'motion/react';
 
@@ -65,7 +65,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [showNotifications, setShowNotifications] = useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
 
-  const currentPlan = userProfile?.plan || APP_CONSTANTS.PLANS.FREE;
+  const currentPlan = normalizePlan(userProfile?.plan);
   const isBasicTier = !PLAN_FEATURES[currentPlan].advancedAnalytics;
 
   const { notifications, unreadCount, clearNotifications, markNotificationsRead } = useToast();

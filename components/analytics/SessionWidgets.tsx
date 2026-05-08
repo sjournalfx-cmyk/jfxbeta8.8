@@ -1,6 +1,5 @@
 
 import React, { useMemo } from 'react';
-import { motion } from 'framer-motion';
 import { Sunrise, Sun, Sunset, Activity, Clock, TrendingUp, TrendingDown, Target, BarChart2, HelpCircle } from 'lucide-react';
 import { 
   BarChart, 
@@ -58,6 +57,25 @@ const getTradeSession = (trade: Trade) => {
 };
 
 const getTradeHour = (trade: Trade) => getSastHourFromTrade(trade);
+
+const calculateHoldMinutes = (trade: Trade) => {
+  if (!trade.openTime || !trade.closeTime) return null;
+
+  const start = new Date(trade.openTime).getTime();
+  const end = new Date(trade.closeTime).getTime();
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return null;
+
+  return (end - start) / (1000 * 60);
+};
+
+const formatDuration = (minutes: number) => {
+  const rounded = Math.max(0, Math.round(minutes));
+  const hours = Math.floor(rounded / 60);
+  const mins = rounded % 60;
+
+  if (hours <= 0) return `${mins}m`;
+  return `${hours}h ${String(mins).padStart(2, '0')}m`;
+};
 
 const formatPnL = (value: number, currencySymbol: string) => {
   const sign = value >= 0 ? '+' : '-';
@@ -179,14 +197,22 @@ export const MarketSessionWidget: React.FC<WidgetProps> = ({ trades, isDarkMode,
 
 export const HourlyPerformanceWidget: React.FC<WidgetProps> = ({ trades, isDarkMode, currencySymbol }) => {
   const data = useMemo(() => {
-    const stats: Record<number, { pnl: number, count: number }> = {};
-    Array.from({ length: 24 }).forEach((_, i) => stats[i] = { pnl: 0, count: 0 });
+    const stats: Record<number, { count: number, wins: number, pnl: number, holdMinutes: number, holdCount: number }> = {};
+    Array.from({ length: 24 }).forEach((_, i) => {
+      stats[i] = { pnl: 0, count: 0, wins: 0, holdMinutes: 0, holdCount: 0 };
+    });
     
     trades.forEach(t => {
       const hour = getTradeHour(t);
       if (hour !== null) {
+        const holdMinutes = calculateHoldMinutes(t);
         stats[hour].pnl += safePnL(t.pnl);
         stats[hour].count += 1;
+        if (t.result === 'Win') stats[hour].wins += 1;
+        if (holdMinutes !== null) {
+          stats[hour].holdMinutes += holdMinutes;
+          stats[hour].holdCount += 1;
+        }
       }
     });
 
@@ -194,9 +220,48 @@ export const HourlyPerformanceWidget: React.FC<WidgetProps> = ({ trades, isDarkM
       hour: parseInt(hour),
       label: `${hour}:00`,
       pnl: d.pnl,
-      count: d.count
-    })).filter(d => d.count > 0 || Math.abs(d.pnl) > 0);
+      count: d.count,
+      avgHoldMinutes: d.holdCount > 0 ? d.holdMinutes / d.holdCount : 0,
+    })).filter(d => d.count > 0);
   }, [trades]);
+
+  const rankingData = useMemo(() => {
+    const stats: Record<number, { count: number, wins: number, pnl: number, holdMinutes: number, holdCount: number }> = {};
+    Array.from({ length: 24 }).forEach((_, i) => {
+      stats[i] = { count: 0, wins: 0, pnl: 0, holdMinutes: 0, holdCount: 0 };
+    });
+
+    trades.forEach(t => {
+      const hour = getTradeHour(t);
+      if (hour === null) return;
+
+      const holdMinutes = calculateHoldMinutes(t);
+      const bucket = stats[hour];
+      bucket.pnl += safePnL(t.pnl);
+      bucket.count += 1;
+      if (t.result === 'Win') bucket.wins += 1;
+      if (holdMinutes !== null) {
+        bucket.holdMinutes += holdMinutes;
+        bucket.holdCount += 1;
+      }
+    });
+
+    return Object.entries(stats)
+      .map(([hour, d]) => ({
+        hour: parseInt(hour),
+        label: `${hour}:00`,
+        count: d.count,
+        wins: d.wins,
+        winRate: d.count > 0 ? (d.wins / d.count) * 100 : 0,
+        avgHoldMinutes: d.holdCount > 0 ? d.holdMinutes / d.holdCount : 0,
+        avgPnL: d.count > 0 ? d.pnl / d.count : 0,
+      }))
+      .filter(d => d.count >= 3)
+      .sort((a, b) => b.winRate - a.winRate || b.avgPnL - a.avgPnL || b.count - a.count);
+  }, [trades]);
+
+  const bestHour = rankingData[0] || null;
+  const worstHour = rankingData.length > 0 ? [...rankingData].sort((a, b) => a.winRate - b.winRate || a.avgPnL - b.avgPnL || a.count - b.count)[0] : null;
 
   return (
     <div className={clsx(
@@ -215,12 +280,12 @@ export const HourlyPerformanceWidget: React.FC<WidgetProps> = ({ trades, isDarkM
         </div>
       </div>
 
-      <div className="h-[250px] min-h-[250px] w-full">
+      <div className="h-[220px] min-h-[220px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={isDarkMode ? "#27272a" : "#e2e8f0"} />
             <XAxis dataKey="label" stroke={isDarkMode ? "#71717a" : "#94a3b8"} fontSize={8} tickLine={false} axisLine={false} />
-            <YAxis stroke={isDarkMode ? "#71717a" : "#94a3b8"} fontSize={8} tickLine={false} axisLine={false} tickFormatter={(v) => `${currencySymbol}${Math.abs(Number(v)).toFixed(2)}`} />
+            <YAxis stroke={isDarkMode ? "#71717a" : "#94a3b8"} fontSize={8} tickLine={false} axisLine={false} tickFormatter={(v) => `${Math.round(Number(v))}m`} />
             <Tooltip 
               contentStyle={{ 
                 backgroundColor: isDarkMode ? '#18181b' : '#fff', 
@@ -234,16 +299,88 @@ export const HourlyPerformanceWidget: React.FC<WidgetProps> = ({ trades, isDarkM
                 color: isDarkMode ? '#fff' : '#000'
               }}
               cursor={{ fill: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' }}
-              formatter={(value: number) => [formatPnL(value, currencySymbol), 'PNL']}
+              formatter={(value: number, name, props) => {
+                const hourData = props.payload as { count: number; hour: number };
+                const holdLabel = formatDuration(Number(value));
+                return [
+                  `${holdLabel}${hourData?.count ? ` • ${hourData.count} trades` : ''}`,
+                  'Avg hold'
+                ];
+              }}
             />
             <ReferenceLine y={0} stroke={isDarkMode ? "#3f3f46" : "#cbd5e1"} />
-            <Bar dataKey="pnl" radius={[2, 2, 0, 0]}>
+            <Bar dataKey="avgHoldMinutes" radius={[2, 2, 0, 0]}>
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.pnl >= 0 ? '#10B981' : '#EF4444'} />
+                <Cell key={`cell-${index}`} fill="#6366F1" />
               ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+      </div>
+
+      <div className="mt-5 grid gap-3 md:grid-cols-2">
+        {[
+          {
+            label: 'Best hour',
+            item: bestHour,
+            tone: 'emerald',
+            icon: TrendingUp,
+          },
+          {
+            label: 'Worst hour',
+            item: worstHour,
+            tone: 'rose',
+            icon: TrendingDown,
+          },
+        ].map(({ label, item, tone, icon: Icon }) => (
+          <div
+            key={label}
+            className={clsx(
+              "rounded-2xl border p-4",
+              isDarkMode ? "bg-black/20 border-zinc-800/50" : "bg-slate-50 border-slate-100"
+            )}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <div className={clsx(
+                  "rounded-xl p-2",
+                  tone === 'emerald' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-rose-500/10 text-rose-500'
+                )}>
+                  <Icon size={16} />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest opacity-50">{label}</p>
+                  <p className="text-sm font-black">{item ? item.label : 'N/A'}</p>
+                </div>
+              </div>
+              <div className={clsx("text-right", tone === 'emerald' ? 'text-emerald-500' : 'text-rose-500')}>
+                <p className="text-sm font-black">{item ? `${item.winRate.toFixed(0)}% WR` : 'No data'}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest opacity-50">
+                  {item ? `${item.count} trades` : 'Min 3 trades'}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
+              <div className={clsx(
+                "rounded-xl border px-3 py-2",
+                isDarkMode ? "border-white/[0.06] bg-white/[0.03]" : "border-slate-200 bg-white"
+              )}>
+                <p className="text-[9px] font-black uppercase tracking-widest opacity-40">Avg hold</p>
+                <p className="mt-1 font-black">{item ? formatDuration(item.avgHoldMinutes) : 'N/A'}</p>
+              </div>
+              <div className={clsx(
+                "rounded-xl border px-3 py-2",
+                isDarkMode ? "border-white/[0.06] bg-white/[0.03]" : "border-slate-200 bg-white"
+              )}>
+                <p className="text-[9px] font-black uppercase tracking-widest opacity-40">Avg trade</p>
+                <p className="mt-1 font-black">
+                  {item ? `${item.avgPnL >= 0 ? '+' : '-'}${currencySymbol}${Math.abs(item.avgPnL).toFixed(2)}` : 'N/A'}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -347,7 +484,7 @@ export const DailyActivityHeatmap: React.FC<WidgetProps> = ({ trades, isDarkMode
             Day of Week
           </h3>
           <InfoTooltip content={tooltipContent} isDarkMode={isDarkMode}>
-            <HelpCircle size={14} className="opacity-40 cursor-help hover:opacity-100 transition-opacity" />
+            <HelpCircle size={14} className="opacity-40 cursor-help hover:opacity-100" />
           </InfoTooltip>
         </div>
         <p className="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1 ml-9">Performance by Trading Day</p>
@@ -364,8 +501,8 @@ export const DailyActivityHeatmap: React.FC<WidgetProps> = ({ trades, isDarkMode
                 tick={{ fill: isDarkMode ? '#a1a1aa' : '#64748b', fontSize: 10, fontWeight: '900' }} 
               />
               <Radar
-                name="PNL"
-                dataKey="absPnl"
+                name="Win Rate"
+                dataKey="winRate"
                 stroke="#8251EE"
                 strokeWidth={3}
                 fill="#8251EE"
@@ -382,8 +519,12 @@ export const DailyActivityHeatmap: React.FC<WidgetProps> = ({ trades, isDarkMode
                   color: isDarkMode ? '#fff' : '#000'
                 }}
                 formatter={(val: number, name, props) => {
-                  const original = props.payload.pnl;
-                  return [formatPnL(original, currencySymbol), 'PNL'];
+                  const payload = props.payload as { winRate?: number; count?: number; pnl?: number };
+                  const winRate = typeof payload?.winRate === 'number' ? payload.winRate : Number(val);
+                  return [
+                    `${winRate.toFixed(0)}%`,
+                    'Win Rate'
+                  ];
                 }}
               />
             </RadarChart>
@@ -401,10 +542,9 @@ export const DailyActivityHeatmap: React.FC<WidgetProps> = ({ trades, isDarkMode
               </span>
             </div>
             <div className={clsx("h-1.5 w-full rounded-full overflow-hidden", isDarkMode ? "bg-zinc-800" : "bg-slate-100")}>
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: `${Math.min(100, (d.absPnl / maxVal) * 100)}%` }}
-                className={clsx("h-full rounded-full transition-all duration-1000", d.pnl >= 0 ? "bg-emerald-500" : "bg-rose-500")}
+              <div 
+                className={clsx("h-full rounded-full", d.pnl >= 0 ? "bg-emerald-500" : "bg-rose-500")}
+                style={{ width: `${Math.min(100, (d.absPnl / maxVal) * 100)}%` }}
               />
             </div>
           </div>

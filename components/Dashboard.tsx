@@ -31,6 +31,7 @@ import { Skeleton } from './ui/Skeleton';
 import { Tooltip } from './ui/Tooltip';
 import { getSASTDateTime } from '../lib/timeUtils';
 import { sortTradesChronologically } from '../lib/analyticsUtils';
+import { APP_CONSTANTS, normalizePlan } from '../lib/constants';
 
 const safePnL = (value: unknown): number => {
     const n = typeof value === 'number' ? value : Number(value);
@@ -279,7 +280,8 @@ const DASHBOARD_PRESETS = {
 
 const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, onUpdateBias, userProfile, onViewChange, eaSession, isLoading, offlineQueue = [], isDemoMode = false }) => {
     // Robust free tier check
-    const isFreeTier = !userProfile || userProfile.plan === 'FREE TIER (JOURNALER)';
+    const currentPlan = normalizePlan(userProfile?.plan);
+    const isFreeTier = !userProfile || currentPlan === APP_CONSTANTS.PLANS.FREE;
     const [activeInfo, setActiveInfo] = useState<{ title: string, content: string } | null>(null);
     const [showPresetMenu, setShowPresetMenu] = useState(false);
 
@@ -330,14 +332,14 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
     }, [eaSession]);
 
     const planBadge = useMemo(() => {
-        const plan = userProfile?.plan;
-        if (plan === 'FREE TIER (JOURNALER)') {
+        const plan = normalizePlan(userProfile?.plan);
+        if (plan === APP_CONSTANTS.PLANS.FREE) {
             return { label: 'FREE', color: 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20' };
         }
-        if (plan === 'PRO TIER (ANALYSTS)') {
+        if (plan === APP_CONSTANTS.PLANS.HOBBY) {
             return { label: 'PRO', color: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' };
         }
-        if (plan === 'ELITE MASTERS (PREMIUM)') {
+        if (plan === APP_CONSTANTS.PLANS.STANDARD) {
             return { label: 'ELITE', color: 'bg-[#FF4F01]/10 text-[#FF4F01] border-[#FF4F01]/20' };
         }
         return null;
@@ -402,7 +404,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
 
     // Calculate Stats
   const totalPnL = trades.reduce((acc, t) => acc + (Number.isFinite(Number(t.pnl)) ? Number(t.pnl) : 0), 0);
-    const isPro = userProfile.plan === 'PRO TIER (ANALYSTS)';
+    const isPro = currentPlan === APP_CONSTANTS.PLANS.HOBBY;
     
     // Determine the source of truth for current balance
     // If user is on EA Connect, the bridge balance is the absolute source of truth

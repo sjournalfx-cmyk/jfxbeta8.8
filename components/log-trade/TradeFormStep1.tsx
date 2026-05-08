@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Layout, Target, Clock, Calendar } from 'lucide-react';
+import { Layout, Target, Clock, Calendar, Mic } from 'lucide-react';
 import { AssetType } from '../../types';
 import { Select } from '../Select';
 import { Input } from '../ui/Input';
@@ -203,10 +203,11 @@ export const TradeFormStep1: React.FC<TradeFormStep1Props> = ({
                                                 : "bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
                                     )}
                                 >
+                                    <Mic size={14} />
                                     {isRecordingVoiceNote ? 'Stop' : 'Record'}
                                 </button>
                                 <span className={`text-[10px] font-bold uppercase tracking-widest ${isRecordingVoiceNote ? 'text-emerald-500' : isDarkMode ? 'text-zinc-500' : 'text-slate-400'}`}>
-                                    {isRecordingVoiceNote ? 'Listening' : 'Ready'}
+                                    {isRecordingVoiceNote ? 'Listening' : null}
                                 </span>
                                 {voiceNoteError && <p className="w-full text-xs font-medium text-rose-500">{voiceNoteError}</p>}
                             </div>

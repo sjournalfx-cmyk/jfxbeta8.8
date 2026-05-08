@@ -1,6 +1,5 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   ArrowUpCircle,
   ArrowDownCircle,
@@ -254,10 +253,9 @@ const chartData = useMemo(() => {
   };
 
   const SummaryCard = ({ title, amount, count, icon: Icon, color }: any) => (
-    <motion.div 
-      whileHover={{ y: -5, scale: 1.02 }}
+    <div
       className={clsx(
-        "p-5 rounded-[24px] border transition-all flex flex-col gap-4 min-h-[122px]",
+        "p-5 rounded-[24px] border flex flex-col gap-4 min-h-[122px]",
         isDarkMode ? "bg-zinc-900/40 border-zinc-800/50 backdrop-blur-md" : "bg-white border-slate-200 shadow-lg"
       )}
     >
@@ -275,7 +273,7 @@ const chartData = useMemo(() => {
         </h3>
         <p className="text-xs font-bold opacity-30 uppercase tracking-wider">{title}</p>
       </div>
-    </motion.div>
+    </div>
   );
 
   return (
@@ -295,7 +293,7 @@ const chartData = useMemo(() => {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={clsx(
-                "px-6 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all",
+                "px-6 py-2 rounded-lg text-xs font-black uppercase tracking-widest",
                 activeSubTab === tab 
                   ? (isDarkMode ? "bg-zinc-800 text-white shadow-xl" : "bg-white text-black shadow-md")
                   : "opacity-40 hover:opacity-100"
@@ -348,14 +346,11 @@ const chartData = useMemo(() => {
           <button 
             onClick={() => setIsCumulative(!isCumulative)}
             className={clsx(
-              "w-12 h-6 rounded-full transition-all relative",
+              "w-12 h-6 rounded-full relative",
               isCumulative ? "bg-brand" : "bg-zinc-800"
             )}
           >
-            <motion.div 
-              animate={{ x: isCumulative ? 24 : 4 }}
-              className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm"
-            />
+          <div className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm" />
           </button>
         </div>
       </div>
@@ -377,7 +372,7 @@ const chartData = useMemo(() => {
                   setShowAddModal(false);
                   setEditingTransaction(null);
                 }}
-                className="p-2 rounded-lg hover:bg-zinc-800/50 transition-colors"
+                className="p-2 rounded-lg hover:bg-zinc-800/50"
               >
                 <X size={18} />
               </button>
@@ -389,7 +384,7 @@ const chartData = useMemo(() => {
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value as CashTransactionType })}
                   className={clsx(
-                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none transition-all",
+                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
                       ? "bg-zinc-950 border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
@@ -408,7 +403,7 @@ const chartData = useMemo(() => {
                   value={formData.amount}
                   onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                   className={clsx(
-                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none transition-all",
+                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
                       ? "bg-zinc-950 border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
@@ -426,7 +421,7 @@ const chartData = useMemo(() => {
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   className={clsx(
-                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none transition-all",
+                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
                       ? "bg-zinc-950 border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
@@ -440,7 +435,7 @@ const chartData = useMemo(() => {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   className={clsx(
-                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none transition-all",
+                    "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
                       ? "bg-zinc-950 border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
@@ -456,7 +451,7 @@ const chartData = useMemo(() => {
                     setEditingTransaction(null);
                   }}
                   className={clsx(
-                    "flex-1 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all",
+                    "flex-1 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest",
                     isDarkMode
                       ? "bg-zinc-800 hover:bg-zinc-700"
                       : "bg-slate-100 hover:bg-slate-200"
@@ -468,7 +463,7 @@ const chartData = useMemo(() => {
                   type="submit"
                   disabled={isSubmitting}
                   className={clsx(
-                    "flex-1 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all",
+                    "flex-1 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest",
                     isDarkMode
                       ? "bg-brand hover:bg-brand/90 text-white"
                       : "bg-brand hover:bg-brand/90 text-white"
@@ -609,7 +604,7 @@ const chartData = useMemo(() => {
                       setShowAddModal(true);
                     }}
                     className={clsx(
-                      "inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-[0.18em] transition-none shadow-sm w-full md:w-auto",
+                      "inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-[0.18em] shadow-sm w-full md:w-auto",
                       isDarkMode
                         ? "bg-brand text-white hover:bg-brand"
                         : "bg-brand text-white hover:bg-brand"
@@ -639,7 +634,6 @@ const chartData = useMemo(() => {
               <tbody className="divide-y divide-zinc-800/50">
                 {filteredTransactions.map((t) => (
                   <tr key={t.id} className={clsx(
-                    "transition-colors",
                     isDarkMode ? "hover:bg-zinc-900/50" : "hover:bg-slate-50"
                   )}>
                     <td className="px-8 py-5 text-xs font-bold opacity-60 font-mono">{t.date}</td>
@@ -667,7 +661,7 @@ const chartData = useMemo(() => {
                         <button
                           onClick={() => openEditModal(t)}
                           className={clsx(
-                            "p-2 rounded-lg transition-colors",
+                            "p-2 rounded-lg",
                             isDarkMode ? "hover:bg-zinc-800 text-zinc-400 hover:text-brand" : "hover:bg-slate-100 text-slate-500 hover:text-brand"
                           )}
                         >
@@ -676,7 +670,7 @@ const chartData = useMemo(() => {
                         <button
                           onClick={() => handleDeleteTransaction(t.id)}
                           className={clsx(
-                            "p-2 rounded-lg transition-colors",
+                            "p-2 rounded-lg",
                             isDarkMode ? "hover:bg-zinc-800 text-zinc-400 hover:text-rose-500" : "hover:bg-slate-100 text-slate-500 hover:text-rose-500"
                           )}
                         >
@@ -709,7 +703,7 @@ const chartData = useMemo(() => {
                     setTypeFilter('All');
                   }}
                   className={clsx(
-                    "mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-[0.18em] transition-none",
+                    "mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-[0.18em]",
                     isDarkMode ? "bg-zinc-800 text-white" : "bg-slate-900 text-white"
                   )}
                 >
@@ -743,7 +737,7 @@ const chartData = useMemo(() => {
                     setShowAddModal(true);
                   }}
                   className={clsx(
-                    "mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-[0.18em] transition-none",
+                    "mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-[0.18em]",
                     isDarkMode ? "bg-brand text-white" : "bg-brand text-white"
                   )}
                 >

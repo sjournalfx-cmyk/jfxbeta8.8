@@ -72,7 +72,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
                         <HelpCircle 
                             size={14}
                             onClick={onInfoClick}
-                            className="opacity-40 cursor-help hover:opacity-100 transition-opacity" 
+                            className="opacity-40 cursor-help hover:opacity-100" 
                         />
                     </Tooltip>
                 </div>
@@ -118,7 +118,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
                                             <div className="relative w-full h-full z-10">
                                                 {d.profit > 0 && (
                                                     <div
-                                                        className={`absolute left-1/2 -translate-x-1/2 w-4 bg-emerald-500 rounded-t-sm transition-all duration-300 ${isHovered ? 'w-6 brightness-110 shadow-[0_0_15px_rgba(16,185,129,0.4)]' : 'opacity-90'}`}
+                                                        className={`absolute left-1/2 -translate-x-1/2 w-4 bg-emerald-500 rounded-t-sm ${isHovered ? 'w-6 brightness-110 shadow-[0_0_15px_rgba(16,185,129,0.4)]' : 'opacity-90'}`}
                                                         style={{
                                                             height: `${profitHeight}%`,
                                                             bottom: `${100 - zeroY}%`,
@@ -128,7 +128,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
 
                                                 {d.loss > 0 && (
                                                     <div
-                                                        className={`absolute left-1/2 -translate-x-1/2 w-4 bg-rose-500 rounded-b-sm transition-all duration-300 ${isHovered ? 'w-6 brightness-110 shadow-[0_0_15px_rgba(244,63,94,0.4)]' : 'opacity-90'}`}
+                                                        className={`absolute left-1/2 -translate-x-1/2 w-4 bg-rose-500 rounded-b-sm ${isHovered ? 'w-6 brightness-110 shadow-[0_0_15px_rgba(244,63,94,0.4)]' : 'opacity-90'}`}
                                                         style={{
                                                             height: `${lossHeight}%`,
                                                             top: `${zeroY}%`,
@@ -137,7 +137,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
                                                 )}
                                             </div>
 
-                                            <span className={`absolute bottom-[-24px] text-[9px] font-bold transition-all duration-300 whitespace-nowrap ${isHovered ? 'opacity-100 scale-110 text-indigo-500' : 'opacity-40'}`}>
+                                            <span className={`absolute bottom-[-24px] text-[9px] font-bold whitespace-nowrap ${isHovered ? 'opacity-100 text-indigo-500' : 'opacity-40'}`}>
                                                 {d.pair}
                                             </span>
                                         </div>
@@ -155,7 +155,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
                                 top: mousePos.y - 80
                             }}
                         >
-                            <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md animate-in fade-in zoom-in duration-200 min-w-[160px] ${isDarkMode ? 'bg-[#09090b]/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
+                            <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md min-w-[160px] ${isDarkMode ? 'bg-[#09090b]/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
                                 <div className="font-bold text-sm mb-3 border-b border-white/10 pb-2">{hoveredData.pair}</div>
                                 <div className="space-y-2 text-xs">
                                     <div className="flex justify-between">

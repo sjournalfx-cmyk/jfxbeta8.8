@@ -6,7 +6,7 @@ import { getSASTDateTime } from '../lib/timeUtils';
 import RichTextEditor from './RichTextEditor';
 import { Select } from './Select';
 import ConfirmationModal from './ConfirmationModal';
-import { APP_CONSTANTS, PLAN_FEATURES } from '../lib/constants';
+import { APP_CONSTANTS, PLAN_FEATURES, normalizePlan } from '../lib/constants';
 import { useToast } from './ui/Toast';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
@@ -81,7 +81,7 @@ const LogTrade: React.FC<LogTradeProps> = ({ isDarkMode, onSave, onBatchSave, in
     const [isSaving, setIsSaving] = useState(false);
     const { addToast } = useToast();
     
-    const currentPlan = userProfile?.plan || APP_CONSTANTS.PLANS.FREE;
+    const currentPlan = normalizePlan(userProfile?.plan);
     const isFreeTier = currentPlan === APP_CONSTANTS.PLANS.FREE;
     const features = PLAN_FEATURES[currentPlan];
     const canUploadImages = features.allowImageUploads;

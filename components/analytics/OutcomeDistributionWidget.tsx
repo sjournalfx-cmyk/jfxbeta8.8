@@ -50,7 +50,7 @@ export const OutcomeDistributionWidget: React.FC<OutcomeDistributionWidgetProps>
 
   return (
     <div className={clsx(
-      "h-full p-6 rounded-[32px] border flex flex-col justify-between transition-all",
+      "h-full p-6 rounded-[32px] border flex flex-col justify-between",
       isDarkMode ? "bg-zinc-950 border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-sm"
     )}>
       <div className="flex items-center gap-3 mb-4 self-start">

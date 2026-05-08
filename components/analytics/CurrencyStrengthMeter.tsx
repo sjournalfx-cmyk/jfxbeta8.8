@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Trade } from '../../types';
-import { Tooltip } from '../ui/Tooltip';
-import { Coins, MoreVertical, HelpCircle } from 'lucide-react';
+import { Coins } from 'lucide-react';
 
 interface CurrencyStrengthMeterProps {
     isDarkMode: boolean;
@@ -95,21 +94,12 @@ export const CurrencyStrengthMeter: React.FC<CurrencyStrengthMeterProps> = ({ is
     return (
         <div 
             onMouseMove={handleMouseMove}
-            className={`p-8 rounded-[32px] border flex flex-col h-full min-h-[400px] relative ${isDarkMode ? 'bg-[#18181b] border-zinc-800 shadow-2xl' : 'bg-white border-slate-200 shadow-md'}`}
+            className={`p-4 rounded-[20px] border flex flex-col h-full relative ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}
         >
-            <div className="flex items-center justify-between mb-8">
-                <div>
-                    <div className="flex items-center gap-2">
-                        <h3 className="text-xl font-bold tracking-tight">Currency Strength</h3>
-                        <Tooltip content="Measures the relative strength of currencies based on your trading P&L for each base and quote currency." isDarkMode={isDarkMode}>
-                            <svg 
-                                onClick={onInfoClick}
-                                xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-question-mark opacity-40 cursor-help hover:opacity-100 transition-opacity" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
-                        </Tooltip>
-                    </div>
-                    <p className="text-[10px] uppercase font-bold tracking-widest opacity-40 mt-1">Relative Performance</p>
+            <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-bold tracking-tight">Currency Strength</h3>
                 </div>
-                <MoreVertical size={16} className="opacity-30" />
             </div>
 
             {strengths.length === 0 ? (
@@ -128,11 +118,11 @@ export const CurrencyStrengthMeter: React.FC<CurrencyStrengthMeterProps> = ({ is
                             onMouseLeave={() => setHoveredCur(null)}
                         >
                             <div className="w-12 flex flex-col items-center">
-                                <span className={`text-xs font-black transition-colors ${hoveredCur === item.cur ? 'text-indigo-500' : ''}`}>{item.cur}</span>
+                                <span className={`text-xs font-black ${hoveredCur === item.cur ? 'text-indigo-500' : ''}`}>{item.cur}</span>
                             </div>
-                            <div className={`flex-1 h-2 rounded-full overflow-hidden transition-all duration-300 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'} ${hoveredCur === item.cur ? 'h-3' : ''}`}>
+                            <div className={`flex-1 h-2 rounded-full overflow-hidden ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'} ${hoveredCur === item.cur ? 'h-3' : ''}`}>
                                 <div
-                                    className={`h-full rounded-full transition-all duration-1000 ${item.val > 7 ? 'bg-emerald-500' :
+                                    className={`h-full rounded-full ${item.val > 7 ? 'bg-emerald-500' :
                                         item.val > 4 ? 'bg-blue-500' :
                                             item.val > 2 ? 'bg-amber-500' : 'bg-rose-500'
                                         } ${hoveredCur === item.cur ? 'brightness-110 shadow-lg' : ''}`}
@@ -155,7 +145,7 @@ export const CurrencyStrengthMeter: React.FC<CurrencyStrengthMeterProps> = ({ is
                         top: mousePos.y - 40
                     }}
                 >
-                    <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md animate-in fade-in zoom-in duration-200 min-w-[140px] ${isDarkMode ? 'bg-[#09090b]/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
+                    <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md min-w-[140px] ${isDarkMode ? 'bg-[#09090b]/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
                         <div className="font-bold text-sm mb-2 border-b border-white/10 pb-1">{hoveredData.cur} Strength</div>
                         <div className="flex justify-between items-center text-xs">
                             <span className="opacity-60">Score</span>

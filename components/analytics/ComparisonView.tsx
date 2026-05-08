@@ -258,7 +258,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ trades = [], isD
                     <button
                         key={mode}
                         onClick={() => setCompareMode(mode)}
-                        className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${compareMode === mode 
+                        className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest ${compareMode === mode 
                             ? (isDarkMode ? 'bg-zinc-800 text-white shadow-lg' : 'bg-white text-black shadow-sm') 
                             : 'text-zinc-500 hover:text-zinc-700'}`}
                     >

@@ -51,7 +51,7 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
 
     return (
         <div className={clsx(
-            "p-8 rounded-[32px] border h-full flex flex-col justify-between transition-all",
+            "p-8 rounded-[32px] border h-full flex flex-col justify-between",
             isDarkMode ? "bg-zinc-950 border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
         )}>
             {/* Section 1: Largest Win vs Loss */}
@@ -69,7 +69,7 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
                                     <HelpCircle 
                                         size={12}
                                         onClick={onInfoClick}
-                                        className="opacity-40 cursor-help hover:opacity-100 transition-opacity" 
+                                        className="opacity-40 cursor-help hover:opacity-100" 
                                     />
                                 </Tooltip>
                             </p>
@@ -89,8 +89,8 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
                         </div>
                     </div>
                     <div className={clsx("h-2 rounded-full overflow-hidden flex", isDarkMode ? "bg-zinc-900" : "bg-slate-100")}>
-                        <div className="h-full bg-emerald-500 transition-all duration-1000 ease-out" style={{ width: `${winPercent}%` }} />
-                        <div className="h-full bg-rose-500 transition-all duration-1000 ease-out" style={{ width: `${lossPercent}%` }} />
+                        <div className="h-full bg-emerald-500" style={{ width: `${winPercent}%` }} />
+                        <div className="h-full bg-rose-500" style={{ width: `${lossPercent}%` }} />
                     </div>
                 </div>
             </div>
@@ -113,7 +113,7 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
                                     <HelpCircle 
                                         size={12}
                                         onClick={onInfoClick}
-                                        className="opacity-40 cursor-help hover:opacity-100 transition-opacity" 
+                                        className="opacity-40 cursor-help hover:opacity-100" 
                                     />
                                 </Tooltip>
                             </p>
@@ -133,8 +133,8 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
                         </div>
                     </div>
                     <div className={clsx("h-2 rounded-full overflow-hidden flex", isDarkMode ? "bg-zinc-900" : "bg-slate-100")}>
-                        <div className="h-full bg-blue-500 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(59,130,246,0.3)]" style={{ width: `${longPercent}%` }} />
-                        <div className="h-full bg-orange-500 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(249,115,22,0.3)]" style={{ width: `${shortPercent}%` }} />
+                        <div className="h-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]" style={{ width: `${longPercent}%` }} />
+                        <div className="h-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.3)]" style={{ width: `${shortPercent}%` }} />
                     </div>
                 </div>
             </div>

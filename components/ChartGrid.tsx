@@ -11,7 +11,7 @@ import TradingViewWidget from './TradingViewWidget';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { UserProfile } from '../types';
 import { useToast } from './ui/Toast';
-import { APP_CONSTANTS, PLAN_FEATURES } from '../lib/constants';
+import { APP_CONSTANTS, PLAN_FEATURES, normalizePlan } from '../lib/constants';
 
 interface ChartGridProps {
     isDarkMode: boolean;
@@ -53,7 +53,7 @@ interface LayoutSettings {
 }
 
 const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, onToggleFocus, userProfile, onUpdateProfile }) => {
-    const currentPlan = userProfile?.plan || APP_CONSTANTS.PLANS.FREE;
+    const currentPlan = normalizePlan(userProfile?.plan);
     const features = PLAN_FEATURES[currentPlan];
     const canUseMultiChart = features.multiChartLayouts;
 
