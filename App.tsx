@@ -22,6 +22,7 @@ import { dataService } from './services/dataService';
 import { modalResearchService } from './services/nvidiaAiService';
 import { ToastProvider, useToast } from './components/ui/Toast';
 import { BrandedLoader } from './components/ui/BrandedLoader';
+import { MobileBlocker } from './components/ui/MobileBlocker';
 import { useAuth } from './hooks/useAuth';
 import { useData } from './hooks/useData';
 import { authService } from './services/authService';
@@ -36,7 +37,6 @@ const AIChat = lazy(() => import('./components/AIChat'));
 const BacktestLab = lazy(() => import('./components/BacktestLab'));
 const ChartGrid = lazy(() => import('./components/ChartGrid'));
 const Notes = lazy(() => import('./components/Notes'));
-const Monitoring = lazy(() => import('./components/Monitoring'));
 
 const AppContent: React.FC = () => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -264,7 +264,6 @@ const {
   
   // UI State
   const [isFocusMode, setIsFocusMode] = useState(false);
-  const [firehoseEventContext, setFirehoseEventContext] = useState<FirehoseEvent | null>(null);
   const [isQuickLogOpen, setIsQuickLogOpen] = useState(false);
   const [hasSeenBetaAnnouncement, setHasSeenBetaAnnouncement] = useLocalStorage<boolean>('jfx_beta_announcement_shown', false);
   const [showBetaAnnouncement, setShowBetaAnnouncement] = useState(false);
@@ -733,6 +732,21 @@ const onLogout = async () => {
     }
   }, [currentView]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  if (isMobile) {
+    return <MobileBlocker isDarkMode={isDarkMode} />;
+  }
+
   if (isInitialLoading) {
     return <BrandedLoader />;
   }
@@ -899,8 +913,6 @@ const onLogout = async () => {
                 onUpdateTrade={handleUpdateTrade}
                 eaSession={activeEaSession}
                 onOpenSettings={() => setCurrentView('settings')}
-                firehoseEventContext={firehoseEventContext}
-                onClearFirehoseContext={() => setFirehoseEventContext(null)}
               />
             )}
             {currentView === 'log-trade' && activeUserProfile && (
@@ -1003,18 +1015,6 @@ const onLogout = async () => {
                 isDarkMode={isDarkMode}
                 userProfile={activeUserProfile}
                 onUpdateProfile={handleUpdateProfile}
-              />
-            )}
-            {currentView === 'monitoring' && userId && (
-              <Monitoring
-                isDarkMode={isDarkMode}
-                userId={userId}
-                trades={activeTrades}
-                onViewChange={setCurrentView}
-                onNavigateToChat={(event) => {
-                  setFirehoseEventContext(event);
-                  setCurrentView('ai-chat');
-                }}
               />
             )}
             {currentView === 'settings' && activeUserProfile && (
