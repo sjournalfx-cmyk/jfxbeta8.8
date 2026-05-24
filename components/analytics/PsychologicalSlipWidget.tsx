@@ -46,7 +46,7 @@ export const PsychologicalSlipWidget: React.FC<PsychologicalSlipProps> = ({ trad
     }, [data]);
 
     return (
-        <div className={`p-8 rounded-[32px] border flex flex-col h-full min-h-[400px] ${isDarkMode ? 'bg-[#0d1117] border-zinc-800 shadow-2xl' : 'bg-white border-slate-200 shadow-md'}`}>
+        <div className={`p-8 rounded-[32px] border flex flex-col h-full min-h-[400px] ${isDarkMode ? 'bg-black border-zinc-800 shadow-2xl' : 'bg-white border-slate-200 shadow-md'}`}>
             <div className="flex justify-between items-start mb-8">
                 <div>
                     <h3 className="text-xl font-bold tracking-tight flex items-center gap-2">
@@ -134,7 +134,7 @@ export const PsychologicalSlipWidget: React.FC<PsychologicalSlipProps> = ({ trad
                 {/* Tooltip */}
                 {hoverIndex !== null && data[hoverIndex] && (
                     <div 
-                        className={`absolute z-50 pointer-events-none p-3 rounded-2xl border shadow-xl ${isDarkMode ? 'bg-[#0d1117] border-zinc-700' : 'bg-white border-slate-200'}`}
+                        className={`absolute z-50 pointer-events-none p-3 rounded-2xl border shadow-xl ${isDarkMode ? 'bg-black border-zinc-700' : 'bg-white border-slate-200'}`}
                         style={{ 
                             left: `${(hoverIndex / (data.length - 1)) * 100}%`,
                             top: `${(getPnlY(data[hoverIndex].pnl) / 200) * 100}%`,

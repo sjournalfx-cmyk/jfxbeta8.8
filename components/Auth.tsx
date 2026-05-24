@@ -58,11 +58,11 @@ const Auth: React.FC<AuthProps> = ({ isDarkMode, onLogin, onRegister }) => {
     setPassword('');
   };
 
-  const bgColor = isDarkMode ? 'bg-[#050505]' : 'bg-slate-50';
-  const cardBg = isDarkMode ? 'bg-[#0A0A0A]' : 'bg-white';
+  const bgColor = isDarkMode ? 'bg-[#000000]' : 'bg-slate-50';
+  const cardBg = isDarkMode ? 'bg-[#000000]' : 'bg-white';
   const textColor = isDarkMode ? 'text-white' : 'text-slate-900';
   const borderColor = isDarkMode ? 'border-zinc-800' : 'border-slate-200';
-  const inputBg = isDarkMode ? 'bg-[#111]' : 'bg-slate-50';
+  const inputBg = isDarkMode ? 'bg-[#000000]' : 'bg-slate-50';
 
   return (
     <div className={`flex min-h-dvh w-full ${bgColor} ${textColor} transition-colors duration-500`}>
@@ -70,47 +70,43 @@ const Auth: React.FC<AuthProps> = ({ isDarkMode, onLogin, onRegister }) => {
       {/* Left Panel - Visuals */}
       <div className="hidden lg:flex w-1/2 relative overflow-hidden bg-black items-center justify-center">
         {/* Abstract Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 via-purple-900/20 to-black z-0" />
+        <div className="absolute inset-0 bg-black z-0" />
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-indigo-600/20 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#FF4F01]/10 rounded-full blur-[100px]" />
 
         {/* Content */}
-        <div className="relative z-10 p-12 max-w-lg">
-          <h1 className="text-5xl font-black tracking-tight text-white mb-6 leading-tight">
-            Master your <br />
+        <div className="relative z-10 w-full max-w-[320px] px-8 lg:px-0">
+          <h1 className="max-w-[200px] text-[40px] lg:text-[44px] font-black tracking-tight text-white mb-5 leading-[0.98]">
+            Master your
+            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">trading psychology.</span>
           </h1>
-          <p className="text-zinc-400 text-lg leading-relaxed mb-8">
+          <p className="max-w-[280px] text-zinc-400 text-[12px] leading-[1.6] mb-7">
             JournalFX is the professional tool for traders who treat the markets like a business. Track, analyze, and optimize your edge with AI-driven insights.
           </p>
-
-          <div className="grid grid-cols-2 gap-6">
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <h3 className="font-bold text-white mb-1">AI Analysis</h3>
-              <p className="text-xs text-zinc-500">Automated pattern recognition</p>
-            </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <h3 className="font-bold text-white mb-1">Pro Metrics</h3>
-              <p className="text-xs text-zinc-500">Institutional grade analytics</p>
-            </div>
-          </div>
         </div>
       </div>
 
       {/* Right Panel - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-12 relative overflow-y-auto">
-        <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-8 duration-700 py-8">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-7 lg:px-8 lg:py-12 relative overflow-y-auto">
+        <div className="w-full max-w-[390px] animate-in fade-in slide-in-from-bottom-8 duration-700 py-8">
           
           <div className="text-center mb-8 sm:mb-10">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-3">{isLoginView ? 'Welcome Back' : 'Create Account'}</h2>
-            <p className="text-sm text-zinc-500 px-4">
+            <h2 className="text-[24px] sm:text-[28px] leading-[1.05] font-black tracking-tight mb-3">{isLoginView ? 'Welcome Back' : 'Create Account'}</h2>
+            <p className="text-[12px] sm:text-[13px] text-zinc-500 px-0 sm:px-2">
               {isLoginView ? 'Access your institutional-grade trading workspace.' : 'Join the elite traders mastering their psychology.'}
             </p>
           </div>
 
           <div className="space-y-4 mb-8">
-             <button className={`w-full flex items-center justify-center gap-3 py-4 rounded-2xl border-2 font-black text-sm transition-all hover:scale-[1.01] active:scale-[0.99] ${isDarkMode ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-white border-slate-100 hover:bg-slate-50 text-slate-900 shadow-sm'}`}>
-                <User size={18} className="text-indigo-500" /> Continue with Google
+             <button className={`w-full flex items-center justify-center gap-3 py-2 rounded-2xl border-2 font-black text-[13px] transition-all hover:scale-[1.01] active:scale-[0.99] ${isDarkMode ? 'bg-[#000000] border-white/10 hover:bg-[#050505] text-white' : 'bg-white border-slate-100 hover:bg-slate-50 text-slate-900 shadow-sm'}`}>
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="w-[18px] h-[18px] shrink-0" fill="none">
+                  <path d="M21.35 11.1H12v2.95h5.35c-.23 1.22-.94 2.25-2 2.94v2.44h3.24c1.9-1.75 2.99-4.34 2.99-7.43 0-.72-.07-1.41-.23-1.98Z" fill="#4285F4" />
+                  <path d="M12 22c2.7 0 4.97-.9 6.63-2.57l-3.24-2.44c-.9.6-2.06.96-3.39.96-2.6 0-4.81-1.75-5.6-4.1H2.99v2.56A10 10 0 0 0 12 22Z" fill="#34A853" />
+                  <path d="M6.4 13.85A6 6 0 0 1 6.4 10.15V7.59H2.99a10 10 0 0 0 0 8.82l3.41-2.56Z" fill="#FBBC05" />
+                  <path d="M12 5.96c1.47 0 2.79.51 3.84 1.5l2.88-2.88C16.96 2.78 14.7 1.75 12 1.75A10 10 0 0 0 2.99 7.59l3.41 2.56C7.19 7.71 9.4 5.96 12 5.96Z" fill="#EA4335" />
+                </svg>
+                <span>Continue with Google</span>
              </button>
           </div>
 
@@ -123,7 +119,7 @@ const Auth: React.FC<AuthProps> = ({ isDarkMode, onLogin, onRegister }) => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5 px-1">
+          <form onSubmit={handleSubmit} className="space-y-5 px-0 sm:px-1">
             {error && (
               <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center gap-3 text-rose-500 text-sm font-bold animate-in fade-in zoom-in-95">
                 <AlertCircle size={18} />
@@ -140,7 +136,7 @@ const Auth: React.FC<AuthProps> = ({ isDarkMode, onLogin, onRegister }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className={`w-full ${inputBg} border-2 ${borderColor} rounded-2xl py-4 pl-12 pr-4 font-bold text-sm outline-none focus:border-indigo-500 transition-all placeholder:opacity-30`}
+                  className={`w-full ${inputBg} border-2 ${borderColor} rounded-2xl py-2 pl-12 pr-4 font-bold text-[13px] outline-none focus:border-indigo-500 transition-all placeholder:opacity-30`}
                 />
               </div>
             </div>
@@ -157,7 +153,7 @@ const Auth: React.FC<AuthProps> = ({ isDarkMode, onLogin, onRegister }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className={`w-full ${inputBg} border-2 ${borderColor} rounded-2xl py-4 pl-12 pr-12 font-bold text-sm outline-none focus:border-indigo-500 transition-all placeholder:opacity-30`}
+                  className={`w-full ${inputBg} border-2 ${borderColor} rounded-2xl py-2 pl-12 pr-12 font-bold text-[13px] outline-none focus:border-indigo-500 transition-all placeholder:opacity-30`}
                 />
                 <button 
                   type="button"
@@ -189,7 +185,7 @@ const Auth: React.FC<AuthProps> = ({ isDarkMode, onLogin, onRegister }) => {
             <button 
               type="submit" 
               disabled={isLoading}
-              className="w-full py-5 bg-[#FF4F01] hover:bg-[#E64601] text-white rounded-2xl font-black text-sm shadow-xl shadow-[#FF4F01]/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4"
+              className="w-full py-3 bg-[#FF4F01] hover:bg-[#E64601] text-white rounded-2xl font-black text-[13px] shadow-xl shadow-[#FF4F01]/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4"
             >
               {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

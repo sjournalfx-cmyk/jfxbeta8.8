@@ -54,7 +54,7 @@ export const TiltScoreWidget: React.FC<TiltScoreWidgetProps> = ({ trades = [], i
     const dashOffset = circumference - (scoreData.score / 100) * circumference;
 
     return (
-        <div className={`rounded-[18px] border p-7 ${isDarkMode ? 'border-zinc-800 bg-[#0d1117]' : 'border-slate-200 bg-white shadow-sm'}`}>
+        <div className={`rounded-[18px] border p-7 ${isDarkMode ? 'border-zinc-800 bg-black' : 'border-slate-200 bg-white shadow-sm'}`}>
             <div className="flex items-start justify-between gap-4">
                 <div>
                     <h2 className={`text-[28px] font-bold tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-950'}`}>
@@ -67,7 +67,7 @@ export const TiltScoreWidget: React.FC<TiltScoreWidgetProps> = ({ trades = [], i
 
                 <div className="mt-8 flex items-center gap-3">
                     <span className={`text-[16px] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Score</span>
-                    <span className={`relative block h-8 w-14 rounded-full ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`}>
+                    <span className={`relative block h-8 w-14 rounded-full ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`}>
                         <span className={`absolute left-1 top-1 h-6 w-6 rounded-full ${isDarkMode ? 'bg-zinc-600' : 'bg-white shadow-sm'}`} />
                     </span>
                 </div>

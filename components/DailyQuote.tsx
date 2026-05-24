@@ -13,7 +13,7 @@ const DailyQuote: React.FC<DailyQuoteProps> = ({ isDarkMode }) => {
   return (
     <div className={`w-full p-6 rounded-2xl border mb-8 flex flex-col md:flex-row items-center gap-6 relative overflow-hidden transition-all ${
       isDarkMode 
-        ? 'bg-[#18181b] border-[#27272a] shadow-2xl' 
+        ? 'bg-[#000000] border-[#27272a] shadow-2xl' 
         : 'bg-white border-slate-100 shadow-md'
     }`}>
       {/* Decorative Background Icon */}

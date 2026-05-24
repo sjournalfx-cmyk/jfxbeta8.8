@@ -53,7 +53,7 @@ const StepIndicator = ({ current, total, isDarkMode }: { current: number, total:
                                 ? 'border-[#FF4F01] bg-[#FF4F01] text-white shadow-lg shadow-[#FF4F01]/30 scale-110'
                                 : isCompleted
                                     ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-500'
-                                    : isDarkMode ? 'border-[#27272a] bg-[#18181b] text-zinc-500' : 'border-slate-200 bg-slate-100 text-slate-400'
+                                    : isDarkMode ? 'border-[#27272a] bg-[#000000] text-zinc-500' : 'border-slate-200 bg-slate-100 text-slate-400'
                             }
                     `}
                     >
@@ -298,8 +298,8 @@ const LogTrade: React.FC<LogTradeProps> = ({ isDarkMode, onSave, onBatchSave, in
     const ratingTheme = formData.rating === 5 ? { border: 'border-amber-500', shadow: 'shadow-amber-500/20', glow: 'from-amber-500/20' } : { border: isDarkMode ? 'border-[#27272a]' : 'border-slate-200', shadow: isDarkMode ? 'shadow-black/50' : 'shadow-slate-200', glow: 'from-transparent' };
 
     return (
-        <div className={cn("w-full h-full overflow-hidden flex flex-col font-sans", isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-[#F8FAFC] text-slate-900')}>
-            <div className={cn("h-18 shrink-0 flex items-center justify-between px-8 py-4 z-20 relative", isDarkMode ? 'bg-[#09090b]' : 'bg-white')}>
+        <div className={cn("w-full h-full overflow-hidden flex flex-col font-sans", isDarkMode ? 'bg-[#000000] text-zinc-200' : 'bg-[#F8FAFC] text-slate-900')}>
+            <div className={cn("h-18 shrink-0 flex items-center justify-between px-8 py-4 z-20 relative", isDarkMode ? 'bg-[#000000]' : 'bg-white')}>
                 <div className={cn("absolute bottom-0 left-8 right-8 h-px", isDarkMode ? "bg-[#27272a]" : "bg-slate-200")} />
                 <div className="flex items-center gap-4">
                     <div className={cn("p-2 rounded-lg", isDarkMode ? 'bg-violet-500/10 text-violet-400' : 'bg-violet-50 text-violet-600')}>
@@ -335,7 +335,7 @@ const LogTrade: React.FC<LogTradeProps> = ({ isDarkMode, onSave, onBatchSave, in
                 </div>
             </div>
 
-            <div className={cn("p-6 shrink-0 flex justify-between items-center z-20 relative", isDarkMode ? "bg-[#09090b]" : "bg-white border-slate-200")}>
+            <div className={cn("p-6 shrink-0 flex justify-between items-center z-20 relative", isDarkMode ? "bg-[#000000]" : "bg-white border-slate-200")}>
                 <div className={cn("absolute top-0 left-8 right-8 h-px", isDarkMode ? "bg-[#27272a]" : "bg-slate-200")} />
                 <Button variant="ghost" onClick={prevStep} disabled={step === 1} leftIcon={<ChevronLeft size={16} />} className={cn(step === 1 && "opacity-0")}>Back</Button>
                 {step < 3 ? <Button variant="primary" onClick={nextStep} rightIcon={<ChevronRight size={16} />} className="px-8">Continue</Button> : <div className="w-24" />}

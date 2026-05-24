@@ -84,23 +84,23 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
             <div className={`
                 relative w-full max-w-lg rounded-3xl border shadow-2xl overflow-hidden
-                ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200'}
+                ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200'}
             `}>
                 <div className={`p-6 border-b flex items-center justify-between ${isDarkMode ? 'border-zinc-800' : 'border-slate-100'}`}>
                     <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'}`}>
+                        <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-black' : 'bg-slate-100'}`}>
                             <Keyboard size={20} className="text-[#FF4F01]" />
                         </div>
                         <div>
                             <h3 className="text-lg font-bold">Keyboard Shortcuts</h3>
                             <p className={`text-xs ${isDarkMode ? 'text-zinc-500' : 'text-slate-500'}`}>
-                                Press <kbd className={`px-1.5 py-0.5 rounded text-[10px] font-mono ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'}`}>?</kbd> to toggle this panel
+                                Press <kbd className={`px-1.5 py-0.5 rounded text-[10px] font-mono ${isDarkMode ? 'bg-black' : 'bg-slate-100'}`}>?</kbd> to toggle this panel
                             </p>
                         </div>
                     </div>
                     <button
                         onClick={onClose}
-                        className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800' : 'hover:bg-slate-100'}`}
+                        className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black' : 'hover:bg-slate-100'}`}
                     >
                         <X size={20} />
                     </button>
@@ -124,14 +124,14 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
                                             {shortcut.modifiers && (
                                                 <kbd className={`
                                                     px-2 py-1 rounded text-[10px] font-mono font-bold
-                                                    ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-600'}
+                                                    ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-600'}
                                                 `}>
                                                     {shortcut.modifiers === 'ctrl' ? '⌘' : shortcut.modifiers}
                                                 </kbd>
                                             )}
                                             <kbd className={`
                                                 px-2 py-1 rounded text-[10px] font-mono font-bold
-                                                ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-600'}
+                                                ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-600'}
                                             `}>
                                                 {shortcut.key.length === 1 ? shortcut.key.toUpperCase() : shortcut.key}
                                             </kbd>
@@ -158,14 +158,14 @@ export const KeyboardShortcutHint: React.FC<{
             {modifiers && (
                 <kbd className={`
                     px-1.5 py-0.5 rounded text-[9px] font-mono font-bold
-                    ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-600'}
+                    ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-600'}
                 `}>
                     {modifiers === 'ctrl' ? '⌘' : modifiers}
                 </kbd>
             )}
             <kbd className={`
                 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold
-                ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-600'}
+                ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-600'}
             `}>
                 {key}
             </kbd>

@@ -465,3 +465,47 @@ export interface MTTrade {
   synced_at: string;
 }
 
+export interface DBFirehoseRule {
+  id: string;
+  name: string;
+  lucene_query: string;
+  active: boolean;
+  created_by: 'ai' | 'manual';
+  created_at: string;
+  last_event_at?: string | null;
+}
+
+export interface FirehoseRule {
+  id: string;
+  name: string;
+  luceneQuery: string;
+  active: boolean;
+  createdBy: 'ai' | 'manual';
+  createdAt: string;
+  lastEventAt?: string | null;
+}
+
+export interface DBFirehoseEvent {
+  id: string;
+  rule_id: string;
+  title: string;
+  url: string;
+  source: string;
+  summary: string;
+  published_at: string;
+  seen: boolean;
+  created_at: string;
+}
+
+export interface FirehoseEvent {
+  id: string;
+  ruleId: string;
+  title: string;
+  url: string;
+  source: string;
+  summary: string;
+  publishedAt: string;
+  seen: boolean;
+  createdAt: string;
+}
+

@@ -23,15 +23,15 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                 <div className="p-5">
                     <div className="flex items-center gap-3 mb-5">
-                        <div className="w-9 h-9 rounded-lg bg-zinc-800" />
+                        <div className="w-9 h-9 rounded-lg bg-black" />
                         <div className="space-y-2">
-                            <div className="w-28 h-4 bg-zinc-800 rounded" />
-                            <div className="w-36 h-2 bg-zinc-800 rounded" />
+                            <div className="w-28 h-4 bg-black rounded" />
+                            <div className="w-36 h-2 bg-black rounded" />
                         </div>
                     </div>
                     <div className="h-[200px] flex items-end gap-1 px-2">
                         {[...Array(24)].map((_, i) => (
-                            <div key={i} className="flex-1 bg-zinc-800 rounded-t" style={{ height: `${15 + Math.random() * 70}%` }} />
+                            <div key={i} className="flex-1 bg-black rounded-t" style={{ height: `${15 + Math.random() * 70}%` }} />
                         ))}
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
             <div className="relative z-10 p-5">
                 <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${isDarkMode ? 'bg-zinc-900' : 'bg-slate-100'}`}>
+                        <div className={`p-2 rounded-lg ${isDarkMode ? 'bg-black' : 'bg-slate-100'}`}>
                             <TrendingUp size={18} style={{ color: accentColor }} />
                         </div>
                         <div>
@@ -304,7 +304,7 @@ export const EquityCurveWidget: React.FC<EquityCurveWidgetProps> = ({ trades = [
                     </div>
                 ) : (
                     <div className="h-[200px] flex flex-col items-center justify-center text-center gap-3">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isDarkMode ? 'bg-zinc-900' : 'bg-slate-100'}`}>
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isDarkMode ? 'bg-black' : 'bg-slate-100'}`}>
                             <Activity size={24} strokeWidth={1.5} className={isDarkMode ? 'text-zinc-600' : 'text-slate-300'} />
                         </div>
                         <div className="space-y-1">

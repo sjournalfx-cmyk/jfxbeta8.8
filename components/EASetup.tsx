@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
     Download, Copy, Check, Info, AlertCircle,
     Terminal, Shield, Cpu, ArrowRight, Loader2,
@@ -882,7 +882,7 @@ const BridgeWizard: React.FC<BridgeWizardProps> = ({ isDarkMode, onComplete, use
                                             ? 'bg-[#FF4F01] text-white'
                                             : isDone
                                                 ? 'bg-emerald-500 text-white'
-                                                : 'bg-zinc-900 text-zinc-400'
+                                                : 'bg-black text-zinc-400'
                                             }`}>
                                             {isDone ? <Check size={16} strokeWidth={3} /> : <StepIcon size={16} />}
                                         </div>

@@ -256,11 +256,11 @@ const chartData = useMemo(() => {
     <div
       className={clsx(
         "p-5 rounded-[24px] border flex flex-col gap-4 min-h-[122px]",
-        isDarkMode ? "bg-zinc-900/40 border-zinc-800/50 backdrop-blur-md" : "bg-white border-slate-200 shadow-lg"
+        isDarkMode ? "bg-black/40 border-zinc-800/50 backdrop-blur-md" : "bg-white border-slate-200 shadow-lg"
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <div className={clsx("p-2.5 rounded-xl shrink-0", isDarkMode ? "bg-zinc-800" : "bg-slate-100")}>
+        <div className={clsx("p-2.5 rounded-xl shrink-0", isDarkMode ? "bg-black" : "bg-slate-100")}>
           <Icon size={18} style={{ color }} />
         </div>
         <div className="text-right min-w-0">
@@ -287,7 +287,7 @@ const chartData = useMemo(() => {
           </p>
         </div>
 
-        <div className={clsx("flex p-1 rounded-xl border w-full md:w-auto", isDarkMode ? "bg-zinc-950 border-zinc-800" : "bg-slate-100 border-slate-200")}>
+        <div className={clsx("flex p-1 rounded-xl border w-full md:w-auto", isDarkMode ? "bg-black border-zinc-800" : "bg-slate-100 border-slate-200")}>
           {(['transactions', 'insights'] as const).map((tab) => (
             <button
               key={tab}
@@ -295,7 +295,7 @@ const chartData = useMemo(() => {
               className={clsx(
                 "px-6 py-2 rounded-lg text-xs font-black uppercase tracking-widest",
                 activeSubTab === tab 
-                  ? (isDarkMode ? "bg-zinc-800 text-white shadow-xl" : "bg-white text-black shadow-md")
+                  ? "bg-[#FF4F00] text-white shadow-xl"
                   : "opacity-40 hover:opacity-100"
               )}
             >
@@ -308,7 +308,7 @@ const chartData = useMemo(() => {
       {/* Filter Bar */}
       <div className={clsx(
         "flex flex-wrap items-center gap-4 p-4 rounded-2xl border",
-        isDarkMode ? "bg-zinc-900/40 border-zinc-800/50" : "bg-white border-slate-200"
+        isDarkMode ? "bg-black/40 border-zinc-800/50" : "bg-white border-slate-200"
       )}>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-zinc-800/50 bg-black/20">
           <Calendar size={14} className="opacity-40" />
@@ -347,7 +347,7 @@ const chartData = useMemo(() => {
             onClick={() => setIsCumulative(!isCumulative)}
             className={clsx(
               "w-12 h-6 rounded-full relative",
-              isCumulative ? "bg-brand" : "bg-zinc-800"
+              isCumulative ? "bg-brand" : "bg-black"
             )}
           >
           <div className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm" />
@@ -360,7 +360,7 @@ const chartData = useMemo(() => {
           <div
             className={clsx(
               "w-full max-w-md p-6 rounded-2xl border shadow-xl",
-              isDarkMode ? "bg-zinc-900 border-zinc-800" : "bg-white border-slate-200"
+              isDarkMode ? "bg-black border-zinc-800" : "bg-white border-slate-200"
             )}
           >
             <div className="flex justify-between items-center mb-6">
@@ -372,7 +372,7 @@ const chartData = useMemo(() => {
                   setShowAddModal(false);
                   setEditingTransaction(null);
                 }}
-                className="p-2 rounded-lg hover:bg-zinc-800/50"
+                className="p-2 rounded-lg hover:bg-black/50"
               >
                 <X size={18} />
               </button>
@@ -386,7 +386,7 @@ const chartData = useMemo(() => {
                   className={clsx(
                     "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
-                      ? "bg-zinc-950 border-zinc-800 focus:border-brand"
+                      ? "bg-black border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
                   )}
                 >
@@ -405,7 +405,7 @@ const chartData = useMemo(() => {
                   className={clsx(
                     "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
-                      ? "bg-zinc-950 border-zinc-800 focus:border-brand"
+                      ? "bg-black border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
                   )}
                   placeholder="0.00"
@@ -423,7 +423,7 @@ const chartData = useMemo(() => {
                   className={clsx(
                     "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
-                      ? "bg-zinc-950 border-zinc-800 focus:border-brand"
+                      ? "bg-black border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
                   )}
                 />
@@ -437,7 +437,7 @@ const chartData = useMemo(() => {
                   className={clsx(
                     "w-full px-4 py-3 rounded-xl border text-sm font-bold outline-none",
                     isDarkMode
-                      ? "bg-zinc-950 border-zinc-800 focus:border-brand"
+                      ? "bg-black border-zinc-800 focus:border-brand"
                       : "bg-slate-50 border-slate-200 focus:border-brand"
                   )}
                   placeholder="Optional description..."
@@ -453,7 +453,7 @@ const chartData = useMemo(() => {
                   className={clsx(
                     "flex-1 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest",
                     isDarkMode
-                      ? "bg-zinc-800 hover:bg-zinc-700"
+                      ? "bg-black hover:bg-black"
                       : "bg-slate-100 hover:bg-slate-200"
                   )}
                 >
@@ -494,14 +494,14 @@ const chartData = useMemo(() => {
             {/* Chart Section */}
             <div className={clsx(
               "p-6 md:p-8 rounded-[32px] border",
-              isDarkMode ? "bg-zinc-950 border-zinc-800 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
+              isDarkMode ? "bg-black border-zinc-800 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
             )}>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between mb-6">
                 <div>
                   <h3 className="text-xl font-black tracking-tight italic">TRANSACTION MOMENTUM</h3>
                   <p className="text-xs opacity-40 font-bold uppercase tracking-[0.2em] mt-1">Net capital flow over time</p>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg border self-start md:self-auto bg-zinc-900/50 border-zinc-800">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg border self-start md:self-auto bg-black/50 border-zinc-800">
                   <div className="w-2 h-2 rounded-full bg-brand shadow-[0_0_10px_#8251EE]" />
                   <span className="text-[10px] font-black uppercase tracking-widest opacity-60 text-brand">Equity Balance</span>
                 </div>
@@ -533,7 +533,7 @@ const chartData = useMemo(() => {
                     />
                     <Tooltip 
                       contentStyle={{ 
-                        backgroundColor: isDarkMode ? '#18181b' : '#fff', 
+                        backgroundColor: isDarkMode ? '#000000' : '#fff', 
                         borderColor: isDarkMode ? '#27272a' : '#e2e8f0',
                         borderRadius: '16px',
                         fontSize: '12px',
@@ -577,7 +577,7 @@ const chartData = useMemo(() => {
             key="transactions"
             className={clsx(
               "rounded-[32px] border overflow-hidden min-w-0",
-              isDarkMode ? "bg-zinc-950 border-zinc-800 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
+              isDarkMode ? "bg-black border-zinc-800 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
             )}
           >
             <div className={clsx(
@@ -634,7 +634,7 @@ const chartData = useMemo(() => {
               <tbody className="divide-y divide-zinc-800/50">
                 {filteredTransactions.map((t) => (
                   <tr key={t.id} className={clsx(
-                    isDarkMode ? "hover:bg-zinc-900/50" : "hover:bg-slate-50"
+                    isDarkMode ? "hover:bg-black/50" : "hover:bg-slate-50"
                   )}>
                     <td className="px-8 py-5 text-xs font-bold opacity-60 font-mono">{t.date}</td>
                     <td className="px-8 py-5">
@@ -662,7 +662,7 @@ const chartData = useMemo(() => {
                           onClick={() => openEditModal(t)}
                           className={clsx(
                             "p-2 rounded-lg",
-                            isDarkMode ? "hover:bg-zinc-800 text-zinc-400 hover:text-brand" : "hover:bg-slate-100 text-slate-500 hover:text-brand"
+                            isDarkMode ? "hover:bg-black text-zinc-400 hover:text-brand" : "hover:bg-slate-100 text-slate-500 hover:text-brand"
                           )}
                         >
                           <Edit3 size={14} />
@@ -671,7 +671,7 @@ const chartData = useMemo(() => {
                           onClick={() => handleDeleteTransaction(t.id)}
                           className={clsx(
                             "p-2 rounded-lg",
-                            isDarkMode ? "hover:bg-zinc-800 text-zinc-400 hover:text-rose-500" : "hover:bg-slate-100 text-slate-500 hover:text-rose-500"
+                            isDarkMode ? "hover:bg-black text-zinc-400 hover:text-rose-500" : "hover:bg-slate-100 text-slate-500 hover:text-rose-500"
                           )}
                         >
                           <Trash2 size={14} />
@@ -685,11 +685,11 @@ const chartData = useMemo(() => {
             ) : hasTransactions ? (
               <div className={clsx(
                 "px-6 py-16 text-center",
-                isDarkMode ? "bg-zinc-950" : "bg-white"
+                isDarkMode ? "bg-black" : "bg-white"
               )}>
                 <div className={clsx(
                   "mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border",
-                  isDarkMode ? "border-zinc-800 bg-zinc-900/60 text-brand" : "border-slate-200 bg-slate-50 text-brand"
+                  isDarkMode ? "border-zinc-800 bg-black/60 text-brand" : "border-slate-200 bg-slate-50 text-brand"
                 )}>
                   <Sparkles size={28} />
                 </div>
@@ -704,7 +704,7 @@ const chartData = useMemo(() => {
                   }}
                   className={clsx(
                     "mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-[0.18em]",
-                    isDarkMode ? "bg-zinc-800 text-white" : "bg-slate-900 text-white"
+                    isDarkMode ? "bg-black text-white" : "bg-slate-900 text-white"
                   )}
                 >
                   Reset Filters
@@ -713,11 +713,11 @@ const chartData = useMemo(() => {
             ) : (
               <div className={clsx(
                 "px-6 py-16 text-center",
-                isDarkMode ? "bg-zinc-950" : "bg-white"
+                isDarkMode ? "bg-black" : "bg-white"
               )}>
                 <div className={clsx(
                   "mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border",
-                  isDarkMode ? "border-zinc-800 bg-zinc-900/60 text-brand" : "border-slate-200 bg-slate-50 text-brand"
+                  isDarkMode ? "border-zinc-800 bg-black/60 text-brand" : "border-slate-200 bg-slate-50 text-brand"
                 )}>
                   <Coins size={28} />
                 </div>

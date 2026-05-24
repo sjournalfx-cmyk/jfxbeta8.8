@@ -27,7 +27,7 @@ export class ChartErrorBoundary extends React.Component<Props, State> {
     public render() {
         if (this.state.hasError) {
             return (
-                <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-900 text-zinc-400 p-6 rounded-lg border border-zinc-800">
+                <div className="w-full h-full flex flex-col items-center justify-center bg-black text-zinc-400 p-6 rounded-lg border border-zinc-800">
                     <AlertTriangle size={48} className="text-amber-500 mb-4" />
                     <h2 className="text-lg font-bold text-white mb-2">Chart Rendering Error</h2>
                     <p className="text-sm text-center mb-4 max-w-md">
@@ -38,7 +38,7 @@ export class ChartErrorBoundary extends React.Component<Props, State> {
                     </div>
                     <button 
                         onClick={() => this.setState({ hasError: false, error: null })}
-                        className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded transition-colors"
+                        className="px-4 py-2 bg-black hover:bg-black text-white rounded transition-colors"
                     >
                         Try Again
                     </button>

@@ -95,7 +95,7 @@ export const PLByMindsetWidget: React.FC<PLByMindsetWidgetProps> = ({ trades = [
                 </div>
                 {tooltip.visible && (
                     <div
-                        className="fixed z-50 bg-[#18181b] border border-[#27272a] rounded-xl px-4 py-3 shadow-xl pointer-events-none"
+                        className="fixed z-50 bg-[#000000] border border-[#27272a] rounded-xl px-4 py-3 shadow-xl pointer-events-none"
                         style={{ left: tooltip.x, top: tooltip.y - 10, transform: 'translate(-50%, -100%)' }}
                     >
                         <div className="text-[14px] font-semibold text-white mb-1">{tooltip.label}</div>

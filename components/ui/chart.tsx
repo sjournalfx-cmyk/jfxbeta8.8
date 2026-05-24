@@ -66,7 +66,7 @@ export const ChartTooltipContent = ({
   }
 
   return (
-    <div className="rounded-xl border bg-white dark:bg-zinc-950 p-3 shadow-2xl text-xs dark:border-zinc-800 border-slate-200 min-w-[120px] animate-in fade-in zoom-in duration-200">
+    <div className="rounded-xl border bg-white dark:bg-black p-3 shadow-2xl text-xs dark:border-zinc-800 border-slate-200 min-w-[120px] animate-in fade-in zoom-in duration-200">
       {!hideLabel && (
         <div className="font-black uppercase tracking-widest opacity-40 mb-2 border-b dark:border-white/10 border-black/5 pb-2">
           {payload[0].name}

@@ -4,7 +4,7 @@ import NoteCard from './notes/NoteCard';
 import NoteEditor from './notes/NoteEditor';
 import { Note as KeepNote, NoteColor, SidebarSection } from './notes/types';
 import { Note as AppNote, UserProfile } from '../types';
-import { Search, Menu, RefreshCw, Grid, Settings, Trash2, Archive, Lightbulb, ChevronLeft, Bell, Pencil } from 'lucide-react';
+import { Search, Menu, RefreshCw, Grid, Settings, Trash2, Archive, Lightbulb, ChevronLeft, Bell } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   DndContext, 
@@ -296,11 +296,10 @@ const Notes: React.FC<NotesProps> = ({
           borderColor: 'var(--notebook-divider)' 
         }}
       >
-        <div className="flex items-center gap-5 overflow-hidden">
+        <div className="flex items-center gap-4 overflow-visible">
           {[
             { id: 'NOTES', icon: Lightbulb, title: 'Notes' },
             { id: 'REMINDERS', icon: Bell, title: 'Reminders' },
-            { id: 'EDIT_LABELS', icon: Pencil, title: 'Edit labels' },
             { id: 'ARCHIVE', icon: Archive, title: 'Archive' },
             { id: 'TRASH', icon: Trash2, title: 'Trash' },
           ].map((item) => (
@@ -310,28 +309,28 @@ const Notes: React.FC<NotesProps> = ({
               className={`flex items-center gap-2 py-2.5 transition-all relative group shrink-0`}
               title={item.title}
             >
-              <item.icon className={`w-[17px] h-[17px] transition-colors ${
+              <item.icon className={`w-[18px] h-[18px] shrink-0 transition-colors ${
                 currentSection === item.id 
-                  ? 'text-indigo-500' 
+                  ? 'text-[#FF4F00]' 
                   : 'text-[var(--notebook-muted)] group-hover:text-[var(--notebook-text)]'
               }`} />
               <span className={`text-[9px] font-bold uppercase tracking-widest transition-colors ${
                 currentSection === item.id 
-                  ? 'text-indigo-500' 
+                  ? 'text-[#FF4F00]' 
                   : 'text-[var(--notebook-muted)] group-hover:text-[var(--notebook-text)]'
               }`}>
                 {item.title}
               </span>
               {currentSection === item.id && (
-                <div className="absolute -bottom-[7.5px] left-0 right-0 h-0.5 bg-indigo-500 rounded-full" />
+                <div className="absolute -bottom-[7.5px] left-0 right-0 h-0.5 bg-[#FF4F00] rounded-full" />
               )}
             </button>
           ))}
         </div>
 
         <div className="flex justify-center">
-          <div className={`w-full max-w-[400px] relative flex items-center rounded-lg transition-all group bg-[var(--notebook-hover)] focus-within:bg-[var(--note-default-bg)] focus-within:ring-1 focus-within:ring-indigo-500/20`}>
-            <div className={`pl-2.5 pr-1.5 text-[var(--notebook-muted)] group-focus-within:text-indigo-500`}>
+          <div className={`w-full max-w-[400px] relative flex items-center rounded-lg transition-all group bg-[var(--notebook-hover)] focus-within:bg-[var(--note-default-bg)] focus-within:ring-1 focus-within:ring-[#FF4F00]/20`}>
+            <div className={`pl-2.5 pr-1.5 text-[var(--notebook-muted)] group-focus-within:text-[#FF4F00]`}>
               <Search className="w-4 h-4" />
             </div>
             <input 
@@ -361,16 +360,16 @@ const Notes: React.FC<NotesProps> = ({
             <aside className="w-[340px] xl:w-[380px] flex flex-col border-r shrink-0 overflow-y-auto custom-scrollbar transition-all duration-300" style={{ backgroundColor: 'var(--note-default-bg)', borderColor: 'var(--notebook-divider)' }}>
                 <div className="p-4 space-y-4">
                     {currentSection === 'EDIT_LABELS' && (
-                        <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-4">
+                        <div className="rounded-2xl border border-[#FF4F00]/20 bg-[#FF4F00]/5 p-4">
                             <div className="flex items-center justify-between gap-3 mb-3">
                                 <div>
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-indigo-500">Label Browser</p>
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-[#FF4F00]">Label Browser</p>
                                     <p className="text-xs opacity-60 mt-1">Filter notebook cards by label.</p>
                                 </div>
                                 {activeLabel && (
                                     <button
                                         onClick={() => setActiveLabel(null)}
-                                        className="text-[10px] font-black uppercase tracking-widest text-indigo-500 hover:text-indigo-400"
+                                        className="text-[10px] font-black uppercase tracking-widest text-[#FF4F00] hover:text-[#E64600]"
                                     >
                                         Clear
                                     </button>
@@ -379,7 +378,7 @@ const Notes: React.FC<NotesProps> = ({
                             <div className="flex flex-wrap gap-2">
                                 <button
                                     onClick={() => setActiveLabel(null)}
-                                    className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border transition-colors ${!activeLabel ? 'border-indigo-500 bg-indigo-500 text-white' : 'border-[var(--notebook-divider)] text-[var(--notebook-muted)] hover:text-[var(--notebook-text)]'}`}
+                                    className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border transition-colors ${!activeLabel ? 'border-[#FF4F00] bg-[#FF4F00] text-white' : 'border-[var(--notebook-divider)] text-[var(--notebook-muted)] hover:text-[var(--notebook-text)]'}`}
                                 >
                                     All Labels
                                 </button>
@@ -387,7 +386,7 @@ const Notes: React.FC<NotesProps> = ({
                                     <button
                                         key={label}
                                         onClick={() => setActiveLabel(label)}
-                                        className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border transition-colors ${activeLabel === label ? 'border-indigo-500 bg-indigo-500 text-white' : 'border-[var(--notebook-divider)] text-[var(--notebook-muted)] hover:text-[var(--notebook-text)]'}`}
+                                        className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border transition-colors ${activeLabel === label ? 'border-[#FF4F00] bg-[#FF4F00] text-white' : 'border-[var(--notebook-divider)] text-[var(--notebook-muted)] hover:text-[var(--notebook-text)]'}`}
                                     >
                                         {label}
                                     </button>
@@ -498,7 +497,7 @@ const Notes: React.FC<NotesProps> = ({
             <main className={`flex-1 overflow-y-auto custom-scrollbar flex flex-col items-center py-12 px-8 relative bg-[var(--note-default-bg)]`}>
               
               <div 
-                className={`relative transition-all duration-300 ${isResizing ? 'ring-2 ring-indigo-500/50' : ''}`}
+                className={`relative transition-all duration-300 ${isResizing ? 'ring-2 ring-[#FF4F00]/50' : ''}`}
                 style={{ 
                   width: `${canvasWidth}px`, 
                   height: canvasHeight > 0 ? `${canvasHeight}px` : 'auto',
@@ -540,7 +539,7 @@ const Notes: React.FC<NotesProps> = ({
                 <div 
                   onMouseDown={startResizing}
                   className={`absolute bottom-0 right-0 w-10 h-10 flex items-center justify-center cursor-nwse-resize z-50 group pointer-events-auto
-                    ${isResizing ? 'text-indigo-500' : 'text-zinc-500 opacity-0 group-hover:opacity-100'} 
+                    ${isResizing ? 'text-[#FF4F00]' : 'text-zinc-500 opacity-0 group-hover:opacity-100'} 
                     hover:opacity-100 transition-all`}
                   title="Resize canvas"
                 >

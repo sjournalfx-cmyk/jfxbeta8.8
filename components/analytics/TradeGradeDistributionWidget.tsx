@@ -25,7 +25,7 @@ export const TradeGradeDistributionWidget: React.FC<TradeGradeDistributionProps>
     }, [trades]);
 
     return (
-        <div className={`p-6 rounded-[32px] border flex flex-col h-full ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`}>
+        <div className={`p-6 rounded-[32px] border flex flex-col h-full ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`}>
             <div className="flex items-center gap-2 mb-6">
                 <Star size={16} className="text-amber-500 opacity-80" />
                 <h3 className="text-sm font-black uppercase tracking-widest opacity-80">Trade Grade Distribution</h3>

@@ -150,7 +150,7 @@ export const MarketSessionWidget: React.FC<WidgetProps> = ({ trades, isDarkMode,
             <YAxis stroke={isDarkMode ? "#71717a" : "#94a3b8"} fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${currencySymbol}${Math.abs(Number(v)).toFixed(2)}`} />
             <Tooltip 
               contentStyle={{ 
-                backgroundColor: isDarkMode ? '#18181b' : '#fff', 
+                backgroundColor: isDarkMode ? '#000000' : '#fff', 
                 borderRadius: '16px', 
                 border: isDarkMode ? '1px solid #27272a' : '1px solid #e2e8f0',
                 fontWeight: 'bold',
@@ -288,7 +288,7 @@ export const HourlyPerformanceWidget: React.FC<WidgetProps> = ({ trades, isDarkM
             <YAxis stroke={isDarkMode ? "#71717a" : "#94a3b8"} fontSize={8} tickLine={false} axisLine={false} tickFormatter={(v) => `${Math.round(Number(v))}m`} />
             <Tooltip 
               contentStyle={{ 
-                backgroundColor: isDarkMode ? '#18181b' : '#fff', 
+                backgroundColor: isDarkMode ? '#000000' : '#fff', 
                 borderRadius: '16px', 
                 border: isDarkMode ? '1px solid #27272a' : '1px solid #e2e8f0',
                 fontWeight: 'bold',
@@ -475,7 +475,7 @@ export const DailyActivityHeatmap: React.FC<WidgetProps> = ({ trades, isDarkMode
   return (
     <div className={clsx(
       "p-8 rounded-[32px] border h-full flex flex-col justify-between",
-      isDarkMode ? "bg-zinc-950 border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
+      isDarkMode ? "bg-black border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
     )}>
       <div className="mb-4">
         <div className="flex items-center gap-3">
@@ -545,7 +545,7 @@ export const DailyActivityHeatmap: React.FC<WidgetProps> = ({ trades, isDarkMode
                 {d.pnl >= 0 ? '+' : ''}{currencySymbol}{Math.abs(d.pnl).toLocaleString()}
               </span>
             </div>
-            <div className={clsx("h-1.5 w-full rounded-full overflow-hidden", isDarkMode ? "bg-zinc-800" : "bg-slate-100")}>
+            <div className={clsx("h-1.5 w-full rounded-full overflow-hidden", isDarkMode ? "bg-black" : "bg-slate-100")}>
               <div 
                 className={clsx("h-full rounded-full", d.pnl >= 0 ? "bg-emerald-500" : "bg-rose-500")}
                 style={{ width: `${Math.min(100, (d.absPnl / maxVal) * 100)}%` }}

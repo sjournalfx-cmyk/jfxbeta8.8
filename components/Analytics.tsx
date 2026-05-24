@@ -442,7 +442,7 @@ const renderPsychologyLayout = () => (
                     <div className="flex items-center justify-between">
                         <h2 className="text-[18px] font-bold text-white">{scoreToggled ? 'Performance Radar' : 'Tilt Score'}</h2>
                         <div
-                            className="inline-flex rounded-full border border-[#2a2a2a] bg-[#0a0a0a] p-1 shadow-[0_1px_0_rgba(255,255,255,0.03)]"
+                            className="inline-flex rounded-[8px] border border-[#2a2a2a] bg-[#0a0a0a] p-1 shadow-[0_1px_0_rgba(255,255,255,0.03)]"
                             role="tablist"
                             aria-label="Tilt score display mode"
                         >
@@ -450,9 +450,9 @@ const renderPsychologyLayout = () => (
                                 type="button"
                                 onClick={() => setScoreToggled(false)}
                                 aria-pressed={!scoreToggled}
-                                className={`rounded-full px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] transition-all ${
+                                className={`rounded-[6px] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] transition-all ${
                                     !scoreToggled
-                                        ? 'bg-white text-black shadow-sm'
+                                        ? 'bg-[#FF4F00] text-white shadow-sm'
                                         : 'text-[#94a3b8] hover:text-white'
                                 }`}
                             >
@@ -462,9 +462,9 @@ const renderPsychologyLayout = () => (
                                 type="button"
                                 onClick={() => setScoreToggled(true)}
                                 aria-pressed={scoreToggled}
-                                className={`rounded-full px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] transition-all ${
+                                className={`rounded-[6px] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] transition-all ${
                                     scoreToggled
-                                        ? 'bg-white text-black shadow-sm'
+                                        ? 'bg-[#FF4F00] text-white shadow-sm'
                                         : 'text-[#94a3b8] hover:text-white'
                                 }`}
                             >
@@ -522,7 +522,7 @@ const renderPsychologyLayout = () => (
                             type="button"
                             onClick={onRefreshPsychologyInsights}
                             disabled={!onRefreshPsychologyInsights || isRefreshingPsychologyInsights}
-                            className="group inline-flex items-center gap-2 rounded-full border border-[#2c2c2c] bg-[linear-gradient(180deg,#121212_0%,#090909_100%)] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#e2e8f0] shadow-[0_1px_0_rgba(255,255,255,0.04),0_8px_18px_rgba(0,0,0,0.25)] transition-all duration-200 hover:border-[#3a3a3a] hover:bg-[linear-gradient(180deg,#161616_0%,#0b0b0b_100%)] hover:text-white hover:shadow-[0_1px_0_rgba(255,255,255,0.06),0_12px_22px_rgba(0,0,0,0.32)] disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:border-[#2c2c2c] disabled:hover:bg-[linear-gradient(180deg,#121212_0%,#090909_100%)]"
+                            className="group inline-flex items-center gap-2 rounded-[8px] border border-[#2c2c2c] bg-[linear-gradient(180deg,#121212_0%,#090909_100%)] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#e2e8f0] shadow-[0_1px_0_rgba(255,255,255,0.04),0_8px_18px_rgba(0,0,0,0.25)] transition-all duration-200 hover:border-[#3a3a3a] hover:bg-[linear-gradient(180deg,#161616_0%,#0b0b0b_100%)] hover:text-white hover:shadow-[0_1px_0_rgba(255,255,255,0.06),0_12px_22px_rgba(0,0,0,0.32)] disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:border-[#2c2c2c] disabled:hover:bg-[linear-gradient(180deg,#121212_0%,#090909_100%)]"
                         >
                             <RotateCcw size={12} className={isRefreshingPsychologyInsights ? 'animate-spin text-white' : 'text-[#93c5fd] transition-transform duration-200 group-hover:rotate-12'} />
                             <span className="translate-y-[0.5px]">Analyze</span>
@@ -594,10 +594,10 @@ const renderPsychologyLayout = () => (
 
     const renderWidget = (id: string) => {
         switch (id) {
-            case 'winRate': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><Target size={14} className="text-indigo-500" /> Win Rate</span><div className="text-2xl font-black">{Number(stats.winRate).toFixed(1)}%</div></div>;
-            case 'profitFactor': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><Gauge size={14} className="text-indigo-500" /> Profit Factor</span><div className="text-2xl font-black">{Number(stats.profitFactor).toFixed(1)}</div></div>;
-            case 'grossProfit': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><TrendingUp size={14} className="text-emerald-500" /> Gross Profit</span><div className="text-2xl font-black text-emerald-500">+{currencySymbol}{stats.grossProfit.toLocaleString()}</div></div>;
-            case 'grossLoss': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><TrendingDown size={14} className="text-rose-500" /> Gross Loss</span><div className="text-2xl font-black text-rose-500">-{currencySymbol}{stats.grossLoss.toLocaleString()}</div></div>;
+            case 'winRate': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><Target size={14} className="text-indigo-500" /> Win Rate</span><div className="text-2xl font-black">{Number(stats.winRate).toFixed(1)}%</div></div>;
+            case 'profitFactor': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><Gauge size={14} className="text-indigo-500" /> Profit Factor</span><div className="text-2xl font-black">{Number(stats.profitFactor).toFixed(1)}</div></div>;
+            case 'grossProfit': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><TrendingUp size={14} className="text-emerald-500" /> Gross Profit</span><div className="text-2xl font-black text-emerald-500">+{currencySymbol}{stats.grossProfit.toLocaleString()}</div></div>;
+            case 'grossLoss': return <div className={`h-full p-6 rounded-[24px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><span className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2"><TrendingDown size={14} className="text-rose-500" /> Gross Loss</span><div className="text-2xl font-black text-rose-500">-{currencySymbol}{stats.grossLoss.toLocaleString()}</div></div>;
             case 'equityCurve': return <EquityCurveWidget trades={completedTrades} equityData={equityData} isDarkMode={isDarkMode} currencySymbol={currencySymbol} />;
             case 'drawdown': return <DrawdownOverTimeWidget trades={completedTrades} isDarkMode={isDarkMode} userProfile={userProfile} startingBalance={effectiveInitialBalance} />;
             case 'streakMomentum': return <MomentumStreakWidget trades={completedTrades} isDarkMode={isDarkMode} />;
@@ -606,7 +606,7 @@ const renderPsychologyLayout = () => (
             case 'currencyStrength': return <CurrencyStrengthMeter isDarkMode={isDarkMode} trades={completedTrades} />;
             case 'outcomeDist': return <OutcomeDistributionWidget trades={completedTrades} isDarkMode={isDarkMode} />;
             case 'tiltScore': return null;
-            case 'riskReward': return <div className={`h-full p-8 rounded-[32px] border ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><h3 className="font-bold text-lg mb-6 flex items-center gap-2"><Activity size={20} className="text-indigo-500" /> Risk/Reward</h3><div className="space-y-6"><div className="flex justify-between items-end"><span className="text-sm opacity-60">Avg Win</span><span className="text-xl font-black text-emerald-500">{currencySymbol}{Math.round(stats.avgWin).toLocaleString()}</span></div><div className="flex justify-between items-end"><span className="text-sm opacity-60">Avg Loss</span><span className="text-xl font-black text-rose-500">{currencySymbol}{Math.round(stats.avgLoss).toLocaleString()}</span></div></div></div>;
+            case 'riskReward': return <div className={`h-full p-8 rounded-[32px] border ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}><h3 className="font-bold text-lg mb-6 flex items-center gap-2"><Activity size={20} className="text-indigo-500" /> Risk/Reward</h3><div className="space-y-6"><div className="flex justify-between items-end"><span className="text-sm opacity-60">Avg Win</span><span className="text-xl font-black text-emerald-500">{currencySymbol}{Math.round(stats.avgWin).toLocaleString()}</span></div><div className="flex justify-between items-end"><span className="text-sm opacity-60">Avg Loss</span><span className="text-xl font-black text-rose-500">{currencySymbol}{Math.round(stats.avgLoss).toLocaleString()}</span></div></div></div>;
             case 'plMindset': return null;
             case 'plAdherence': return null;
             case 'matrix': return <PerformanceMatrixWidget trades={completedTrades} isDarkMode={isDarkMode} currencySymbol={currencySymbol} />;
@@ -689,13 +689,13 @@ const renderPsychologyLayout = () => (
                     </div>
                 ))}
                 <div className="min-h-[90px]">
-                    <div className={`h-full p-5 rounded-[20px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+                    <div className={`h-full p-5 rounded-[20px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
                         <span className="text-[9px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-1.5"><TrendingUp size={12} className="text-emerald-500" /> Total P&L</span>
                         <div className="text-xl font-black text-emerald-500">{currencySymbol}{stats.netProfit.toLocaleString()}</div>
                     </div>
                 </div>
                 <div className="min-h-[90px]">
-                    <div className={`h-full p-5 rounded-[20px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+                    <div className={`h-full p-5 rounded-[20px] border flex flex-col justify-between ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
                         <span className="text-[9px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-1.5"><Activity size={12} className="text-indigo-500" /> Risk/Reward</span>
                         <div className="text-xl font-black">{stats.avgWin > 0 && stats.avgLoss < 0 ? (Math.abs(stats.avgWin) / Math.abs(stats.avgLoss)).toFixed(2) : '0.00'}</div>
                     </div>
@@ -733,7 +733,7 @@ const renderPsychologyLayout = () => (
         ? 'bg-[#000000] text-zinc-200'
         : pageIsLight
             ? 'bg-[#F8FAFC] text-slate-900'
-            : 'bg-[#050505] text-zinc-200';
+            : 'bg-[#000000] text-zinc-200';
 
     return (
         <div className={`w-full h-full overflow-y-auto custom-scrollbar p-6 lg:p-10 font-sans ${pageBackgroundClass}`}>
@@ -749,7 +749,7 @@ const renderPsychologyLayout = () => (
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id as any)}
                             className={`w-full justify-center px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest whitespace-nowrap flex items-center gap-2 ${activeTab === tab.id 
-                                ? (pageIsLight ? 'bg-white text-black shadow-sm' : 'bg-zinc-800 text-white shadow-lg') 
+                                ? (pageIsLight ? 'bg-white text-black shadow-sm' : 'bg-[#FF4F00] text-white shadow-lg') 
                                 : (pageIsLight ? 'text-slate-500 hover:text-slate-700' : 'text-zinc-500 hover:text-zinc-300')}`}
                         >
                             <tab.icon size={14} />
@@ -798,7 +798,7 @@ const renderPsychologyLayout = () => (
                             disabled
                             aria-disabled="true"
                             onClick={(e) => e.preventDefault()}
-                            className={`px-6 py-3 rounded-xl font-bold flex items-center gap-2 cursor-not-allowed opacity-50 ${isDarkMode ? 'bg-zinc-800 text-white' : 'bg-black text-white'}`}
+                            className={`px-6 py-3 rounded-xl font-bold flex items-center gap-2 cursor-not-allowed opacity-50 ${isDarkMode ? 'bg-black text-white' : 'bg-black text-white'}`}
                         >
                             <Printer size={18} />
                             Generate PDF Report

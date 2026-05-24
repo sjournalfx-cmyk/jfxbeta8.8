@@ -72,13 +72,13 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
   const compliance = totalRules > 0 ? Math.round((activeRules / totalRules) * 100) : 0;
 
   return (
-    <div className={`w-full h-full overflow-hidden flex flex-col ${isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
+    <div className={`w-full h-full overflow-hidden flex flex-col ${isDarkMode ? 'bg-[#000000] text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
       
       {/* Hero Header */}
-      <header className={`px-8 py-8 border-b shrink-0 flex items-start justify-between ${isDarkMode ? 'border-[#27272a] bg-[#09090b]' : 'border-slate-200 bg-white'}`}>
+      <header className={`px-8 py-8 border-b shrink-0 flex items-start justify-between ${isDarkMode ? 'border-[#27272a] bg-[#000000]' : 'border-slate-200 bg-white'}`}>
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-lg bg-indigo-600 text-white shadow-lg shadow-indigo-600/20">
+            <div className="p-2 rounded-lg bg-[#FF4F00] text-white shadow-lg shadow-[#FF4F00]/20">
               <Scale size={24} />
             </div>
             <h1 className="text-3xl font-black tracking-tight font-serif italic">The Trading Constitution</h1>
@@ -103,7 +103,7 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
       <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
         
         {/* Navigation / TOC */}
-        <aside className={`w-full md:w-72 border-r overflow-y-auto flex flex-col ${isDarkMode ? 'border-[#27272a] bg-[#121215]' : 'border-slate-200 bg-white'}`}>
+        <aside className={`w-full md:w-72 border-r overflow-y-auto flex flex-col ${isDarkMode ? 'border-[#27272a] bg-[#000000]' : 'border-slate-200 bg-white'}`}>
            <div className="p-6 space-y-1 flex-1">
              <h3 className="text-xs font-bold uppercase tracking-wider opacity-50 px-3 mb-4">Articles of Law</h3>
              {ruleSections.map((section, index) => {
@@ -114,8 +114,8 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
                    onClick={() => setActiveSectionId(section.id)}
                    className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all text-sm font-semibold text-left
                      ${isActive 
-                       ? 'bg-indigo-500/10 text-indigo-500 border border-indigo-500/20' 
-                       : isDarkMode ? 'text-zinc-400 hover:bg-zinc-800 border border-transparent' : 'text-slate-600 hover:bg-slate-100 border border-transparent'
+                       ? 'bg-[#FF4F00]/10 text-[#FF4F00] border border-[#FF4F00]/20' 
+                       : isDarkMode ? 'text-zinc-400 hover:bg-black border border-transparent' : 'text-slate-600 hover:bg-slate-100 border border-transparent'
                      }
                    `}
                  >
@@ -134,8 +134,8 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
            </div>
 
            {/* Daily Ratification Panel */}
-           <div className={`m-6 p-6 rounded-2xl border flex flex-col gap-4 text-center ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
-              <div className="mx-auto p-3 rounded-full bg-indigo-500 text-white shadow-lg">
+           <div className={`m-6 p-6 rounded-2xl border flex flex-col gap-4 text-center ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+              <div className="mx-auto p-3 rounded-full bg-[#FF4F00] text-white shadow-lg">
                   <Gavel size={20} />
               </div>
               <div>
@@ -148,7 +148,7 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
               {!isSigned ? (
                   <button 
                     onClick={() => setIsSigned(true)}
-                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/25 transition-all active:scale-95 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-[#FF4F00] hover:bg-[#E64600] text-white font-bold rounded-xl shadow-lg shadow-[#FF4F00]/25 transition-all active:scale-95 flex items-center justify-center gap-2"
                   >
                       <PenTool size={16} /> Sign Pledge
                   </button>
@@ -176,12 +176,12 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
                     
                     {/* Section Header */}
                     <div className="mb-10">
-                        <div className="flex items-center gap-2 text-indigo-500 font-bold uppercase tracking-widest text-xs mb-3">
+                        <div className="flex items-center gap-2 text-[#FF4F00] font-bold uppercase tracking-widest text-xs mb-3">
                             <Icon size={14} /> Section Overview
                         </div>
                         <h2 className="text-4xl font-black font-serif italic mb-4">{section.title}</h2>
                         {section.description && (
-                            <div className={`p-4 rounded-xl border-l-4 ${isDarkMode ? 'bg-zinc-900/50 border-indigo-500' : 'bg-indigo-50 border-indigo-500'}`}>
+                            <div className={`p-4 rounded-xl border-l-4 ${isDarkMode ? 'bg-black/50 border-[#FF4F00]' : 'bg-indigo-50 border-[#FF4F00]'}`}>
                                 <p className={`text-lg italic ${isDarkMode ? 'text-zinc-300' : 'text-slate-700'}`}>
                                     "{section.description}"
                                 </p>
@@ -202,7 +202,7 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
                           `}
                         >
                            {/* Clause Number */}
-                           <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 transition-colors ${rule.isActive ? (isDarkMode ? 'bg-zinc-950 border-zinc-500' : 'bg-white border-slate-400') : 'bg-rose-500 border-rose-500'}`} />
+                           <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 transition-colors ${rule.isActive ? (isDarkMode ? 'bg-black border-zinc-500' : 'bg-white border-slate-400') : 'bg-rose-500 border-rose-500'}`} />
 
                            <div className="flex items-start justify-between gap-4">
                                <div className="flex-1">
@@ -219,7 +219,7 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
                                    <button 
                                      onClick={() => toggleRuleActive(section.id, rule.id)}
                                      title={rule.isActive ? "Suspend Rule" : "Activate Rule"}
-                                     className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-100 text-slate-400'}`}
+                                     className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-100 text-slate-400'}`}
                                    >
                                      {rule.isActive ? <XCircle size={18} /> : <CheckCircle size={18} />}
                                    </button>
@@ -236,7 +236,7 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
                       ))}
 
                       {/* Add New Rule Input */}
-                      <div className={`mt-12 p-6 rounded-2xl border border-dashed transition-all ${isDarkMode ? 'border-zinc-800 bg-zinc-900/30' : 'border-slate-300 bg-slate-50'}`}>
+                      <div className={`mt-12 p-6 rounded-2xl border border-dashed transition-all ${isDarkMode ? 'border-zinc-800 bg-black/30' : 'border-slate-300 bg-slate-50'}`}>
                           <h4 className="text-sm font-bold flex items-center gap-2 mb-4 opacity-70">
                               <Scroll size={16} /> Amend Article
                           </h4>
@@ -244,7 +244,7 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
                               <input 
                                 type="text"
                                 placeholder="Draft a new clause..."
-                                className={`flex-1 bg-transparent border-b-2 py-2 outline-none text-lg font-medium transition-colors ${isDarkMode ? 'border-zinc-700 focus:border-indigo-500 placeholder-zinc-700' : 'border-slate-300 focus:border-indigo-500 placeholder-slate-400'}`}
+                                className={`flex-1 bg-transparent border-b-2 py-2 outline-none text-lg font-medium transition-colors ${isDarkMode ? 'border-zinc-700 focus:border-[#FF4F00] placeholder-zinc-700' : 'border-slate-300 focus:border-[#FF4F00] placeholder-slate-400'}`}
                                 value={newRuleText}
                                 onChange={(e) => setNewRuleText(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleAddRule(section.id)}
@@ -252,7 +252,7 @@ const Rules: React.FC<RulesProps> = ({ isDarkMode, ruleSections, onUpdateSection
                               <button 
                                  onClick={() => handleAddRule(section.id)}
                                  disabled={!newRuleText.trim()}
-                                 className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:hover:bg-indigo-600 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-500/20"
+                                 className="px-6 py-2 bg-[#FF4F00] hover:bg-[#E64600] disabled:opacity-50 disabled:hover:bg-[#FF4F00] text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-[#FF4F00]/20"
                               >
                                 Ratify
                               </button>

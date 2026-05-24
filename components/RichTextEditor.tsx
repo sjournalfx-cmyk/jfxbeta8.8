@@ -229,7 +229,7 @@ const MermaidNodeView = ({ node, extension }: any) => {
   }, [node.attrs.code, node.textContent]);
 
   return (
-    <div className="mermaid-wrapper my-4 p-4 rounded-xl border border-zinc-800 bg-zinc-950 flex flex-col items-center justify-center relative group">
+    <div className="mermaid-wrapper my-4 p-4 rounded-xl border border-zinc-800 bg-black flex flex-col items-center justify-center relative group">
       {error && <div className="absolute top-2 left-2 text-[10px] text-rose-500 font-bold uppercase">{error}</div>}
       <div ref={containerRef} className="max-w-full overflow-auto" />
       <div className="hidden group-hover:block absolute bottom-2 right-2 text-[8px] font-black uppercase tracking-widest opacity-20">AI Generated Map</div>
@@ -527,10 +527,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   return (
     <div
       ref={editorRef}
-      className={`flex flex-col rounded-xl border transition-all relative ${isDarkMode ? 'bg-[#18181b] border-[#27272a] focus-within:border-indigo-500/50' : 'bg-white border-slate-200 focus-within:border-indigo-500'} ${className}`}
+      className={`flex flex-col rounded-xl border transition-all relative ${isDarkMode ? 'bg-[#000000] border-[#27272a] focus-within:border-indigo-500/50' : 'bg-white border-slate-200 focus-within:border-indigo-500'} ${className}`}
     >
       {showToolbar && (
-        <div className={`flex flex-wrap items-center gap-0.5 p-1 border-b transition-colors rounded-t-xl ${isDarkMode ? 'border-[#27272a] bg-zinc-900/50' : 'border-slate-200 bg-slate-50/50'}`}>
+        <div className={`flex flex-wrap items-center gap-0.5 p-1 border-b transition-colors rounded-t-xl ${isDarkMode ? 'border-[#27272a] bg-black/50' : 'border-slate-200 bg-slate-50/50'}`}>
           <ToolbarButton
             onClick={() => editor.chain().focus().toggleBold().run()}
             isActive={editor.isActive('bold')}
@@ -648,7 +648,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
           shouldShow={({ editor, state }) => {
             return !editor.isActive('table') && !state.selection.empty;
           }}
-          className={`flex items-center gap-0.5 p-1 rounded-xl shadow-xl border ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`}
+          className={`flex items-center gap-0.5 p-1 rounded-xl shadow-xl border ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'}`}
         >
           <ToolbarButton
             onClick={() => editor.chain().focus().toggleBold().run()}
@@ -690,7 +690,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       {/* Custom Draggable Table Menu */}
       {editor && tableInfo && (
         <div
-          className={`absolute z-[100] p-3 rounded-xl shadow-2xl border select-none transition-shadow ${isDarkMode ? 'bg-[#18181b] border-[#27272a] shadow-black/50' : 'bg-white border-slate-200 shadow-slate-200/50'}`}
+          className={`absolute z-[100] p-3 rounded-xl shadow-2xl border select-none transition-shadow ${isDarkMode ? 'bg-[#000000] border-[#27272a] shadow-black/50' : 'bg-white border-slate-200 shadow-slate-200/50'}`}
           style={{
             left: menuOffset.x,
             top: menuOffset.y,
@@ -1018,7 +1018,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
           vertical-align: top;
           box-sizing: border-box;
           position: relative;
-          background: ${isDarkMode ? '#18181b' : '#ffffff'};
+          background: ${isDarkMode ? '#000000' : '#ffffff'};
           word-break: break-word;
           transition: all 0.15s ease;
         }
@@ -1102,7 +1102,7 @@ const ToolbarButton = ({ onClick, isActive = false, icon: Icon, title, className
     className={`p-1.5 rounded-md transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none ${
       isActive 
         ? 'bg-indigo-600 text-white shadow-sm' 
-        : 'text-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800'
+        : 'text-zinc-500 hover:bg-zinc-200 dark:hover:bg-black'
     } ${className}`}
     title={showTooltip ? title : undefined}
   >

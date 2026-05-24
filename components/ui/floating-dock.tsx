@@ -107,7 +107,7 @@ function IconContainer({
             "relative flex aspect-square items-center justify-center rounded-full shrink-0 cursor-pointer transition-all duration-300",
             isActive 
               ? "bg-[#FF4F01] text-white shadow-lg shadow-[#FF4F01]/30 scale-110" 
-              : "bg-transparent hover:bg-slate-100 dark:hover:bg-zinc-900/50 border border-transparent hover:border-slate-200 dark:hover:border-zinc-800 text-slate-500 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-zinc-100",
+              : "bg-transparent hover:bg-slate-100 dark:hover:bg-black/50 border border-transparent hover:border-slate-200 dark:hover:border-zinc-800 text-slate-500 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-zinc-100",
             isLocked && "opacity-40 cursor-not-allowed"
           )}
         >
@@ -118,7 +118,7 @@ function IconContainer({
                 animate={{ opacity: 1, x: 50, y: "-50%", scale: 1 }}
                 exit={{ opacity: 0, x: 10, y: "-50%", scale: 0.8 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
-                className="absolute left-0 top-1/2 w-fit rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium whitespace-pre text-slate-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white z-[100] shadow-xl flex flex-col gap-1.5 min-w-[140px]"
+                className="absolute left-0 top-1/2 w-fit rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium whitespace-pre text-slate-700 dark:border-zinc-800 dark:bg-black dark:text-white z-[100] shadow-xl flex flex-col gap-1.5 min-w-[140px]"
               >
                 <span className="font-bold">{title}</span>
                 {description && (

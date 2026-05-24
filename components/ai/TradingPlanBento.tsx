@@ -211,7 +211,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
         className={`relative rounded-2xl border transition-all duration-300 overflow-hidden ${
           isSigned
             ? 'border-emerald-500/30 bg-emerald-500/[0.02]'
-            : `${config.bg} ${config.borderColor} ${isDarkMode ? 'bg-zinc-900/40' : 'bg-white'}`
+            : `${config.bg} ${config.borderColor} ${isDarkMode ? 'bg-black/40' : 'bg-white'}`
         }`}
       >
         <button
@@ -299,7 +299,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
           <button
             onClick={onClose}
             className={`p-2.5 rounded-xl transition-all active:scale-95 ${
-              isDarkMode ? 'hover:bg-zinc-800 text-zinc-400 hover:text-white' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-700'
+              isDarkMode ? 'hover:bg-black text-zinc-400 hover:text-white' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-700'
             }`}
           >
             <ArrowLeft size={20} />
@@ -310,7 +310,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
         <div className="flex items-center gap-3">
           {/* Search */}
           <div className={`relative flex items-center gap-2 px-3 py-2 rounded-xl border transition-all ${
-            isDarkMode ? 'bg-zinc-900/50 border-zinc-700' : 'bg-white border-slate-200'
+            isDarkMode ? 'bg-black/50 border-zinc-700' : 'bg-white border-slate-200'
           }`}>
             <Search size={14} className={isDarkMode ? 'text-zinc-500' : 'text-slate-400'} />
             <input
@@ -327,9 +327,9 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
                 <X size={12} />
               </button>
             )}
-            <div className={`w-px h-4 ${isDarkMode ? 'bg-zinc-700' : 'bg-slate-200'}`} />
+            <div className={`w-px h-4 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
             <kbd className={`text-[9px] font-mono px-1.5 py-0.5 rounded ${
-              isDarkMode ? 'bg-zinc-800 text-zinc-500' : 'bg-slate-100 text-slate-400'
+              isDarkMode ? 'bg-black text-zinc-500' : 'bg-slate-100 text-slate-400'
             }`}>⌘K</kbd>
           </div>
 
@@ -362,7 +362,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
               activeTab === tab.id && !showAllSections
                 ? `${tab.color} shadow-lg`
                 : isDarkMode
-                  ? 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
+                  ? 'text-zinc-500 hover:text-zinc-300 hover:bg-black/50'
                   : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
             }`}
           >
@@ -370,14 +370,14 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
             {tab.label}
           </button>
         ))}
-        <div className={`w-px h-6 mx-2 ${isDarkMode ? 'bg-zinc-700' : 'bg-slate-200'}`} />
+        <div className={`w-px h-6 mx-2 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
         <button
           onClick={() => setShowAllSections(true)}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
             showAllSections
               ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-purple-500/20'
               : isDarkMode
-                ? 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
+                ? 'text-zinc-500 hover:text-zinc-300 hover:bg-black/50'
                 : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
           }`}
         >
@@ -388,11 +388,11 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
         <div className="flex-1" />
         
         {/* View Controls */}
-        <div className={`flex items-center gap-1 p-1 rounded-xl ${isDarkMode ? 'bg-zinc-800/50' : 'bg-slate-100'}`}>
+        <div className={`flex items-center gap-1 p-1 rounded-xl ${isDarkMode ? 'bg-black/50' : 'bg-slate-100'}`}>
           <button
             onClick={() => setViewMode('grid')}
             className={`p-2 rounded-lg transition-all ${viewMode === 'grid' 
-              ? (isDarkMode ? 'bg-zinc-700 text-white' : 'bg-white text-slate-700 shadow-sm')
+              ? (isDarkMode ? 'bg-black text-white' : 'bg-white text-slate-700 shadow-sm')
               : (isDarkMode ? 'text-zinc-500 hover:text-zinc-300' : 'text-slate-400 hover:text-slate-600')
             }`}
           >
@@ -401,7 +401,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
           <button
             onClick={() => setViewMode('list')}
             className={`p-2 rounded-lg transition-all ${viewMode === 'list' 
-              ? (isDarkMode ? 'bg-zinc-700 text-white' : 'bg-white text-slate-700 shadow-sm')
+              ? (isDarkMode ? 'bg-black text-white' : 'bg-white text-slate-700 shadow-sm')
               : (isDarkMode ? 'text-zinc-500 hover:text-zinc-300' : 'text-slate-400 hover:text-slate-600')
             }`}
           >
@@ -410,7 +410,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
         </div>
 
         {/* Expand/Collapse */}
-        <div className={`flex items-center gap-1 p-1 rounded-xl ${isDarkMode ? 'bg-zinc-800/50' : 'bg-slate-100'}`}>
+        <div className={`flex items-center gap-1 p-1 rounded-xl ${isDarkMode ? 'bg-black/50' : 'bg-slate-100'}`}>
           <button
             onClick={expandAll}
             className={`p-2 rounded-lg transition-all ${isDarkMode ? 'text-zinc-500 hover:text-white' : 'text-slate-400 hover:text-slate-700'}`}
@@ -461,7 +461,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
                     transition={{ delay: idx * 0.1 }}
                   >
                     <ErrorBoundary isDarkMode={isDarkMode} fallback={
-                      <div className={`p-6 rounded-2xl border ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'}`}>
+                      <div className={`p-6 rounded-2xl border ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'}`}>
                         <span className="text-xs text-rose-500">Failed to render roadmap</span>
                       </div>
                     }>
@@ -520,7 +520,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
                 <FileText size={14} />
                 {showAllSections ? 'All Sections' : TABS.find(t => t.id === activeTab)?.label || 'Sections'}
                 <span className={`text-[10px] px-2 py-0.5 rounded-full ${
-                  isDarkMode ? 'bg-zinc-800 text-zinc-500' : 'bg-slate-100 text-slate-400'
+                  isDarkMode ? 'bg-black text-zinc-500' : 'bg-slate-100 text-slate-400'
                 }`}>
                   {Object.keys(filteredSections).length}
                 </span>
@@ -588,7 +588,7 @@ const TradingPlanBento: React.FC<Props> = ({ isDarkMode, message, onClose, onTog
                 isDarkMode ? 'text-zinc-500' : 'text-slate-400'
               }`}
             >
-              <div className={`p-4 rounded-2xl mb-4 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'}`}>
+              <div className={`p-4 rounded-2xl mb-4 ${isDarkMode ? 'bg-black' : 'bg-slate-100'}`}>
                 <Search size={32} />
               </div>
               <p className="text-sm font-medium">No sections found</p>

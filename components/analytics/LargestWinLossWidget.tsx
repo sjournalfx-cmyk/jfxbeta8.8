@@ -52,13 +52,13 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
     return (
         <div className={clsx(
             "p-8 rounded-[32px] border h-full flex flex-col justify-between",
-            isDarkMode ? "bg-zinc-950 border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
+            isDarkMode ? "bg-black border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-xl"
         )}>
             {/* Section 1: Largest Win vs Loss */}
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className={clsx("p-2 rounded-xl", isDarkMode ? "bg-zinc-900" : "bg-slate-100")}>
+                        <div className={clsx("p-2 rounded-xl", isDarkMode ? "bg-black" : "bg-slate-100")}>
                             <Medal size={20} className="text-amber-500" />
                         </div>
                         <div>
@@ -88,7 +88,7 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
                             <div className="text-lg font-black text-rose-500">-{currencySymbol}{largestLoss.toLocaleString()}</div>
                         </div>
                     </div>
-                    <div className={clsx("h-2 rounded-full overflow-hidden flex", isDarkMode ? "bg-zinc-900" : "bg-slate-100")}>
+                    <div className={clsx("h-2 rounded-full overflow-hidden flex", isDarkMode ? "bg-black" : "bg-slate-100")}>
                         <div className="h-full bg-emerald-500" style={{ width: `${winPercent}%` }} />
                         <div className="h-full bg-rose-500" style={{ width: `${lossPercent}%` }} />
                     </div>
@@ -102,7 +102,7 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className={clsx("p-2 rounded-xl", isDarkMode ? "bg-zinc-900" : "bg-slate-100")}>
+                        <div className={clsx("p-2 rounded-xl", isDarkMode ? "bg-black" : "bg-slate-100")}>
                             <Activity size={20} className="text-brand" />
                         </div>
                         <div>
@@ -132,7 +132,7 @@ export const LargestWinLossWidget: React.FC<LargestWinLossWidgetProps> = ({ trad
                             <div className="text-lg font-black">{shortPnl >= 0 ? '+' : '-'}{currencySymbol}{Math.abs(shortPnl).toLocaleString()}</div>
                         </div>
                     </div>
-                    <div className={clsx("h-2 rounded-full overflow-hidden flex", isDarkMode ? "bg-zinc-900" : "bg-slate-100")}>
+                    <div className={clsx("h-2 rounded-full overflow-hidden flex", isDarkMode ? "bg-black" : "bg-slate-100")}>
                         <div className="h-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]" style={{ width: `${longPercent}%` }} />
                         <div className="h-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.3)]" style={{ width: `${shortPercent}%` }} />
                     </div>

@@ -27,8 +27,8 @@ const Badge = ({ children, className }: { children?: React.ReactNode, className?
 );
 
 const StatPill = ({ icon: Icon, label, value, isDarkMode }: any) => (
-    <div className={`flex items-center gap-3 px-4 py-2 rounded-xl border ${isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
-        <div className={`p-1.5 rounded-lg ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>
+    <div className={`flex items-center gap-3 px-4 py-2 rounded-xl border ${isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+        <div className={`p-1.5 rounded-lg ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>
             <Icon size={14} />
         </div>
         <div className="flex flex-col">
@@ -46,7 +46,7 @@ interface LogicCardProps {
 
 const LogicCard: React.FC<LogicCardProps> = ({ rule, isDarkMode, showCheck = false }) => (
     <div className={`p-3 rounded-lg border flex items-start gap-3 transition-colors ${rule.type === 'Hard'
-            ? (isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200')
+            ? (isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200')
             : (isDarkMode ? 'bg-indigo-900/10 border-indigo-500/20' : 'bg-indigo-50 border-indigo-100')
         }`}>
         {showCheck ? (
@@ -320,10 +320,10 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
     };
 
     return (
-        <div className={`w-full h-full overflow-hidden flex flex-col font-sans ${isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-[#F8FAFC] text-slate-900'}`}>
+        <div className={`w-full h-full overflow-hidden flex flex-col font-sans ${isDarkMode ? 'bg-[#000000] text-zinc-200' : 'bg-[#F8FAFC] text-slate-900'}`}>
 
             {/* --- Top Dashboard --- */}
-            <div className={`shrink-0 px-8 py-8 border-b ${isDarkMode ? 'bg-[#09090b] border-[#27272a]' : 'bg-white border-slate-200'}`}>
+            <div className={`shrink-0 px-8 py-8 border-b ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}`}>
                 <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
                     <div className="flex-1">
                         <h1 className="text-3xl font-black tracking-tight mb-2 flex items-center gap-3">
@@ -347,7 +347,7 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                 </div>
 
                 {/* Filter Bar */}
-                <div className={`flex items-center gap-4 mt-8 p-1.5 rounded-xl border overflow-x-auto no-scrollbar ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+                <div className={`flex items-center gap-4 mt-8 p-1.5 rounded-xl border overflow-x-auto no-scrollbar ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
                     <div className="relative shrink-0">
                         <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
                         <input
@@ -358,7 +358,7 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                         />
                     </div>
 
-                    <div className={`w-px h-6 shrink-0 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                    <div className={`w-px h-6 shrink-0 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
 
                     <div className="flex gap-1">
                         {['All', 'Reversal', 'Continuation', 'Breakout', 'Range', 'Scalp'].map(type => (
@@ -366,8 +366,8 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                                 key={type}
                                 onClick={() => setFilterType(type)}
                                 className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all whitespace-nowrap ${filterType === type
-                                        ? 'bg-zinc-100 text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-white'
-                                        : isDarkMode ? 'text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300' : 'text-slate-500 hover:bg-slate-100'
+                                        ? 'bg-zinc-100 text-zinc-900 shadow-sm dark:bg-black dark:text-white'
+                                        : isDarkMode ? 'text-zinc-500 hover:bg-black hover:text-zinc-300' : 'text-slate-500 hover:bg-slate-100'
                                     }`}
                             >
                                 {type}
@@ -383,9 +383,9 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                     {/* New Strategy Card */}
                     <button
                         onClick={handleOpenCreateModal}
-                        className={`group relative rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:scale-[1.02] active:scale-95 h-full min-h-[300px] ${isDarkMode ? 'border-zinc-800 bg-zinc-900/20 hover:border-indigo-500/50 hover:bg-zinc-900/50' : 'border-slate-200 bg-slate-50 hover:border-indigo-400 hover:bg-indigo-50'}`}
+                        className={`group relative rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:scale-[1.02] active:scale-95 h-full min-h-[300px] ${isDarkMode ? 'border-zinc-800 bg-black/20 hover:border-indigo-500/50 hover:bg-black/50' : 'border-slate-200 bg-slate-50 hover:border-indigo-400 hover:bg-indigo-50'}`}
                     >
-                        <div className={`p-4 rounded-full transition-colors ${isDarkMode ? 'bg-zinc-800 group-hover:bg-indigo-600 text-zinc-400 group-hover:text-white' : 'bg-white group-hover:bg-indigo-500 text-slate-400 group-hover:text-white shadow-sm'}`}>
+                        <div className={`p-4 rounded-full transition-colors ${isDarkMode ? 'bg-black group-hover:bg-indigo-600 text-zinc-400 group-hover:text-white' : 'bg-white group-hover:bg-indigo-500 text-slate-400 group-hover:text-white shadow-sm'}`}>
                             <Plus size={32} />
                         </div>
                         <div className="text-center">
@@ -401,15 +401,15 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                             <div
                                 key={entry.id}
                                 onClick={() => { setSelectedEntry(entry); setActiveImageIndex(0); setIsCheatSheetMode(false); }}
-                                className={`group relative rounded-2xl overflow-hidden border flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer bg-clip-padding ${isDarkMode ? 'bg-[#121215] border-zinc-800 hover:border-zinc-600' : 'bg-white border-slate-200 hover:border-indigo-300 shadow-md'}`}
+                                className={`group relative rounded-2xl overflow-hidden border flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer bg-clip-padding ${isDarkMode ? 'bg-[#000000] border-zinc-800 hover:border-zinc-600' : 'bg-white border-slate-200 hover:border-indigo-300 shadow-md'}`}
                             >
                                 {/* Status Stripe */}
                                 <div className={`absolute top-0 left-0 bottom-0 w-1 ${entry.status === 'Active' ? 'bg-emerald-500' : entry.status === 'Archived' ? 'bg-zinc-500' : 'bg-amber-500'}`} />
 
                                 {/* Image Header */}
-                                <div className="aspect-[16/9] bg-zinc-900 relative overflow-hidden ml-1">
+                                <div className="aspect-[16/9] bg-black relative overflow-hidden ml-1">
                                     <img src={entry.imageUrl} alt={entry.title} className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-100" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#121215] via-transparent to-transparent opacity-90" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent opacity-90" />
 
                                     {/* Badges */}
                                     <div className="absolute top-3 left-3 flex gap-2">
@@ -446,10 +446,10 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
 
                                     <div className="mt-auto space-y-4">
                                         <div className="flex gap-2">
-                                            <Badge className={`${isDarkMode ? 'bg-zinc-800 text-zinc-300 border-zinc-700' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>
+                                            <Badge className={`${isDarkMode ? 'bg-black text-zinc-300 border-zinc-700' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>
                                                 {entry.setupType}
                                             </Badge>
-                                            <Badge className={`${isDarkMode ? 'bg-zinc-800 text-zinc-300 border-zinc-700' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>
+                                            <Badge className={`${isDarkMode ? 'bg-black text-zinc-300 border-zinc-700' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>
                                                 {entry.timeframe || 'Any'}
                                             </Badge>
                                         </div>
@@ -474,9 +474,9 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
 
             {/* --- View Dossier Modal --- */}
             {selectedEntry && (
-                <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in zoom-in-95 duration-200">
+                <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
                     <div
-                        className={`w-full max-w-7xl h-[95vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ${isDarkMode ? 'bg-[#121215] border border-zinc-800' : 'bg-white'}`}
+                        className={`w-full max-w-7xl h-[95vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ${isDarkMode ? 'bg-[#000000] border border-zinc-800' : 'bg-white'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Top Control Bar */}
@@ -497,14 +497,14 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                                     onClick={() => setIsCheatSheetMode(!isCheatSheetMode)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all border ${isCheatSheetMode
                                             ? 'bg-amber-500 text-white border-amber-500'
-                                            : isDarkMode ? 'bg-zinc-800 text-zinc-400 border-zinc-700' : 'bg-slate-100 text-slate-600 border-slate-200'
+                                            : isDarkMode ? 'bg-black text-zinc-400 border-zinc-700' : 'bg-slate-100 text-slate-600 border-slate-200'
                                         }`}
                                 >
                                     {isCheatSheetMode ? <FileText size={14} /> : <Smartphone size={14} />}
                                     {isCheatSheetMode ? 'Standard View' : 'Cheat Sheet'}
                                 </button>
 
-                                <div className={`w-px h-6 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                                <div className={`w-px h-6 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
 
                                 <button
                                     onClick={() => handleOpenEditModal(selectedEntry)}
@@ -522,9 +522,9 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                                     <Trash2 size={18} />
                                 </button>
 
-                                <div className={`w-px h-6 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                                <div className={`w-px h-6 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
 
-                                <button onClick={() => setSelectedEntry(null)} className={`p-2 rounded-full hover:bg-zinc-800 hover:text-white transition-colors ${isDarkMode ? 'text-zinc-400' : 'text-slate-400'}`}>
+                                <button onClick={() => setSelectedEntry(null)} className={`p-2 rounded-full hover:bg-black hover:text-white transition-colors ${isDarkMode ? 'text-zinc-400' : 'text-slate-400'}`}>
                                     <X size={20} />
                                 </button>
                             </div>
@@ -532,7 +532,7 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
 
                         {isCheatSheetMode ? (
                             // --- CHEAT SHEET VIEW ---
-                            <div className={`flex-1 overflow-y-auto p-8 lg:p-12 flex justify-center ${isDarkMode ? 'bg-[#09090b]' : 'bg-slate-50'}`}>
+                            <div className={`flex-1 overflow-y-auto p-8 lg:p-12 flex justify-center ${isDarkMode ? 'bg-[#000000]' : 'bg-slate-50'}`}>
                                 <div className="max-w-3xl w-full space-y-12">
                                     {/* Header Stats */}
                                     <div className="flex justify-between items-end border-b pb-6 border-dashed border-gray-500/30">
@@ -552,7 +552,7 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                                             <h3 className="text-lg font-bold uppercase tracking-widest mb-4 opacity-70">Mandatory Checks</h3>
                                             <div className="space-y-4">
                                                 {(selectedEntry.logicRules || []).filter(r => r.type === 'Hard').map((rule, idx) => (
-                                                    <div key={idx} className={`p-6 rounded-xl border-l-4 flex gap-4 items-center ${isDarkMode ? 'bg-zinc-900 border-l-rose-500 border-y border-r border-zinc-800' : 'bg-white border-l-rose-500 shadow-sm'}`}>
+                                                    <div key={idx} className={`p-6 rounded-xl border-l-4 flex gap-4 items-center ${isDarkMode ? 'bg-black border-l-rose-500 border-y border-r border-zinc-800' : 'bg-white border-l-rose-500 shadow-sm'}`}>
                                                         <div className="w-8 h-8 rounded-full border-2 border-zinc-500 flex items-center justify-center shrink-0">
                                                             <span className="text-sm font-bold opacity-50">{idx + 1}</span>
                                                         </div>
@@ -620,7 +620,7 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                                 </div>
 
                                 {/* Right: Logic & Params */}
-                                <div className={`flex-1 overflow-y-auto custom-scrollbar p-10 ${isDarkMode ? 'bg-[#121215]' : 'bg-slate-50'}`}>
+                                <div className={`flex-1 overflow-y-auto custom-scrollbar p-10 ${isDarkMode ? 'bg-[#000000]' : 'bg-slate-50'}`}>
 
                                     {/* Info Grid */}
                                     <div className="grid grid-cols-4 gap-4 mb-10">
@@ -630,7 +630,7 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                                             { l: 'Session', v: selectedEntry.bestSession },
                                             { l: 'Risk Limit', v: `${selectedEntry.maxRisk}%` },
                                         ].map((item, i) => (
-                                            <div key={i} className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-white border-slate-200'}`}>
+                                            <div key={i} className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-white border-slate-200'}`}>
                                                 <div className="text-[10px] font-bold uppercase opacity-50 mb-1">{item.l}</div>
                                                 <div className="font-bold">{item.v}</div>
                                             </div>
@@ -651,7 +651,7 @@ const Playbook: React.FC<PlaybookProps> = ({ isDarkMode, entries = [], onAddEntr
                                                 return (
                                                     <div key={phase} className="relative pl-8">
                                                         {/* Circle positioning */}
-                                                        <div className={`absolute left-[-13px] top-0 w-6 h-6 rounded-full border-4 flex items-center justify-center text-[10px] font-bold z-20 ${isDarkMode ? 'bg-[#121215] border-indigo-500 text-white' : 'bg-slate-50 border-indigo-500 text-slate-900'}`}>
+                                                        <div className={`absolute left-[-13px] top-0 w-6 h-6 rounded-full border-4 flex items-center justify-center text-[10px] font-bold z-20 ${isDarkMode ? 'bg-[#000000] border-indigo-500 text-white' : 'bg-slate-50 border-indigo-500 text-slate-900'}`}>
                                                             {idx + 1}
                                                         </div>
 

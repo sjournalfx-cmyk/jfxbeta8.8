@@ -129,7 +129,7 @@ export const TradeFormStep3: React.FC<TradeFormStep3Props> = ({
                             onClick={() => (type === 'before' ? beforeInputRef : afterInputRef).current?.click()}
                             className={cn(
                                 "w-full h-32 border-2 border-dashed rounded-xl flex flex-col items-center justify-center gap-3 transition-all overflow-hidden relative cursor-pointer",
-                                isDarkMode ? 'border-[#27272a] bg-[#18181b]/50 hover:border-violet-500' : 'border-slate-300 bg-slate-50 hover:border-violet-500'
+                                isDarkMode ? 'border-[#27272a] bg-[#000000]/50 hover:border-violet-500' : 'border-slate-300 bg-slate-50 hover:border-violet-500'
                             )}>
                             {screenshots[type] ? (
                                 <>

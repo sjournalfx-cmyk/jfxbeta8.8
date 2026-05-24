@@ -85,7 +85,7 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
             title="Strategy Robustness Lab"
             description="Advanced parameter sensitivity analysis and robustness scoring are exclusive to Elite Masters. Upgrade to unlock the 'Sweet Spot' finder."
             fallback={
-                <div className="relative min-h-[600px] flex items-center justify-center rounded-[40px] border-2 border-dashed border-zinc-800 bg-zinc-900/20 overflow-hidden w-full">
+                <div className="relative min-h-[600px] flex items-center justify-center rounded-[40px] border-2 border-dashed border-zinc-800 bg-black/20 overflow-hidden w-full">
                     <div className="absolute inset-0 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 text-center">
                         <div className="p-6 rounded-3xl bg-indigo-500/10 text-indigo-500 mb-6 border border-indigo-500/20">
                             <Lock size={48} />
@@ -113,7 +113,7 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                         </p>
                     </div>
 
-                    <div className={cn("p-1.5 rounded-2xl flex items-center border overflow-hidden", isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-slate-100 border-slate-200 shadow-sm')}>
+                    <div className={cn("p-1.5 rounded-2xl flex items-center border overflow-hidden", isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-slate-100 border-slate-200 shadow-sm')}>
                         {[
                             { id: 'equity', label: 'Profitability', icon: TrendingUp },
                             { id: 'drawdown', label: 'Risk (DD)', icon: Waves },
@@ -126,7 +126,7 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                                 className={cn(
                                     "px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2",
                                     optMetric === m.id
-                                        ? (isDarkMode ? 'bg-zinc-800 text-white shadow-xl border border-white/10' : 'bg-white text-black shadow-md border border-black/5')
+                                        ? (isDarkMode ? 'bg-black text-white shadow-xl border border-white/10' : 'bg-white text-black shadow-md border border-black/5')
                                         : 'text-zinc-500 hover:text-zinc-300'
                                 )}
                             >
@@ -165,7 +165,7 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                                     <span className="text-6xl font-black tracking-tighter">{(robustnessScore * 100).toFixed(0)}</span>
                                     <span className="text-xl font-black text-purple-500 mb-2">%</span>
                                 </div>
-                                <div className="w-full h-3 bg-zinc-800 rounded-full overflow-hidden mb-6">
+                                <div className="w-full h-3 bg-black rounded-full overflow-hidden mb-6">
                                     <div
                                         className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 origin-left"
                                         style={{ transform: `scaleX(${robustnessScore})` }}
@@ -202,7 +202,7 @@ export const RobustnessLab: React.FC<RobustnessLabProps> = ({ isDarkMode, trades
                                             <span className="text-[10px] font-black uppercase tracking-tight">{stat.label}</span>
                                             <span className="text-lg font-mono font-black">{stat.value}</span>
                                         </div>
-                                        <div className="h-0.5 bg-zinc-800 w-full" />
+                                        <div className="h-0.5 bg-black w-full" />
                                     </div>
                                 ))}
                             </div>

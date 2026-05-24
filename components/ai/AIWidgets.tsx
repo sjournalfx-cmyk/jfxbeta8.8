@@ -383,7 +383,7 @@ export const ChecklistWidget = ({
             animate={{ opacity: 1, y: 0 }}
             className={`w-full overflow-hidden rounded-[28px] border ${
                 isDarkMode 
-                    ? 'bg-zinc-950/70 border-white/8 shadow-2xl shadow-black/20' 
+                    ? 'bg-black/70 border-white/8 shadow-2xl shadow-black/20' 
                     : 'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
             }`}
         >
@@ -886,7 +886,7 @@ export const MermaidWidget = ({ code, type, isDarkMode, onSave, onFix }: { code:
             animate={{ opacity: 1, scale: 1 }}
             className={`w-full p-4 sm:p-5 flex flex-col rounded-2xl border overflow-hidden ${
                 isDarkMode 
-                    ? 'bg-zinc-950 border-white/8' 
+                    ? 'bg-black border-white/8' 
                     : 'bg-white border-slate-200'
             }`}
         >

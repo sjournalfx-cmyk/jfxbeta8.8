@@ -623,7 +623,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
   }, [templateSearch, selectedCategory, favorites]);
 
   return (
-    <div className={`w-full h-full flex flex-col p-6 overflow-hidden relative ${isDarkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
+    <div className={`w-full h-full flex flex-col p-6 overflow-hidden relative ${isDarkMode ? 'bg-black text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
       
       <header className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4 shrink-0">
         <div className="flex-1">
@@ -631,7 +631,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
               <input 
                 value={diagramName}
                 onChange={(e) => setDiagramName(e.target.value)}
-                className={`text-2xl font-bold tracking-tight bg-transparent border-b-2 border-transparent focus:border-indigo-500 outline-none transition-all ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
+                className={`text-2xl font-bold tracking-tight bg-transparent border-b-2 border-transparent focus:border-[#FF4F00] outline-none transition-all ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
                 placeholder="Strategy Name"
               />
               <button onClick={handleNewDiagram} className="p-1.5 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 text-zinc-500" title="New Diagram">
@@ -661,7 +661,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
 
             <button 
                 onClick={() => setIsLoadModalOpen(true)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${isDarkMode ? 'border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-indigo-400' : 'bg-indigo-50 border-indigo-100 hover:bg-indigo-100 text-indigo-600'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${isDarkMode ? 'border-zinc-800 bg-black hover:bg-black text-indigo-400' : 'bg-indigo-50 border-indigo-100 hover:bg-indigo-100 text-indigo-600'}`}
             >
                 <FolderOpen size={16} /> Load Saved
             </button>
@@ -675,17 +675,17 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                 {currentDiagramId ? 'Update' : 'Save Mapper'}
             </button>
 
-            <div className={`w-px h-8 mx-1 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+            <div className={`w-px h-8 mx-1 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
 
             <button 
                 onClick={() => setIsTemplateModalOpen(true)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${isDarkMode ? 'border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${isDarkMode ? 'border-zinc-800 bg-black hover:bg-black text-zinc-300' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'}`}
             >
                 <LayoutTemplate size={16} /> Templates
             </button>
             <button 
                 onClick={handleDownload}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${isDarkMode ? 'border-zinc-800 bg-zinc-900 hover:bg-zinc-800' : 'bg-white border-slate-200 hover:bg-slate-50'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${isDarkMode ? 'border-zinc-800 bg-black hover:bg-black' : 'bg-white border-slate-200 hover:bg-slate-50'}`}
             >
                 <Download size={16} /> Export
             </button>
@@ -697,24 +697,24 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
         {/* Left Pane: Editor */}
         <div className="w-1/3 flex flex-col gap-4 min-w-[350px]">
             {/* AI Prompter */}
-            <div className={`relative overflow-hidden p-4 rounded-xl border flex flex-col gap-3 ${isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`}>
+            <div className={`relative overflow-hidden p-4 rounded-xl border flex flex-col gap-3 ${isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`}>
                 {/* Maintenance Overlay */}
                 <div className="absolute inset-0 z-20 bg-white/10 dark:bg-black/20 backdrop-blur-[1px] flex flex-col items-center justify-center p-4">
-                     <div className={`px-3 py-1.5 rounded-full shadow-sm font-bold text-[10px] uppercase tracking-wide flex items-center gap-2 ${isDarkMode ? 'bg-zinc-800 text-zinc-400 border border-zinc-700' : 'bg-white text-slate-500 border border-slate-200'}`}>
+                     <div className={`px-3 py-1.5 rounded-full shadow-sm font-bold text-[10px] uppercase tracking-wide flex items-center gap-2 ${isDarkMode ? 'bg-black text-zinc-400 border border-zinc-700' : 'bg-white text-slate-500 border border-slate-200'}`}>
                         <AlertCircle size={12} className="text-amber-500" />
                         Under Maintenance
                      </div>
                 </div>
 
                 <div className="flex items-center justify-between opacity-40 pointer-events-none select-none">
-                    <div className="flex items-center gap-2 text-sm font-bold text-indigo-500">
+                    <div className="flex items-center gap-2 text-sm font-bold text-[#FF4F00]">
                         <Sparkles size={16} /> AI Architect
                     </div>
                     {code.length > 0 && (
                         <button 
                             onClick={() => handleGenerate('refine')}
                             disabled={isGenerating}
-                            className={`text-[10px] px-2 py-1 rounded border flex items-center gap-1 ${isDarkMode ? 'border-zinc-700 hover:bg-zinc-800' : 'border-slate-200 hover:bg-slate-50'}`}
+                            className={`text-[10px] px-2 py-1 rounded border flex items-center gap-1 ${isDarkMode ? 'border-zinc-700 hover:bg-black' : 'border-slate-200 hover:bg-slate-50'}`}
                         >
                             <Wand2 size={10} /> Refine Code
                         </button>
@@ -730,7 +730,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                 <button 
                     onClick={() => handleGenerate('new')}
                     disabled={true}
-                    className="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all opacity-40 pointer-events-none shadow-lg shadow-indigo-600/20"
+                    className="w-full py-2 rounded-lg bg-[#FF4F00] hover:bg-[#E64600] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all opacity-40 pointer-events-none shadow-lg shadow-[#FF4F00]/20"
                 >
                     {isGenerating ? <RefreshCw className="animate-spin" size={14}/> : <Play size={14}/>}
                     Generate New Diagram
@@ -738,7 +738,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
             </div>
 
             {/* Quick Syntax Toolbar */}
-            <div className={`px-2 py-1.5 rounded-t-xl border-x border-t flex items-center gap-1 overflow-x-auto no-scrollbar ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-100 border-slate-200'}`}>
+            <div className={`px-2 py-1.5 rounded-t-xl border-x border-t flex items-center gap-1 overflow-x-auto no-scrollbar ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-slate-100 border-slate-200'}`}>
                 {[
                     { label: 'Node', code: 'A[Label]', icon: Box },
                     { label: 'Decision', code: 'B{Check?}', icon: Diamond },
@@ -823,7 +823,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                 
                 <button 
                     onClick={() => setIsFullScreen(!isFullScreen)} 
-                    className={`p-2 rounded-lg backdrop-blur-md border shadow-lg transition-all ${isDarkMode ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30 hover:bg-indigo-500/30' : 'bg-white/80 text-indigo-600 border-slate-200 hover:bg-indigo-50'}`}
+                    className={`p-2 rounded-lg backdrop-blur-md border shadow-lg transition-all ${isDarkMode ? 'bg-[#FF4F00]/20 text-[#FF4F00] border-[#FF4F00]/30 hover:bg-[#FF4F00]/30' : 'bg-white/80 text-[#FF4F00] border-slate-200 hover:bg-orange-50'}`}
                 >
                     {isFullScreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                 </button>
@@ -870,7 +870,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
       {isTemplateModalOpen && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
               <div 
-                  className={`w-full max-w-5xl h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden ${isDarkMode ? 'bg-[#09090b] border border-[#27272a]' : 'bg-white'}`}
+                  className={`w-full max-w-5xl h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden ${isDarkMode ? 'bg-black border border-[#27272a]' : 'bg-white'}`}
                   onClick={(e) => e.stopPropagation()}
               >
                   {/* Modal Header */}
@@ -879,20 +879,20 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                           <h2 className="text-lg font-bold">Template Library</h2>
                           <p className={`text-xs ${isDarkMode ? 'text-zinc-500' : 'text-slate-500'}`}>Select a starting point for your strategy map.</p>
                       </div>
-                      <button onClick={() => setIsTemplateModalOpen(false)} className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}>
+                      <button onClick={() => setIsTemplateModalOpen(false)} className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}>
                           <X size={20} />
                       </button>
                   </div>
 
                   {/* Modal Toolbar */}
-                  <div className={`px-6 py-3 border-b shrink-0 flex gap-4 overflow-x-auto ${isDarkMode ? 'border-[#27272a] bg-[#121215]' : 'border-slate-100 bg-slate-50'}`}>
+                  <div className={`px-6 py-3 border-b shrink-0 flex gap-4 overflow-x-auto ${isDarkMode ? 'border-[#27272a] bg-black' : 'border-slate-100 bg-slate-50'}`}>
                       <div className="relative flex-1 max-w-xs">
                           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
                           <input 
                               value={templateSearch}
                               onChange={(e) => setTemplateSearch(e.target.value)}
                               placeholder="Search templates..."
-                              className={`w-full pl-9 pr-4 py-2 rounded-lg text-sm outline-none border ${isDarkMode ? 'bg-zinc-900 border-zinc-700 focus:border-indigo-500' : 'bg-white border-slate-200 focus:border-indigo-500'}`}
+                              className={`w-full pl-9 pr-4 py-2 rounded-lg text-sm outline-none border ${isDarkMode ? 'bg-black border-zinc-700 focus:border-[#FF4F00]' : 'bg-white border-slate-200 focus:border-[#FF4F00]'}`}
                           />
                       </div>
                       <div className="flex gap-1">
@@ -902,8 +902,8 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                                   onClick={() => setSelectedCategory(cat)}
                                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${
                                       selectedCategory === cat 
-                                      ? 'bg-indigo-600 text-white border-indigo-600' 
-                                      : isDarkMode ? 'border-zinc-800 bg-zinc-900 text-zinc-500 hover:text-zinc-300' : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-100'
+                                      ? 'bg-[#FF4F00] text-white border-[#FF4F00]' 
+                                      : isDarkMode ? 'border-zinc-800 bg-black text-zinc-500 hover:text-zinc-300' : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-100'
                                   }`}
                               >
                                   {cat}
@@ -919,10 +919,10 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                               <div 
                                   key={template.id}
                                   onClick={() => loadTemplate(template)}
-                                  className={`group relative p-5 rounded-xl border cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg flex flex-col gap-3 ${isDarkMode ? 'bg-zinc-900 border-zinc-800 hover:border-indigo-500/50' : 'bg-white border-slate-200 hover:border-indigo-300'}`}
+                                  className={`group relative p-5 rounded-xl border cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg flex flex-col gap-3 ${isDarkMode ? 'bg-black border-zinc-800 hover:border-[#FF4F00]/50' : 'bg-white border-slate-200 hover:border-orange-300'}`}
                               >
                                   <div className="flex justify-between items-start">
-                                      <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>
+                                      <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>
                                           {template.category}
                                       </span>
                                       <button 
@@ -934,7 +934,7 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                                   </div>
                                   
                                   <div>
-                                      <h3 className="font-bold text-base mb-1 group-hover:text-indigo-500 transition-colors">{template.name}</h3>
+                                      <h3 className="font-bold text-base mb-1 group-hover:text-[#FF4F00] transition-colors">{template.name}</h3>
                                       <p className={`text-xs line-clamp-2 ${isDarkMode ? 'text-zinc-500' : 'text-slate-500'}`}>
                                           {template.description}
                                       </p>
@@ -956,12 +956,12 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
       {isLoadModalOpen && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
               <div 
-                  className={`w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col overflow-hidden ${isDarkMode ? 'bg-[#09090b] border border-[#27272a]' : 'bg-white'}`}
+                  className={`w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col overflow-hidden ${isDarkMode ? 'bg-black border border-[#27272a]' : 'bg-white'}`}
                   onClick={(e) => e.stopPropagation()}
               >
                   <div className={`px-6 py-4 border-b shrink-0 flex items-center justify-between ${isDarkMode ? 'border-[#27272a]' : 'border-slate-100'}`}>
                       <h2 className="text-lg font-bold">Saved Strategy Maps</h2>
-                      <button onClick={() => setIsLoadModalOpen(false)} className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}>
+                      <button onClick={() => setIsLoadModalOpen(false)} className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}>
                           <X size={20} />
                       </button>
                   </div>
@@ -979,10 +979,10 @@ const DiagramEditor: React.FC<DiagramEditorProps> = ({ isDarkMode, userId }) => 
                                   <div 
                                       key={diagram.id}
                                       onClick={() => handleLoadDiagram(diagram)}
-                                      className={`p-4 rounded-xl border flex items-center justify-between group cursor-pointer transition-all ${isDarkMode ? 'bg-zinc-900 border-zinc-800 hover:border-indigo-500' : 'bg-slate-50 border-slate-200 hover:border-indigo-300'}`}
+                                      className={`p-4 rounded-xl border flex items-center justify-between group cursor-pointer transition-all ${isDarkMode ? 'bg-black border-zinc-800 hover:border-[#FF4F00]' : 'bg-slate-50 border-slate-200 hover:border-orange-300'}`}
                                   >
                                       <div>
-                                          <h4 className="font-bold group-hover:text-indigo-500 transition-colors">{diagram.name}</h4>
+                                          <h4 className="font-bold group-hover:text-[#FF4F00] transition-colors">{diagram.name}</h4>
                                           <p className="text-[10px] opacity-40 font-mono uppercase">
                                               Last updated: {new Date(diagram.updatedAt).toLocaleDateString()}
                                           </p>

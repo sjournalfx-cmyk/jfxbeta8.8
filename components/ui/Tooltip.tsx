@@ -41,10 +41,10 @@ export const Tooltip: React.FC<TooltipProps> = ({ content, children, isDarkMode,
       
       {isVisible && (
         <div className={`absolute z-[500] w-72 p-3 rounded-xl text-[10px] font-bold leading-relaxed shadow-2xl border backdrop-blur-md animate-in fade-in zoom-in-95 duration-200 ${positionClasses[position]} ${
-          isDarkMode ? 'bg-[#18181b]/95 border-zinc-800 text-zinc-300' : 'bg-white/95 border-slate-200 text-slate-600'
+          isDarkMode ? 'bg-[#000000]/95 border-zinc-800 text-zinc-300' : 'bg-white/95 border-slate-200 text-slate-600'
         }`}>
           {content}
-          <div className={`absolute w-2 h-2 rotate-45 border-r border-b ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200'} ${
+          <div className={`absolute w-2 h-2 rotate-45 border-r border-b ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200'} ${
             position === 'top' ? 'top-full left-1/2 -translate-x-1/2 -translate-y-1/2 border-t-0 border-l-0' :
             position === 'bottom' ? 'bottom-full left-1/2 -translate-x-1/2 translate-y-1/2 border-t-0 border-l-0 rotate-[225deg]' :
             ''

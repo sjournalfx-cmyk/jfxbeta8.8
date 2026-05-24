@@ -97,7 +97,7 @@ export function TradingMistakesBarChartWidget({ trades = [], isDarkMode }: Tradi
   return (
     <Card
       data-chart="trading-mistakes-bar"
-      className={`relative flex h-full min-h-[320px] flex-col overflow-hidden border shadow-sm ${isDarkMode ? 'border-zinc-800 bg-[#0d1117]' : 'border-slate-200 bg-white'}`}
+      className={`relative flex h-full min-h-[320px] flex-col overflow-hidden border shadow-sm ${isDarkMode ? 'border-zinc-800 bg-black' : 'border-slate-200 bg-white'}`}
       isDarkMode={isDarkMode}
     >
       <ChartStyle id="trading-mistakes-bar" config={chartConfig} />

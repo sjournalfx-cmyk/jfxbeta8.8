@@ -108,7 +108,7 @@ export const GoalsStep: React.FC<StepProps> = ({ isDarkMode, data, onChange }) =
           onChange={(e) => onChange({ whyITrade: e.target.value })}
           placeholder="e.g., Financial freedom for my family, building a legacy, or master technical analysis..."
           className={`w-full h-24 p-4 rounded-xl border-2 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-            isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+            isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
           }`}
         />
       </div>
@@ -119,7 +119,7 @@ export const GoalsStep: React.FC<StepProps> = ({ isDarkMode, data, onChange }) =
           onChange={(e) => onChange({ goals: e.target.value })}
           placeholder="e.g., Target 5% monthly return, grow account to $50k, maintain < 3% drawdown..."
           className={`w-full h-24 p-4 rounded-xl border-2 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-            isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+            isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
           }`}
         />
       </div>
@@ -185,7 +185,7 @@ export const RiskStep: React.FC<StepProps> = ({ isDarkMode, data, onChange }) =>
             onChange={(e) => onChange({ lossCap: e.target.value })}
             placeholder="e.g., -2% or -$500"
             className={`w-full p-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-rose-500/20 ${
-              isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+              isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
             }`}
           />
         </div>
@@ -197,7 +197,7 @@ export const RiskStep: React.FC<StepProps> = ({ isDarkMode, data, onChange }) =>
             onChange={(e) => onChange({ profitTarget: e.target.value })}
             placeholder="e.g., +4% or +$1000"
             className={`w-full p-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-              isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+              isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
             }`}
           />
         </div>
@@ -321,7 +321,7 @@ export const TechnicalStep: React.FC<StepProps & { preferredPairOptions: string[
             value={data.analysisTimeframe}
             onChange={(e) => onChange({ analysisTimeframe: e.target.value })}
             className={`w-full p-3 rounded-xl border-2 focus:outline-none ${
-              isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
+              isDarkMode ? 'bg-black border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
             }`}
           >
             {['Monthly', 'Weekly', 'Daily', 'H4', 'H1'].map(tf => <option key={tf} value={tf}>{tf}</option>)}
@@ -333,7 +333,7 @@ export const TechnicalStep: React.FC<StepProps & { preferredPairOptions: string[
             value={data.entryTimeframe}
             onChange={(e) => onChange({ entryTimeframe: e.target.value })}
             className={`w-full p-3 rounded-xl border-2 focus:outline-none ${
-              isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
+              isDarkMode ? 'bg-black border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
             }`}
           >
             {['H1', 'M15', 'M5', 'M1', 'Seconds'].map(tf => <option key={tf} value={tf}>{tf}</option>)}
@@ -430,7 +430,7 @@ export const ReviewStep: React.FC<StepProps & { onEdit: (step: number) => void }
       <p className={`mt-2 ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Verify your trading plan parameters</p>
     </div>
 
-    <div className={`rounded-2xl border p-5 space-y-4 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/50' : 'border-slate-200 bg-slate-50'}`}>
+    <div className={`rounded-2xl border p-5 space-y-4 ${isDarkMode ? 'border-zinc-800 bg-black/50' : 'border-slate-200 bg-slate-50'}`}>
       <div className="grid grid-cols-2 gap-4">
         {[
           { label: 'Style', value: data.tradingStyle, step: 0 },

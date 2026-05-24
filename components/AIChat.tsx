@@ -599,8 +599,8 @@ const MessageRow = React.memo(({ message, isDarkMode, userProfile, renderMessage
         <div className={`shrink-0 mt-1 ${isUser ? 'order-2' : 'order-1'}`}>
           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${
             isUser 
-              ? isDarkMode ? 'bg-zinc-700' : 'bg-slate-300 text-slate-600'
-              : 'bg-zinc-800 dark:bg-zinc-700'
+              ? isDarkMode ? 'bg-black' : 'bg-slate-300 text-slate-600'
+              : 'bg-black dark:bg-black'
           }`}>
             {isUser ? (
               userProfile?.avatarUrl 
@@ -711,7 +711,7 @@ const MessageRow = React.memo(({ message, isDarkMode, userProfile, renderMessage
               isCompactAudioMessage ? 'w-fit max-w-xs px-2 py-1.5 ml-auto' : 'px-4 py-3'
             } ${
               isUser 
-                ? isDarkMode ? 'bg-zinc-800 text-zinc-100' : 'bg-slate-200 text-slate-900'
+                ? isDarkMode ? 'bg-black text-zinc-100' : 'bg-slate-200 text-slate-900'
                 : isDarkMode ? 'bg-transparent text-zinc-200' : 'bg-transparent text-slate-800'
             } ${message.isDeepAnalysis && !isUser ? (isDarkMode ? 'border border-emerald-500/50 bg-emerald-900/10' : 'border border-emerald-300/50 bg-emerald-50') : ''}`}>
               {renderMessageContent(message)}
@@ -735,7 +735,7 @@ const MessageRow = React.memo(({ message, isDarkMode, userProfile, renderMessage
               <button 
                 onClick={handleCopy}
                 className={`p-1.5 rounded-lg transition-colors ${
-                  isDarkMode ? 'hover:bg-zinc-700 text-zinc-400' : 'hover:bg-slate-200 text-slate-500'
+                  isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500'
                 }`}
                 title="Copy"
               >
@@ -745,7 +745,7 @@ const MessageRow = React.memo(({ message, isDarkMode, userProfile, renderMessage
                 <>
                   <button 
                     className={`p-1.5 rounded-lg transition-colors ${
-                      isDarkMode ? 'hover:bg-zinc-700 text-zinc-400' : 'hover:bg-slate-200 text-slate-500'
+                      isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500'
                     }`}
                     title="Good response"
                   >
@@ -753,7 +753,7 @@ const MessageRow = React.memo(({ message, isDarkMode, userProfile, renderMessage
                   </button>
                   <button 
                     className={`p-1.5 rounded-lg transition-colors ${
-                      isDarkMode ? 'hover:bg-zinc-700 text-zinc-400' : 'hover:bg-slate-200 text-slate-500'
+                      isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500'
                     }`}
                     title="Bad response"
                   >
@@ -848,12 +848,12 @@ const ChallengesStep = ({ isDarkMode, data, challengeOptions, onChange }: Challe
               active
                 ? 'border-rose-500 bg-rose-500/10'
                 : isDarkMode
-                  ? 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
+                  ? 'border-zinc-800 bg-black/50 hover:border-zinc-700'
                   : 'border-slate-200 bg-white hover:border-slate-300'
             }`}
           >
             <div className="flex items-start gap-3">
-              <div className={`mt-0.5 rounded-xl p-2 ${active ? 'bg-rose-500/15 text-rose-500' : isDarkMode ? 'bg-zinc-800 text-zinc-300' : 'bg-slate-100 text-slate-600'}`}>
+              <div className={`mt-0.5 rounded-xl p-2 ${active ? 'bg-rose-500/15 text-rose-500' : isDarkMode ? 'bg-black text-zinc-300' : 'bg-slate-100 text-slate-600'}`}>
                 {option.icon}
               </div>
               <div className="min-w-0">
@@ -2367,7 +2367,7 @@ ${strategyProfile.whyITrade}`;
     return (
       <div className={`relative flex flex-col gap-3 mt-4 ${(isTradingPlan || message.kind === 'analysis' || message.kind === 'psychology' || message.kind === 'scaling') ? 'max-w-4xl' : 'max-w-2xl'}`}>
         {isTradingPlan && message.strategyProfile && (
-          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/70' : 'border-slate-200 bg-slate-50'}`}>
+          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-black/70' : 'border-slate-200 bg-slate-50'}`}>
             <div className="flex items-center mb-4">
               <div className="flex items-center gap-2">
                 <Workflow size={18} className="text-amber-500" />
@@ -2395,7 +2395,7 @@ ${strategyProfile.whyITrade}`;
         )}
 
         {message.kind === 'scaling' && message.scalingSnapshot && (
-          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/70' : 'border-slate-200 bg-slate-50'}`}>
+          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-black/70' : 'border-slate-200 bg-slate-50'}`}>
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp size={18} className="text-amber-500" />
               <span className={`text-xs font-semibold uppercase tracking-[0.2em] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Scaling Snapshot</span>
@@ -2421,7 +2421,7 @@ ${strategyProfile.whyITrade}`;
         )}
 
         {message.kind === 'psychology' && message.psychologySnapshot && (
-          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/70' : 'border-slate-200 bg-slate-50'}`}>
+          <div className={`rounded-2xl border p-5 ${isDarkMode ? 'border-zinc-800 bg-black/70' : 'border-slate-200 bg-slate-50'}`}>
             <div className="flex items-center gap-2 mb-4">
               <Brain size={18} className="text-rose-500" />
               <span className={`text-xs font-semibold uppercase tracking-[0.2em] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Psychology Snapshot</span>
@@ -2455,7 +2455,7 @@ ${strategyProfile.whyITrade}`;
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative break-inside-avoid p-4 rounded-xl border flex flex-col gap-2 transition-all duration-300 ${c.bg} ${c.borderColor} ${isDarkMode ? 'bg-zinc-900/50' : 'bg-slate-50'} group hover:border-amber-500/30 shadow-sm mb-4`}
+                className={`relative break-inside-avoid p-4 rounded-xl border flex flex-col gap-2 transition-all duration-300 ${c.bg} ${c.borderColor} ${isDarkMode ? 'bg-black/50' : 'bg-slate-50'} group hover:border-amber-500/30 shadow-sm mb-4`}
               >
                 <div className="flex items-center justify-between">
                   <div className={`flex items-center gap-2 ${c.color}`}>
@@ -2484,11 +2484,11 @@ ${strategyProfile.whyITrade}`;
         isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200'
       }`}>
         <div className="flex items-center gap-3">
-          <button className={`p-2 rounded-lg lg:hidden ${isDarkMode ? 'hover:bg-zinc-800' : 'hover:bg-slate-100'}`}>
+          <button className={`p-2 rounded-lg lg:hidden ${isDarkMode ? 'hover:bg-black' : 'hover:bg-slate-100'}`}>
             <Menu size={20} className={isDarkMode ? 'text-zinc-300' : 'text-slate-700'} />
           </button>
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-zinc-800 dark:bg-zinc-700 flex items-center justify-center shadow-lg shadow-black/20">
+            <div className="w-8 h-8 rounded-full bg-black dark:bg-black flex items-center justify-center shadow-lg shadow-black/20">
               <AssistantIcon size={16} className="text-white" />
             </div>
             <h2 className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
@@ -2499,12 +2499,12 @@ ${strategyProfile.whyITrade}`;
         
         {/* Model Switcher & New Chat */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg p-1">
+          <div className="flex items-center gap-1 bg-zinc-100 dark:bg-black rounded-lg p-1">
             <button
               onClick={() => handleModelSwitch('deepseek')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                 selectedModel === 'deepseek'
-                  ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm'
+                  ? 'bg-[#FF4F00] text-white shadow-sm'
                   : isDarkMode ? 'text-zinc-400 hover:text-zinc-200' : 'text-slate-500 hover:text-slate-700'
               }`}
             >
@@ -2515,7 +2515,7 @@ ${strategyProfile.whyITrade}`;
               onClick={() => handleModelSwitch('kimi')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                 selectedModel === 'kimi'
-                  ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm'
+                  ? 'bg-[#FF4F00] text-white shadow-sm'
                   : isDarkMode ? 'text-zinc-400 hover:text-zinc-200' : 'text-slate-500 hover:text-slate-700'
               }`}
             >
@@ -2525,14 +2525,14 @@ ${strategyProfile.whyITrade}`;
           </div>
           <button 
             onClick={handleNewChat} 
-            className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-300' : 'hover:bg-slate-100 text-slate-700'}`}
+            className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-300' : 'hover:bg-slate-100 text-slate-700'}`}
             title={`New ${selectedModel === 'deepseek' ? 'Research' : 'Mentor'} Chat`}
           >
             <Plus size={18} />
           </button>
           <button
             onClick={() => onOpenSettings?.()}
-            className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-300' : 'hover:bg-slate-100 text-slate-700'}`}
+            className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-300' : 'hover:bg-slate-100 text-slate-700'}`}
             title="Settings"
           >
             <Settings size={18} />
@@ -2562,7 +2562,7 @@ ${strategyProfile.whyITrade}`;
                   Cancel
                 </button>
               </div>
-              <div className={`h-1 rounded-full ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`}>
+              <div className={`h-1 rounded-full ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`}>
                 <motion.div 
                   className="h-full bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
                   initial={{ width: 0 }}
@@ -2649,7 +2649,7 @@ ${strategyProfile.whyITrade}`;
                         onChange={(e) => setWizardData({ ...wizardData, whyITrade: e.target.value })}
                         placeholder="e.g., Financial freedom for my family, building a legacy, or master technical analysis..."
                         className={`w-full h-24 p-4 rounded-xl border-2 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-                          isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+                          isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
                         }`}
                       />
                     </div>
@@ -2660,7 +2660,7 @@ ${strategyProfile.whyITrade}`;
                         onChange={(e) => setWizardData({ ...wizardData, goals: e.target.value })}
                         placeholder="e.g., Target 5% monthly return, grow account to $50k, maintain < 3% drawdown..."
                         className={`w-full h-24 p-4 rounded-xl border-2 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-                          isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+                          isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
                         }`}
                       />
                     </div>
@@ -2726,7 +2726,7 @@ ${strategyProfile.whyITrade}`;
                           onChange={(e) => setWizardData({ ...wizardData, lossCap: e.target.value })}
                           placeholder="e.g., -2% or -$500"
                           className={`w-full p-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-rose-500/20 ${
-                            isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+                            isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
                           }`}
                         />
                       </div>
@@ -2738,7 +2738,7 @@ ${strategyProfile.whyITrade}`;
                           onChange={(e) => setWizardData({ ...wizardData, profitTarget: e.target.value })}
                           placeholder="e.g., +4% or +$1000"
                           className={`w-full p-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-                            isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+                            isDarkMode ? 'bg-black border-zinc-800 text-white placeholder-zinc-600' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
                           }`}
                         />
                       </div>
@@ -2831,7 +2831,7 @@ ${strategyProfile.whyITrade}`;
                           value={wizardData.analysisTimeframe}
                           onChange={(e) => setWizardData({ ...wizardData, analysisTimeframe: e.target.value })}
                           className={`w-full p-3 rounded-xl border-2 focus:outline-none ${
-                            isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
+                            isDarkMode ? 'bg-black border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
                           }`}
                         >
                           {['Monthly', 'Weekly', 'Daily', 'H4', 'H1'].map(tf => <option key={tf} value={tf}>{tf}</option>)}
@@ -2843,7 +2843,7 @@ ${strategyProfile.whyITrade}`;
                           value={wizardData.entryTimeframe}
                           onChange={(e) => setWizardData({ ...wizardData, entryTimeframe: e.target.value })}
                           className={`w-full p-3 rounded-xl border-2 focus:outline-none ${
-                            isDarkMode ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
+                            isDarkMode ? 'bg-black border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
                           }`}
                         >
                           {['H1', 'M15', 'M5', 'M1', 'Seconds'].map(tf => <option key={tf} value={tf}>{tf}</option>)}
@@ -2940,7 +2940,7 @@ ${strategyProfile.whyITrade}`;
                     <p className={`mt-2 ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Verify your trading plan parameters</p>
                   </div>
 
-                  <div className={`rounded-2xl border p-5 space-y-4 ${isDarkMode ? 'border-zinc-800 bg-zinc-900/50' : 'border-slate-200 bg-slate-50'}`}>
+                  <div className={`rounded-2xl border p-5 space-y-4 ${isDarkMode ? 'border-zinc-800 bg-black/50' : 'border-slate-200 bg-slate-50'}`}>
                     <div className="grid grid-cols-2 gap-4">
                       {[
                         { label: 'Style', value: wizardData.tradingStyle },
@@ -2971,7 +2971,7 @@ ${strategyProfile.whyITrade}`;
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
                     wizardStep === 0 
                       ? 'opacity-0 cursor-not-allowed' 
-                      : isDarkMode ? 'text-zinc-400 hover:text-white hover:bg-zinc-800' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                      : isDarkMode ? 'text-zinc-400 hover:text-white hover:bg-black' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
                   <ArrowLeft size={16} /> Back
@@ -2983,7 +2983,7 @@ ${strategyProfile.whyITrade}`;
                     className={`flex items-center gap-2 px-6 py-2 rounded-lg font-medium transition-all ${
                       isStepComplete(wizardStep, wizardData)
                         ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-600 hover:to-amber-700'
-                        : isDarkMode ? 'bg-zinc-800 text-zinc-600 cursor-not-allowed' : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                        : isDarkMode ? 'bg-black text-zinc-600 cursor-not-allowed' : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                     }`}
                   >
                     Next <ArrowRight size={16} />
@@ -2991,7 +2991,7 @@ ${strategyProfile.whyITrade}`;
                 ) : (
                   <button
                     disabled
-                    className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium bg-zinc-800 text-zinc-500 cursor-not-allowed"
+                    className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium bg-black text-zinc-500 cursor-not-allowed"
                     title="Under development"
                     aria-label="Architect Plan under development"
                   >
@@ -3016,7 +3016,7 @@ ${strategyProfile.whyITrade}`;
               animate={{ opacity: 1 }}
               className="flex flex-col items-center justify-center h-full px-4"
             >
-              <div className="w-14 h-14 rounded-full bg-zinc-800 dark:bg-zinc-700 flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-full bg-black dark:bg-black flex items-center justify-center mb-4">
                 <AssistantIcon size={28} className="text-white" />
               </div>
               <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{assistantLabel}</h2>
@@ -3034,7 +3034,7 @@ ${strategyProfile.whyITrade}`;
                       key={item.title}
                       onClick={() => handleSend(item.prompt)}
                       className={`p-4 rounded-xl border text-left transition-all ${
-                        isDarkMode ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700' : 'bg-white border-slate-200 hover:border-slate-300'
+                        isDarkMode ? 'bg-black border-zinc-800 hover:border-zinc-700' : 'bg-white border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       <div className="flex items-center gap-2 mb-1">
@@ -3070,7 +3070,7 @@ ${strategyProfile.whyITrade}`;
             >
               <div className="flex items-center gap-4 max-w-4xl mx-auto w-full">
                 <div className="shrink-0 mt-1">
-                  <div className="w-8 h-8 rounded-full bg-zinc-800 dark:bg-zinc-700 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-black dark:bg-black flex items-center justify-center">
                     <AssistantIcon size={16} className="text-white" />
                   </div>
                 </div>
@@ -3107,7 +3107,7 @@ ${strategyProfile.whyITrade}`;
                 onClick={() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })}
                 className={`flex items-center justify-center w-9 h-9 rounded-full shadow-lg transition-all active:scale-95 border backdrop-blur-sm opacity-50 hover:opacity-90 ${
                   isDarkMode
-                    ? 'bg-zinc-900/45 text-zinc-300 hover:bg-zinc-800/70 border-zinc-700/60'
+                    ? 'bg-black/45 text-zinc-300 hover:bg-black/70 border-zinc-700/60'
                     : 'bg-white/45 text-slate-600 hover:bg-white/80 border-slate-200/60'
                 }`}
                 title="Scroll to bottom"
@@ -3134,7 +3134,7 @@ ${strategyProfile.whyITrade}`;
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 className={`features-menu mb-4 p-4 rounded-2xl shadow-lg ${
-                  isDarkMode ? 'bg-zinc-900/95' : 'bg-slate-50/95'
+                  isDarkMode ? 'bg-black/95' : 'bg-slate-50/95'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -3143,7 +3143,7 @@ ${strategyProfile.whyITrade}`;
                   </h3>
                   <button 
                     onClick={() => setShowFeaturesMenu(false)}
-                    className={`p-1 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}
+                    className={`p-1 rounded-lg ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}
                   >
                     <X size={14} />
                   </button>
@@ -3155,7 +3155,7 @@ ${strategyProfile.whyITrade}`;
                         key={item.title}
                         onClick={() => { void handleSend(item.prompt); setShowFeaturesMenu(false); }}
                         className={`p-4 rounded-xl border text-left transition-all ${
-                          isDarkMode ? 'bg-zinc-800 border-zinc-700 hover:border-zinc-600' : 'bg-white border-slate-200 hover:border-slate-300'
+                          isDarkMode ? 'bg-black border-zinc-700 hover:border-zinc-600' : 'bg-white border-slate-200 hover:border-slate-300'
                         }`}
                       >
                         <div className="flex items-center gap-2 mb-1">
@@ -3171,7 +3171,7 @@ ${strategyProfile.whyITrade}`;
                   <button 
                     onClick={() => { handleFeatureRequest('psychology', "Create a psychology protocol for managing tilt and emotional state during drawdown."); setShowFeaturesMenu(false); }}
                     className={`p-4 rounded-xl border text-left transition-all ${
-                      isDarkMode ? 'bg-zinc-800 border-zinc-700 hover:border-zinc-600' : 'bg-white border-slate-200 hover:border-slate-300'
+                      isDarkMode ? 'bg-black border-zinc-700 hover:border-zinc-600' : 'bg-white border-slate-200 hover:border-slate-300'
                       }`}
                     >
                     <div className="flex items-center gap-2 mb-1">
@@ -3194,7 +3194,7 @@ ${strategyProfile.whyITrade}`;
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.98 }}
                 className={`forge-menu mb-4 p-4 rounded-2xl border ${
-                  isDarkMode ? 'bg-zinc-900 border-zinc-700' : 'bg-slate-50 border-slate-200'
+                  isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'
                 }`}
               >
                 {isResearchMode ? (
@@ -3224,7 +3224,7 @@ ${strategyProfile.whyITrade}`;
             {/* Input Area - ChatGPT Style */}
             <div className={`relative rounded-[22px] border shadow-sm ${
               isDarkMode 
-                ? 'bg-zinc-900/95 border-zinc-700 focus-within:border-emerald-500' 
+                ? 'bg-black/95 border-zinc-700 focus-within:border-emerald-500' 
                 : 'bg-white border-slate-200 focus-within:border-slate-300'
             }`}>
               {(isRecording || pendingVoiceClip) && (
@@ -3265,7 +3265,7 @@ ${strategyProfile.whyITrade}`;
                         </div>
                         <button
                           onClick={discardPendingVoiceClip}
-                          className={`rounded-xl px-3 py-2 text-xs font-semibold transition-colors ${isDarkMode ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700' : 'bg-white text-slate-700 hover:bg-slate-100'}`}
+                          className={`rounded-xl px-3 py-2 text-xs font-semibold transition-colors ${isDarkMode ? 'bg-black text-zinc-300 hover:bg-black' : 'bg-white text-slate-700 hover:bg-slate-100'}`}
                         >
                           Discard Clip
                         </button>
@@ -3291,7 +3291,7 @@ ${strategyProfile.whyITrade}`;
                       exit={{ opacity: 0, y: 6 }}
                       transition={{ duration: 0.15 }}
                       className={`absolute bottom-full left-2 right-2 mb-2 overflow-hidden rounded-2xl border ${
-                        isDarkMode ? 'bg-zinc-900/70 border-zinc-800 backdrop-blur-sm' : 'bg-white/90 border-slate-200 backdrop-blur-sm'
+                        isDarkMode ? 'bg-black/70 border-zinc-800 backdrop-blur-sm' : 'bg-white/90 border-slate-200 backdrop-blur-sm'
                       }`}
                       style={{ zIndex: 100 }}
                     >
@@ -3311,8 +3311,8 @@ ${strategyProfile.whyITrade}`;
                                 onMouseEnter={() => setSelectedCommandIndex(idx)}
                                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-colors ${
                                   idx === selectedCommandIndex
-                                    ? (isDarkMode ? 'bg-zinc-800 text-white' : 'bg-slate-100 text-slate-900')
-                                    : (isDarkMode ? 'text-zinc-400 hover:bg-zinc-800/50' : 'text-slate-600 hover:bg-slate-50')
+                                    ? (isDarkMode ? 'bg-black text-white' : 'bg-slate-100 text-slate-900')
+                                    : (isDarkMode ? 'text-zinc-400 hover:bg-black/50' : 'text-slate-600 hover:bg-slate-50')
                                 }`}
                               >
                                 <span className="font-mono text-xs font-semibold">{cmd.cmd}</span>
@@ -3322,7 +3322,7 @@ ${strategyProfile.whyITrade}`;
                                     <Star size={10} className="text-amber-400 fill-amber-400 opacity-60" />
                                   )}
                                   {cmd.needsSymbol && (
-                                    <span className={`text-[9px] px-1.5 py-0.5 rounded font-semibold shrink-0 ${isDarkMode ? 'bg-zinc-800 text-zinc-500' : 'bg-slate-200 text-slate-400'}`}>
+                                    <span className={`text-[9px] px-1.5 py-0.5 rounded font-semibold shrink-0 ${isDarkMode ? 'bg-black text-zinc-500' : 'bg-slate-200 text-slate-400'}`}>
                                       +SYM
                                     </span>
                                   )}
@@ -3346,7 +3346,7 @@ ${strategyProfile.whyITrade}`;
                   className={`features-btn shrink-0 p-2.5 rounded-2xl transition-colors ${
                     showFeaturesMenu 
                       ? isDarkMode ? 'bg-emerald-600 text-white' : 'bg-emerald-600 text-white'
-                      : isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-500'
+                      : isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-500'
                   }`}
                   title="Features"
                   aria-label="Open features menu"
@@ -3396,7 +3396,7 @@ ${strategyProfile.whyITrade}`;
                   className={`shrink-0 flex items-center gap-2 px-3 py-2.5 rounded-2xl border transition-colors ${
                     isRecording || isTranscribing
                       ? (isDarkMode ? 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10' : 'border-emerald-200 text-emerald-700 bg-emerald-50')
-                      : (isDarkMode ? 'border-zinc-700 text-zinc-300 hover:bg-zinc-800' : 'border-slate-200 text-slate-700 hover:bg-slate-50')
+                      : (isDarkMode ? 'border-zinc-700 text-zinc-300 hover:bg-black' : 'border-slate-200 text-slate-700 hover:bg-slate-50')
                   } disabled:opacity-50`}
                   title={isTranscribing ? "Processing recording..." : (isRecording ? "Stop recording" : "Start recording")}
                   aria-label={isTranscribing ? "Processing recording" : (isRecording ? "Stop recording" : "Start recording")}
@@ -3410,7 +3410,7 @@ ${strategyProfile.whyITrade}`;
                       onClick={togglePauseRecording}
                       disabled={isTranscribing}
                       className={`shrink-0 flex items-center gap-2 rounded-2xl border px-3 py-2.5 text-xs font-semibold transition-colors ${
-                        isDarkMode ? 'border-zinc-700 text-zinc-200 hover:bg-zinc-800' : 'border-slate-200 text-slate-700 hover:bg-slate-50'
+                        isDarkMode ? 'border-zinc-700 text-zinc-200 hover:bg-black' : 'border-slate-200 text-slate-700 hover:bg-slate-50'
                       }`}
                       title={isRecordingPaused ? 'Resume recording' : 'Pause recording'}
                     >
@@ -3445,7 +3445,7 @@ ${strategyProfile.whyITrade}`;
                       ? (isDarkMode ? 'bg-emerald-600 text-white hover:bg-emerald-500' : 'bg-slate-900 text-white hover:bg-slate-800')
                       : (canSendMessage
                         ? (isDarkMode ? 'bg-emerald-600 text-white hover:bg-emerald-500' : 'bg-slate-900 text-white hover:bg-slate-800')
-                        : (isDarkMode ? 'bg-zinc-800 text-zinc-600' : 'bg-slate-100 text-slate-400'))
+                        : (isDarkMode ? 'bg-black text-zinc-600' : 'bg-slate-100 text-slate-400'))
                   } disabled:cursor-not-allowed disabled:active:scale-100`}
                   title={isGenerating ? "Stop Generating" : "Send Message"}
                 >

@@ -2,9 +2,45 @@
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans-alt: 'DM Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --color-obsidian: #050505;
+  /* Landing Page Font Families */
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-label: 'Inter', system-ui, sans-serif;
+  --font-body-lg: 'Inter', system-ui, sans-serif;
+  --font-body-md: 'Inter', system-ui, sans-serif;
+  --font-h3: 'Inter', system-ui, sans-serif;
+
+  /* Landing Page Font Sizes */
+  --font-size-display: 3.5rem;
+  --font-size-h2: 2.25rem;
+  --font-size-h3: 1.5rem;
+  --font-size-label: 0.875rem;
+  --font-size-body-lg: 1.125rem;
+  --font-size-body-md: 0.875rem;
+
+  /* Landing Page Colors */
+  --color-page-bg: #000000;
+  --color-panel-bg: #000000;
+  --color-soft-card: #000000;
+  --color-text: #ffffff;
+  --color-muted: #a1a1aa;
+  --color-muted-light: #71717a;
+  --color-line: #27272a;
+  --color-jfx: #FF4F01;
+
+  /* Landing Page Spacing */
+  --spacing-margin: 3.5rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  --spacing-section: 6rem;
+
+  --color-obsidian: #000000;
   --color-zinc-850: #1f1f22;
   --color-zinc-950: #000000;
 
@@ -21,36 +57,38 @@
   --spacing-compact-xl: 2rem;
 }
 
-/* Global Compact Scaling */
-:root {
+/* Global Compact Scaling — scoped to .compact-scale so landing & auth pages are unaffected */
+.compact-scale {
   font-size: 14px; /* Scaled down from 16px to fit more on screen */
 }
 
 @media (min-width: 1536px) {
-  :root {
+  .compact-scale {
     font-size: 15px; /* Slightly larger for huge screens */
   }
 }
 
-/* Tighten Layout Spacing */
+/* Tighten Layout Spacing (only inside the authenticated workspace) */
+.compact-scale body,
 body {
   line-height: 1.4;
   letter-spacing: -0.01em;
+  background-color: #000000;
 }
 
-/* Sidebar Width Scaling */
-.w-64 { width: 14rem !important; }
-.w-80 { width: 18rem !important; }
+/* Sidebar Width Scaling — app only */
+.compact-scale .w-64 { width: 14rem !important; }
+.compact-scale .w-80 { width: 18rem !important; }
 
-/* Dashboard Widget Scaling */
-.p-8 { padding: 1.5rem !important; } /* Standard page padding */
-.p-10 { padding: 2rem !important; } /* Large page padding */
-.gap-8 { gap: 1.5rem !important; }
-.gap-6 { gap: 1rem !important; }
+/* Dashboard Widget Scaling — app only */
+.compact-scale .p-8 { padding: 1.5rem !important; } /* Standard page padding */
+.compact-scale .p-10 { padding: 2rem !important; } /* Large page padding */
+.compact-scale .gap-8 { gap: 1.5rem !important; }
+.compact-scale .gap-6 { gap: 1rem !important; }
 
-/* Adjust header sizes */
-h1 { font-size: 1.875rem !important; line-height: 2.25rem !important; } /* text-3xl */
-h2 { font-size: 1.5rem !important; line-height: 2rem !important; } /* text-2xl */
+/* Adjust header sizes — app only */
+.compact-scale h1 { font-size: 1.875rem !important; line-height: 2.25rem !important; } /* text-3xl */
+.compact-scale h2 { font-size: 1.5rem !important; line-height: 2rem !important; } /* text-2xl */
 
 /* Custom scrollbar improvements for smaller space */
 ::-webkit-scrollbar {
@@ -58,20 +96,40 @@ h2 { font-size: 1.5rem !important; line-height: 2rem !important; } /* text-2xl *
   height: 4px;
 }
 
-/* Ensure Chart Grid stays legible */
-.grid-cols-2 {
+/* Ensure Chart Grid stays legible — app only */
+.compact-scale .grid-cols-2 {
   gap: 0.5rem !important;
 }
 
-/* Notes Editor Padding */
-.mx-auto.py-12 {
+/* Notes Editor Padding — app only */
+.compact-scale .mx-auto.py-12 {
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
 }
 
-/* Tailwind button scaling */
-button.px-8 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
-button.py-4 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+/* Tailwind button scaling — app only */
+.compact-scale button.px-8 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+.compact-scale button.py-4 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+
+/* Landing page marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-content {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  animation: marquee 20s linear infinite;
+  will-change: transform;
+  white-space: nowrap;
+}
 
 /* Notebook Colors */
 :root {

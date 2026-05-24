@@ -64,17 +64,17 @@ export const Select: React.FC<SelectProps> = ({
         aria-labelledby={label ? labelId.current : undefined}
         onClick={() => !disabled && setIsOpen(!isOpen)}
         className={`w-full text-left ${Icon ? 'pl-11' : 'pl-4'} pr-10 py-3.5 rounded-lg border outline-none font-medium transition-all text-sm flex items-center justify-between relative
-          ${isOpen ? 'ring-2 ring-violet-500/20 border-violet-500' : ''}
+          ${isOpen ? 'ring-2 ring-[#FF4F00]/20 border-[#FF4F00]' : ''}
           ${error ? 'border-rose-500 ring-rose-500/10' : ''}
           ${isDarkMode 
-            ? 'bg-[#18181b] border-[#27272a] text-zinc-100 hover:bg-[#27272a]' 
+            ? 'bg-[#000000] border-[#27272a] text-zinc-100 hover:bg-[#27272a]' 
             : 'bg-white border-slate-200 text-slate-900 hover:bg-slate-50 shadow-sm'
           }
-          ${disabled ? 'cursor-not-allowed bg-zinc-100 dark:bg-zinc-900/50' : ''}
+          ${disabled ? 'cursor-not-allowed bg-zinc-100 dark:bg-black/50' : ''}
         `}
       >
         {Icon && (
-           <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors pointer-events-none ${isOpen ? 'text-violet-500' : 'text-zinc-400'}`}>
+           <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors pointer-events-none ${isOpen ? 'text-[#FF4F00]' : 'text-zinc-400'}`}>
               <Icon size={16} strokeWidth={2} />
            </div>
         )}
@@ -86,7 +86,7 @@ export const Select: React.FC<SelectProps> = ({
 
       {isOpen && (
         <div className={`absolute left-0 right-0 mt-2 rounded-xl border shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-100 origin-top
-          ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-200'}
+          ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}
         `}>
           <div className="max-h-60 overflow-y-auto custom-scrollbar p-1.5 space-y-0.5">
             {options.length > 0 ? (
@@ -102,7 +102,7 @@ export const Select: React.FC<SelectProps> = ({
                     }}
                     className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-3
                       ${isSelected 
-                        ? 'bg-violet-600 text-white shadow-md shadow-violet-500/20' 
+                        ? 'bg-[#FF4F00] text-white shadow-md shadow-[#FF4F00]/20' 
                         : isDarkMode 
                           ? 'text-zinc-300 hover:bg-[#27272a]' 
                           : 'text-slate-700 hover:bg-slate-100'

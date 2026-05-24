@@ -130,9 +130,10 @@ type DcfItem = {
   'Stock Price'?: number;
 };
 
-const fmtPct = (v: number | undefined | null): string => {
+const fmtPct = (v: number | string | undefined | null): string => {
   if (v === undefined || v === null) return 'N/A';
-  return Number.isFinite(v) ? `${v >= 0 ? '+' : ''}${v.toFixed(2)}%` : 'N/A';
+  const num = typeof v === 'string' ? parseFloat(v) : v;
+  return Number.isFinite(num) ? `${num >= 0 ? '+' : ''}${num.toFixed(2)}%` : 'N/A';
 };
 
 const fmtRatioPct = (v: number | undefined | null): string => {

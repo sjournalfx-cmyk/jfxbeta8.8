@@ -37,8 +37,8 @@ const OpenPositions: React.FC<OpenPositionsProps> = ({ positions, isDarkMode, cu
 
     if (!positions || positions.length === 0) {
         return (
-            <div className={`h-full flex flex-col items-center justify-center p-8 text-center rounded-[32px] border-2 border-dashed transition-all ${isDarkMode ? 'border-zinc-800 bg-zinc-900/20' : 'border-zinc-200 bg-zinc-50/50'}`}>
-                <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-6 animate-pulse ${isDarkMode ? 'bg-zinc-800 text-zinc-500' : 'bg-zinc-100 text-zinc-400'}`}>
+            <div className={`h-full flex flex-col items-center justify-center p-8 text-center rounded-[32px] border-2 border-dashed transition-all ${isDarkMode ? 'border-zinc-800 bg-black/20' : 'border-zinc-200 bg-zinc-50/50'}`}>
+                <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-6 animate-pulse ${isDarkMode ? 'bg-black text-zinc-500' : 'bg-zinc-100 text-zinc-400'}`}>
                     <Activity size={32} strokeWidth={1.5} />
                 </div>
                 <div className="space-y-2">
@@ -76,7 +76,7 @@ const OpenPositions: React.FC<OpenPositionsProps> = ({ positions, isDarkMode, cu
                         <div
                             key={pos.ticket}
                             className={`p-4 rounded-2xl border-2 transition-all ${isRefreshing ? 'data-refresh' : ''} ${isDarkMode
-                                ? 'bg-[#18181b] border-[#27272a] hover:border-zinc-700'
+                                ? 'bg-[#000000] border-[#27272a] hover:border-zinc-700'
                                 : 'bg-white border-slate-100 shadow-sm hover:shadow-md'
                                 }`}
                         >

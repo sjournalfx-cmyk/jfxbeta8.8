@@ -387,12 +387,12 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
     }, [watchlistCategory, starredSymbols]);
 
     return (
-        <div className={`w-full h-full flex flex-col relative ${isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-slate-100 text-slate-900'}`}>
+        <div className={`w-full h-full flex flex-col relative ${isDarkMode ? 'bg-[#000000] text-zinc-200' : 'bg-slate-100 text-slate-900'}`}>
             <div className="flex flex-1 min-h-0 relative">
                 <div className="flex-1 flex flex-col min-w-0">
-                    <div className={`h-14 shrink-0 flex items-center px-4 justify-between border-b relative z-30 ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-200 shadow-sm'}`}>
+                    <div className={`h-14 shrink-0 flex items-center px-4 justify-between border-b relative z-30 ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200 shadow-sm'}`}>
                         <div className="flex items-center gap-3">
-                            <div className={`flex items-center px-3 py-1.5 rounded-lg border focus-within:ring-2 focus-within:ring-indigo-500/20 ${isDarkMode ? 'bg-[#09090b] border-[#27272a]' : 'bg-slate-50 border-slate-200'}`}>
+                            <div className={`flex items-center px-3 py-1.5 rounded-lg border focus-within:ring-2 focus-within:ring-[#FF4F00]/20 ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-slate-50 border-slate-200'}`}>
                                 <Search size={14} className="opacity-50 mr-2" />
                                 <input
                                     id="chart-symbol-input"
@@ -408,20 +408,20 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                             <button
                                 onClick={() => handleSymbolChange(symbolInput)}
                                 title="Load Symbol"
-                                className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-bold shadow-lg shadow-indigo-600/20"
+                                className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#FF4F00] hover:bg-[#E64600] text-white rounded-lg text-xs font-bold shadow-lg shadow-[#FF4F00]/20"
                             >
                                 <RefreshCw size={12} /> Load
                             </button>
 
                             {layout !== 'single' && (
                                 <>
-                                    <div className={`w-px h-6 mx-1 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                                    <div className={`w-px h-6 mx-1 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
                                     <button
                                         onClick={() => setIsSynced(!isSynced)}
                                         title={isSynced ? "Disable Symbol Sync" : "Enable Symbol Sync"}
                                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold border ${isSynced
-                                            ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
-                                            : isDarkMode ? 'text-zinc-500 border-transparent hover:bg-zinc-800' : 'text-slate-500 border-transparent hover:bg-slate-100'
+                                            ? 'bg-[#FF4F00]/10 text-[#FF4F00] border-[#FF4F00]/20'
+                                            : isDarkMode ? 'text-zinc-500 border-transparent hover:bg-black' : 'text-slate-500 border-transparent hover:bg-slate-100'
                                             }`}
                                     >
                                         {isSynced ? <Link2 size={14} /> : <Link2Off size={14} />}
@@ -432,23 +432,23 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <div className={`hidden xl:flex items-center gap-1 mr-4 p-1 rounded-lg border ${isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-white border-slate-200'}`}>
+                            <div className={`hidden xl:flex items-center gap-1 mr-4 p-1 rounded-lg border ${isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-white border-slate-200'}`}>
                                 <div className="px-2 opacity-30 border-r border-zinc-700/50 mr-1">
                                     <Clock size={14} />
                                 </div>
-                                <button onClick={() => applyTimeframePreset('Scalp')} title="Scalp Preset (1m, 5m, 15m, 1h)" className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-100 text-slate-500'}`}>Scalp</button>
-                                <button onClick={() => applyTimeframePreset('Intraday')} title="Day Trading Preset (5m, 15m, 1h, 4h)" className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-100 text-slate-500'}`}>Day</button>
-                                <button onClick={() => applyTimeframePreset('Swing')} title="Swing Trading Preset (1h, 4h, D, W)" className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-100 text-slate-500'}`}>Swing</button>
-                                <div className={`w-px h-4 mx-1 ${isDarkMode ? 'bg-zinc-700' : 'bg-slate-300'}`} />
+                                <button onClick={() => applyTimeframePreset('Scalp')} title="Scalp Preset (1m, 5m, 15m, 1h)" className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-100 text-slate-500'}`}>Scalp</button>
+                                <button onClick={() => applyTimeframePreset('Intraday')} title="Day Trading Preset (5m, 15m, 1h, 4h)" className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-100 text-slate-500'}`}>Day</button>
+                                <button onClick={() => applyTimeframePreset('Swing')} title="Swing Trading Preset (1h, 4h, D, W)" className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-100 text-slate-500'}`}>Swing</button>
+                                <div className={`w-px h-4 mx-1 ${isDarkMode ? 'bg-black' : 'bg-slate-300'}`} />
                                 <button onClick={() => handleZoom('out')} title="Zoom Out Timeframe" className={`p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}><ZoomOut size={14} /></button>
                                 <button onClick={() => handleZoom('in')} title="Zoom In Timeframe" className={`p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}><ZoomIn size={14} /></button>
                             </div>
 
-                            <div className={`flex items-center p-1 rounded-lg border ${isDarkMode ? 'bg-[#09090b] border-[#27272a]' : 'bg-slate-50 border-slate-200'}`}>
+                            <div className={`flex items-center p-1 rounded-lg border ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-slate-50 border-slate-200'}`}>
                                 <button
                                     onClick={() => setLayout('single')}
                                     title="Single Chart Layout"
-                                    className={`p-1.5 rounded ${layout === 'single' ? 'bg-indigo-500 text-white shadow' : 'text-zinc-500'}`}
+                                    className={`p-1.5 rounded ${layout === 'single' ? 'bg-[#FF4F00] text-white shadow' : 'text-zinc-500'}`}
                                 >
                                     <Square size={16} />
                                 </button>
@@ -465,7 +465,7 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                                         onClick={() => handleLayoutChange(l.id as any)}
                                         title={canUseMultiChart ? `${l.title} Layout` : `${l.title} (Locked)`}
                                         className={`p-1.5 rounded relative ${layout === l.id
-                                            ? 'bg-indigo-500 text-white shadow'
+                                            ? 'bg-[#FF4F00] text-white shadow'
                                             : !canUseMultiChart ? 'text-zinc-500/40 opacity-60' : 'text-zinc-500 hover:bg-black/5 dark:hover:bg-white/5'
                                             }`}
                                     >
@@ -480,13 +480,13 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                         </div>
 
                             <div className="relative" ref={settingsRef}>
-                                <button onClick={() => setIsSettingsOpen(!isSettingsOpen)} title="Layout Dimensions & Split Settings" className={`p-2 rounded-lg ${isSettingsOpen ? 'bg-indigo-500 text-white' : isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}><SlidersHorizontal size={20} /></button>
+                                <button onClick={() => setIsSettingsOpen(!isSettingsOpen)} title="Layout Dimensions & Split Settings" className={`p-2 rounded-lg ${isSettingsOpen ? 'bg-[#FF4F00] text-white' : isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}><SlidersHorizontal size={20} /></button>
                                 {isSettingsOpen && (
-                                    <div className={`absolute top-full right-0 mt-2 w-64 p-4 rounded-xl border shadow-2xl z-50 origin-top-right ${isDarkMode ? 'bg-[#121215] border-[#27272a]' : 'bg-white border-slate-200'}`}>
+                                    <div className={`absolute top-full right-0 mt-2 w-64 p-4 rounded-xl border shadow-2xl z-50 origin-top-right ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}`}>
                                         <h4 className="text-xs font-bold uppercase tracking-wider opacity-50 mb-3">Dimensions</h4>
-                                        <div className={`flex p-1 rounded-lg border mb-4 ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
-                                            <button onClick={() => setLayoutSettings({ ...layoutSettings, isScrollable: false })} className={`flex-1 py-1.5 text-xs font-bold rounded-md ${!layoutSettings.isScrollable ? 'bg-indigo-600 text-white shadow' : 'opacity-50'}`}>Fit Screen</button>
-                                            <button onClick={() => setLayoutSettings({ ...layoutSettings, isScrollable: true })} className={`flex-1 py-1.5 text-xs font-bold rounded-md ${layoutSettings.isScrollable ? 'bg-indigo-600 text-white shadow' : 'opacity-50'}`}>Scrollable</button>
+                                        <div className={`flex p-1 rounded-lg border mb-4 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+                                            <button onClick={() => setLayoutSettings({ ...layoutSettings, isScrollable: false })} className={`flex-1 py-1.5 text-xs font-bold rounded-md ${!layoutSettings.isScrollable ? 'bg-[#FF4F00] text-white shadow' : 'opacity-50'}`}>Fit Screen</button>
+                                            <button onClick={() => setLayoutSettings({ ...layoutSettings, isScrollable: true })} className={`flex-1 py-1.5 text-xs font-bold rounded-md ${layoutSettings.isScrollable ? 'bg-[#FF4F00] text-white shadow' : 'opacity-50'}`}>Scrollable</button>
                                         </div>
                                         {layoutSettings.isScrollable && (
                                             <div className="mb-4">
@@ -535,21 +535,21 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                                             <h4 className="text-xs font-bold uppercase tracking-wider opacity-50 mb-3">Chart Elements</h4>
                                             <button
                                                 onClick={() => setShowToolbar(!showToolbar)}
-                                                className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold ${showToolbar ? 'bg-indigo-500/10 text-indigo-500' : 'opacity-50 hover:bg-black/5 dark:hover:bg-white/5'}`}
+                                                className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold ${showToolbar ? 'bg-[#FF4F00]/10 text-[#FF4F00]' : 'opacity-50 hover:bg-black/5 dark:hover:bg-white/5'}`}
                                             >
                                                 <span>Drawing Toolbar</span>
                                                 {showToolbar ? <Check size={14} /> : <Plus size={14} />}
                                             </button>
                                             <button
                                                 onClick={() => setShowLegend(!showLegend)}
-                                                className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold ${showLegend ? 'bg-indigo-500/10 text-indigo-500' : 'opacity-50 hover:bg-black/5 dark:hover:bg-white/5'}`}
+                                                className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold ${showLegend ? 'bg-[#FF4F00]/10 text-[#FF4F00]' : 'opacity-50 hover:bg-black/5 dark:hover:bg-white/5'}`}
                                             >
                                                 <span>Chart Legend</span>
                                                 {showLegend ? <Check size={14} /> : <Plus size={14} />}
                                             </button>
                                             <button
                                                 onClick={() => setShowGrid(!showGrid)}
-                                                className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold ${showGrid ? 'bg-indigo-500/10 text-indigo-500' : 'opacity-50 hover:bg-black/5 dark:hover:bg-white/5'}`}
+                                                className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold ${showGrid ? 'bg-[#FF4F00]/10 text-[#FF4F00]' : 'opacity-50 hover:bg-black/5 dark:hover:bg-white/5'}`}
                                             >
                                                 <span>Grid Lines</span>
                                                 {showGrid ? <Check size={14} /> : <Plus size={14} />}
@@ -558,22 +558,22 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                                     </div>
                                 )}
                             </div>
-                            <div className={`w-px h-6 mx-2 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                            <div className={`w-px h-6 mx-2 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
                             <button
                                 onClick={handleSaveConfig}
                                 disabled={isSaving}
                                 title="Save Current Layout to Profile"
-                                className={`p-2 rounded-lg flex items-center gap-2 ${isSaving ? 'opacity-50' : isDarkMode ? 'hover:bg-zinc-800 text-teal-500' : 'hover:bg-slate-100 text-teal-600'}`}
+                                className={`p-2 rounded-lg flex items-center gap-2 ${isSaving ? 'opacity-50' : isDarkMode ? 'hover:bg-black text-teal-500' : 'hover:bg-slate-100 text-teal-600'}`}
                             >
                                 {isSaving ? <RefreshCw size={20} /> : <Plus size={20} />}
                                 <span className="text-xs font-bold hidden md:inline">Save Config</span>
                             </button>
-                            <button onClick={onToggleFocus} title={isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"} className={`p-2 rounded-lg ${isFocusMode ? 'bg-indigo-500 text-white' : isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}><Minimize2 size={20} /></button>
-                            <button onClick={() => setIsWatchlistOpen(!isWatchlistOpen)} title="Toggle Watchlist Sidebar" className={`p-2 rounded-lg ${isWatchlistOpen ? 'bg-zinc-800 text-white' : isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}><List size={20} /></button>
+                            <button onClick={onToggleFocus} title={isFocusMode ? "Exit Focus Mode" : "Enter Focus Mode"} className={`p-2 rounded-lg ${isFocusMode ? 'bg-[#FF4F00] text-white' : isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}><Minimize2 size={20} /></button>
+                            <button onClick={() => setIsWatchlistOpen(!isWatchlistOpen)} title="Toggle Watchlist Sidebar" className={`p-2 rounded-lg ${isWatchlistOpen ? 'bg-black text-white' : isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-500'}`}><List size={20} /></button>
                         </div>
                     </div>
 
-                    <div className={`flex-1 overflow-auto relative p-1 ${isDarkMode ? 'bg-[#09090b]' : 'bg-slate-100'}`}>
+                    <div className={`flex-1 overflow-auto relative p-1 ${isDarkMode ? 'bg-[#000000]' : 'bg-slate-100'}`}>
                         <div className={`w-full h-full gap-1 grid ${getGridClass()}`} style={getGridStyle()}>
                             {charts.map((chart) => {
                                 if (!isVisible(chart.id)) return null;
@@ -598,11 +598,11 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                     </div>
                 </div>
 
-                <div className={`${isWatchlistOpen ? 'w-72 translate-x-0' : 'w-0 translate-x-full'} shrink-0 border-l flex flex-col overflow-hidden ${isDarkMode ? 'bg-[#121215] border-[#27272a]' : 'bg-white border-slate-200'}`}>
+                <div className={`${isWatchlistOpen ? 'w-72 translate-x-0' : 'w-0 translate-x-full'} shrink-0 border-l flex flex-col overflow-hidden ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}`}>
                     <div className="p-4 border-b shrink-0 flex items-center justify-between"><h3 className="font-bold text-sm">Watchlist</h3><button onClick={() => setIsWatchlistOpen(false)} className="opacity-50 hover:opacity-100"><X size={16} /></button></div>
                     <div className="flex p-2 gap-1 overflow-x-auto border-b no-scrollbar">
                         {(Object.keys(WATCHLISTS) as Array<keyof typeof WATCHLISTS>).map(cat => (
-                            <button key={cat} onClick={() => setWatchlistCategory(cat)} className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${watchlistCategory === cat ? 'bg-indigo-600 text-white' : isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-600'}`}>{cat}</button>
+                            <button key={cat} onClick={() => setWatchlistCategory(cat)} className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${watchlistCategory === cat ? 'bg-[#FF4F00] text-white' : isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-600'}`}>{cat}</button>
                         ))}
                     </div>
                     <div className="flex-1 overflow-y-auto custom-scrollbar p-2">
@@ -610,7 +610,7 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                             const isStarred = starredSymbols.includes(symbol);
                             const displaySymbol = symbol.split(':')[1] || symbol;
                             return (
-                                <button key={symbol} onClick={() => handleSymbolChange(symbol)} className={`w-full flex items-center justify-between p-3 rounded-lg text-left group ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-300' : 'hover:bg-slate-50 text-slate-700'}`}><span className="font-bold text-sm">{displaySymbol}</span><div onClick={(e) => toggleStar(symbol, e)} className={`opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 ${isStarred ? 'opacity-100 text-amber-400' : 'text-zinc-500'}`}><Star size={14} fill={isStarred ? "currentColor" : "none"} /></div></button>
+                                <button key={symbol} onClick={() => handleSymbolChange(symbol)} className={`w-full flex items-center justify-between p-3 rounded-lg text-left group ${isDarkMode ? 'hover:bg-black text-zinc-300' : 'hover:bg-slate-50 text-slate-700'}`}><span className="font-bold text-sm">{displaySymbol}</span><div onClick={(e) => toggleStar(symbol, e)} className={`opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 ${isStarred ? 'opacity-100 text-amber-400' : 'text-zinc-500'}`}><Star size={14} fill={isStarred ? "currentColor" : "none"} /></div></button>
                             )
                         })}
                     </div>
@@ -620,7 +620,7 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
             {/* Drawing Warning Confirmation Modal */}
             {drawingWarning.isOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <div className={`w-full max-w-md mx-4 p-6 rounded-2xl shadow-2xl border ${isDarkMode ? 'bg-[#18181b] border-zinc-700' : 'bg-white border-slate-200'}`}>
+                    <div className={`w-full max-w-md mx-4 p-6 rounded-2xl shadow-2xl border ${isDarkMode ? 'bg-[#000000] border-zinc-700' : 'bg-white border-slate-200'}`}>
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-xl bg-amber-500/10 text-amber-500">
                                 <AlertTriangle size={24} />
@@ -635,7 +635,7 @@ const ChartGrid: React.FC<ChartGridProps> = ({ isDarkMode, isFocusMode = false, 
                         <div className="flex gap-3 mt-6">
                             <button
                                 onClick={() => setDrawingWarning(prev => ({ ...prev, isOpen: false }))}
-                                className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm ${isDarkMode ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`}
+                                className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm ${isDarkMode ? 'bg-black hover:bg-black text-zinc-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`}
                             >
                                 Cancel
                             </button>

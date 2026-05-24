@@ -40,7 +40,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               rightIcon && 'pr-11',
               props.disabled && 'cursor-not-allowed opacity-60',
               isDarkMode
-                ? 'bg-[#18181b] border-[#27272a] text-zinc-100 placeholder-zinc-600 focus:bg-[#27272a] focus:border-[#FF4F01]/50 focus:ring-4 focus:ring-[#FF4F01]/5'
+                ? 'bg-[#000000] border-[#27272a] text-zinc-100 placeholder-zinc-600 focus:bg-[#27272a] focus:border-[#FF4F01]/50 focus:ring-4 focus:ring-[#FF4F01]/5'
                 : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 focus:border-[#FF4F01] focus:ring-4 focus:ring-[#FF4F01]/5',
               error && 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/5',
               className

@@ -72,7 +72,7 @@ function JFXChart({
           isDarkMode={isDarkMode}
         />
       ) : (
-        <div className={`w-full h-full flex flex-col items-center justify-center gap-4 p-6 text-center ${isDarkMode ? 'bg-[#09090b]' : 'bg-white'}`}>
+        <div className={`w-full h-full flex flex-col items-center justify-center gap-4 p-6 text-center ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
           {isFetching ? (
             <div className="flex flex-col items-center gap-3">
               <RefreshCw size={24} className="animate-spin text-indigo-500" />
@@ -93,7 +93,7 @@ function JFXChart({
               </div>
               <button 
                 onClick={loadData}
-                className="mt-2 px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[10px] font-bold transition-all"
+                className="mt-2 px-4 py-1.5 rounded-lg bg-black hover:bg-black text-[10px] font-bold transition-all"
               >
                 Retry Connection
               </button>

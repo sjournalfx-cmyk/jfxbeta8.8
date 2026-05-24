@@ -25,7 +25,7 @@ export const TradeFormStep2: React.FC<TradeFormStep2Props> = ({
                     </label>
                     <div className={cn(
                         "p-1.5 rounded-xl flex border",
-                        isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-slate-100 border-slate-200'
+                        isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-slate-100 border-slate-200'
                     )}>
                         <button
                             type="button"
@@ -133,7 +133,7 @@ export const TradeFormStep2: React.FC<TradeFormStep2Props> = ({
                                 isDesktopBridgeTrade && "cursor-not-allowed opacity-60",
                                 formData.result === id
                                     ? `bg-${color}-500/10 border-${color}-500 text-${color}-600 dark:text-${color}-400`
-                                    : `border-transparent ${isDarkMode ? 'bg-[#18181b] text-zinc-500 hover:bg-[#27272a]' : 'bg-slate-50 text-slate-500 hover:bg-slate-100'}`
+                                    : `border-transparent ${isDarkMode ? 'bg-[#000000] text-zinc-500 hover:bg-[#27272a]' : 'bg-slate-50 text-slate-500 hover:bg-slate-100'}`
                             )}
                         >
                             <Icon size={20} />

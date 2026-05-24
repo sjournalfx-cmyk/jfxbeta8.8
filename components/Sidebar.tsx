@@ -132,7 +132,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="relative">
           <IconNotebook size={18} />
           {offlineQueueCount > 0 && (
-            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-indigo-500 rounded-full border border-white dark:border-[#050505] animate-pulse" />
+            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-indigo-500 rounded-full border border-white dark:border-[#000000] animate-pulse" />
           )}
         </div>
       ), 
@@ -185,7 +185,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     <motion.div 
       layout="position"
       className={`h-full flex flex-col py-4 border-r z-[100] relative transition-colors duration-300 ${isDarkMode
-        ? 'bg-[#050505] border-zinc-800 shadow-[4px_0_24px_rgba(0,0,0,0.5)]'
+        ? 'bg-[#000000] border-zinc-800 shadow-[4px_0_24px_rgba(0,0,0,0.5)]'
         : 'bg-white border-slate-200 shadow-[4px_0_24px_rgba(0,0,0,0.02)]'
         }`}
       style={{ width: isExpanded ? 240 : 72 }}
@@ -215,11 +215,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           showNotifications
             ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto'
             : 'opacity-0 -translate-x-2 scale-95 pointer-events-none'
-        } ${isDarkMode ? 'bg-[#0d1117] border-zinc-800 shadow-black/50' : 'bg-white border-slate-200 shadow-slate-200/50'}`}
+        } ${isDarkMode ? 'bg-[#000000] border-zinc-800 shadow-black/50' : 'bg-white border-slate-200 shadow-slate-200/50'}`}
       >
         {showNotifications && (
           <>
-            <div className={`p-5 border-b flex items-center justify-between ${isDarkMode ? 'border-zinc-800 bg-zinc-900/50' : 'border-slate-100 bg-slate-50/50'}`}>
+            <div className={`p-5 border-b flex items-center justify-between ${isDarkMode ? 'border-zinc-800 bg-black/50' : 'border-slate-100 bg-slate-50/50'}`}>
               <div>
                 <h3 className="text-sm font-black uppercase tracking-widest">Notifications</h3>
                 <p className="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-0.5">{notifications.length} recent alerts</p>
@@ -239,7 +239,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 notifications.map((n) => (
                   <div
                     key={n.id}
-                    className={`p-4 rounded-2xl border flex items-start gap-3 transition-all hover:scale-[1.02] ${isDarkMode ? 'bg-zinc-900/30 border-zinc-800 hover:border-zinc-700' : 'bg-slate-50 border-slate-100 hover:border-slate-200'
+                    className={`p-4 rounded-2xl border flex items-start gap-3 transition-all hover:scale-[1.02] ${isDarkMode ? 'bg-black/30 border-zinc-800 hover:border-zinc-700' : 'bg-slate-50 border-slate-100 hover:border-slate-200'
                       }`}
                   >
                     <div className={`mt-0.5 p-1.5 rounded-lg ${n.type === 'success' ? 'bg-emerald-500/10 text-emerald-500' :
@@ -279,7 +279,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Toggle Button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`absolute -right-3 top-12 w-6 h-6 rounded-full border flex items-center justify-center transition-all z-50 ${isDarkMode ? 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white' : 'bg-white border-slate-200 text-slate-500 hover:text-slate-900 shadow-sm'}`}
+        className={`absolute -right-3 top-12 w-6 h-6 rounded-full border flex items-center justify-center transition-all z-50 ${isDarkMode ? 'bg-black border-zinc-800 text-zinc-400 hover:text-white' : 'bg-white border-slate-200 text-slate-500 hover:text-slate-900 shadow-sm'}`}
       >
         <ChevronRight size={14} className={`${isExpanded ? 'rotate-180' : ''}`} />
       </button>
@@ -340,7 +340,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     </div>
                   )}
                   {item.id === 'ea-setup' && !isBasicTier && userProfile?.syncMethod === 'EA_CONNECT' && !userProfile?.eaConnected && (
-                    <div className="absolute w-1.5 h-1.5 bg-rose-500 rounded-full border border-white dark:border-[#050505] animate-bounce -top-0.5 -right-0.5" />
+                    <div className="absolute w-1.5 h-1.5 bg-rose-500 rounded-full border border-white dark:border-[#000000] animate-bounce -top-0.5 -right-0.5" />
                   )}
                 </div>
               ),

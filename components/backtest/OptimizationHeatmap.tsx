@@ -58,7 +58,7 @@ export const OptimizationHeatmap: React.FC<OptimizationHeatmapProps> = ({
 
     return (
         <div className={`w-full h-full flex flex-col p-6 rounded-[32px] border transition-all duration-500 overflow-hidden ${
-            isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-xl'
+            isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-xl'
         }`}>
             {/* Header section with Stats */}
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
@@ -75,7 +75,7 @@ export const OptimizationHeatmap: React.FC<OptimizationHeatmapProps> = ({
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <div className={`px-4 py-2 rounded-2xl border ${isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-slate-50 border-slate-100'}`}>
+                    <div className={`px-4 py-2 rounded-2xl border ${isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-slate-50 border-slate-100'}`}>
                         <div className="text-[8px] font-black uppercase tracking-widest opacity-40 mb-1">Best Potential</div>
                         <div className={`text-sm font-mono font-black ${isDarkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
                             {currentMetric.highGood ? maxVal.toLocaleString() : minVal.toLocaleString()}{currentMetric.unit}
@@ -117,7 +117,7 @@ export const OptimizationHeatmap: React.FC<OptimizationHeatmapProps> = ({
                                                 animate={{ opacity: 1, y: -10, scale: 1 }}
                                                 exit={{ opacity: 0, y: 10, scale: 0.9 }}
                                                 className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-3 rounded-2xl z-[100] min-w-[160px] pointer-events-none shadow-2xl backdrop-blur-xl border ${
-                                                    isDarkMode ? 'bg-zinc-900/90 border-white/10' : 'bg-white/90 border-black/5'
+                                                    isDarkMode ? 'bg-black/90 border-white/10' : 'bg-white/90 border-black/5'
                                                 }`}
                                             >
                                                 <div className="text-[8px] font-black uppercase tracking-widest opacity-40 mb-2 border-b border-white/5 pb-1">Cell Parameters</div>

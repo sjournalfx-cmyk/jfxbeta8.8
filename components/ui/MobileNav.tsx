@@ -117,7 +117,7 @@ export const MobilePageHeader: React.FC<{
         <header className={`
             sticky top-0 z-40 px-4 py-3 border-b
             ${isDarkMode 
-                ? 'bg-[#09090b]/95 border-zinc-800' 
+                ? 'bg-[#000000]/95 border-zinc-800' 
                 : 'bg-white/95 border-slate-200'
             }
             backdrop-blur-lg sm:hidden
@@ -170,7 +170,7 @@ export const MobileCard: React.FC<{
             className={`
                 p-4 rounded-2xl border transition-all
                 ${isDarkMode 
-                    ? 'bg-[#18181b] border-[#27272a]' 
+                    ? 'bg-[#000000] border-[#27272a]' 
                     : 'bg-white border-slate-100 shadow-sm'
                 }
                 ${onClick ? 'cursor-pointer active:scale-[0.98]' : ''}
@@ -199,7 +199,7 @@ export const MobileStats: React.FC<{
                     className={`
                         p-4 rounded-xl border
                         ${isDarkMode 
-                            ? 'bg-[#18181b] border-[#27272a]' 
+                            ? 'bg-[#000000] border-[#27272a]' 
                             : 'bg-white border-slate-100'
                         }
                     `}

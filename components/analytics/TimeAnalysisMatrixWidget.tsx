@@ -117,7 +117,7 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
   };
 
   return (
-    <div className={`p-6 rounded-3xl border flex flex-col h-full overflow-visible relative ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+    <div className={`p-6 rounded-3xl border flex flex-col h-full overflow-visible relative ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-500">
@@ -204,7 +204,7 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
               style={{ 
                 left: hoveredCell.x + 20, 
                 top: hoveredCell.y - 120,
-                backgroundColor: isDarkMode ? 'rgba(24, 24, 27, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.95)' : 'rgba(255, 255, 255, 0.95)',
                 borderColor: isDarkMode ? 'rgba(63, 63, 70, 0.5)' : 'rgba(226, 232, 240, 0.8)',
                 minWidth: '220px'
               }}

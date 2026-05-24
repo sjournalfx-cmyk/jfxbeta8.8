@@ -199,7 +199,7 @@ export const TradeFormStep1: React.FC<TradeFormStep1Props> = ({
                                         isRecordingVoiceNote
                                             ? "bg-rose-500 text-white"
                                             : isDarkMode
-                                                ? "bg-zinc-800 text-zinc-200 hover:bg-zinc-700 border border-zinc-700"
+                                                ? "bg-black text-zinc-200 hover:bg-black border border-zinc-700"
                                                 : "bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
                                     )}
                                 >

@@ -24,7 +24,7 @@ export const DetailedStatistics: React.FC<DetailedStatisticsProps> = ({ stats, u
   };
 
   const StatRow = ({ label, value, isNegative = false }: { label: string, value: any, isNegative?: boolean }) => (
-    <div className={`flex justify-between items-center py-2.5 px-4 ${isDarkMode ? 'hover:bg-zinc-800/50' : 'hover:bg-slate-50'} border-b ${isDarkMode ? 'border-zinc-800' : 'border-slate-100'}`}>
+    <div className={`flex justify-between items-center py-2.5 px-4 ${isDarkMode ? 'hover:bg-black/50' : 'hover:bg-slate-50'} border-b ${isDarkMode ? 'border-zinc-800' : 'border-slate-100'}`}>
       <span className={`text-sm font-medium ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>{label}</span>
       <span className={`text-sm font-bold ${isDarkMode ? 'text-zinc-200' : 'text-slate-900'} ${isNegative ? 'text-rose-500' : ''}`}>
         {value}
@@ -80,7 +80,7 @@ export const DetailedStatistics: React.FC<DetailedStatisticsProps> = ({ stats, u
   ];
 
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 w-full ${isDarkMode ? 'bg-[#09090b]' : 'bg-white'} p-8 rounded-[32px] border ${isDarkMode ? 'border-zinc-800 shadow-2xl' : 'border-slate-200 shadow-xl'}`}>
+    <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 w-full ${isDarkMode ? 'bg-black' : 'bg-white'} p-8 rounded-[32px] border ${isDarkMode ? 'border-zinc-800 shadow-2xl' : 'border-slate-200 shadow-xl'}`}>
       <div className="space-y-0.5">
         {leftColumn.map((row, i) => (
           <StatRow key={i} label={row.label} value={row.value} isNegative={row.isNegative} />

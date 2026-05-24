@@ -172,7 +172,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
             {[1, 2, 3, 4, 5, 6, 7].map((s) => (
               <div
                 key={s}
-                className={`h-2.5 rounded-full transition-all duration-300 ${s === step ? 'w-8 bg-[#FF4F01]' : s < step ? 'w-2.5 bg-[#FF4F01]/40' : 'w-2.5 bg-zinc-200 dark:bg-zinc-800'
+                className={`h-2.5 rounded-full transition-all duration-300 ${s === step ? 'w-8 bg-[#FF4F01]' : s < step ? 'w-2.5 bg-[#FF4F01]/40' : 'w-2.5 bg-zinc-200 dark:bg-black'
                   }`}
               />
             ))}
@@ -183,7 +183,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
                 <span className="border border-[#FF4F01] text-[10px] font-bold px-2 py-1 rounded text-[#FF4F01] uppercase tracking-widest animate-pulse">Final Step</span>
               </div>
             )}
-            <div className="bg-zinc-100 dark:bg-zinc-900 px-3 py-1.5 rounded-md text-[11px] font-bold text-zinc-500 uppercase tracking-widest border border-zinc-200 dark:border-zinc-800">
+            <div className="bg-zinc-100 dark:bg-black px-3 py-1.5 rounded-md text-[11px] font-bold text-zinc-500 uppercase tracking-widest border border-zinc-200 dark:border-zinc-800">
               Step {step} of {totalStepsUI}
             </div>
           </div>
@@ -289,7 +289,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
                       {!isAtBottom && <span className="text-[10px] font-black uppercase tracking-widest opacity-40 mr-2">Scroll to bottom</span>}
                       <button
                         onClick={() => setAgreedToTerms(!agreedToTerms)}
-                        className={`w-12 h-6 rounded-full relative transition-all ${agreedToTerms ? 'bg-[#FF4F01]' : 'bg-zinc-200 dark:bg-zinc-700'}`}
+                        className={`w-12 h-6 rounded-full relative transition-all ${agreedToTerms ? 'bg-[#FF4F01]' : 'bg-zinc-200 dark:bg-black'}`}
                       >
                         <div className={`absolute top-1 w-4 h-4 bg-white transition-all shadow-sm ${agreedToTerms ? 'left-7' : 'left-1'}`} />
                       </button>
@@ -388,7 +388,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
                           <><span className="text-5xl font-black">{formData.currencySymbol}{plan.price}</span> <span className="text-xs opacity-50 uppercase font-bold tracking-widest">{idx === 0 ? 'one-time' : '/monthly'}</span></>
                         )}
                       </div>
-                      <button onClick={() => handleSelectPlan(plan.name)} className={`w-full py-4 rounded-xl font-bold text-sm transition-all ${plan.highlight ? 'bg-[#FF4F01] text-white hover:bg-[#e64601] shadow-lg shadow-[#FF4F01]/20' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>
+                      <button onClick={() => handleSelectPlan(plan.name)} className={`w-full py-4 rounded-xl font-bold text-sm transition-all ${plan.highlight ? 'bg-[#FF4F01] text-white hover:bg-[#e64601] shadow-lg shadow-[#FF4F01]/20' : 'bg-zinc-100 dark:bg-black text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-black'}`}>
                         {idx === 0 ? 'Get started' : 'Join Beta'}
                       </button>
                     </div>
@@ -412,7 +412,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
                       : isDarkMode ? 'border-zinc-800 bg-[#111]' : 'border-zinc-100 bg-white shadow-sm'
                     } ${formData.plan === 'PRO TIER (ANALYSTS)' || formData.plan === 'PREMIUM (MASTERS)' ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-colors ${formData.syncMethod === 'Manual' ? 'bg-[#FF4F01] text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-colors ${formData.syncMethod === 'Manual' ? 'bg-[#FF4F01] text-white' : 'bg-zinc-100 dark:bg-black text-zinc-500'}`}>
                     <ShieldCheck size={28} />
                   </div>
                   <h3 className="text-2xl font-black mb-3">Manual Entry</h3>
@@ -435,7 +435,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
                       : isDarkMode ? 'border-zinc-800 bg-[#111]' : 'border-zinc-100 bg-white shadow-sm'
                     } ${formData.plan === 'PREMIUM (MASTERS)' ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-colors ${formData.syncMethod === 'EA_CONNECT' ? 'bg-[#FF4F01] text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-colors ${formData.syncMethod === 'EA_CONNECT' ? 'bg-[#FF4F01] text-white' : 'bg-zinc-100 dark:bg-black text-zinc-500'}`}>
                     <Cpu size={28} />
                   </div>
                   <div className="flex items-center gap-3 mb-3">
@@ -461,7 +461,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
                         : isDarkMode ? 'border-zinc-800 bg-[#111]' : 'border-zinc-100 bg-white shadow-sm'
                       }`}
                   >
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-colors ${formData.syncMethod === 'BROKER_SYNC' ? 'bg-[#FF4F01] text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-colors ${formData.syncMethod === 'BROKER_SYNC' ? 'bg-[#FF4F01] text-white' : 'bg-zinc-100 dark:bg-black text-zinc-500'}`}>
                       <Globe size={28} />
                     </div>
                     <div className="flex items-center gap-3 mb-3">
@@ -598,7 +598,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
         <div className="mt-12 lg:mt-24 pt-10 border-t border-zinc-100 dark:border-zinc-900 flex items-center justify-between">
           <button
             onClick={prevStep}
-            className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-sm transition-all border ${step === 1 ? 'opacity-0 pointer-events-none' : isDarkMode ? 'border-zinc-800 hover:bg-zinc-900 text-zinc-400' : 'border-zinc-200 hover:bg-zinc-100 text-zinc-600'
+            className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-sm transition-all border ${step === 1 ? 'opacity-0 pointer-events-none' : isDarkMode ? 'border-zinc-800 hover:bg-black text-zinc-400' : 'border-zinc-200 hover:bg-zinc-100 text-zinc-600'
               }`}
           >
             <ArrowLeft size={18} /> Back

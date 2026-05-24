@@ -47,7 +47,7 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
             JournalFX
           </span>
         </div>
-        <div className="px-2.5 py-1 rounded-full border border-zinc-800/80 bg-zinc-900/50 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-[#FF4F01]">
+        <div className="px-2.5 py-1 rounded-full border border-zinc-800/80 bg-black/50 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-[#FF4F01]">
           v1.0.0-Beta
         </div>
       </header>
@@ -60,15 +60,15 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-[210px] h-[390px] bg-zinc-950 border-[5px] border-zinc-800 rounded-[38px] p-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden mb-6 flex flex-col justify-between"
+          className="relative w-[210px] h-[390px] bg-black border-[5px] border-zinc-800 rounded-[38px] p-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden mb-6 flex flex-col justify-between"
         >
           {/* Speaker Notch */}
-          <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-16 h-4 bg-zinc-800 rounded-full z-20 flex items-start justify-center">
-            <div className="w-8 h-1 bg-zinc-900 rounded-full mt-1" />
+          <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-16 h-4 bg-black rounded-full z-20 flex items-start justify-center">
+            <div className="w-8 h-1 bg-black rounded-full mt-1" />
           </div>
 
           {/* Simulated App Screen */}
-          <div className="flex-1 rounded-[28px] bg-[#09090b] p-3 pt-5 flex flex-col gap-2.5 relative overflow-hidden select-none">
+          <div className="flex-1 rounded-[28px] bg-[#000000] p-3 pt-5 flex flex-col gap-2.5 relative overflow-hidden select-none">
             {/* Ambient inner glow */}
             <div className="absolute -top-10 -right-10 w-24 h-24 bg-[#FF4F01]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
@@ -83,7 +83,7 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
             </div>
 
             {/* Mock Chart & Balance */}
-            <div className="bg-zinc-900/40 border border-zinc-900/60 rounded-xl p-2 flex flex-col gap-1">
+            <div className="bg-black/40 border border-zinc-900/60 rounded-xl p-2 flex flex-col gap-1">
               <span className="text-[8px] text-zinc-500 font-bold uppercase tracking-wider">Account Balance</span>
               <div className="flex items-baseline gap-1">
                 <span className="text-xs font-black text-white">$14,842</span>
@@ -125,7 +125,7 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
                 <span className="text-[7px] text-zinc-400 font-black uppercase tracking-wider">Active Positions</span>
                 <span className="text-[6px] text-indigo-400 hover:underline cursor-pointer">View All</span>
               </div>
-              <div className="bg-zinc-900/35 border border-zinc-950 rounded-xl p-1.5 flex items-center justify-between">
+              <div className="bg-black/35 border border-zinc-950 rounded-xl p-1.5 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <div className="w-5 h-5 bg-[#FF4F01]/10 text-[#FF4F01] rounded-lg flex items-center justify-center text-[8px] font-black">X</div>
                   <div className="flex flex-col">
@@ -135,7 +135,7 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
                 </div>
                 <div className="text-[8px] font-black text-emerald-400 font-mono">+$310.00</div>
               </div>
-              <div className="bg-zinc-900/35 border border-zinc-950 rounded-xl p-1.5 flex items-center justify-between">
+              <div className="bg-black/35 border border-zinc-950 rounded-xl p-1.5 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <div className="w-5 h-5 bg-indigo-500/10 text-indigo-400 rounded-lg flex items-center justify-center text-[8px] font-black">E</div>
                   <div className="flex flex-col">
@@ -209,9 +209,9 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
           {upcomingFeatures.map((feat, index) => (
             <div 
               key={index}
-              className="flex items-start gap-3 p-3 rounded-2xl bg-zinc-950 border border-zinc-900/80 hover:border-zinc-800 transition-colors"
+              className="flex items-start gap-3 p-3 rounded-2xl bg-black border border-zinc-900/80 hover:border-zinc-800 transition-colors"
             >
-              <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+              <div className="p-2 rounded-xl bg-black border border-zinc-800 flex items-center justify-center shrink-0">
                 {feat.icon}
               </div>
               <div className="flex-1">
@@ -252,7 +252,7 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
           
           <button 
             onClick={handleNotifyMe}
-            className="w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider border border-zinc-800 bg-zinc-950 text-zinc-300 hover:bg-zinc-900/60 hover:text-white transition-colors"
+            className="w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider border border-zinc-800 bg-black text-zinc-300 hover:bg-black/60 hover:text-white transition-colors"
           >
             {notified ? '✓ Notification Request Saved' : 'Notify Me on Release'}
           </button>

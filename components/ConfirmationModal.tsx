@@ -95,26 +95,26 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   const getIconBg = () => {
     switch (variant) {
       case 'danger':
-        return 'bg-zinc-800';
+        return 'bg-black';
       case 'warning':
-        return 'bg-zinc-800';
+        return 'bg-black';
       case 'info':
-        return 'bg-zinc-800';
+        return 'bg-black';
       default:
-        return 'bg-zinc-800';
+        return 'bg-black';
     }
   };
 
   const getConfirmButtonClass = () => {
     switch (variant) {
       case 'danger':
-        return 'bg-zinc-700 text-white';
+        return 'bg-black text-white';
       case 'warning':
-        return 'bg-zinc-700 text-white';
+        return 'bg-black text-white';
       case 'info':
-        return 'bg-zinc-700 text-white';
+        return 'bg-black text-white';
       default:
-        return 'bg-zinc-700 text-white';
+        return 'bg-black text-white';
     }
   };
 
@@ -129,9 +129,9 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     }
   };
 
-return (
+  return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 animate-in fade-in duration-200"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
@@ -141,43 +141,45 @@ return (
       <div className="absolute inset-0 bg-black/80" />
       <div
         ref={modalRef}
-        className="relative w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-800 bg-[#090909] shadow-2xl shadow-black/50 transform transition-all animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-[26rem] rounded-2xl overflow-hidden border border-zinc-800 bg-black shadow-xl shadow-black/40"
         role="document"
       >
-        <div className="p-6">
-          <div className="flex flex-col items-center text-center">
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${getIconBg()}`}>
+        <div className="p-5 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+            <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center ${getIconBg()}`}>
               {getIcon()}
             </div>
 
-            <h3 id="modal-title" className="text-xl font-semibold text-white tracking-tight mb-2">{title}</h3>
-            <p id="modal-description" className="text-sm leading-6 text-zinc-400 mb-7 px-2">
-              {description}
-            </p>
+            <div className="min-w-0 flex-1">
+              <h3 id="modal-title" className="text-xl font-semibold text-white tracking-tight">
+                {title}
+              </h3>
+              <p id="modal-description" className="mt-2 text-sm leading-6 text-zinc-400">
+                {description}
+              </p>
 
-            <div className="flex gap-3 w-full" role="group" aria-label="Dialog actions">
-              {showCancel && (
+              <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end" role="group" aria-label="Dialog actions">
+                {showCancel && (
+                  <button
+                    onClick={onCancel}
+                    className="inline-flex min-h-10 items-center justify-center rounded-xl border border-zinc-700 bg-black px-4 text-sm font-medium text-zinc-100 transition-colors hover:bg-zinc-900"
+                    ref={cancelButtonRef}
+                  >
+                    {cancelText}
+                  </button>
+                )}
                 <button
-                  onClick={onCancel}
-                  className="flex-1 py-3 rounded-xl font-medium text-sm bg-zinc-800 text-zinc-100 border border-zinc-700"
-                  ref={cancelButtonRef}
+                  onClick={onConfirm}
+                  className={`inline-flex min-h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold transition-colors ${getConfirmButtonClass()}`}
+                  ref={confirmButtonRef}
+                  autoFocus={!showCancel}
                 >
-                  {cancelText}
+                  {confirmText}
                 </button>
-              )}
-              <button
-                onClick={onConfirm}
-                className={`flex-1 py-3 rounded-xl font-medium text-sm ${getConfirmButtonClass()}`}
-                ref={confirmButtonRef}
-                autoFocus={!showCancel}
-              >
-                {confirmText}
-              </button>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="h-px w-full bg-zinc-800" />
       </div>
     </div>
   );

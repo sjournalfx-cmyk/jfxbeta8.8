@@ -51,10 +51,10 @@ export const OutcomeDistributionWidget: React.FC<OutcomeDistributionWidgetProps>
   return (
     <div className={clsx(
       "h-full p-6 rounded-[32px] border flex flex-col justify-between",
-      isDarkMode ? "bg-zinc-950 border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-sm"
+      isDarkMode ? "bg-black border-zinc-900 shadow-2xl" : "bg-white border-slate-200 shadow-sm"
     )}>
       <div className="flex items-center gap-3 mb-4 self-start">
-        <div className={clsx("p-2 rounded-xl", isDarkMode ? "bg-zinc-900" : "bg-slate-100")}>
+        <div className={clsx("p-2 rounded-xl", isDarkMode ? "bg-black" : "bg-slate-100")}>
           <PieChartIcon size={20} className="text-teal-500" />
         </div>
         <div>

@@ -22,9 +22,9 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         className={cn(
           'rounded-xl border transition-all duration-200',
           isDarkMode
-            ? 'bg-zinc-900/50 border-zinc-800/50 backdrop-blur-sm text-zinc-100'
+            ? 'bg-black/50 border-zinc-800/50 backdrop-blur-sm text-zinc-100'
             : 'bg-white border-slate-200 shadow-sm text-slate-900',
-          hoverable && (isDarkMode ? 'hover:border-zinc-700 hover:bg-zinc-900' : 'hover:border-slate-300 hover:shadow-md'),
+          hoverable && (isDarkMode ? 'hover:border-zinc-700 hover:bg-black' : 'hover:border-slate-300 hover:shadow-md'),
           paddings[padding],
           className
         )}

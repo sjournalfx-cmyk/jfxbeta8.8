@@ -81,7 +81,7 @@ const MetaTraderTerminal: React.FC<MetaTraderTerminalProps> = ({
   return (
     <div className="flex flex-col h-full w-full bg-transparent overflow-hidden">
       {/* Header / Toolbar */}
-      <div className={`flex items-center justify-between px-6 py-4 border-b ${isDarkMode ? 'border-zinc-800 bg-zinc-900/50' : 'border-slate-200 bg-white'
+      <div className={`flex items-center justify-between px-6 py-4 border-b ${isDarkMode ? 'border-zinc-800 bg-black/50' : 'border-slate-200 bg-white'
         }`}>
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-xl bg-[#FF4F01]/10 text-[#FF4F01]">
@@ -99,7 +99,7 @@ const MetaTraderTerminal: React.FC<MetaTraderTerminalProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handleRetry}
-              className={`p-2 rounded-lg transition-all ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-100 text-slate-500'
+              className={`p-2 rounded-lg transition-all ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-100 text-slate-500'
                 }`}
               title="Reload Terminal"
             >

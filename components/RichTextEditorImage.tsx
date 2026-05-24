@@ -126,8 +126,8 @@ const ImageNode: React.FC<NodeViewProps> = (props) => {
         className={`relative transition-all group/image flex flex-col ${
           selected ? 'ring-2 ring-indigo-500 rounded-lg shadow-2xl' : 'shadow-lg'
         } ${hasBorder ? 'p-1 border-2 rounded-lg' : ''} ${
-            hasBorder && borderColor === 'auto' ? 'border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800' : ''
-        } ${hasBorder && borderColor !== 'auto' ? 'bg-white dark:bg-zinc-800' : ''}`}
+            hasBorder && borderColor === 'auto' ? 'border-zinc-200 dark:border-zinc-700 bg-white dark:bg-black' : ''
+        } ${hasBorder && borderColor !== 'auto' ? 'bg-white dark:bg-black' : ''}`}
         style={{ 
             width: width, 
             maxWidth: '100%',

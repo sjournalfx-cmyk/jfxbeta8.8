@@ -38,7 +38,7 @@ export const StepProgress: React.FC<StepProgressProps> = ({ steps, currentStep, 
                       : isCompleted
                         ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-500'
                         : isDarkMode
-                          ? 'border-[#27272a] bg-[#18181b] text-zinc-500'
+                          ? 'border-[#27272a] bg-[#000000] text-zinc-500'
                           : 'border-slate-200 bg-slate-100 text-slate-400'
                     }
                   `}

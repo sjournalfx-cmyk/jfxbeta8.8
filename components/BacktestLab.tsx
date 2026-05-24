@@ -1246,13 +1246,13 @@ setAllData(validData);
     }, [centerChart, magnetMode, isLocked, selectedDrawingId, handleUndo, handleRedo, drawings, pushToHistory, addToast]);
 
     return (
-        <div className={`w-full h-full flex flex-col overflow-hidden font-sans ${isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-white text-slate-900'}`} onMouseUp={handleMouseUp}>
-            <div className={`h-16 shrink-0 border-b flex items-center justify-between px-8 z-50 relative shadow-sm ${isDarkMode ? 'border-zinc-800 bg-[#09090b]/95 backdrop-blur-sm' : 'border-slate-200 bg-white/95 backdrop-blur-sm'}`}>
+        <div className={`w-full h-full flex flex-col overflow-hidden font-sans ${isDarkMode ? 'bg-black text-zinc-200' : 'bg-white text-slate-900'}`} onMouseUp={handleMouseUp}>
+            <div className={`h-16 shrink-0 border-b flex items-center justify-between px-8 z-50 relative shadow-sm ${isDarkMode ? 'border-zinc-800 bg-black/95 backdrop-blur-sm' : 'border-slate-200 bg-white/95 backdrop-blur-sm'}`}>
                 <div className="flex items-center gap-5 w-72">
                     {(!showWelcome || allData.length > 0) ? (
 <button
                             onClick={() => { setShowWelcome(true); setAllData([]); localStorage.removeItem('jfx_backtest_cached_chart'); localStorage.setItem('jfx_backtest_data_source', 'none'); }}
-                            className={`p-1.5 rounded-xl border transition-all ${isDarkMode ? 'bg-zinc-800 border-zinc-700 text-zinc-400 hover:text-[#FF4F01] hover:border-[#FF4F01]/50' : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-[#FF4F01] hover:border-[#FF4F01]/50'}`}
+                            className={`p-1.5 rounded-xl border transition-all ${isDarkMode ? 'bg-black border-zinc-700 text-zinc-400 hover:text-[#FF4F01] hover:border-[#FF4F01]/50' : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-[#FF4F01] hover:border-[#FF4F01]/50'}`}
                             title="Back to Lab Menu"
                         >
                             <ArrowLeftToLine size={14} />
@@ -1271,17 +1271,17 @@ setAllData(validData);
                     </div>
                 </div>
 
-                <div className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-2 p-1.5 rounded-2xl border shadow-xl ${isDarkMode ? 'bg-zinc-900/80 border-zinc-800 shadow-black/20' : 'bg-slate-50 border-slate-200 shadow-slate-200/50'}`}>
+                <div className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-2 p-1.5 rounded-2xl border shadow-xl ${isDarkMode ? 'bg-black/80 border-zinc-800 shadow-black/20' : 'bg-slate-50 border-slate-200 shadow-slate-200/50'}`}>
                     <div className={`flex items-center rounded-xl p-1 gap-1 ${isDarkMode ? 'bg-black/20' : 'bg-slate-100'}`}>
                         <button 
                             onClick={() => setActiveLabTab('chart')}
-                            className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeLabTab === 'chart' ? (isDarkMode ? 'bg-zinc-800 text-[#FF4F01] border border-[#FF4F01]/20' : 'bg-white text-[#FF4F01] shadow-sm') : 'text-zinc-500 hover:text-zinc-300'}`}
+                            className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeLabTab === 'chart' ? (isDarkMode ? 'bg-black text-[#FF4F01] border border-[#FF4F01]/20' : 'bg-white text-[#FF4F01] shadow-sm') : 'text-zinc-500 hover:text-zinc-300'}`}
                         >
                             Chart
                         </button>
                         <button 
                             onClick={() => setActiveLabTab('optimizer')}
-                            className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeLabTab === 'optimizer' ? (isDarkMode ? 'bg-zinc-800 text-[#FF4F01] border border-[#FF4F01]/20' : 'bg-white text-[#FF4F01] shadow-sm') : 'text-zinc-500 hover:text-zinc-300'}`}
+                            className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeLabTab === 'optimizer' ? (isDarkMode ? 'bg-black text-[#FF4F01] border border-[#FF4F01]/20' : 'bg-white text-[#FF4F01] shadow-sm') : 'text-zinc-500 hover:text-zinc-300'}`}
                         >
                             Optimizer
                         </button>
@@ -1291,7 +1291,7 @@ setAllData(validData);
                         <div className="flex items-center gap-2 px-1">
                             <div className="relative group/status">
                                 <div className={`w-2 h-2 rounded-full shadow-sm ${bridgeStatus === 'online' ? 'bg-emerald-500 animate-pulse' : bridgeStatus === 'checking' ? 'bg-amber-500 animate-pulse' : 'bg-rose-500'}`} />
-                                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-zinc-800 text-[8px] font-black uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover/status:opacity-100 transition-opacity border border-white/5 min-w-[120px] text-center`}>
+                                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-black text-[8px] font-black uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover/status:opacity-100 transition-opacity border border-white/5 min-w-[120px] text-center`}>
                                     {bridgeStatus === 'online' ? 'Bridge Online' : bridgeStatus === 'checking' ? 'Checking Bridge...' : bridgeError || 'Bridge Offline'}
                                 </div>
                             </div>
@@ -1312,13 +1312,13 @@ setAllData(validData);
                         {isSymbolMenuOpen && (
                             <>
                                 <div className="fixed inset-0 z-[90]" onClick={() => setIsSymbolMenuOpen(false)} />
-                                <div className={`absolute top-full left-0 mt-2 w-64 border rounded-2xl shadow-2xl p-2 z-[100] max-h-80 overflow-y-auto ${isDarkMode ? 'bg-[#1e222d] border-zinc-700' : 'bg-white border-slate-200'}`}>
+                                <div className={`absolute top-full left-0 mt-2 w-64 border rounded-2xl shadow-2xl p-2 z-[100] max-h-80 overflow-y-auto ${isDarkMode ? 'bg-black border-zinc-700' : 'bg-white border-slate-200'}`}>
                                     <input
                                         type="text"
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value.toUpperCase())}
                                         placeholder="Search symbols..."
-                                        className={`w-full px-3 py-2 mb-2 rounded-lg text-xs font-bold outline-none ${isDarkMode ? 'bg-zinc-800 text-white placeholder-zinc-500' : 'bg-slate-100 text-slate-900 placeholder-slate-400'}`}
+                                        className={`w-full px-3 py-2 mb-2 rounded-lg text-xs font-bold outline-none ${isDarkMode ? 'bg-black text-white placeholder-zinc-500' : 'bg-slate-100 text-slate-900 placeholder-slate-400'}`}
                                         autoFocus
                                     />
                                     {POPULAR_SYMBOLS.filter(s => searchTerm === '' || s.includes(searchTerm)).map(s => (
@@ -1340,7 +1340,7 @@ setAllData(validData);
                             {isTFMenuOpen && (
                                 <>
                                     <div className="fixed inset-0 z-40" onClick={() => setIsTFMenuOpen(false)} />
-                                    <div className={`absolute top-full left-0 mt-2 w-48 border rounded-2xl shadow-2xl p-2 z-[100] ${isDarkMode ? 'bg-[#1e222d] border-zinc-700' : 'bg-white border-slate-200'}`}>
+                                    <div className={`absolute top-full left-0 mt-2 w-48 border rounded-2xl shadow-2xl p-2 z-[100] ${isDarkMode ? 'bg-black border-zinc-700' : 'bg-white border-slate-200'}`}>
                                         {['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1'].map(tf => (
                                             <button key={tf} onClick={() => { setTimeframe(tf); setIsTFMenuOpen(false); handleFetchMT5Data(undefined, tf); }} className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-left ${timeframe === tf ? 'bg-[#FF4F01] text-white' : (isDarkMode ? 'text-zinc-400 hover:bg-white/5 hover:text-white' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900')}`}>
                                                 <span className="text-sm font-black">{tf}</span>
@@ -1359,7 +1359,7 @@ setAllData(validData);
                         </button>
                     </div>
 
-                    <button onClick={() => handleFetchMT5Data()} disabled={isFetching} className={`h-9 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest ${isFetching ? 'bg-zinc-800 text-zinc-500 cursor-wait' : 'bg-gradient-to-r from-[#FF4F01] to-[#ff7e42] text-white active:scale-95 shadow-lg shadow-[#FF4F01]/25'}`}>
+                    <button onClick={() => handleFetchMT5Data()} disabled={isFetching} className={`h-9 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest ${isFetching ? 'bg-black text-zinc-500 cursor-wait' : 'bg-gradient-to-r from-[#FF4F01] to-[#ff7e42] text-white active:scale-95 shadow-lg shadow-[#FF4F01]/25'}`}>
                         {isFetching ? 'Syncing...' : 'Sync'}
                     </button>
                 </div>
@@ -1373,7 +1373,7 @@ setAllData(validData);
                                     {currentIndex + 1} / {allData.length} Bars
                                 </span>
                             </div>
-                            <div className={`w-full h-1.5 rounded-full overflow-hidden ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`}>
+                            <div className={`w-full h-1.5 rounded-full overflow-hidden ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`}>
                                 <div
                                     className="h-full bg-emerald-500 transition-all duration-300 ease-out"
                                     style={{ width: `${Math.min(100, ((currentIndex + 1) / allData.length) * 100)}%` }}
@@ -1444,7 +1444,7 @@ setAllData(validData);
                                     {/* Option 1: Live Sync */}
                                     <div
                                         onClick={() => handleFetchMT5Data()}
-                                        className={`p-8 rounded-3xl border-2 border-dashed flex flex-col items-center justify-center gap-6 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98] group ${isDarkMode ? 'bg-zinc-900/80 border-zinc-800 hover:border-emerald-500/50 hover:bg-emerald-500/5' : 'bg-white border-slate-200 hover:border-emerald-500/50'}`}
+                                        className={`p-8 rounded-3xl border-2 border-dashed flex flex-col items-center justify-center gap-6 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98] group ${isDarkMode ? 'bg-black/80 border-zinc-800 hover:border-emerald-500/50 hover:bg-emerald-500/5' : 'bg-white border-slate-200 hover:border-emerald-500/50'}`}
                                     >
                                         <div className={`p-6 rounded-2xl border-2 border-dashed transition-all group-hover:rotate-12 ${isDarkMode ? 'bg-black border-zinc-800 group-hover:border-emerald-500 group-hover:text-emerald-500 text-zinc-600' : 'bg-slate-50 border-slate-200 group-hover:border-emerald-500 group-hover:text-emerald-500 text-slate-400'}`}>
                                             <RefreshCw size={48} className={isFetching ? 'animate-spin' : ''} />
@@ -1453,13 +1453,13 @@ setAllData(validData);
                                             <h3 className={`text-xl font-black uppercase tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Live MT5 Sync</h3>
                                             <p className={`text-xs font-bold uppercase tracking-widest leading-relaxed ${isDarkMode ? 'text-zinc-500' : 'text-slate-400'}`}>Requires JournalFX Bridge to be running<br />Connects directly to your MT5 Terminal</p>
                                         </div>
-                                        <div className={`px-6 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'bg-zinc-800 border-zinc-700 text-zinc-400 group-hover:text-emerald-400' : 'bg-white border-slate-200 text-slate-500 group-hover:text-emerald-600'}`}>
+                                        <div className={`px-6 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'bg-black border-zinc-700 text-zinc-400 group-hover:text-emerald-400' : 'bg-white border-slate-200 text-slate-500 group-hover:text-emerald-600'}`}>
                                             {isFetching ? 'Connecting...' : 'Start Sync'}
                                         </div>
                                     </div>
 
                                     {/* Option 2: Manual Upload */}
-                                    <label htmlFor="backtest-file-upload" className={`p-8 rounded-3xl border-2 border-dashed flex flex-col items-center justify-center gap-6 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98] group ${isDarkMode ? 'bg-zinc-900/80 border-zinc-800 hover:border-[#FF4F01]/50 hover:bg-[#FF4F01]/5' : 'bg-white border-slate-200 hover:border-[#FF4F01]/50'}`}>
+                                    <label htmlFor="backtest-file-upload" className={`p-8 rounded-3xl border-2 border-dashed flex flex-col items-center justify-center gap-6 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98] group ${isDarkMode ? 'bg-black/80 border-zinc-800 hover:border-[#FF4F01]/50 hover:bg-[#FF4F01]/5' : 'bg-white border-slate-200 hover:border-[#FF4F01]/50'}`}>
                                         <input
                                             id="backtest-file-upload"
                                             name="backtest-data-file"
@@ -1475,14 +1475,14 @@ setAllData(validData);
                                             <h3 className={`text-xl font-black uppercase tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Import JSON File</h3>
                                             <p className={`text-xs font-bold uppercase tracking-widest leading-relaxed ${isDarkMode ? 'text-zinc-500' : 'text-slate-400'}`}>Upload an MT5 Export JSON<br />Array of OHLC objects</p>
                                         </div>
-                                        <div className={`px-6 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'bg-zinc-800 border-zinc-700 text-zinc-400 group-hover:text-[#FF4F01]' : 'bg-white border-slate-200 text-slate-500 group-hover:text-[#FF4F01]'}`}>
+                                        <div className={`px-6 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'bg-black border-zinc-700 text-zinc-400 group-hover:text-[#FF4F01]' : 'bg-white border-slate-200 text-slate-500 group-hover:text-[#FF4F01]'}`}>
                                             Browse Files
                                         </div>
                                     </label>
 
                                     {/* Option 3: Recent Sessions */}
                                     <div
-                                        className={`p-8 rounded-3xl border-2 border-dashed flex flex-col items-center justify-start gap-6 transition-all group overflow-hidden ${isDarkMode ? 'bg-zinc-900/80 border-zinc-800 hover:border-purple-500/50 hover:bg-purple-500/5' : 'bg-white border-slate-200 hover:border-purple-500/50'}`}
+                                        className={`p-8 rounded-3xl border-2 border-dashed flex flex-col items-center justify-start gap-6 transition-all group overflow-hidden ${isDarkMode ? 'bg-black/80 border-zinc-800 hover:border-purple-500/50 hover:bg-purple-500/5' : 'bg-white border-slate-200 hover:border-purple-500/50'}`}
                                     >
                                         <div className="flex flex-col items-center gap-4 w-full h-full">
                                             <div className={`p-6 rounded-2xl border-2 border-dashed transition-all group-hover:scale-110 ${isDarkMode ? 'bg-black border-zinc-800 group-hover:border-purple-500 group-hover:text-purple-500 text-zinc-600' : 'bg-slate-50 border-slate-200 group-hover:border-purple-500 group-hover:text-purple-500 text-slate-400'}`}>
@@ -1580,7 +1580,7 @@ setAllData(validData);
                     </AnimatePresence>
 
                     {analysisResult && (
-                        <div className={`absolute top-4 right-4 w-64 p-4 rounded-xl border backdrop-blur-md shadow-2xl z-20 ${isDarkMode ? 'bg-zinc-900/90 border-zinc-800' : 'bg-white/90 border-slate-200'}`}>
+                        <div className={`absolute top-4 right-4 w-64 p-4 rounded-xl border backdrop-blur-md shadow-2xl z-20 ${isDarkMode ? 'bg-black/90 border-zinc-800' : 'bg-white/90 border-slate-200'}`}>
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-2">
                                     <Brain size={14} className="text-purple-500" />
@@ -1597,7 +1597,7 @@ setAllData(validData);
                 ) : (
                     <div className="flex-1 w-full h-full p-8 flex flex-col items-center justify-center gap-8 overflow-y-auto custom-scrollbar relative z-10">
                         <div className="text-center space-y-4">
-                            <div className="w-20 h-20 bg-zinc-900 rounded-[32px] border border-zinc-800 flex items-center justify-center mx-auto mb-6">
+                            <div className="w-20 h-20 bg-black rounded-[32px] border border-zinc-800 flex items-center justify-center mx-auto mb-6">
                                 <Zap size={32} className="text-[#FF4F01]" />
                             </div>
                             <h2 className="text-2xl font-black uppercase tracking-tight text-white">Advanced Optimizer</h2>
@@ -1613,30 +1613,30 @@ setAllData(validData);
             </div>
 
             {activeLabTab === 'chart' && (
-                <div className={`h-16 shrink-0 border-t flex items-center px-8 justify-between relative z-20 ${isDarkMode ? 'border-zinc-800 bg-[#09090b]' : 'border-slate-200 bg-white'}`}>
+                <div className={`h-16 shrink-0 border-t flex items-center px-8 justify-between relative z-20 ${isDarkMode ? 'border-zinc-800 bg-black' : 'border-slate-200 bg-white'}`}>
                     <div className="flex items-center gap-3">
                     </div>
-                    <div className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-2 p-1.5 rounded-2xl border backdrop-blur shadow-2xl ${isDarkMode ? 'bg-zinc-900/80 border-zinc-800' : 'bg-slate-50/80 border-slate-200'}`}>
-                        <button onClick={() => setIsSelectBarMode(!isSelectBarMode)} className={`flex items-center gap-2 px-3 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest ${isSelectBarMode ? 'bg-rose-500/20 text-rose-500 border border-rose-500/30' : (isDarkMode ? 'hover:bg-zinc-800 text-zinc-400 border border-transparent' : 'hover:bg-slate-200 text-slate-500 border border-transparent')}`}><ArrowLeftToLine size={16} /> Select bar</button>
-                        <div className={`w-px h-5 mx-1 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
-                        <button onClick={handleZoomOut} disabled={allData.length === 0} title="Zoom Out" className={`p-2 rounded-xl ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-200 text-slate-500')}`}><ZoomOut size={16} /></button>
+                    <div className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-2 p-1.5 rounded-2xl border backdrop-blur shadow-2xl ${isDarkMode ? 'bg-black/80 border-zinc-800' : 'bg-slate-50/80 border-slate-200'}`}>
+                        <button onClick={() => setIsSelectBarMode(!isSelectBarMode)} className={`flex items-center gap-2 px-3 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest ${isSelectBarMode ? 'bg-rose-500/20 text-rose-500 border border-rose-500/30' : (isDarkMode ? 'hover:bg-black text-zinc-400 border border-transparent' : 'hover:bg-slate-200 text-slate-500 border border-transparent')}`}><ArrowLeftToLine size={16} /> Select bar</button>
+                        <div className={`w-px h-5 mx-1 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
+                        <button onClick={handleZoomOut} disabled={allData.length === 0} title="Zoom Out" className={`p-2 rounded-xl ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500')}`}><ZoomOut size={16} /></button>
                         <span className={`text-[10px] font-mono font-bold min-w-[40px] text-center ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>{zoomLevel}%</span>
-                        <button onClick={handleZoomIn} disabled={allData.length === 0} title="Zoom In" className={`p-2 rounded-xl ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-200 text-slate-500')}`}><ZoomIn size={16} /></button>
-                        <div className={`w-px h-4 mx-1 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                        <button onClick={handleZoomIn} disabled={allData.length === 0} title="Zoom In" className={`p-2 rounded-xl ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500')}`}><ZoomIn size={16} /></button>
+                        <div className={`w-px h-4 mx-1 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
                         <button 
                             onClick={handleResetView} 
                             disabled={allData.length === 0} 
                             title="Reset View" 
-                            className={`px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700')}`}
+                            className={`px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'bg-black text-zinc-400 hover:bg-black hover:text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700')}`}
                         >
                             Reset
                         </button>
-                        <div className={`w-px h-5 mx-1 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
-                        <button onClick={centerChart} disabled={allData.length === 0} title="Fit Chart" className={`flex items-center gap-2 px-3 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'hover:bg-zinc-800 text-zinc-400 border border-transparent' : 'hover:bg-slate-200 text-slate-500 border border-transparent')}`}><Search size={16} /></button>
-                        <div className={`w-px h-5 mx-1 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
-                        <button onClick={resetReplay} className={`p-2.5 rounded-xl ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}><RotateCcw size={18} /></button>
+                        <div className={`w-px h-5 mx-1 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
+                        <button onClick={centerChart} disabled={allData.length === 0} title="Fit Chart" className={`flex items-center gap-2 px-3 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest ${allData.length === 0 ? 'opacity-30 cursor-not-allowed' : (isDarkMode ? 'hover:bg-black text-zinc-400 border border-transparent' : 'hover:bg-slate-200 text-slate-500 border border-transparent')}`}><Search size={16} /></button>
+                        <div className={`w-px h-5 mx-1 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
+                        <button onClick={resetReplay} className={`p-2.5 rounded-xl ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}><RotateCcw size={18} /></button>
                         <button onClick={() => setIsPlaying(!isPlaying)} disabled={isFetching || allData.length === 0} className={`w-10 h-10 flex items-center justify-center rounded-xl bg-[#FF4F01] text-white shadow-lg shadow-[#FF4F01]/30`}>{isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}</button>
-                        <button onClick={stepForward} disabled={isFetching || allData.length === 0} className={`p-2.5 rounded-xl ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}><StepForward size={18} /></button>
+                        <button onClick={stepForward} disabled={isFetching || allData.length === 0} className={`p-2.5 rounded-xl ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}><StepForward size={18} /></button>
                     </div>
                     <div className="flex items-center gap-4">
                         {isLocked && (
@@ -1650,12 +1650,12 @@ setAllData(validData);
                         <div className="flex flex-col items-end gap-1 relative">
                             <button onClick={() => setIsSpeedMenuOpen(!isSpeedMenuOpen)} className="flex flex-col items-end gap-1 opacity-70 hover:opacity-100">
                                 <span className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Replay Speed</span>
-                                <div className={`flex items-center gap-2 px-2 py-0.5 rounded border ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-100 border-slate-200'}`}><span className="text-[10px] font-mono font-black text-[#FF4F01]">{playSpeed === 1000 ? '0.5x' : playSpeed === 500 ? '1.0x' : playSpeed === 200 ? '2.5x' : '10x'}</span><ChevronDown size={12} /></div>
+                                <div className={`flex items-center gap-2 px-2 py-0.5 rounded border ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-slate-100 border-slate-200'}`}><span className="text-[10px] font-mono font-black text-[#FF4F01]">{playSpeed === 1000 ? '0.5x' : playSpeed === 500 ? '1.0x' : playSpeed === 200 ? '2.5x' : '10x'}</span><ChevronDown size={12} /></div>
                             </button>
                             {isSpeedMenuOpen && (
                                 <>
                                     <div className="fixed inset-0 z-40" onClick={() => setIsSpeedMenuOpen(false)} />
-                                    <div className={`absolute bottom-full right-0 mb-4 w-48 border rounded-xl shadow-2xl p-2 z-50 ${isDarkMode ? 'bg-[#1e222d] border-zinc-800' : 'bg-white border-slate-200'}`}>
+                                    <div className={`absolute bottom-full right-0 mb-4 w-48 border rounded-xl shadow-2xl p-2 z-50 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'}`}>
                                         {[{ l: '0.5x', v: 1000 }, { l: '1.0x', v: 500 }, { l: '2.5x', v: 200 }, { l: '10x', v: 50 }].map(opt => (
                                             <button key={opt.v} onClick={() => { setPlaySpeed(opt.v); setIsSpeedMenuOpen(false); }} className={`w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold flex items-center justify-between ${playSpeed === opt.v ? 'bg-[#FF4F01]/10 text-[#FF4F01]' : (isDarkMode ? 'text-zinc-400 hover:bg-white/5' : 'text-slate-600 hover:bg-slate-50')}`}><span>{opt.l}</span>{playSpeed === opt.v && <Check size={14} />}</button>
                                         ))}
@@ -1666,7 +1666,7 @@ setAllData(validData);
                         {history.length > 0 && (
                             <div className="flex items-center gap-2">
                                 <span className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">{history.length} trade{history.length !== 1 ? 's' : ''}</span>
-                                <button onClick={handleUndoTrade} title="Undo Last Trade" className={`p-1.5 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}>
+                                <button onClick={handleUndoTrade} title="Undo Last Trade" className={`p-1.5 rounded-lg ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-slate-200 text-slate-500'}`}>
                                     <RotateCcw size={14} />
                                 </button>
                             </div>
@@ -1676,8 +1676,8 @@ setAllData(validData);
             )}            {isSettingsOpen && (
                 <div className="fixed inset-0 z-[400] flex justify-end">
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" onClick={() => setIsSettingsOpen(false)} />
-                    <div className={`relative w-full max-w-md h-full shadow-2xl border-l flex flex-col ${isDarkMode ? 'bg-[#09090b] border-zinc-800' : 'bg-white border-slate-200'}`}>
-                        <div className={`px-5 py-4 border-b flex items-center justify-between ${isDarkMode ? 'border-zinc-800 bg-zinc-900/40' : 'border-slate-100 bg-slate-50/60'}`}>
+                    <div className={`relative w-full max-w-md h-full shadow-2xl border-l flex flex-col ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'}`}>
+                        <div className={`px-5 py-4 border-b flex items-center justify-between ${isDarkMode ? 'border-zinc-800 bg-black/40' : 'border-slate-100 bg-slate-50/60'}`}>
                             <div className="flex items-center gap-3">
                                 <div className="h-10 w-10 grid place-items-center bg-[#FF4F01]/10 text-[#FF4F01] rounded-2xl">
                                     <Settings size={18} />
@@ -1696,7 +1696,7 @@ setAllData(validData);
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-zinc-900/25 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+                            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-black/25 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
                                 <div className="flex items-center gap-2 mb-3">
                                     <Zap size={14} className="text-[#FF4F01]" />
                                     <h4 className={`text-[10px] font-black uppercase tracking-[0.18em] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Environment</h4>
@@ -1715,7 +1715,7 @@ setAllData(validData);
                                                     chartRef.current.timeScale().scrollToRealtime();
                                                 }
                                             }}
-                                            className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${isAutoFollow ? 'bg-[#FF4F01]' : isDarkMode ? 'bg-zinc-700' : 'bg-slate-300'}`}
+                                            className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${isAutoFollow ? 'bg-[#FF4F01]' : isDarkMode ? 'bg-black' : 'bg-slate-300'}`}
                                             aria-label="Toggle auto-follow price"
                                         >
                                             <div className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${isAutoFollow ? 'translate-x-5' : 'translate-x-0.5'}`} />
@@ -1724,7 +1724,7 @@ setAllData(validData);
                                 </div>
                             </div>
 
-                            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-zinc-900/25 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+                            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-black/25 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
                                 <div className="flex items-center gap-2 mb-3">
                                     <Download size={14} className="text-blue-500" />
                                     <h4 className={`text-[10px] font-black uppercase tracking-[0.18em] ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Data</h4>
@@ -1749,7 +1749,7 @@ setAllData(validData);
                                 </div>
                             </div>
 
-                            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-zinc-900/25 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+                            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-black/25 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
                                 <div className="flex items-center justify-between gap-2 mb-3">
                                     <div className="flex items-center gap-2">
                                         <Database size={14} className="text-purple-500" />
@@ -1793,7 +1793,7 @@ setAllData(validData);
                             </div>
                         </div>
 
-                        <div className={`p-4 border-t ${isDarkMode ? 'bg-zinc-900/40 border-zinc-800' : 'bg-slate-50/60 border-slate-100'}`}>
+                        <div className={`p-4 border-t ${isDarkMode ? 'bg-black/40 border-zinc-800' : 'bg-slate-50/60 border-slate-100'}`}>
                             <button
                                 onClick={() => setIsSettingsOpen(false)}
                                 className="w-full rounded-xl bg-[#FF4F01] px-4 py-3 text-xs font-black uppercase tracking-[0.18em] text-white transition-transform hover:scale-[1.01] active:scale-[0.99]"
@@ -1807,7 +1807,7 @@ setAllData(validData);
 
             {contextMenu && (
                 <div className="fixed z-[500] w-48 rounded-xl border shadow-2xl overflow-hidden" style={{ left: contextMenu.x, top: contextMenu.y }}>
-                    <div className={`flex flex-col p-1 ${isDarkMode ? 'bg-[#1e222d] border-zinc-800' : 'bg-white border-slate-200'}`}>
+                    <div className={`flex flex-col p-1 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'}`}>
                         {contextMenu.drawing.id === 'paste-dummy' ? (
                             <button onClick={() => { const rect = chartContainerRef.current?.getBoundingClientRect(); if (rect) handlePasteDrawing(contextMenu.x - rect.left, contextMenu.y - rect.top); setContextMenu(null); }} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold text-left ${isDarkMode ? 'hover:bg-white/5 text-zinc-300' : 'hover:bg-slate-50 text-slate-600'}`}><StepForward size={14} /> Paste Drawing</button>
                         ) : (
@@ -1817,7 +1817,7 @@ setAllData(validData);
                                 )}
                                 <button onClick={() => { handleDuplicateDrawing(contextMenu.drawing); setContextMenu(null); }} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold text-left ${isDarkMode ? 'hover:bg-white/5 text-zinc-300' : 'hover:bg-slate-50 text-slate-600'}`}><StepForward size={14} /> Duplicate</button>
                                 <button onClick={() => { updateDrawingProperty(contextMenu.drawing.id, { isLocked: !contextMenu.drawing.isLocked }); setContextMenu(null); }} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold text-left ${isDarkMode ? 'hover:bg-white/5 text-zinc-300' : 'hover:bg-slate-50 text-slate-600'}`}>{contextMenu.drawing.isLocked ? <Unlock size={14} /> : <Lock size={14} />} {contextMenu.drawing.isLocked ? 'Unlock' : 'Lock'}</button>
-                                <div className={`h-px mx-2 my-1 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'}`} />
+                                <div className={`h-px mx-2 my-1 ${isDarkMode ? 'bg-black' : 'bg-slate-100'}`} />
                                 <button onClick={() => { setDrawings(drawings.filter(d => d.id !== contextMenu.drawing.id)); pushToHistory(drawings.filter(d => d.id !== contextMenu.drawing.id)); setContextMenu(null); setSelectedDrawingId(null); addToast({ type: 'info', title: 'Deleted' }); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold text-left text-rose-500 hover:bg-rose-500/10"><Trash2 size={14} /> Remove</button>
                             </>
                         )}

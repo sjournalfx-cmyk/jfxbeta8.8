@@ -56,7 +56,7 @@ const DashboardSkeleton = ({ isDarkMode }: { isDarkMode: boolean }) => (
     <div className="space-y-8 animate-in fade-in duration-500">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map(i => (
-                <div key={i} className={`h-32 p-6 rounded-2xl border ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+                <div key={i} className={`h-32 p-6 rounded-2xl border ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
                     <Skeleton className="w-8 h-8 rounded-lg mb-4" />
                     <Skeleton className="w-24 h-6 mb-2" />
                     <Skeleton className="w-16 h-3" />
@@ -64,11 +64,11 @@ const DashboardSkeleton = ({ isDarkMode }: { isDarkMode: boolean }) => (
             ))}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className={`col-span-1 lg:col-span-2 h-[250px] p-6 rounded-2xl border ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+            <div className={`col-span-1 lg:col-span-2 h-[250px] p-6 rounded-2xl border ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
                 <Skeleton className="w-32 h-6 mb-6" />
                 <Skeleton className="w-full h-32" />
             </div>
-            <div className={`col-span-1 h-[250px] p-6 rounded-2xl border ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+            <div className={`col-span-1 h-[250px] p-6 rounded-2xl border ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
                 <Skeleton className="w-32 h-6 mb-6" />
                 <div className="space-y-3">
                     <Skeleton className="w-full h-10" />
@@ -115,7 +115,7 @@ interface StatCardProps {
 }
 
 const StatCard = ({ label, value, subtext, trend, isDarkMode, icon: Icon, colorClass, tooltip, onInfoClick }: StatCardProps) => (
-    <div className={`h-full p-6 rounded-2xl border transition-all hover:shadow-lg ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+    <div className={`h-full p-6 rounded-2xl border transition-all hover:shadow-lg ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
         <div className="flex justify-between items-start mb-4">
             <div className={`p-3 rounded-xl ${isDarkMode ? 'bg-[#27272a]' : 'bg-slate-50'}`}>
                 <Icon size={20} className={colorClass} />
@@ -143,7 +143,7 @@ const StatCard = ({ label, value, subtext, trend, isDarkMode, icon: Icon, colorC
 );
 
 const RecentTrades = ({ isDarkMode, trades, symbol, offlineQueue = [] }: { isDarkMode: boolean, trades: Trade[], symbol: string, offlineQueue?: Trade[] }) => (
-    <div className={`h-full p-6 rounded-2xl border flex flex-col ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+    <div className={`h-full p-6 rounded-2xl border flex flex-col ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
         <h3 className="font-bold mb-4">Recent Activity</h3>
         <div className="space-y-3 flex-1 overflow-auto custom-scrollbar pr-2">
             {offlineQueue.map(trade => (
@@ -161,7 +161,7 @@ const RecentTrades = ({ isDarkMode, trades, symbol, offlineQueue = [] }: { isDar
                 </div>
             ))}
             {trades.slice(0, 5 - offlineQueue.length).map(trade => (
-                <div key={trade.id} className="flex items-center justify-between p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
+                <div key={trade.id} className="flex items-center justify-between p-2.5 rounded-lg bg-zinc-50 dark:bg-black/50">
                     <div className="flex items-center gap-3">
                         <div className={`w-1.5 h-8 rounded-full ${trade.result === 'Win' ? 'bg-teal-500' : trade.result === 'Loss' ? 'bg-rose-500' : 'bg-gray-400'}`} />
                         <div>
@@ -224,7 +224,7 @@ const DailyBiasWidget = React.memo(({ isDarkMode, dailyBias, onUpdateBias, onInf
     };
 
     return (
-        <div className={`h-full p-6 rounded-2xl border flex flex-col ${isDarkMode ? 'bg-[#18181b] border-zinc-800 shadow-2xl' : 'bg-white border-slate-100 shadow-md'}`}>
+        <div className={`h-full p-6 rounded-2xl border flex flex-col ${isDarkMode ? 'bg-[#000000] border-zinc-800 shadow-2xl' : 'bg-white border-slate-100 shadow-md'}`}>
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
                     <h3 className="font-bold flex items-center gap-2"><Zap size={18} className="text-yellow-500" /> Daily Bias</h3>
@@ -255,7 +255,7 @@ const DailyBiasWidget = React.memo(({ isDarkMode, dailyBias, onUpdateBias, onInf
                                 bias === 'Bearish' ? 'bg-rose-500/10 text-rose-500 border border-rose-500/20' :
                                 isWeekend 
                                     ? (isDarkMode ? 'bg-zinc-500/5 text-zinc-600 border border-zinc-800/50' : 'bg-slate-50 text-slate-300 border border-slate-100')
-                                    : (isDarkMode ? 'bg-zinc-800 text-zinc-500 border border-zinc-700' : 'bg-slate-100 text-slate-400 border border-slate-200')
+                                    : (isDarkMode ? 'bg-black text-zinc-500 border border-zinc-700' : 'bg-slate-100 text-slate-400 border border-slate-200')
                                 } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
                         >
                             <span className="text-[10px] font-bold mb-1">{dayName}</span>
@@ -348,7 +348,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
     const InfoPanel = ({ info, onClose }: { info: { title: string, content: string }, onClose: () => void }) => (
         <div className="fixed inset-0 z-[300] flex items-center justify-center p-6 sm:p-12 animate-in fade-in duration-300">
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-            <div className={`relative w-full max-w-lg p-8 rounded-[32px] border shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-8 duration-300 ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200'}`}>
+            <div className={`relative w-full max-w-lg p-8 rounded-[32px] border shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-8 duration-300 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'}`}>
                 <button 
                     onClick={onClose}
                     className={`absolute top-6 right-6 p-2 rounded-xl transition-all ${isDarkMode ? 'hover:bg-white/5' : 'hover:bg-black/5'}`}
@@ -378,7 +378,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
 
     if (isLoading) {
         return (
-            <div className={`w-full h-full overflow-y-auto p-8 font-sans ${isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
+            <div className={`w-full h-full overflow-y-auto p-8 font-sans ${isDarkMode ? 'bg-black text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
                 <header className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div className="space-y-2">
                         <Skeleton className="w-64 h-10" />
@@ -421,7 +421,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
     const profitFactor = grossLoss > 0 ? (grossProfit / grossLoss).toFixed(2) : (grossProfit > 0 ? "9.9" : "0.00");
 
     const LockedView = ({ title, subtitle }: { title: string, subtitle: string }) => (
-        <div className={`h-full w-full p-6 rounded-2xl border flex flex-col items-center justify-center text-center relative overflow-hidden ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+        <div className={`h-full w-full p-6 rounded-2xl border flex flex-col items-center justify-center text-center relative overflow-hidden ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
             <div className="absolute inset-0 bg-black/5 dark:bg-white/[0.02] backdrop-blur-[2px] z-10" />
             <div className="relative z-20 flex flex-col items-center gap-3">
                 <div className="p-3 rounded-2xl bg-[#FF4F01]/10 text-[#FF4F01] shadow-xl shadow-[#FF4F01]/10">
@@ -469,7 +469,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
                 return <EquityCurveWidget trades={trades} equityData={equityData} isDarkMode={isDarkMode} currencySymbol={userProfile.currencySymbol} isLoading={isLoading} />;
             case 'openPositions':
                 return (
-                    <div className={`h-full p-6 rounded-2xl border flex flex-col ${isDarkMode ? 'bg-[#18181b] border-zinc-800 shadow-2xl' : 'bg-white border-slate-100 shadow-md'}`}>
+                    <div className={`h-full p-6 rounded-2xl border flex flex-col ${isDarkMode ? 'bg-[#000000] border-zinc-800 shadow-2xl' : 'bg-white border-slate-100 shadow-md'}`}>
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-3">
                                 <h3 className="font-bold flex items-center gap-2"><Activity size={18} className="text-emerald-500" /> Open Positions</h3>
@@ -517,7 +517,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
     };
 
     return (
-        <div className={`w-full h-full overflow-y-auto p-8 font-sans ${isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
+        <div className={`w-full h-full overflow-y-auto p-8 font-sans ${isDarkMode ? 'bg-[#000000] text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
             <header className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <div className="flex items-center gap-3 mb-1">
@@ -540,7 +540,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
                     <div className="relative">
                         <button 
                             onClick={() => setShowPresetMenu(!showPresetMenu)}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-all ${isDarkMode ? 'bg-[#18181b] border-zinc-800 text-zinc-400 hover:text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 shadow-sm'}`}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-all ${isDarkMode ? 'bg-[#000000] border-zinc-800 text-zinc-400 hover:text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 shadow-sm'}`}
                         >
                             <Layout size={16} />
                             <span className="hidden sm:inline">Layout: {activePreset}</span>
@@ -553,7 +553,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
                                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                    className={`absolute top-full right-0 mt-2 w-56 rounded-2xl border shadow-2xl z-[100] overflow-hidden ${isDarkMode ? 'bg-[#121215] border-zinc-800' : 'bg-white border-slate-200'}`}
+                                    className={`absolute top-full right-0 mt-2 w-56 rounded-2xl border shadow-2xl z-[100] overflow-hidden ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200'}`}
                                 >
                                     <div className="p-2 space-y-1">
                                         <button 
@@ -583,7 +583,7 @@ const Dashboard: React.FC<DashboardProps> = ({ isDarkMode, trades, dailyBias, on
                         </AnimatePresence>
                     </div>
 
-                    <div className={`flex items-center gap-6 p-4 rounded-3xl border ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+                    <div className={`flex items-center gap-6 p-4 rounded-3xl border ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
                     <div className="flex items-center gap-3 border-r pr-6 border-zinc-800/50">
                         <div className="w-10 h-10 rounded-2xl bg-[#FF4F01]/10 flex items-center justify-center text-[#FF4F01] shadow-lg">
                             <Wallet size={20} />

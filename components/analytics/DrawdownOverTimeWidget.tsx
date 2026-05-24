@@ -68,7 +68,7 @@ export const DrawdownOverTimeWidget: React.FC<DrawdownOverTimeWidgetProps> = ({ 
     const hoverY = hoverIndex !== null ? (drawdownData[hoverIndex].drawdown / maxY) * 200 : 0;
 
     return (
-        <div className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border flex flex-col min-h-[350px] relative h-full ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+        <div className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border flex flex-col min-h-[350px] relative h-full ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
             <div className="flex justify-between items-start mb-6">
                 <div className="flex items-center gap-2">
                     <h3 className="text-lg font-bold tracking-tight">Drawdown Over Time</h3>
@@ -119,7 +119,7 @@ export const DrawdownOverTimeWidget: React.FC<DrawdownOverTimeWidgetProps> = ({ 
                             {hoverIndex !== null && (
                                 <>
                                     <line x1={mousePos.x} y1="0" x2={mousePos.x} y2="200" stroke="#f43f5e" strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
-                                    <circle cx={mousePos.x} cy={hoverY} r="5" fill="#f43f5e" stroke={isDarkMode ? "#0d1117" : "white"} strokeWidth="2" />
+                                    <circle cx={mousePos.x} cy={hoverY} r="5" fill="#f43f5e" stroke={isDarkMode ? "#000000" : "white"} strokeWidth="2" />
                                 </>
                             )}
                         </svg>

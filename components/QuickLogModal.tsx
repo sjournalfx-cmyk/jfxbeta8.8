@@ -70,12 +70,12 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div 
         className={`w-full max-w-md rounded-2xl border shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 ${
-          isDarkMode ? 'bg-[#121215] border-[#27272a] text-white' : 'bg-white border-slate-200 text-slate-900'
+          isDarkMode ? 'bg-[#000000] border-[#27272a] text-white' : 'bg-white border-slate-200 text-slate-900'
         }`}
       >
         <div className="flex items-center justify-between p-6 border-b border-dashed border-zinc-200 dark:border-zinc-800">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-violet-500/10 text-violet-500">
+            <div className="p-2 rounded-lg bg-[#FF4F00]/10 text-[#FF4F00]">
               <Save size={20} />
             </div>
             <h2 className="text-xl font-bold tracking-tight">Quick Log Trade</h2>
@@ -93,7 +93,7 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
                 autoFocus
                 required
                 className={`w-full px-4 py-2.5 rounded-lg border outline-none text-sm font-bold uppercase transition-all ${
-                  isDarkMode ? 'bg-zinc-900 border-zinc-800 focus:border-violet-500' : 'bg-slate-50 border-slate-200 focus:border-violet-500'
+                  isDarkMode ? 'bg-black border-zinc-800 focus:border-[#FF4F00]' : 'bg-slate-50 border-slate-200 focus:border-[#FF4F00]'
                 }`}
                 placeholder="EURUSD"
                 value={formData.pair}
@@ -119,7 +119,7 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
               <label className="block text-[10px] font-black uppercase tracking-widest mb-1.5 opacity-40">Direction</label>
-              <div className={`p-1 rounded-xl flex border ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+              <div className={`p-1 rounded-xl flex border ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, direction: 'Long' })}
@@ -150,7 +150,7 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
                 type="number"
                 step="any"
                 className={`w-full px-4 py-2.5 rounded-lg border outline-none text-sm font-mono ${
-                  isDarkMode ? 'bg-zinc-900 border-zinc-800 focus:border-violet-500' : 'bg-slate-50 border-slate-200 focus:border-violet-500'
+                  isDarkMode ? 'bg-black border-zinc-800 focus:border-[#FF4F00]' : 'bg-slate-50 border-slate-200 focus:border-[#FF4F00]'
                 }`}
                 placeholder="1.08500"
                 value={formData.entryPrice}
@@ -163,7 +163,7 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
                 type="number"
                 step="0.01"
                 className={`w-full px-4 py-2.5 rounded-lg border outline-none text-sm font-mono ${
-                  isDarkMode ? 'bg-zinc-900 border-zinc-800 focus:border-violet-500' : 'bg-slate-50 border-slate-200 focus:border-violet-500'
+                  isDarkMode ? 'bg-black border-zinc-800 focus:border-[#FF4F00]' : 'bg-slate-50 border-slate-200 focus:border-[#FF4F00]'
                 }`}
                 placeholder="1.00"
                 value={formData.lots}
@@ -179,7 +179,7 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
                 type="number"
                 step="any"
                 className={`w-full px-4 py-2.5 rounded-lg border outline-none text-sm font-mono ${
-                  isDarkMode ? 'bg-zinc-900 border-zinc-800 focus:border-rose-500' : 'bg-slate-50 border-slate-200 focus:border-rose-500'
+                  isDarkMode ? 'bg-black border-zinc-800 focus:border-rose-500' : 'bg-slate-50 border-slate-200 focus:border-rose-500'
                 }`}
                 placeholder="0.00000"
                 value={formData.stopLoss}
@@ -192,7 +192,7 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
                 type="number"
                 step="any"
                 className={`w-full px-4 py-2.5 rounded-lg border outline-none text-sm font-mono ${
-                  isDarkMode ? 'bg-zinc-900 border-zinc-800 focus:border-teal-500' : 'bg-slate-50 border-slate-200 focus:border-teal-500'
+                  isDarkMode ? 'bg-black border-zinc-800 focus:border-teal-500' : 'bg-slate-50 border-slate-200 focus:border-teal-500'
                 }`}
                 placeholder="0.00000"
                 value={formData.takeProfit}
@@ -204,7 +204,7 @@ const QuickLogModal: React.FC<QuickLogModalProps> = ({ isOpen, onClose, onSave, 
           <button
             type="submit"
             disabled={isSaving}
-            className="w-full py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-sm shadow-xl shadow-violet-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+            className="w-full py-4 bg-[#FF4F00] hover:bg-[#E64600] text-white rounded-xl font-bold text-sm shadow-xl shadow-[#FF4F00]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
           >
             {isSaving ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Save size={18} />}
             {isSaving ? 'Saving...' : 'Save Quick Trade'}

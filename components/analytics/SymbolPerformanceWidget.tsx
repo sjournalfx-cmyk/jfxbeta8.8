@@ -44,9 +44,9 @@ export const SymbolPerformanceWidget: React.FC<SymbolPerformanceWidgetProps> = (
     ];
 
     return (
-        <div className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border h-full ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+        <div className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border h-full ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
             <div className="flex items-center gap-3 mb-6">
-                <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'} text-indigo-500`}>
+                <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-black' : 'bg-slate-100'} text-indigo-500`}>
                     <BarChart3 size={20} />
                 </div>
                 <div className="flex items-center gap-2">
@@ -62,7 +62,7 @@ export const SymbolPerformanceWidget: React.FC<SymbolPerformanceWidgetProps> = (
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {cards.map((card, i) => (
-                    <div key={i} className={`p-4 rounded-xl border ${isDarkMode ? 'bg-[#18181b] border-zinc-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                    <div key={i} className={`p-4 rounded-xl border ${isDarkMode ? 'bg-[#000000] border-zinc-700/50' : 'bg-slate-50 border-slate-200'}`}>
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-[10px] font-bold uppercase tracking-wider opacity-50">{card.label}</span>
                         </div>

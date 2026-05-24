@@ -157,7 +157,7 @@ export function StrategyPerformancePieChart({ trades = [], isDarkMode, currencyS
       const pnlPercentage = totalPnl > 0 ? (data.pnl / totalPnl) * 100 : 0;
       
       return (
-        <div className={`p-4 rounded-xl border shadow-2xl ${isDarkMode ? 'bg-[#18181b] border-zinc-800 text-zinc-100' : 'bg-white border-slate-200 text-slate-900'}`}>
+        <div className={`p-4 rounded-xl border shadow-2xl ${isDarkMode ? 'bg-[#000000] border-zinc-800 text-zinc-100' : 'bg-white border-slate-200 text-slate-900'}`}>
           <div className="flex items-center gap-2 mb-3 pb-2 border-b border-zinc-500/10">
             <div className="h-3 w-3 rounded-full" style={{ backgroundColor: data.fill }} />
             <span className="font-black text-sm uppercase tracking-tight">{data.strategy}</span>

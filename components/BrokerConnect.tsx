@@ -304,9 +304,9 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
         </div>
 
         {!status.connected ? (
-          <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
+          <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
             <div className="space-y-6">
-              <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-50'}`}>
+              <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-black' : 'bg-slate-50'}`}>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
                   <Shield size={16} className="text-[#FF4F01]" />
                   Before Connecting
@@ -328,7 +328,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                     onChange={(e) => setServer(e.target.value)}
                     placeholder="e.g., MetaQuotes-Demo"
                     list="servers"
-                    className={`w-full px-4 py-3 rounded-xl border ${isDarkMode ? 'bg-zinc-800 border-zinc-700' : 'bg-slate-50 border-slate-200'} focus:outline-none focus:border-[#FF4F01]`}
+                    className={`w-full px-4 py-3 rounded-xl border ${isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'} focus:outline-none focus:border-[#FF4F01]`}
                   />
                   <datalist id="servers">
                     <option value="MetaQuotes-Demo" />
@@ -345,7 +345,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
                     placeholder="Your MT5 account number"
-                    className={`w-full px-4 py-3 rounded-xl border ${isDarkMode ? 'bg-zinc-800 border-zinc-700' : 'bg-slate-50 border-slate-200'} focus:outline-none focus:border-[#FF4F01]`}
+                    className={`w-full px-4 py-3 rounded-xl border ${isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'} focus:outline-none focus:border-[#FF4F01]`}
                   />
                 </div>
 
@@ -356,7 +356,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Your investor (read-only) password"
-                    className={`w-full px-4 py-3 rounded-xl border ${isDarkMode ? 'bg-zinc-800 border-zinc-700' : 'bg-slate-50 border-slate-200'} focus:outline-none focus:border-[#FF4F01]`}
+                    className={`w-full px-4 py-3 rounded-xl border ${isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'} focus:outline-none focus:border-[#FF4F01]`}
                   />
                 </div>
               </div>
@@ -381,7 +381,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
         ) : (
           <div className="space-y-6">
             {/* Status Card */}
-            <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
+            <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-lg bg-green-500/10">
@@ -396,7 +396,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                 </div>
                 <button
                   onClick={handleDisconnect}
-                  className={`p-2 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800' : 'hover:bg-slate-100'}`}
+                  className={`p-2 rounded-lg ${isDarkMode ? 'hover:bg-black' : 'hover:bg-slate-100'}`}
                 >
                   <XCircle size={18} />
                 </button>
@@ -404,11 +404,11 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
 
               {/* Account Stats */}
               <div className="grid grid-cols-2 gap-4">
-                <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-50'}`}>
+                <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-black' : 'bg-slate-50'}`}>
                   <p className={`text-sm ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Balance</p>
                   <p className="text-2xl font-bold">${status.balance?.toFixed(2)}</p>
                 </div>
-                <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-50'}`}>
+                <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-black' : 'bg-slate-50'}`}>
                   <p className={`text-sm ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>Equity</p>
                   <p className="text-2xl font-bold">${status.equity?.toFixed(2)}</p>
                 </div>
@@ -421,7 +421,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                   className={`flex-1 py-2 px-4 rounded-xl font-medium transition ${
                     activeTab === 'trading'
                       ? 'bg-[#FF4F01] text-white'
-                      : isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-50 text-slate-600'
+                      : isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-50 text-slate-600'
                   }`}
                 >
                   Trading
@@ -431,7 +431,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                   className={`flex-1 py-2 px-4 rounded-xl font-medium transition ${
                     activeTab === 'connect'
                       ? 'bg-[#FF4F01] text-white'
-                      : isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-50 text-slate-600'
+                      : isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-50 text-slate-600'
                   }`}
                 >
                   Sync
@@ -443,7 +443,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
             {activeTab === 'trading' && (
               <div className="space-y-4">
                 {/* Quick Order Form */}
-                <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
+                <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
                   <h3 className="font-semibold mb-4 flex items-center gap-2">
                     <Plus size={18} className="text-[#FF4F01]" />
                     Quick Order
@@ -458,7 +458,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                         onChange={(e) => setSymbol(e.target.value)}
                         placeholder="EURUSD"
                         className={`w-full px-3 py-2 rounded-lg border text-sm ${
-                          isDarkMode ? 'bg-zinc-800 border-zinc-700' : 'bg-slate-50 border-slate-200'
+                          isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'
                         } focus:outline-none focus:border-[#FF4F01]`}
                       />
                     </div>
@@ -470,7 +470,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                         onChange={(e) => setVolume(e.target.value)}
                         placeholder="0.01"
                         className={`w-full px-3 py-2 rounded-lg border text-sm ${
-                          isDarkMode ? 'bg-zinc-800 border-zinc-700' : 'bg-slate-50 border-slate-200'
+                          isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'
                         } focus:outline-none focus:border-[#FF4F01]`}
                       />
                     </div>
@@ -482,7 +482,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                         onChange={(e) => setSl(e.target.value)}
                         placeholder="0"
                         className={`w-full px-3 py-2 rounded-lg border text-sm ${
-                          isDarkMode ? 'bg-zinc-800 border-zinc-700' : 'bg-slate-50 border-slate-200'
+                          isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'
                         } focus:outline-none focus:border-[#FF4F01]`}
                       />
                     </div>
@@ -494,7 +494,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                         onChange={(e) => setTp(e.target.value)}
                         placeholder="0"
                         className={`w-full px-3 py-2 rounded-lg border text-sm ${
-                          isDarkMode ? 'bg-zinc-800 border-zinc-700' : 'bg-slate-50 border-slate-200'
+                          isDarkMode ? 'bg-black border-zinc-700' : 'bg-slate-50 border-slate-200'
                         } focus:outline-none focus:border-[#FF4F01]`}
                       />
                     </div>
@@ -535,7 +535,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                 </div>
 
                 {/* Positions List */}
-                <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
+                <div className={`rounded-3xl border p-6 ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200'} shadow-xl`}>
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-semibold flex items-center gap-2">
                       <DollarSign size={18} className="text-[#FF4F01]" />
@@ -543,7 +543,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                     </h3>
                     <button
                       onClick={fetchPositions}
-                      className={`p-2 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800' : 'hover:bg-slate-100'}`}
+                      className={`p-2 rounded-lg ${isDarkMode ? 'hover:bg-black' : 'hover:bg-slate-100'}`}
                     >
                       <RefreshCw size={16} />
                     </button>
@@ -559,7 +559,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                         <div
                           key={pos.ticket}
                           className={`flex items-center justify-between p-3 rounded-xl ${
-                            isDarkMode ? 'bg-zinc-800' : 'bg-slate-50'
+                            isDarkMode ? 'bg-black' : 'bg-slate-50'
                           }`}
                         >
                           <div className="flex items-center gap-3">
@@ -608,7 +608,7 @@ const BrokerConnect: React.FC<BrokerConnectProps> = ({ isDarkMode, userProfile }
                   {syncing ? 'Syncing...' : 'Sync Trades'}
                 </button>
 
-                <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-50'}`}>
+                <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-black' : 'bg-slate-50'}`}>
                   <p className={`text-sm ${isDarkMode ? 'text-zinc-400' : 'text-slate-500'}`}>
                     <strong>Note:</strong> MT5 terminal must remain running with your account logged in.
                     Trades are automatically synced when you click "Sync Trades" or you can setup periodic sync in settings.

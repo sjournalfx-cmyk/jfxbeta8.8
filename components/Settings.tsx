@@ -606,7 +606,7 @@ const Settings: React.FC<SettingsProps> = ({
                         <button
                           onClick={() => setFormData({ ...formData, autoJournal: !formData.autoJournal })}
                           className={`relative h-7 w-14 rounded-full transition-all ${
-                            formData.autoJournal ? 'bg-emerald-500' : 'bg-zinc-700'
+                            formData.autoJournal ? 'bg-emerald-500' : 'bg-black'
                           }`}
                         >
                           <span
@@ -692,7 +692,7 @@ const Settings: React.FC<SettingsProps> = ({
                                   : 'border-slate-200 bg-slate-50 hover:border-slate-300'
                             }`}
                           >
-                            <div className="mb-4 rounded-2xl border border-white/10 bg-[#050505] p-4">
+                            <div className="mb-4 rounded-2xl border border-white/10 bg-[#000000] p-4">
                               <div className="mb-2 h-2 w-1/2 rounded-full bg-[#FF4F01]/60" />
                               <div className="mb-2 h-2 w-1/3 rounded-full bg-white/10" />
                               <div className="h-2 w-2/3 rounded-full bg-white/10" />
@@ -726,7 +726,7 @@ const Settings: React.FC<SettingsProps> = ({
                     <button
                       onClick={() => setFormData({ ...formData, keepChartsAlive: !formData.keepChartsAlive })}
                       className={`relative h-7 w-14 rounded-full transition-all ${
-                        formData.keepChartsAlive ? 'bg-indigo-500' : 'bg-zinc-700'
+                        formData.keepChartsAlive ? 'bg-indigo-500' : 'bg-black'
                       }`}
                     >
                       <span
@@ -845,7 +845,7 @@ const Settings: React.FC<SettingsProps> = ({
                             disabled={active}
                             className={`rounded-2xl px-4 py-3 text-xs font-black uppercase tracking-[0.16em] transition-all ${
                               active
-                                  ? 'cursor-default bg-zinc-700 text-zinc-400'
+                                  ? 'cursor-default bg-black text-zinc-400'
                                   : 'bg-[#FF4F01] text-white hover:scale-[1.02]'
                               }`}
                             >
@@ -879,7 +879,7 @@ const Settings: React.FC<SettingsProps> = ({
                   </div>
                 </section>
 
-                <section className={`rounded-[28px] border p-6 ${isDarkMode ? 'border-white/[0.08] bg-black/20' : 'border-slate-200 bg-white'}`}>
+                <section className={`rounded-2xl border p-4 ${isDarkMode ? 'border-white/[0.08] bg-black' : 'border-slate-200 bg-white'}`}>
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
                       <p className="text-sm font-bold">Session control</p>
@@ -887,7 +887,7 @@ const Settings: React.FC<SettingsProps> = ({
                     </div>
                     <button
                       onClick={onLogout}
-                      className="rounded-2xl bg-rose-500 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-rose-400"
+                      className="rounded-xl bg-rose-500 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rose-400"
                     >
                       Sign Out Now
                     </button>

@@ -63,7 +63,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
     return (
         <div 
             onMouseMove={handleMouseMove}
-            className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border flex flex-col min-h-[450px] relative h-full ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}
+            className={`py-4 px-0 sm:p-6 rounded-none sm:rounded-[24px] border flex flex-col min-h-[450px] relative h-full ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}
         >
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
@@ -82,7 +82,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
                 <div className="flex-1 flex items-center justify-center opacity-30 text-sm">No trade data available</div>
             ) : (
                 <div className="flex-1 flex relative overflow-hidden">
-                    <div className={`w-14 flex flex-col justify-between text-[10px] font-mono opacity-40 py-4 h-full z-20 absolute left-0 top-0 bottom-4 border-r border-dashed ${isDarkMode ? 'bg-[#0d1117] border-white/5' : 'bg-white border-slate-200'}`}>
+                    <div className={`w-14 flex flex-col justify-between text-[10px] font-mono opacity-40 py-4 h-full z-20 absolute left-0 top-0 bottom-4 border-r border-dashed ${isDarkMode ? 'bg-black border-white/5' : 'bg-white border-slate-200'}`}>
                         <span>{currencySymbol}{Math.round(maxVal)}</span>
                         <span>{currencySymbol}0</span>
                         <span>{currencySymbol}{Math.round(minVal)}</span>
@@ -155,7 +155,7 @@ export const PerformanceByPairWidget: React.FC<PerformanceByPairWidgetProps> = (
                                 top: mousePos.y - 80
                             }}
                         >
-                            <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md min-w-[160px] ${isDarkMode ? 'bg-[#09090b]/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
+                            <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md min-w-[160px] ${isDarkMode ? 'bg-black/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
                                 <div className="font-bold text-sm mb-3 border-b border-white/10 pb-2">{hoveredData.pair}</div>
                                 <div className="space-y-2 text-xs">
                                     <div className="flex justify-between">

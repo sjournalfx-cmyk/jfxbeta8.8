@@ -72,11 +72,11 @@ export const ExecutionPerformanceTable: React.FC<ExecutionPerformanceTableProps>
     }, [trades]);
 
     return (
-        <div className={`rounded-none sm:rounded-[24px] overflow-hidden border-y sm:border h-full ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`}>
+        <div className={`rounded-none sm:rounded-[24px] overflow-hidden border-y sm:border h-full ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-sm'}`}>
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className={`text-[10px] font-bold uppercase tracking-widest opacity-40 ${isDarkMode ? 'bg-zinc-900/50 text-zinc-500' : 'bg-slate-50 text-slate-400'}`}>
+                        <tr className={`text-[10px] font-bold uppercase tracking-widest opacity-40 ${isDarkMode ? 'bg-black/50 text-zinc-500' : 'bg-slate-50 text-slate-400'}`}>
                             <th className="px-6 py-5 font-bold">Tiltmeter</th>
                             <th className="px-6 py-5 font-bold">Entry Comment</th>
                             <th className="px-6 py-5 font-bold">Exit Comment</th>
@@ -99,7 +99,7 @@ export const ExecutionPerformanceTable: React.FC<ExecutionPerformanceTableProps>
                                     <td className="px-6 py-4">
                                         <div className="flex items-center">
                                             <div className="relative flex items-center h-4 w-20 justify-center">
-                                                <div className={`absolute w-1.5 h-4 rounded-full z-10 ${isDarkMode ? 'bg-zinc-700' : 'bg-slate-300'}`} />
+                                                <div className={`absolute w-1.5 h-4 rounded-full z-10 ${isDarkMode ? 'bg-black' : 'bg-slate-300'}`} />
                                                 <div
                                                     className={`absolute h-1.5 rounded-full ${isWin ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]' : 'bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.4)]'}`}
                                                     style={{
@@ -123,7 +123,7 @@ export const ExecutionPerformanceTable: React.FC<ExecutionPerformanceTableProps>
                                                 <button 
                                                     title="Edit Entry Comment"
                                                     onClick={() => setEditingTrade({ id: trade.id, field: 'notes', value: trade.notes || '' })}
-                                                    className={`opacity-0 group-hover/comment:opacity-100 p-1 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
+                                                    className={`opacity-0 group-hover/comment:opacity-100 p-1 rounded-lg ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
                                                     <Pencil size={12} />
                                                 </button>
                                             </div>
@@ -140,7 +140,7 @@ export const ExecutionPerformanceTable: React.FC<ExecutionPerformanceTableProps>
                                                 <button 
                                                     title="Edit Exit Comment"
                                                     onClick={() => setEditingTrade({ id: trade.id, field: 'exitComment', value: trade.exitComment || '' })}
-                                                    className={`opacity-0 group-hover/comment:opacity-100 p-1 rounded-lg ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
+                                                    className={`opacity-0 group-hover/comment:opacity-100 p-1 rounded-lg ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-200 text-slate-400'}`}>
                                                     <Pencil size={12} />
                                                 </button>
                                             </div>

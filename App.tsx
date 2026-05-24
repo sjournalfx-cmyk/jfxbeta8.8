@@ -4,6 +4,7 @@ import LogTrade from './components/LogTrade';
 import Dashboard from './components/Dashboard';
 import Journal from './components/Journal';
 import Auth from './components/Auth';
+
 import { PartyPopper, MessageSquare, Activity, CheckCircle2, Loader2 } from 'lucide-react';
 import { Trade, Note, DailyBias, FirehoseEvent } from './types';
 import Onboarding from './components/Onboarding';
@@ -12,6 +13,7 @@ import EASetup from './components/EASetup';
 import BrokerConnect from './components/BrokerConnect';
 import ConfirmationModal from './components/ConfirmationModal';
 import QuickLogModal from './components/QuickLogModal';
+import LandingPage from './components/LandingPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import { APP_CONSTANTS, PLAN_FEATURES, normalizePlan } from './lib/constants';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -43,6 +45,7 @@ const AppContent: React.FC = () => {
   const [settingsTab, setSettingsTab] = useState<'profile' | 'account' | 'appearance' | 'billing' | 'security' | 'help'>('profile');
   const { addToast } = useToast();
   const [isDemoMode, setIsDemoMode] = useLocalStorage<boolean>('jfx_demo_mode', false);
+  const [showLanding, setShowLanding] = useState(() => !window.location.search.includes('auth') && !window.location.search.includes('app'));
 
   // Mock for current migration version - In a real app, this would be fetched from the backend.
   const [currentMigrationVersion] = useState('v20250201.1');
@@ -85,6 +88,35 @@ const {
   const activeNotes = isDemoMode ? demoNotes : notes;
   const activeDailyBias = isDemoMode ? demoDailyBias : dailyBias;
   const activeEaSession = isDemoMode ? demoEASession : eaSession;
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      // Landing page and Auth page: restore full-size layout, remove compact scaling
+      document.body.style.overflow = 'auto';
+      document.documentElement.classList.remove('compact-scale');
+      const rootEl = document.getElementById('root');
+      if (rootEl) {
+        rootEl.style.overflow = 'auto';
+        rootEl.style.height = 'auto';
+        rootEl.style.width = 'auto';
+      }
+    } else {
+      // Authenticated workspace: apply compact scaling + lock overflow
+      document.body.style.overflow = 'hidden';
+      document.documentElement.classList.add('compact-scale');
+      const rootEl = document.getElementById('root');
+      if (rootEl) {
+        rootEl.style.overflow = 'hidden';
+        rootEl.style.height = '100vh';
+        rootEl.style.width = '100vw';
+      }
+    }
+    return () => {
+      // Cleanup: restore compact scale on unmount (returning to authenticated state)
+      document.documentElement.classList.add('compact-scale');
+    };
+  }, [showLanding, isAuthenticated]);
+
   const analyticsSnapshot = useMemo(
     () => buildAnalyticsAiSnapshot(activeTrades, activeUserProfile, activeDailyBias, activeEaSession),
     [activeTrades, activeUserProfile, activeDailyBias, activeEaSession]
@@ -696,7 +728,7 @@ const onLogout = async () => {
   setConfirmModal({
     isOpen: true,
     title: 'Log Out',
-    description: 'Are you sure you want to log out of your account?',
+    description: 'Log out of this device now?',
     confirmText: 'Log Out',
     variant: 'danger',
     onConfirm: async () => {
@@ -722,8 +754,8 @@ const onLogout = async () => {
     document.documentElement.classList.add(themeClass);
     document.body.classList.add(themeClass);
     document.body.style.background = activeTheme === 'cosmic'
-      ? 'linear-gradient(135deg,#09090b 0%,#18181b 50%,#030712 100%)'
-      : 'linear-gradient(135deg,#000000 0%,#050505 55%,#0a0a0a 100%)';
+      ? 'linear-gradient(135deg,#000000 0%,#000000 50%,#000000 100%)'
+      : 'linear-gradient(135deg,#000000 0%,#000000 55%,#000000 100%)';
   }, [isDarkMode, activeUserProfile?.themePreference]);
 
   useEffect(() => {
@@ -743,12 +775,23 @@ const onLogout = async () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  if (isInitialLoading) {
+    return <BrandedLoader />;
+  }
+
   if (isMobile) {
     return <MobileBlocker isDarkMode={isDarkMode} />;
   }
 
-  if (isInitialLoading) {
-    return <BrandedLoader />;
+  if (showLanding && !isAuthenticated) {
+    return (
+      <LandingPage
+        onEnterAuth={() => {
+          window.history.pushState({}, '', '/?auth=1');
+          setShowLanding(false);
+        }}
+      />
+    );
   }
 
   if (!isAuthenticated) {
@@ -854,7 +897,7 @@ const onLogout = async () => {
           </div>
         </div>
       )}
-      <div className={`flex h-screen w-full transition-colors duration-300 ${isDemoMode ? 'pt-16' : ''} ${isDarkMode ? 'text-zinc-100' : 'bg-slate-50 text-slate-900'}`} style={isDarkMode ? { background: 'linear-gradient(135deg,#000000 0%,#050510 60%,#000000 100%)' } : {}}>
+      <div className={`compact-scale flex h-screen w-full transition-colors duration-300 ${isDemoMode ? 'pt-16' : ''} ${isDarkMode ? 'text-zinc-100' : 'bg-slate-50 text-slate-900'}`} style={isDarkMode ? { background: '#000000' } : {}}>
 
         {!isFocusMode && (
             <Sidebar

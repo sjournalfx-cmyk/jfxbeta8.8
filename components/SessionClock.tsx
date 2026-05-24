@@ -94,26 +94,26 @@ const SessionClock: React.FC<SessionClockProps> = ({ isDarkMode }) => {
   const sessionsToShow = ALL_SESSIONS.filter(s => visibleSessions.includes(s.id));
 
   return (
-    <div className={`w-full p-6 rounded-2xl border mb-6 flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 relative ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+    <div className={`w-full p-6 rounded-2xl border mb-6 flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 relative ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
       
       {/* Settings Action */}
       <div className="absolute top-4 right-4" ref={settingsRef}>
           <button 
             onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-            className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500 hover:text-zinc-300' : 'hover:bg-slate-50 text-slate-400 hover:text-slate-600'}`}
+            className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-500 hover:text-zinc-300' : 'hover:bg-slate-50 text-slate-400 hover:text-slate-600'}`}
           >
             <Settings2 size={16} />
           </button>
 
           {isSettingsOpen && (
-            <div className={`absolute right-0 top-full mt-2 w-48 p-2 rounded-xl border shadow-2xl z-[50] animate-in fade-in slide-in-from-top-2 duration-200 ${isDarkMode ? 'bg-[#121215] border-[#27272a]' : 'bg-white border-slate-200'}`}>
+            <div className={`absolute right-0 top-full mt-2 w-48 p-2 rounded-xl border shadow-2xl z-[50] animate-in fade-in slide-in-from-top-2 duration-200 ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}`}>
                 <p className="text-[10px] font-black uppercase tracking-widest opacity-40 p-2 mb-1">Visible Sessions</p>
                 <div className="space-y-1">
                     {ALL_SESSIONS.map(s => (
                         <button
                             key={s.id}
                             onClick={() => toggleSession(s.id)}
-                            className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold transition-colors ${isDarkMode ? 'hover:bg-zinc-800' : 'hover:bg-slate-50'}`}
+                            className={`w-full flex items-center justify-between p-2 rounded-lg text-xs font-bold transition-colors ${isDarkMode ? 'hover:bg-black' : 'hover:bg-slate-50'}`}
                         >
                             <span>{s.name}</span>
                             {visibleSessions.includes(s.id) ? (
@@ -131,7 +131,7 @@ const SessionClock: React.FC<SessionClockProps> = ({ isDarkMode }) => {
       {/* Main UTC Clock */}
       <div className="flex flex-col gap-4 min-w-[200px]">
         <div className="flex items-center gap-4">
-           <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>
+           <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>
               <Globe size={24} className="animate-[spin_60s_linear_infinite]" />
            </div>
            <div>
@@ -143,7 +143,7 @@ const SessionClock: React.FC<SessionClockProps> = ({ isDarkMode }) => {
         </div>
       </div>
 
-      <div className={`h-px xl:h-12 w-full xl:w-px ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+      <div className={`h-px xl:h-12 w-full xl:w-px ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
 
       {/* Session Bars */}
       <div className={`flex-1 w-full grid gap-4 grid-cols-2 ${sessionsToShow.length === 4 ? 'md:grid-cols-4' : sessionsToShow.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
@@ -152,7 +152,7 @@ const SessionClock: React.FC<SessionClockProps> = ({ isDarkMode }) => {
               const isOpen = status.state === 'Open';
 
               return (
-                  <div key={session.name} className={`relative p-3 rounded-xl border overflow-hidden ${isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <div key={session.name} className={`relative p-3 rounded-xl border overflow-hidden ${isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-slate-50 border-slate-200'}`}>
                       {/* Progress Background */}
                       {isOpen && (
                           <div 

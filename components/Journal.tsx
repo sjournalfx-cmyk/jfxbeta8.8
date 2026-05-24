@@ -118,7 +118,7 @@ const MiniCalendar = ({ year, month, trades, isDarkMode, onClick }: any) => {
     const getDayStyle = (day: number) => {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const dayTrades = monthTrades.filter((t: Trade) => t.date === dateStr);
-        if (dayTrades.length === 0) return { bg: isDarkMode ? 'text-zinc-500 hover:bg-zinc-800 hover:text-zinc-200' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600', text: '' };
+        if (dayTrades.length === 0) return { bg: isDarkMode ? 'text-zinc-500 hover:bg-black hover:text-zinc-200' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600', text: '' };
         
         const pnl = dayTrades.reduce((acc: number, t: Trade) => acc + safePnL(t.pnl), 0);
         
@@ -131,10 +131,10 @@ const MiniCalendar = ({ year, month, trades, isDarkMode, onClick }: any) => {
     };
 
     return (
-        <div onClick={onClick} className={`p-5 rounded-2xl border cursor-pointer transition-all hover:scale-[1.02] hover:shadow-xl ${isDarkMode ? 'bg-[#121215] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
+        <div onClick={onClick} className={`p-5 rounded-2xl border cursor-pointer transition-all hover:scale-[1.02] hover:shadow-xl ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-100 shadow-md'}`}>
             <div className="flex justify-between items-center mb-4">
                 <h4 className={`text-sm font-bold ${isDarkMode ? 'text-zinc-200' : 'text-slate-700'}`}>{new Date(year, month).toLocaleString('default', { month: 'long' })}</h4>
-                {monthTrades.length > 0 && (<span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${isDarkMode ? 'bg-zinc-800 text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>{monthTrades.length} Trades</span>)}
+                {monthTrades.length > 0 && (<span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${isDarkMode ? 'bg-black text-zinc-400' : 'bg-slate-100 text-slate-500'}`}>{monthTrades.length} Trades</span>)}
             </div>
             <div className="grid grid-cols-7 gap-1.5">
                 {['S','M','T','W','T','F','S'].map(d => (<div key={d} className="text-[9px] font-bold opacity-30 text-center">{d}</div>))}
@@ -206,16 +206,16 @@ const CalendarView = ({ isDarkMode, trades, userProfile }: { isDarkMode: boolean
 
     return (
         <div className="h-full flex flex-col">
-            <div className={`flex flex-col md:flex-row md:items-center justify-between p-6 gap-4 border-b shrink-0 ${isDarkMode ? 'border-[#27272a] bg-[#121215]' : 'border-slate-100 bg-white'}`}>
+            <div className={`flex flex-col md:flex-row md:items-center justify-between p-6 gap-4 border-b shrink-0 ${isDarkMode ? 'border-[#27272a] bg-[#000000]' : 'border-slate-100 bg-white'}`}>
                 <div className="flex items-center gap-4">
-                    <div className={`flex items-center p-1 rounded-xl border ${isDarkMode ? 'bg-[#09090b] border-[#27272a]' : 'bg-slate-50 border-slate-200'}`}>
+                    <div className={`flex items-center p-1 rounded-xl border ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-slate-50 border-slate-200'}`}>
                         <button onClick={prev} className={`p-2 rounded-lg hover:bg-opacity-10 ${isDarkMode ? 'hover:bg-white text-zinc-400' : 'hover:bg-black text-slate-500'}`}><ChevronLeft size={18} /></button>
                         <span className={`w-40 text-center font-bold text-sm ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{mode === 'month' ? currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : year}</span>
                         <button onClick={next} className={`p-2 rounded-lg hover:bg-opacity-10 ${isDarkMode ? 'hover:bg-white text-zinc-400' : 'hover:bg-black text-slate-500'}`}><ChevronRight size={18} /></button>
                     </div>
-                    <div className={`flex rounded-lg border overflow-hidden p-1 gap-1 ${isDarkMode ? 'border-[#27272a] bg-[#09090b]' : 'border-slate-200 bg-slate-50'}`}>
-                         <button onClick={() => setMode('month')} className={`px-3 py-1.5 rounded text-xs font-bold transition-all ${mode === 'month' ? (isDarkMode ? 'bg-zinc-800 text-white shadow' : 'bg-white text-slate-900 shadow') : 'text-zinc-500'}`}>Month</button>
-                         <button onClick={() => setMode('year')} className={`px-3 py-1.5 rounded text-xs font-bold transition-all ${mode === 'year' ? (isDarkMode ? 'bg-zinc-800 text-white shadow' : 'bg-white text-slate-900 shadow') : 'text-zinc-500'}`}>Year</button>
+                    <div className={`flex rounded-lg border overflow-hidden p-1 gap-1 ${isDarkMode ? 'border-[#27272a] bg-[#000000]' : 'border-slate-200 bg-slate-50'}`}>
+                         <button onClick={() => setMode('month')} className={`px-3 py-1.5 rounded text-xs font-bold transition-all ${mode === 'month' ? (isDarkMode ? 'bg-black text-white shadow' : 'bg-white text-slate-900 shadow') : 'text-zinc-500'}`}>Month</button>
+                         <button onClick={() => setMode('year')} className={`px-3 py-1.5 rounded text-xs font-bold transition-all ${mode === 'year' ? (isDarkMode ? 'bg-black text-white shadow' : 'bg-white text-slate-900 shadow') : 'text-zinc-500'}`}>Year</button>
                     </div>
                 </div>
                 {mode === 'month' && (
@@ -241,14 +241,14 @@ const CalendarView = ({ isDarkMode, trades, userProfile }: { isDarkMode: boolean
                                 <span className={`font-bold ${isDarkMode ? 'text-zinc-200' : 'text-slate-700'}`}>{monthlyStats.winTrades}</span>
                             </div>
                         </div>
-                        <div className={`w-px h-8 hidden lg:block ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                        <div className={`w-px h-8 hidden lg:block ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
                         <div className="flex flex-col items-end">
                             <span className="text-[10px] uppercase font-bold opacity-50 tracking-wider">Net P&L</span>
                             <span className={`font-mono font-bold text-lg ${monthlyStats.totalPnL > 0 ? 'text-teal-500' : monthlyStats.totalPnL < 0 ? 'text-rose-500' : isDarkMode ? 'text-zinc-500' : 'text-slate-400'}`}>
                                 {monthlyStats.totalPnL > 0 ? '+' : ''}{userProfile.currencySymbol}{Math.abs(monthlyStats.totalPnL).toLocaleString()}
                             </span>
                         </div>
-                        <div className={`w-px h-8 hidden lg:block ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                        <div className={`w-px h-8 hidden lg:block ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
                         <div className="flex flex-col items-end">
                             <span className="text-[10px] uppercase font-bold opacity-50 tracking-wider">Win Rate</span>
                             <div className="flex items-center gap-1.5"><Activity size={14} className="text-purple-500" /><span className={`font-bold ${isDarkMode ? 'text-zinc-200' : 'text-slate-700'}`}>{monthlyStats.winRate.toFixed(0)}%</span></div>
@@ -257,9 +257,9 @@ const CalendarView = ({ isDarkMode, trades, userProfile }: { isDarkMode: boolean
                 )}
             </div>
 
-            <div className={`flex-1 overflow-y-auto custom-scrollbar p-6 pb-0 ${isDarkMode ? 'bg-[#09090b]' : 'bg-slate-50/50'}`}>
+            <div className={`flex-1 overflow-y-auto custom-scrollbar p-6 pb-0 ${isDarkMode ? 'bg-[#000000]' : 'bg-slate-50/50'}`}>
                 {mode === 'month' && (
-                    <div className={`mb-8 border-t border-l border-r rounded-t-2xl overflow-hidden transition-all duration-300 ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-200 shadow-sm'}`}>
+                    <div className={`mb-8 border-t border-l border-r rounded-t-2xl overflow-hidden transition-all duration-300 ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200 shadow-sm'}`}>
                         <button 
                             onClick={() => setIsSummaryOpen(!isSummaryOpen)}
                             className={`w-full flex items-center justify-between p-4 px-6 hover:bg-black/5 dark:hover:bg-white/5 transition-colors`}
@@ -293,7 +293,7 @@ const CalendarView = ({ isDarkMode, trades, userProfile }: { isDarkMode: boolean
                                                 <td className="py-4">
                                                     <div className="flex items-center justify-center">
                                                         {wd.tCount > 0 ? (
-                                                            <div className={`relative w-32 h-2.5 rounded-full overflow-hidden flex ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'}`}>
+                                                            <div className={`relative w-32 h-2.5 rounded-full overflow-hidden flex ${isDarkMode ? 'bg-black' : 'bg-slate-100'}`}>
                                                                 <div className="absolute left-1/2 top-0 bottom-0 w-px bg-zinc-400/30 z-10" />
                                                                 <div className="h-full bg-rose-500/80 ml-auto transition-all" style={{ width: `${wd.lRate / 2}%` }} />
                                                                 <div className="h-full bg-emerald-500/80 transition-all" style={{ width: `${wd.wRate / 2}%` }} />
@@ -340,7 +340,7 @@ const CalendarView = ({ isDarkMode, trades, userProfile }: { isDarkMode: boolean
                                 const isCurrentDay = isToday(day); 
                                 
                                 const getBgColor = () => {
-                                    if (!hasTrades) return isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-200';
+                                    if (!hasTrades) return isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200';
                                     if (isBE) return isDarkMode ? 'bg-zinc-500/20 border-zinc-500/30' : 'bg-slate-200 border-slate-300';
                                     if (isPositive) return isDarkMode ? 'bg-emerald-500/20 border-emerald-500/30' : 'bg-emerald-50 border-emerald-200';
                                     if (isNegative) return isDarkMode ? 'bg-rose-500/20 border-rose-500/30' : 'bg-rose-50 border-rose-200';
@@ -348,7 +348,7 @@ const CalendarView = ({ isDarkMode, trades, userProfile }: { isDarkMode: boolean
                                 };
 
                                 return (
-                                    <div key={day} className={`relative rounded-xl border p-2.5 flex flex-col items-center justify-center min-h-[115px] transition-all duration-200 overflow-hidden group ${getBgColor()} ${isDarkMode ? 'hover:border-zinc-600' : 'hover:shadow-md hover:-translate-y-0.5'} ${isCurrentDay ? 'ring-2 ring-indigo-500 ring-offset-2 ring-offset-[#09090b]' : ''}`}>
+                                    <div key={day} className={`relative rounded-xl border p-2.5 flex flex-col items-center justify-center min-h-[115px] transition-all duration-200 overflow-hidden group ${getBgColor()} ${isDarkMode ? 'hover:border-zinc-600' : 'hover:shadow-md hover:-translate-y-0.5'} ${isCurrentDay ? 'ring-2 ring-indigo-500 ring-offset-2 ring-offset-[#000000]' : ''}`}>
                                         <div className="absolute top-2 right-3 z-10">
                                             <span className={`text-[10px] font-bold ${isCurrentDay ? 'text-indigo-500' : isDarkMode ? 'text-zinc-500' : 'text-slate-400'}`}>{day}</span>
                                         </div>
@@ -660,8 +660,8 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
     };
 
     const renderTradeDetails = (trade: Trade) => (
-        <div key={`details-${trade.id}`} className={`col-span-11 mx-6 mt-1 mb-6 rounded-2xl overflow-hidden border shadow-xl relative ${isDarkMode ? 'bg-[#09090b] border-[#27272a] shadow-black' : 'bg-white border-slate-200'}`}>
-            <div className={`relative px-6 py-4 border-b flex flex-wrap items-center justify-between gap-4 ${isDarkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-slate-50/50 border-slate-100'}`}>
+        <div key={`details-${trade.id}`} className={`col-span-11 mx-6 mt-1 mb-6 rounded-2xl overflow-hidden border shadow-xl relative ${isDarkMode ? 'bg-[#000000] border-[#27272a] shadow-black' : 'bg-white border-slate-200'}`}>
+            <div className={`relative px-6 py-4 border-b flex flex-wrap items-center justify-between gap-4 ${isDarkMode ? 'bg-black/50 border-zinc-800' : 'bg-slate-50/50 border-slate-100'}`}>
                 <div className="flex items-center gap-6">
                     <div>
                         <div className={`text-4xl font-mono font-black tracking-tighter leading-none ${safePnL(trade.pnl) > 0 ? 'text-emerald-400' : safePnL(trade.pnl) < 0 ? 'text-rose-500' : 'text-zinc-500'}`}>
@@ -669,7 +669,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                         </div>
                         <div className="text-[9px] font-black uppercase tracking-[0.2em] opacity-40 mt-1">Net P&L</div>
                     </div>
-                    <div className={`w-px h-10 ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-200'}`} />
+                    <div className={`w-px h-10 ${isDarkMode ? 'bg-black' : 'bg-slate-200'}`} />
                     <div>
                         <div className="flex items-center gap-2">
                             <h2 className="text-2xl font-black tracking-tight">{trade.pair}</h2>
@@ -700,7 +700,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                 <div className="flex items-center gap-2">
                     <button 
                         onClick={() => onEditTrade(trade)}
-                        className={`p-2 rounded-lg transition-all ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-400' : 'hover:bg-white text-slate-500 shadow-sm border border-slate-200'}`} 
+                        className={`p-2 rounded-lg transition-all ${isDarkMode ? 'hover:bg-black text-zinc-400' : 'hover:bg-white text-slate-500 shadow-sm border border-slate-200'}`} 
                         title="Edit Entry"
                     >
                         <Edit3 size={16} />
@@ -711,7 +711,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
             <div className="relative p-6">
                 <div className="grid grid-cols-12 gap-6 items-stretch">
                     <div className="col-span-12 md:col-span-4 lg:col-span-3 space-y-4 pr-1">
-                        <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-zinc-900/30 border-zinc-800' : 'bg-slate-50/50 border-slate-200'}`}>
+                        <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-black/30 border-zinc-800' : 'bg-slate-50/50 border-slate-200'}`}>
                             <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Execution</h4>
                              <div className="space-y-3 text-sm">
                                  <div className="flex justify-between"><span className="opacity-50">Entry</span><span className="font-mono font-bold">{trade.entryPrice.toFixed(2)}</span></div>
@@ -736,7 +736,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                 <div className="flex justify-between"><span className="opacity-50">R:R Ratio</span><span className="font-bold text-indigo-500">1 : {trade.rr}</span></div>
                             </div>
                         </div>
-                        <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-zinc-900/30 border-zinc-800' : 'bg-slate-50/50 border-slate-200'}`}>
+                        <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-black/30 border-zinc-800' : 'bg-slate-50/50 border-slate-200'}`}>
                             <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Psychology</h4>
                             <div className="space-y-3 text-sm">
                                 <div className="flex justify-between"><span className="opacity-50">Mindset</span><span className="font-bold">{trade.mindset || 'Neutral'}</span></div>
@@ -744,7 +744,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                 <div className="flex justify-between"><span className="opacity-50">Mistake</span><span className="font-bold text-rose-500">{trade.tradingMistake || 'None'}</span></div>
                             </div>
                         </div>
-                        <div className={`p-3 rounded-xl border ${isDarkMode ? 'bg-zinc-900/30 border-zinc-800 text-zinc-300' : 'bg-white border-slate-200 text-slate-700'}`}>
+                        <div className={`p-3 rounded-xl border ${isDarkMode ? 'bg-black/30 border-zinc-800 text-zinc-300' : 'bg-white border-slate-200 text-slate-700'}`}>
                             <div className="flex items-center justify-between mb-2">
                                 <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40">Voice Note</h4>
                                 <Mic size={12} className="opacity-40" />
@@ -806,13 +806,13 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                 </div>
                             </div>
                         ))}
-                        <div className={`h-full p-5 rounded-xl border flex flex-col ${isDarkMode ? 'bg-zinc-900/20 border-zinc-800 text-zinc-300' : 'bg-white border-slate-200 text-slate-700'}`}>
+                        <div className={`h-full p-5 rounded-xl border flex flex-col ${isDarkMode ? 'bg-black/20 border-zinc-800 text-zinc-300' : 'bg-white border-slate-200 text-slate-700'}`}>
                             <div className="flex items-center justify-between mb-2">
                                 <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40">Entry Note</h4>
                                 {!(editingComment?.tradeId === trade.id && editingComment.field === 'notes') && (
                                     <button
                                         onClick={() => beginCommentEdit(trade, 'notes')}
-                                        className={`p-1.5 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-100 text-slate-400'}`}
+                                        className={`p-1.5 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-100 text-slate-400'}`}
                                         title="Edit Entry Comment"
                                     >
                                         <Edit3 size={12} />
@@ -825,13 +825,13 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                         <textarea
                                             value={editingComment.value}
                                             onChange={(e) => setEditingComment(prev => prev ? { ...prev, value: e.target.value } : prev)}
-                                            className={`w-full min-h-28 resize-none rounded-xl border px-3 py-2 text-sm outline-none ${isDarkMode ? 'bg-zinc-950 border-zinc-800 text-zinc-100' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
+                                            className={`w-full min-h-28 resize-none rounded-xl border px-3 py-2 text-sm outline-none ${isDarkMode ? 'bg-black border-zinc-800 text-zinc-100' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
                                             placeholder="Edit entry comment..."
                                         />
                                         <div className="flex items-center justify-end gap-2">
                                             <button
                                                 onClick={() => setEditingComment(null)}
-                                                className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest ${isDarkMode ? 'bg-zinc-800 text-zinc-300' : 'bg-slate-100 text-slate-600'}`}
+                                                className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest ${isDarkMode ? 'bg-black text-zinc-300' : 'bg-slate-100 text-slate-600'}`}
                                             >
                                                 Cancel
                                             </button>
@@ -861,13 +861,13 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                 </div>
                             )}
                         </div>
-                        <div className={`h-full p-5 rounded-xl border flex flex-col ${isDarkMode ? 'bg-zinc-900/20 border-zinc-800 text-zinc-300' : 'bg-white border-slate-200 text-slate-700'}`}>
+                        <div className={`h-full p-5 rounded-xl border flex flex-col ${isDarkMode ? 'bg-black/20 border-zinc-800 text-zinc-300' : 'bg-white border-slate-200 text-slate-700'}`}>
                             <div className="flex items-center justify-between mb-2">
                                 <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40">Exit Note</h4>
                                 {!(editingComment?.tradeId === trade.id && editingComment.field === 'exitComment') && (
                                     <button
                                         onClick={() => beginCommentEdit(trade, 'exitComment')}
-                                        className={`p-1.5 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-zinc-800 text-zinc-500' : 'hover:bg-slate-100 text-slate-400'}`}
+                                        className={`p-1.5 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-black text-zinc-500' : 'hover:bg-slate-100 text-slate-400'}`}
                                         title="Edit Exit Comment"
                                     >
                                         <Edit3 size={12} />
@@ -880,13 +880,13 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                         <textarea
                                             value={editingComment.value}
                                             onChange={(e) => setEditingComment(prev => prev ? { ...prev, value: e.target.value } : prev)}
-                                            className={`w-full min-h-28 resize-none rounded-xl border px-3 py-2 text-sm outline-none ${isDarkMode ? 'bg-zinc-950 border-zinc-800 text-zinc-100' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
+                                            className={`w-full min-h-28 resize-none rounded-xl border px-3 py-2 text-sm outline-none ${isDarkMode ? 'bg-black border-zinc-800 text-zinc-100' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
                                             placeholder="Edit exit comment..."
                                         />
                                         <div className="flex items-center justify-end gap-2">
                                             <button
                                                 onClick={() => setEditingComment(null)}
-                                                className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest ${isDarkMode ? 'bg-zinc-800 text-zinc-300' : 'bg-slate-100 text-slate-600'}`}
+                                                className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest ${isDarkMode ? 'bg-black text-zinc-300' : 'bg-slate-100 text-slate-600'}`}
                                             >
                                                 Cancel
                                             </button>
@@ -916,7 +916,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
 
     const renderTradeRow = (trade: Trade, isGrouped = false, isFirst = false, isLast = false, rowKey?: string) => (
         <React.Fragment key={rowKey || `${isGrouped ? 'grouped' : 'standalone'}-${trade.id}-${trade.date}-${trade.time}`}>
-            <div className={`grid grid-cols-[40px_1.5fr_1fr_1fr_1.2fr_1.2fr_1fr_1.5fr_0.8fr_1.2fr_40px] px-2 py-4 border-b items-center transition-all rounded-xl ${isGrouped ? (isDarkMode ? 'bg-white/[0.02] mt-0 rounded-none first:rounded-t-xl last:rounded-b-xl last:border-b-0' : 'bg-black/[0.01] mt-0 rounded-none first:rounded-t-xl last:rounded-b-xl last:border-b-0') : 'mt-1'} ${expandedTradeId === trade.id ? (isDarkMode ? 'bg-zinc-800/50 border-indigo-500/50' : 'bg-slate-50 border-indigo-200 shadow-inner') : (isDarkMode ? 'border-[#27272a] hover:bg-zinc-800/30' : 'border-slate-100 hover:bg-slate-50')} ${selectedIds.includes(trade.id) ? (isDarkMode ? 'bg-indigo-900/10' : 'bg-indigo-50') : ''}`}>
+            <div className={`grid grid-cols-[40px_1.5fr_1fr_1fr_1.2fr_1.2fr_1fr_1.5fr_0.8fr_1.2fr_40px] px-2 py-4 border-b items-center transition-all rounded-xl ${isGrouped ? (isDarkMode ? 'bg-white/[0.02] mt-0 rounded-none first:rounded-t-xl last:rounded-b-xl last:border-b-0' : 'bg-black/[0.01] mt-0 rounded-none first:rounded-t-xl last:rounded-b-xl last:border-b-0') : 'mt-1'} ${expandedTradeId === trade.id ? (isDarkMode ? 'bg-black/50 border-indigo-500/50' : 'bg-slate-50 border-indigo-200 shadow-inner') : (isDarkMode ? 'border-[#27272a] hover:bg-black/30' : 'border-slate-100 hover:bg-slate-50')} ${selectedIds.includes(trade.id) ? (isDarkMode ? 'bg-indigo-900/10' : 'bg-indigo-50') : ''}`}>
                 <div className="col-span-1 flex items-center justify-center self-stretch relative min-h-[64px]">
                     {isGrouped ? (
                         <div className="absolute inset-0 flex flex-col items-center">
@@ -957,7 +957,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                 </div>
         <div className="col-span-1 flex flex-wrap gap-1 cursor-pointer" onClick={() => toggleExpand(trade.id)}>
           {(trade.tags || []).slice(0, 2).map((tag, i) => (
-            <span key={i} className={`text-[10px] px-1.5 py-0.5 rounded border ${isDarkMode ? 'border-zinc-700 bg-zinc-800' : 'border-slate-200 bg-slate-100'}`}>{tag}</span>
+            <span key={i} className={`text-[10px] px-1.5 py-0.5 rounded border ${isDarkMode ? 'border-zinc-700 bg-black' : 'border-slate-200 bg-slate-100'}`}>{tag}</span>
           ))}
           {(trade.tags || []).length > 2 && <span className="text-[10px] opacity-50">+{(trade.tags || []).length - 2}</span>}
         </div>
@@ -983,7 +983,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
     );
 
     return (
-        <div className={`w-full h-full overflow-hidden flex flex-col p-8 pb-0 ${isDarkMode ? 'bg-[#09090b] text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
+        <div className={`w-full h-full overflow-hidden flex flex-col p-8 pb-0 ${isDarkMode ? 'bg-[#000000] text-zinc-200' : 'bg-slate-50 text-slate-900'}`}>
             {previewImage && (
                 <div 
                     className="fixed inset-0 z-[200] bg-black/90 backdrop-blur-sm flex flex-col p-4 animate-in fade-in duration-200"
@@ -1037,7 +1037,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                             </button>
                         )}
                         {selectedSetupSummary && (
-                            <div className={`hidden lg:flex flex-col gap-0.5 px-4 py-2 rounded-xl border text-left ${selectedSetupSummary.mixedSetupState ? 'border-amber-500/30 bg-amber-500/10 text-amber-200' : isDarkMode ? 'border-[#27272a] bg-[#18181b] text-zinc-300' : 'border-slate-200 bg-white text-slate-700'}`}>
+                            <div className={`hidden lg:flex flex-col gap-0.5 px-4 py-2 rounded-xl border text-left ${selectedSetupSummary.mixedSetupState ? 'border-amber-500/30 bg-amber-500/10 text-amber-200' : isDarkMode ? 'border-[#27272a] bg-[#000000] text-zinc-300' : 'border-slate-200 bg-white text-slate-700'}`}>
                                 <span className="text-[9px] font-black uppercase tracking-widest opacity-60">Setup Preview</span>
                                 <span className="text-xs font-bold leading-tight">{selectedSetupSummary.setupName}</span>
                                 <span className="text-[10px] opacity-50">
@@ -1045,23 +1045,23 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                 </span>
                             </div>
                         )}
-                        <button onClick={() => setSelectedIds([])} className={`p-2 rounded flex items-center gap-2 text-xs font-bold transition-all ${isDarkMode ? 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700' : 'bg-slate-200 text-slate-600 hover:bg-slate-300'}`}>Cancel</button>
+                        <button onClick={() => setSelectedIds([])} className={`p-2 rounded flex items-center gap-2 text-xs font-bold transition-all ${isDarkMode ? 'bg-black text-zinc-400 hover:bg-black' : 'bg-slate-200 text-slate-600 hover:bg-slate-300'}`}>Cancel</button>
                         <button onClick={handleBulkDelete} className="p-2 rounded flex items-center gap-2 text-xs font-bold transition-all bg-rose-500 text-white hover:bg-rose-600 shadow-lg shadow-rose-500/20"><Trash2 size={16} /> Delete Selected</button>
                     </div>
                 ) : (
                     <div className="flex gap-3">
-                        <div className={`flex rounded-lg border overflow-hidden p-1 gap-1 ${isDarkMode ? 'border-[#27272a] bg-[#18181b]' : 'border-slate-200 bg-white'}`}>
+                        <div className={`flex rounded-lg border overflow-hidden p-1 gap-1 ${isDarkMode ? 'border-[#27272a] bg-[#000000]' : 'border-slate-200 bg-white'}`}>
                             <button 
                                 onClick={() => setViewMode('list')} 
                                 aria-label="Switch to List View"
-                                className={`p-2 rounded flex items-center gap-2 text-xs font-bold transition-all ${viewMode === 'list' ? (isDarkMode ? 'bg-zinc-800 text-white shadow' : 'bg-slate-100 text-slate-900') : 'text-zinc-500 hover:text-zinc-300'}`}
+                                className={`p-2 rounded flex items-center gap-2 text-xs font-bold transition-all ${viewMode === 'list' ? 'bg-[#FF4F00] text-white shadow' : 'text-zinc-500 hover:text-zinc-300'}`}
                             >
                                 <List size={16} /> List
                             </button>
                             <button 
                                 onClick={() => setViewMode('calendar')} 
                                 aria-label="Switch to Calendar View"
-                                className={`p-2 rounded flex items-center gap-2 text-xs font-bold transition-all ${viewMode === 'calendar' ? (isDarkMode ? 'bg-zinc-800 text-white shadow' : 'bg-slate-100 text-slate-900') : 'text-zinc-500 hover:text-zinc-300'}`}
+                                className={`p-2 rounded flex items-center gap-2 text-xs font-bold transition-all ${viewMode === 'calendar' ? 'bg-[#FF4F00] text-white shadow' : 'text-zinc-500 hover:text-zinc-300'}`}
                             >
                                 <CalendarIcon size={16} /> Calendar
                             </button>
@@ -1075,7 +1075,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                 placeholder="Search pair, tag or asset..." 
                                 value={searchTerm} 
                                 onChange={(e) => setSearchTerm(e.target.value)} 
-                                className={`pl-10 pr-4 py-2 rounded-lg border text-sm outline-none w-64 ${isDarkMode ? 'bg-[#18181b] border-[#27272a] focus:border-blue-500' : 'bg-white border-slate-200'}`} 
+                                className={`pl-10 pr-4 py-2 rounded-lg border text-sm outline-none w-64 ${isDarkMode ? 'bg-[#000000] border-[#27272a] focus:border-blue-500' : 'bg-white border-slate-200'}`} 
                             />
                         </div>
                         <div className="relative">
@@ -1098,14 +1098,14 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                 )}
                             </button>
                             {showDateFilter && (
-                                <div className={`absolute right-0 top-full mt-2 p-4 rounded-xl border shadow-xl z-50 min-w-[320px] ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-200'}`}>
+                                <div className={`absolute right-0 top-full mt-2 p-4 rounded-xl border shadow-xl z-50 min-w-[320px] ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}`}>
                                     <p className="text-xs font-bold mb-3 uppercase tracking-wider opacity-60">Quick Select</p>
                                     <div className="flex flex-wrap gap-2 mb-4">
                                         {quickRanges.map((range) => (
                                             <button
                                                 key={range.label}
                                                 onClick={() => { applyQuickRange(range.days); setShowDateFilter(false); }}
-                                                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${range.days === -99 ? (!dateRange ? 'bg-indigo-500 text-white' : isDarkMode ? 'bg-zinc-800 hover:bg-zinc-700' : 'bg-slate-100 hover:bg-slate-200') : isDarkMode ? 'bg-zinc-800 hover:bg-zinc-700' : 'bg-slate-100 hover:bg-slate-200'}`}
+                                                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${range.days === -99 ? (!dateRange ? 'bg-indigo-500 text-white' : isDarkMode ? 'bg-black hover:bg-black' : 'bg-slate-100 hover:bg-slate-200') : isDarkMode ? 'bg-black hover:bg-black' : 'bg-slate-100 hover:bg-slate-200'}`}
                                                 >
                                                     {range.label}
                                             </button>
@@ -1130,7 +1130,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                                         }
                                                         setDraftDateRange(getRangeForDays(preset.days));
                                                     }}
-                                                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${isDarkMode ? 'bg-zinc-800 hover:bg-zinc-700' : 'bg-slate-100 hover:bg-slate-200'}`}
+                                                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${isDarkMode ? 'bg-black hover:bg-black' : 'bg-slate-100 hover:bg-slate-200'}`}
                                                 >
                                                     {preset.label}
                                                 </button>
@@ -1143,7 +1143,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                                 value={draftDateRange?.start || ''}
                                                 max={draftDateRange?.end || undefined}
                                                 onChange={(e) => setDraftDateRange(prev => ({ start: e.target.value, end: prev?.end || e.target.value }))}
-                                                className={`w-full px-3 py-2 rounded-lg border text-sm ${isDarkMode ? 'bg-[#09090b] border-[#27272a]' : 'bg-white border-slate-200'}`}
+                                                className={`w-full px-3 py-2 rounded-lg border text-sm ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}`}
                                             />
                                         </div>
                                         <div>
@@ -1153,7 +1153,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                                 value={draftDateRange?.end || ''}
                                                 min={draftDateRange?.start || undefined}
                                                 onChange={(e) => setDraftDateRange(prev => ({ start: prev?.start || e.target.value, end: e.target.value }))}
-                                                className={`w-full px-3 py-2 rounded-lg border text-sm ${isDarkMode ? 'bg-[#09090b] border-[#27272a]' : 'bg-white border-slate-200'}`}
+                                                className={`w-full px-3 py-2 rounded-lg border text-sm ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200'}`}
                                             />
                                         </div>
                                         <div className="flex gap-2 pt-1">
@@ -1161,7 +1161,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                                 onClick={() => {
                                                     setDraftDateRange(dateRange ?? getCurrentMonthRange());
                                                 }}
-                                                className={`flex-1 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${isDarkMode ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`}
+                                                className={`flex-1 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${isDarkMode ? 'bg-black hover:bg-black text-zinc-200' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`}
                                             >
                                                 Reset
                                             </button>
@@ -1191,7 +1191,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                 )}
             </header>
             
-            <div className={`flex-1 rounded-t-2xl border-t border-l border-r overflow-hidden flex flex-col ${isDarkMode ? 'bg-[#18181b] border-[#27272a]' : 'bg-white border-slate-200 shadow-md'}`}>
+            <div className={`flex-1 rounded-t-2xl border-t border-l border-r overflow-hidden flex flex-col ${isDarkMode ? 'bg-[#000000] border-[#27272a]' : 'bg-white border-slate-200 shadow-md'}`}>
                 {viewMode === 'calendar' ? (
                     <CalendarView isDarkMode={isDarkMode} trades={trades} userProfile={userProfile} />
                 ) : (
@@ -1302,7 +1302,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                                 <div className="col-span-1 text-xs opacity-50">---</div>
         <div className="col-span-1 flex flex-wrap gap-1">
           {(group.trades[0].tags || []).slice(0, 1).map((tag, i) => (
-            <span key={i} className={`text-[9px] px-1.5 py-0.5 rounded border ${isDarkMode ? 'border-zinc-700 bg-zinc-800' : 'border-slate-200 bg-slate-100'}`}>{tag}</span>
+            <span key={i} className={`text-[9px] px-1.5 py-0.5 rounded border ${isDarkMode ? 'border-zinc-700 bg-black' : 'border-slate-200 bg-slate-100'}`}>{tag}</span>
           ))}
         </div>
                                                 <div className="col-span-1">
@@ -1350,7 +1350,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
             {isLinkModalOpen && (
                 <div className="fixed inset-0 z-[300] flex items-center justify-center p-6">
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsLinkModalOpen(false)} />
-                    <div className={`relative w-full max-w-md p-8 rounded-[32px] border shadow-2xl ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200'}`}>
+                    <div className={`relative w-full max-w-md p-8 rounded-[32px] border shadow-2xl ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200'}`}>
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-2.5 rounded-2xl bg-violet-500/10 text-violet-500">
                                 <Link size={24} />
@@ -1371,7 +1371,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                     onChange={(e) => setDraftSetupName(e.target.value)}
                                     placeholder={selectedSetupSummary?.setupName || 'EURUSD 3-Trade Setup'}
                                     maxLength={80}
-                                    className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none ${isDarkMode ? 'bg-[#09090b] border-[#27272a] text-zinc-100 focus:border-violet-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-violet-500'}`}
+                                    className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none ${isDarkMode ? 'bg-[#000000] border-[#27272a] text-zinc-100 focus:border-violet-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-violet-500'}`}
                                 />
                                 <p className={`mt-2 text-[11px] ${isDarkMode ? 'text-zinc-500' : 'text-slate-500'}`}>
                                     A readable name makes the setup easier to find later in both Journal and Desktop Bridge.
@@ -1391,7 +1391,7 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                         <div className="flex gap-3">
                             <button 
                                 onClick={() => setIsLinkModalOpen(false)}
-                                className={`flex-1 py-4 rounded-2xl font-black text-sm transition-all ${isDarkMode ? 'bg-zinc-800 text-white hover:bg-zinc-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+                                className={`flex-1 py-4 rounded-2xl font-black text-sm transition-all ${isDarkMode ? 'bg-black text-white hover:bg-black' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
                             >
                                 Cancel
                             </button>

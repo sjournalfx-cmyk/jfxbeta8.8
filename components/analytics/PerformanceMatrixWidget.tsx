@@ -76,7 +76,7 @@ export const PerformanceMatrixWidget: React.FC<PerformanceMatrixWidgetProps> = (
     };
 
     return (
-        <div className={`w-full overflow-hidden rounded-[32px] border ${isDarkMode ? 'bg-[#0d1117] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
+        <div className={`w-full overflow-hidden rounded-[32px] border ${isDarkMode ? 'bg-black border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}>
             <div className="p-6 border-b border-zinc-500/10 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                     <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-500">
@@ -94,7 +94,7 @@ export const PerformanceMatrixWidget: React.FC<PerformanceMatrixWidgetProps> = (
                     type="button"
                     onClick={() => setViewMode((prev) => (prev === 'monthly' ? 'weekly' : 'monthly'))}
                     className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-[10px] font-black uppercase tracking-widest ${
-                        isDarkMode ? 'border-zinc-800 bg-zinc-900/80 text-zinc-200 hover:border-zinc-700' : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                        isDarkMode ? 'border-zinc-800 bg-black/80 text-zinc-200 hover:border-zinc-700' : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
                     }`}
                     aria-pressed={viewMode === 'weekly'}
                     title={viewMode === 'monthly' ? 'Switch to weekly view' : 'Switch to monthly view'}
@@ -107,7 +107,7 @@ export const PerformanceMatrixWidget: React.FC<PerformanceMatrixWidgetProps> = (
             <div className="overflow-x-auto custom-scrollbar">
                 <table className="w-full border-collapse text-left">
                     <thead>
-                        <tr className={`${isDarkMode ? 'bg-zinc-900/80' : 'bg-slate-50'}`}>
+                        <tr className={`${isDarkMode ? 'bg-black/80' : 'bg-slate-50'}`}>
                             <th className="p-4 text-[10px] font-black uppercase tracking-widest opacity-40 border-b border-zinc-500/10 sticky left-0 z-30 bg-inherit min-w-[140px]">Instrument</th>
                             {columns.map((label) => (
                                 <th
@@ -124,7 +124,7 @@ export const PerformanceMatrixWidget: React.FC<PerformanceMatrixWidgetProps> = (
                     <tbody className={`divide-y ${isDarkMode ? 'divide-zinc-800' : 'divide-slate-100'}`}>
                         {matrixData.symbols.map(symbol => (
                             <tr key={symbol} className="group">
-                                <td className={`p-4 text-[11px] font-black sticky left-0 z-20 border-r ${isDarkMode ? 'bg-[#0d1117] text-white border-zinc-800' : 'bg-white text-slate-900 border-slate-100'}`}>{symbol}</td>
+                                <td className={`p-4 text-[11px] font-black sticky left-0 z-20 border-r ${isDarkMode ? 'bg-black text-white border-zinc-800' : 'bg-white text-slate-900 border-slate-100'}`}>{symbol}</td>
                                 {matrixData.data[symbol].map((val, i) => (
                                     <td
                                         key={i}

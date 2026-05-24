@@ -94,7 +94,7 @@ export const CurrencyStrengthMeter: React.FC<CurrencyStrengthMeterProps> = ({ is
     return (
         <div 
             onMouseMove={handleMouseMove}
-            className={`p-4 rounded-[20px] border flex flex-col h-full relative ${isDarkMode ? 'bg-[#18181b] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}
+            className={`p-4 rounded-[20px] border flex flex-col h-full relative ${isDarkMode ? 'bg-[#000000] border-zinc-800' : 'bg-white border-slate-200 shadow-md'}`}
         >
             <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
@@ -120,7 +120,7 @@ export const CurrencyStrengthMeter: React.FC<CurrencyStrengthMeterProps> = ({ is
                             <div className="w-12 flex flex-col items-center">
                                 <span className={`text-xs font-black ${hoveredCur === item.cur ? 'text-indigo-500' : ''}`}>{item.cur}</span>
                             </div>
-                            <div className={`flex-1 h-2 rounded-full overflow-hidden ${isDarkMode ? 'bg-zinc-800' : 'bg-slate-100'} ${hoveredCur === item.cur ? 'h-3' : ''}`}>
+                            <div className={`flex-1 h-2 rounded-full overflow-hidden ${isDarkMode ? 'bg-black' : 'bg-slate-100'} ${hoveredCur === item.cur ? 'h-3' : ''}`}>
                                 <div
                                     className={`h-full rounded-full ${item.val > 7 ? 'bg-emerald-500' :
                                         item.val > 4 ? 'bg-blue-500' :
@@ -145,7 +145,7 @@ export const CurrencyStrengthMeter: React.FC<CurrencyStrengthMeterProps> = ({ is
                         top: mousePos.y - 40
                     }}
                 >
-                    <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md min-w-[140px] ${isDarkMode ? 'bg-[#09090b]/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
+                    <div className={`p-4 rounded-xl shadow-2xl border backdrop-blur-md min-w-[140px] ${isDarkMode ? 'bg-black/90 border-zinc-700' : 'bg-white/90 border-slate-200'}`}>
                         <div className="font-bold text-sm mb-2 border-b border-white/10 pb-1">{hoveredData.cur} Strength</div>
                         <div className="flex justify-between items-center text-xs">
                             <span className="opacity-60">Score</span>

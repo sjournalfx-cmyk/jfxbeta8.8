@@ -76,7 +76,7 @@ function TradingViewWidget({
             "theme": theme,
             "style": "1",
             "locale": "en",
-            "toolbar_bg": theme === 'dark' ? "#09090b" : "#f1f3f6",
+            "toolbar_bg": theme === 'dark' ? "#000000" : "#f1f3f6",
             "enable_publishing": false,
             "hide_side_toolbar": !showToolbar,
             "hide_volume": true,
@@ -147,7 +147,7 @@ function TradingViewWidget({
               isInitializedRef.current = false;
               initializeWidget();
             }}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-600/20 active:scale-95"
+            className="flex items-center gap-2 px-4 py-2 bg-[#FF4F00] hover:bg-[#E64600] text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-[#FF4F00]/20 active:scale-95"
           >
             <RefreshCcw size={14} />
             Retry Chart Load
