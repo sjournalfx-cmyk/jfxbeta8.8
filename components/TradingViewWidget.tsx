@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, memo, useCallback, useState } from 'react';
 import { AlertCircle, RefreshCcw } from 'lucide-react';
+import { getDefaultTimezone } from '../lib/timeUtils';
 
 interface TradingViewWidgetProps {
   symbol?: string;
@@ -72,7 +73,7 @@ function TradingViewWidget({
             "autosize": autosize,
             "symbol": symbol,
             "interval": interval,
-            "timezone": "Africa/Johannesburg",
+            "timezone": getDefaultTimezone(),
             "theme": theme,
             "style": "1",
             "locale": "en",

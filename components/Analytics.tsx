@@ -46,6 +46,7 @@ import { PLByPlanAdherenceWidget } from './analytics/PLByPlanAdherenceWidget';
 import { CashTransactionsView } from './analytics/CashTransactionsView';
 import { APP_CONSTANTS, normalizePlan } from '../lib/constants';
 import { type PsychologyInsightsEntry } from '../lib/psychologyInsights';
+import { getDefaultTimezone } from '../lib/timeUtils';
 
 import {
     DndContext,
@@ -531,7 +532,7 @@ const renderPsychologyLayout = () => (
 
                     {dailyPsychologyInsights?.content ? (
                         psychologyBriefSections.length > 0 ? (
-                            <div className="flex-1 space-y-2 overflow-y-auto pr-1">
+                            <div className="max-h-[280px] space-y-2 overflow-y-auto pr-1">
                                 {psychologyBriefSections.flatMap((section, sectionIndex) =>
                                     section.items.map((item, itemIndex) => {
                                         const tone = item.tone;
@@ -851,7 +852,7 @@ const renderPsychologyLayout = () => (
 
                     <div className="flex justify-center pt-8 border-t border-zinc-500/10">
                         <p className="text-xs font-bold opacity-30 uppercase tracking-[0.2em] italic">
-                            All times are calculated in SAST (Africa/Johannesburg)
+                            All times are calculated in {getDefaultTimezone()}
                         </p>
                     </div>
                 </div>

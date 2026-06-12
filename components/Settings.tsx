@@ -23,11 +23,13 @@ import {
   Moon,
   Zap,
   ExternalLink,
+  Clock,
 } from 'lucide-react';
 import { UserProfile } from '../types';
 import { APP_CONSTANTS, normalizePlan } from '../lib/constants';
 import { Select } from './Select';
 import { normalizeThemePreference } from '../lib/theme';
+import { getDefaultTimezone } from '../lib/timeUtils';
 
 const freeAvatars = [
   'https://api.dicebear.com/7.x/bottts/svg?seed=1&backgroundColor=f1f5f9',
@@ -395,6 +397,19 @@ const Settings: React.FC<SettingsProps> = ({
                           value={formData.country}
                           onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                           className={`${inputClass} pl-10`}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className={labelClass}>
+                        Timezone
+                      </label>
+                      <div className="relative">
+                        <Clock className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={16} />
+                        <input
+                          value={formData.timezone || getDefaultTimezone()}
+                          readOnly
+                          className={`${inputClass} cursor-not-allowed pl-10 opacity-70`}
                         />
                       </div>
                     </div>

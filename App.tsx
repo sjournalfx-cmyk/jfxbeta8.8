@@ -4,6 +4,7 @@ import LogTrade from './components/LogTrade';
 import Dashboard from './components/Dashboard';
 import Journal from './components/Journal';
 import Auth from './components/Auth';
+import BetaSplash from './components/BetaSplash';
 
 import { PartyPopper, MessageSquare, Activity, CheckCircle2, Loader2 } from 'lucide-react';
 import { Trade, Note, DailyBias, FirehoseEvent } from './types';
@@ -26,6 +27,7 @@ import { MobileBlocker } from './components/ui/MobileBlocker';
 import { useAuth } from './hooks/useAuth';
 import { useData } from './hooks/useData';
 import { authService } from './services/authService';
+import posthog from 'posthog-js';
 import { Agentation, type Annotation } from "agentation";
 import { getSafePnL } from './lib/trade-normalization';
 import { normalizeThemePreference } from './lib/theme';
@@ -43,10 +45,11 @@ const AppContent: React.FC = () => {
   const [settingsTab, setSettingsTab] = useState<'profile' | 'account' | 'appearance' | 'billing' | 'security' | 'help'>('profile');
   const { addToast } = useToast();
   const [isDemoMode, setIsDemoMode] = useLocalStorage<boolean>('jfx_demo_mode', false);
+  const [showBetaSplash, setShowBetaSplash] = useState(true);
 
   // Mock for current migration version - In a real app, this would be fetched from the backend.
   const [currentMigrationVersion] = useState('v20250201.1');
-  
+
   const {
     userId,
     userProfile,
@@ -62,6 +65,22 @@ const AppContent: React.FC = () => {
     setUserId,
     setUserEmail
   } = useAuth();
+
+  // PostHog analytics initialization
+  useEffect(() => {
+    posthog.init('phc_afcj9r3oxhjFLVOZq2hUbcbkWBYM0mPxgNpiYYYjlSw', {
+      api_host: 'https://us.i.posthog.com',
+      autocapture: true,
+      capture_pageview: false,
+    });
+  }, []);
+
+  // Track view changes as pageviews
+  useEffect(() => {
+    if (isAuthenticated) {
+      posthog.capture('$pageview', { view: currentView });
+    }
+  }, [currentView, isAuthenticated]);
 
 const {
     trades,
@@ -793,6 +812,7 @@ const onLogout = async () => {
               setUserEmail(user.email || '');
               await loadUserData(user.id);
               setIsAuthenticated(true);
+              posthog.identify(user.id, { email: user.email || '' });
             }
           } catch (error) {
             console.error("Login data load failed:", error);
@@ -809,6 +829,7 @@ const onLogout = async () => {
               setUserEmail(user.email || '');
               await loadUserData(user.id);
               setIsAuthenticated(true);
+              posthog.identify(user.id, { email: user.email || '' });
             }
           } catch (error) {
             console.error("Registration data load failed:", error);
@@ -826,6 +847,10 @@ const onLogout = async () => {
       setCurrentView(profile.syncMethod === 'EA_CONNECT' ? 'ea-setup' : 'dashboard');
       setTrades([]);
     }} />;
+  }
+
+  if (showBetaSplash) {
+    return <BetaSplash onContinue={() => setShowBetaSplash(false)} />;
   }
 
   const totalPnL = activeTrades.reduce((acc, t) => acc + getSafePnL(t.pnl), 0);

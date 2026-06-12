@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { Trade } from '../../types';
 import { Clock, TrendingUp, TrendingDown, AlertCircle } from 'lucide-react';
 import { clsx } from 'clsx';
-import { ANALYTICS_TIMEZONE_LABEL, getSastHourFromTrade, getSastWeekdayFromDate } from '../../lib/timeUtils';
+import { getTimezoneLabel, getSastHourFromTrade, getSastWeekdayFromDate } from '../../lib/timeUtils';
 
 interface TimeAnalysisMatrixProps {
   trades: Trade[];
@@ -142,7 +142,7 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
             </div>
           )}
           <div className="text-[10px] font-black uppercase tracking-widest opacity-50 text-right">
-            Timezone: {ANALYTICS_TIMEZONE_LABEL}
+            Timezone: {getTimezoneLabel()}
           </div>
         </div>
       </div>
@@ -269,7 +269,7 @@ export const TimeAnalysisMatrixWidget: React.FC<TimeAnalysisMatrixProps> = ({ tr
         </div>
         <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest opacity-25 italic">
           <AlertCircle size={12} />
-          <span>Timezone: {ANALYTICS_TIMEZONE_LABEL}</span>
+          <span>Timezone: {getTimezoneLabel()}</span>
         </div>
       </div>
     </div>

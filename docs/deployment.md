@@ -2,22 +2,28 @@
 
 Since the Vercel Hobby plan blocks private repo deployments (commit author must be the project owner), the repo must remain **public**.
 
-## Trigger a deploy
+## Full workflow
 
-```powershell
-Invoke-RestMethod -Method Post -Uri "https://api.vercel.com/v1/integrations/deploy/prj_Q3NrV3DDu6mhdskwn249cbACxx6l/vVc6M0ZJsK"
-```
+Each time you have local changes to push to production:
 
-Alternatively with `curl` (Git Bash / WSL):
+1. ✅ **Commit local changes**
+   ```powershell
+   git add -A
+   git commit -m "description of changes"
+   ```
 
-```bash
-curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_Q3NrV3DDu6mhdskwn249cbACxx6l/vVc6M0ZJsK"
-```
+2. ✅ **Push to both remotes**
+   ```powershell
+   git push --force jfx8 master:main
+   git push --force origin2 master:main
+   ```
 
-## Push to GitHub
+3. ✅ **Trigger Vercel deploy hook**
+   ```powershell
+   Invoke-RestMethod -Method Post -Uri "https://api.vercel.com/v1/integrations/deploy/prj_Q3NrV3DDu6mhdskwn249cbACxx6l/vVc6M0ZJsK"
+   ```
 
-```powershell
-git push --force origin2 master:main
-```
-
-Then trigger the deploy hook.
+   Or with `curl` (Git Bash / WSL):
+   ```bash
+   curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_Q3NrV3DDu6mhdskwn249cbACxx6l/vVc6M0ZJsK"
+   ```

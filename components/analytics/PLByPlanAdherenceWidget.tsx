@@ -63,12 +63,12 @@ export const PLByPlanAdherenceWidget: React.FC<PLByPlanAdherenceWidgetProps> = (
                     {chart.ticks.map((tick) => (
                         <div
                             key={tick}
-                            className="absolute left-0 right-0 border-t border-[#1f1f1f]"
+                            className="absolute left-0 right-0 border-t border-[#141414]"
                             style={{ top: `${((chart.roundedMax - tick) / chart.range) * 100}%` }}
                         />
                     ))}
                     <div
-                        className="absolute left-0 right-0 border-t border-[#4a4a4a]"
+                        className="absolute left-0 right-0 border-t border-[#2a2a2a]"
                         style={{ top: `${chart.zeroY}%` }}
                     />
 
@@ -78,7 +78,7 @@ export const PLByPlanAdherenceWidget: React.FC<PLByPlanAdherenceWidgetProps> = (
                         return (
                             <div key={item.label} className="relative flex h-full w-full max-w-[120px] items-end justify-center">
                                 <div
-                                    className={`${isPositive ? 'bg-[#7ae2b1]' : index === 2 ? 'bg-[#fcbba4]' : 'bg-[#c0c5cc]'} w-[68%] cursor-pointer transition-opacity hover:opacity-80`}
+                                    className={`${isPositive ? 'bg-[#7ae2b1]/20 border-[#7ae2b1]/30' : index === 2 ? 'bg-[#fcbba4]/20 border-[#fcbba4]/30' : 'bg-[#c0c5cc]/20 border-[#c0c5cc]/30'} w-[68%] cursor-pointer backdrop-blur-xl border-b border-t border-t-white/[0.06] transition-all hover:opacity-90 hover:brightness-125`}
                                     style={{
                                         height,
                                         position: 'absolute',
@@ -105,7 +105,7 @@ export const PLByPlanAdherenceWidget: React.FC<PLByPlanAdherenceWidgetProps> = (
                     >
                         <div className="text-[14px] font-semibold text-white mb-1">{tooltip.label}</div>
                         <div className="text-[13px] text-[#c0c5cc]">{tooltip.count} trade{tooltip.count !== 1 ? 's' : ''}</div>
-                        <div className={`text-[16px] font-bold ${tooltip.value >= 0 ? 'text-[#7ae2b1]' : 'text-[#c0c5cc]'}`}>
+                        <div className={`text-[16px] font-bold ${tooltip.value >= 0 ? 'text-[#7ae2b1]' : 'text-[#ef4444]'}`}>
                             {tooltip.value >= 0 ? '+' : ''}{currencySymbol}{tooltip.value.toFixed(2)}
                         </div>
                     </div>

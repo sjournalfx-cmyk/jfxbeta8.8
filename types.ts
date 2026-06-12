@@ -53,6 +53,7 @@ export interface UserProfile {
   autoJournal?: boolean;
   avatarUrl?: string;
   themePreference: 'obsidian' | 'cosmic';
+  timezone?: string;
   chartLayout?: 'single' | 'split-v' | 'split-h' | 'quad' | 'focus-main';
   chartConfigCharts?: any[];
   chartConfig?: ChartConfig;

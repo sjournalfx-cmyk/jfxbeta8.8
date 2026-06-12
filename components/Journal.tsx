@@ -7,7 +7,7 @@ import {
   Trophy, CheckCircle, LayoutPanelTop, Target, Star, Eye, Layers, Link, Unlink, RefreshCw, Mic
 } from 'lucide-react';
 import { Trade, UserProfile } from '../types';
-import { getSASTDateTime } from '../lib/timeUtils';
+import { getSASTDateTime, getDefaultTimezone } from '../lib/timeUtils';
 import { sanitizeRichTextHtml } from '../lib/htmlSanitizer';
 import { JournalSkeleton, EmptyState } from './ui/Skeleton';
 
@@ -727,10 +727,10 @@ const Journal: React.FC<JournalProps> = ({ isDarkMode, trades, onUpdateTrade, on
                                      );
                                  })()}
                                 {trade.openTime && (
-                                    <div className="flex justify-between text-[10px]"><span className="opacity-50 uppercase font-bold">Opened</span><span className="font-mono opacity-80">{new Date(trade.openTime).toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}</span></div>
+                                    <div className="flex justify-between text-[10px]"><span className="opacity-50 uppercase font-bold">Opened</span><span className="font-mono opacity-80">{new Date(trade.openTime).toLocaleString('en-ZA', { timeZone: getDefaultTimezone() })}</span></div>
                                 )}
                                 {trade.closeTime && (
-                                    <div className="flex justify-between text-[10px]"><span className="opacity-50 uppercase font-bold">Closed</span><span className="font-mono opacity-80">{new Date(trade.closeTime).toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}</span></div>
+                                    <div className="flex justify-between text-[10px]"><span className="opacity-50 uppercase font-bold">Closed</span><span className="font-mono opacity-80">{new Date(trade.closeTime).toLocaleString('en-ZA', { timeZone: getDefaultTimezone() })}</span></div>
                                 )}
                                 <div className="flex justify-between"><span className="opacity-50">Volume</span><span className="font-bold">{trade.lots} Lots</span></div>
                                 <div className="flex justify-between"><span className="opacity-50">R:R Ratio</span><span className="font-bold text-indigo-500">1 : {trade.rr}</span></div>

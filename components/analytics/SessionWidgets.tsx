@@ -19,7 +19,7 @@ import {
 } from 'recharts';
 import { Trade } from '../../types';
 import { clsx } from 'clsx';
-import { ANALYTICS_TIMEZONE_LABEL, getSastHourFromTrade, getSastWeekdayFromDate } from '../../lib/timeUtils';
+import { getTimezoneLabel, getSastHourFromTrade, getSastWeekdayFromDate } from '../../lib/timeUtils';
 import { Tooltip as InfoTooltip } from '../ui/Tooltip';
 
 const safePnL = (value: unknown): number => {
@@ -138,7 +138,7 @@ export const MarketSessionWidget: React.FC<WidgetProps> = ({ trades, isDarkMode,
           </h3>
         </div>
         <div className="text-[10px] font-black uppercase tracking-widest opacity-50 text-right">
-          Timezone: {ANALYTICS_TIMEZONE_LABEL}
+          Timezone: {getTimezoneLabel()}
         </div>
       </div>
 
@@ -276,7 +276,7 @@ export const HourlyPerformanceWidget: React.FC<WidgetProps> = ({ trades, isDarkM
           </h3>
         </div>
         <div className="text-[10px] font-black uppercase tracking-widest opacity-50 text-right">
-          Timezone: {ANALYTICS_TIMEZONE_LABEL}
+          Timezone: {getTimezoneLabel()}
         </div>
       </div>
 

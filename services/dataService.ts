@@ -984,6 +984,7 @@ export const dataService = {
     if (profile.themePreference !== undefined) dbProfile.theme_preference = profile.themePreference;
     if (profile.chartConfig !== undefined) dbProfile.chart_config = profile.chartConfig;
     if (profile.keepChartsAlive !== undefined) dbProfile.keep_charts_alive = profile.keepChartsAlive;
+    if (profile.timezone !== undefined) dbProfile.timezone = profile.timezone;
 
     const { error } = await supabase
       .from('profiles')

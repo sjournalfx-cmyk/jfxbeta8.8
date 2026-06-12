@@ -64,7 +64,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ isDarkMode, onComplete }) => {
     onboarded: true,
     plan: 'FREE TIER (JOURNALER)',
     themePreference: 'obsidian',
-    avatarUrl: freeAvatars[0]
+    avatarUrl: freeAvatars[0],
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   });
 
   const scrollRef = useRef<HTMLDivElement>(null);

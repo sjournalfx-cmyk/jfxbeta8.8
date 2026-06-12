@@ -6,6 +6,7 @@ import { dataService } from '../services/dataService';
 import { supabase } from '../lib/supabase';
 import { normalizeThemePreference } from '../lib/theme';
 import { normalizePlan } from '../lib/constants';
+import { setDefaultTimezone, getDefaultTimezone } from '../lib/timeUtils';
 
 const AUTH_BOOT_TIMEOUT_MS = 8000;
 
@@ -65,7 +66,18 @@ export const useAuth = () => {
           themePreference: normalizeThemePreference(profile.theme_preference),
           chartConfig: profile.chart_config || null,
           keepChartsAlive: profile.keep_charts_alive ?? true,
+          timezone: profile.timezone || undefined,
         };
+
+        const userTz = mappedProfile.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (userTz !== getDefaultTimezone()) {
+          setDefaultTimezone(userTz);
+        }
+        if (!mappedProfile.timezone) {
+          mappedProfile.timezone = userTz;
+          dataService.updateProfile({ timezone: userTz }).catch(() => {});
+        }
+
         setUserProfile(mappedProfile);
       }
       return mappedProfile;

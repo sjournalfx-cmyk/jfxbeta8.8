@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Clock, Globe, Settings2, CheckSquare, Square } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { getDefaultTimezone } from '../lib/timeUtils';
 
 interface SessionClockProps {
   isDarkMode: boolean;
@@ -136,9 +137,9 @@ const SessionClock: React.FC<SessionClockProps> = ({ isDarkMode }) => {
            </div>
            <div>
                <h3 className="text-2xl font-mono font-bold tracking-tight">
-                  {utcTime.toLocaleTimeString('en-GB', { timeZone: 'Africa/Johannesburg', hour12: false })}
+                   {utcTime.toLocaleTimeString('en-GB', { timeZone: getDefaultTimezone(), hour12: false })}
                </h3>
-               <p className="text-xs font-bold uppercase tracking-widest opacity-50">SAST Time</p>
+               <p className="text-xs font-bold uppercase tracking-widest opacity-50">{getDefaultTimezone()}</p>
            </div>
         </div>
       </div>
