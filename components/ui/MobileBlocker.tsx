@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { 
-    Smartphone, Monitor, Sparkles, Share2, 
+  Smartphone, Sparkles, Share2, 
   CheckCircle2, TrendingUp, Bot 
-
- 
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -208,10 +206,7 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
 
       {/* Footer */}
       <footer className="relative z-10 flex flex-col items-center gap-2 pt-4 border-t border-dashed border-zinc-900 max-w-lg mx-auto w-full">
-        <div className="flex items-center gap-2 text-zinc-500 text-[10px] font-medium">
-          <Monitor size={10} />
-          <span>Requires Screen Width &ge; 768px</span>
-        </div>
+
         <p className="text-zinc-600 text-[9px] font-bold tracking-widest uppercase">
           © {new Date().getFullYear()} JournalFX. All Rights Reserved.
         </p>

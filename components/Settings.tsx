@@ -244,8 +244,8 @@ const Settings: React.FC<SettingsProps> = ({
   );
 
   return (
-    <div className={`min-h-screen overflow-auto ${containerBg}`}>
-      <div className="flex min-h-screen w-full flex-col gap-6 p-4 sm:p-6 lg:p-8">
+    <div className={`h-screen overflow-hidden ${containerBg}`}>
+      <div className="flex h-full w-full flex-col gap-6 p-4 sm:p-6 lg:p-8">
         <header className={`rounded-[32px] border p-6 md:p-8 ${shellCard}`}>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
@@ -330,7 +330,7 @@ const Settings: React.FC<SettingsProps> = ({
             </div>
           </aside>
 
-          <main className={`flex min-h-0 max-h-[calc(100vh-2rem)] flex-col overflow-y-auto rounded-[32px] border p-6 md:p-8 ${shellCard} custom-scrollbar`}>
+          <main className={`flex min-h-0 flex-col overflow-y-auto rounded-[32px] border p-6 md:p-8 ${shellCard} custom-scrollbar`}>
             <div
               className={`mb-6 flex flex-col gap-3 border-b pb-5 ${
                 isDarkMode ? 'border-white/[0.06]' : 'border-slate-200'
