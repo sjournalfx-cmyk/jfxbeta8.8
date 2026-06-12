@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { 
-  Smartphone, Monitor, Sparkles, Share2, 
-  CheckCircle2, TrendingUp, Bot, Zap, ShieldCheck 
+    Smartphone, Monitor, Sparkles, Share2, 
+  CheckCircle2, TrendingUp, Bot 
+
+ 
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -11,25 +13,12 @@ interface MobileBlockerProps {
 
 export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true }) => {
   const [copied, setCopied] = useState(false);
-  const [notified, setNotified] = useState(false);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const handleNotifyMe = () => {
-    setNotified(true);
-    setTimeout(() => setNotified(false), 3000);
-  };
-
-  // Mock data for the phone preview screen
-  const upcomingFeatures = [
-    { icon: <Bot className="text-indigo-400" size={16} />, title: "Pocket AI Analyst", desc: "Real-time trading psychology feedback on the go." },
-    { icon: <Zap className="text-amber-400" size={16} />, title: "Headless MT5 Bridge", desc: "Instant sync with your running MT5 terminals." },
-    { icon: <TrendingUp className="text-emerald-400" size={16} />, title: "Optimized Performance Charts", desc: "High-framerate charts scaled perfectly for mobile." },
-  ];
 
   return (
     <div className="min-h-screen w-full bg-[#000000] text-zinc-100 flex flex-col justify-between p-6 relative overflow-hidden font-sans select-none">
@@ -38,19 +27,7 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
       <div className="absolute bottom-[-15%] right-[-20%] w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Header */}
-      <header className="relative z-10 flex items-center justify-between w-full max-w-lg mx-auto">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#FF4F01] to-orange-600 flex items-center justify-center text-white font-black shadow-lg shadow-[#FF4F01]/20">
-            J
-          </div>
-          <span className="font-extrabold text-sm tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
-            JournalFX
-          </span>
-        </div>
-        <div className="px-2.5 py-1 rounded-full border border-zinc-800/80 bg-black/50 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-[#FF4F01]">
-          v1.0.0-Beta
-        </div>
-      </header>
+
 
       {/* Main Content */}
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-md mx-auto w-full my-6">
@@ -199,29 +176,6 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
           </p>
         </motion.div>
 
-        {/* Feature List (Sleek cards) */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="w-full space-y-2 px-4"
-        >
-          {upcomingFeatures.map((feat, index) => (
-            <div 
-              key={index}
-              className="flex items-start gap-3 p-3 rounded-2xl bg-black border border-zinc-900/80 hover:border-zinc-800 transition-colors"
-            >
-              <div className="p-2 rounded-xl bg-black border border-zinc-800 flex items-center justify-center shrink-0">
-                {feat.icon}
-              </div>
-              <div className="flex-1">
-                <h4 className="text-xs font-bold text-white">{feat.title}</h4>
-                <p className="text-[10px] text-zinc-500 leading-normal mt-0.5">{feat.desc}</p>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-
         {/* Actions */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -248,13 +202,6 @@ export const MobileBlocker: React.FC<MobileBlockerProps> = ({ isDarkMode = true 
                 Copy Dashboard Link
               </>
             )}
-          </button>
-          
-          <button 
-            onClick={handleNotifyMe}
-            className="w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider border border-zinc-800 bg-black text-zinc-300 hover:bg-black/60 hover:text-white transition-colors"
-          >
-            {notified ? '✓ Notification Request Saved' : 'Notify Me on Release'}
           </button>
         </motion.div>
       </main>
